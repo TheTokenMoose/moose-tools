@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a1033">
+  <meta name="description" content="Name Spin Wheel — classroom random name picker with standard and remove modes.">
+  <title>Name Spin Wheel — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <header class="tool-header">
+    <h1>🎡 Name Spin Wheel</h1>
+    <button type="button" id="mute-btn" class="btn-mute" aria-label="Mute music">🔊 Music</button>
+  </header>
+
+  <section class="panel">
+    <label for="name-input">Student names (comma-separated)</label>
+    <textarea id="name-input" rows="3" placeholder="Jayden, Harry, John B, Mia, Lucas">Jayden, Harry, John B, Mia, Lucas, Ava, Noah, Sophia</textarea>
+    <div class="panel-row">
+      <button type="button" id="load-btn" class="btn-primary">Load names onto wheel</button>
+      <span class="mode-label">Mode:</span>
+      <label class="radio"><input type="radio" name="mode" value="standard" checked> Standard (keep names)</label>
+      <label class="radio"><input type="radio" name="mode" value="remove"> Spin &amp; remove</label>
+    </div>
+  </section>
+
+  <div class="main">
+    <canvas id="wheel" width="480" height="480" aria-label="Name spin wheel"></canvas>
+    <div class="side">
+      <p id="result" class="result">Load names, then spin!</p>
+      <p id="count" class="count"></p>
+      <button type="button" id="spin-btn" class="btn-spin">SPIN</button>
+      <button type="button" id="reset-btn" class="btn-secondary">Reset removed names</button>
+      <p class="tip">Tip: “John B” stays one name. Comma separates students.</p>
+    </div>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Name Spin Wheel</strong>
+      <span>Add this app to your device for offline use.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/tool.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

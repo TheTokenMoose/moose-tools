@@ -69,27 +69,39 @@ const PROJECTS = [
     playUrl: "tools/china-expat-salary-planner/",
     installable: true,
     featured: true
+  },
+  {
+    id: "name-spin-wheel",
+    title: "Name Spin Wheel",
+    type: "tool",
+    description: "Circus-themed classroom name picker. Paste comma-separated names, spin the wheel — standard or spin-and-remove so everyone gets a turn.",
+    category: "Classroom",
+    screenshot: "assets/screenshots/name-spin-wheel.png",
+    playUrl: "tools/name-spin-wheel/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "partner-picker",
+    title: "Partner Picker",
+    type: "tool",
+    description: "Split a class into fruit-coloured tables (2–20). Auto-assign, then drag students between groups. Save layouts per class name.",
+    category: "Classroom",
+    screenshot: "assets/screenshots/partner-picker.png",
+    playUrl: "tools/partner-picker/",
+    installable: true,
+    featured: true
+      featured: true
+  },
+  {
+    id: "the-quiet-game",
+    title: "The Quiet Game",
+    type: "tool",
+    description: "Stay quiet or the gorilla steals the banana! Mic noise meter, sensitivity control, and teacher-set timers.",
+    category: "Classroom",
+    screenshot: "assets/screenshots/the-quiet-game.png",
+    playUrl: "tools/the-quiet-game/",
+    installable: true,
+    featured: true
   }
 ];
-
-
-// Helper accessors
-function getAllProjects() {
-  return PROJECTS;
-}
-
-function getProjectById(id) {
-  return PROJECTS.find(p => p.id === id);
-}
-
-function getFeaturedProjects() {
-  return PROJECTS.filter(p => p.featured);
-}
-
-function getGames() {
-  return PROJECTS.filter(p => p.type === "game");
-}
-
-function getTools() {
-  return PROJECTS.filter(p => p.type === "tool");
-}

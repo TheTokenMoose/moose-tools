@@ -1,0 +1,217 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: linear-gradient(160deg, #0f241c 0%, #1a3d2e 40%, #243b55 100%);
+  color: #f4fff8;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+.library-back {
+  margin: 10px 16px 0;
+  position: relative;
+  z-index: 5;
+}
+.library-back a {
+  color: #a8d5c0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.library-back a:hover { text-decoration: underline; color: #ffe66d; }
+
+#app {
+  min-height: calc(100vh - 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px 32px;
+}
+
+.screen { width: min(960px, 100%); }
+
+.hero-card {
+  background: rgba(15, 36, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 28px 28px 32px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.hero-emoji { font-size: 3.2rem; margin-bottom: 8px; }
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  color: #ffe66d;
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  margin: 0 0 22px;
+  color: #c5e6d4;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.settings {
+  text-align: left;
+  max-width: 420px;
+  margin: 0 auto 20px;
+  display: grid;
+  gap: 14px;
+}
+
+.settings label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  color: #e8fff3;
+  font-size: 0.95rem;
+}
+
+settings select,
+.settings select,
+.settings input[type="range"] {
+  width: 100%;
+}
+
+.settings select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: #0f241c;
+  color: #f4fff8;
+  font-size: 1rem;
+}
+
+.settings input[type="range"] {
+  accent-color: #63d297;
+}
+
+#sens-label {
+  font-weight: 600;
+  color: #a8d5c0;
+  font-size: 0.9rem;
+}
+
+.hint, .fine-print {
+  color: #8fb5a3;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.btn-start {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, #63d297, #2a9d8f);
+  color: #0b1a14;
+  box-shadow: 0 8px 24px rgba(99, 210, 151, 0.3);
+}
+.btn-start:hover { filter: brightness(1.06); }
+
+.btn-secondary {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: #f4fff8;
+  margin-left: 8px;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+.error {
+  color: #ff8a80;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+/* Play HUD */
+#screen-play {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#screen-play[hidden] { display: none !important; }
+#screen-menu[hidden], #screen-result[hidden] { display: none !important; }
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(15, 36, 28, 0.75);
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.hud-item { display: flex; flex-direction: column; gap: 2px; min-width: 80px; }
+.hud-label { font-size: 0.75rem; color: #8fb5a3; text-transform: uppercase; letter-spacing: 0.06em; }
+.hud-value { font-size: 1.5rem; font-weight: 800; color: #ffe66d; font-variant-numeric: tabular-nums; }
+
+.noise-item { flex: 1; min-width: 140px; }
+.noise-bar-wrap {
+  height: 14px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.noise-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #63d297, #ffe66d, #e63946);
+  transition: width 0.08s linear;
+  border-radius: 8px;
+}
+
+.btn-quit {
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.1);
+  color: #f4fff8;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-quit:hover { background: rgba(230, 57, 70, 0.5); }
+
+#game {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  background: #87ceeb;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.status-line {
+  text-align: center;
+  margin: 4px 0 0;
+  color: #c5e6d4;
+  font-weight: 600;
+  min-height: 1.4em;
+}
+
+.result-actions { margin-top: 8px; }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.55rem; }
+  .hero-card { padding: 20px 16px 24px; }
+  .hud-value { font-size: 1.25rem; }
+}

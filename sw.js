@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v8";
+const CACHE_NAME = "token-moose-v12";
 
 
 
@@ -43,6 +43,9 @@ const CACHE_URLS = [
   "./assets/screenshots/phonics-pairing-quest.png",
   "./assets/screenshots/ib-little-explorers.png",
   "./assets/screenshots/china-expat-salary-planner.png",
+  "./assets/screenshots/name-spin-wheel.png",
+  "./assets/screenshots/partner-picker.png",
+  "./assets/screenshots/the-quiet-game.png",
   "./games/placeholder-game/",
   "./games/placeholder-game/index.html",
   "./games/alphabet-hunt/",
@@ -66,8 +69,24 @@ const CACHE_URLS = [
   "./tools/china-expat-salary-planner/",
   "./tools/china-expat-salary-planner/index.html",
   "./tools/china-expat-salary-planner/style.css",
-  "./tools/china-expat-salary-planner/app.js"
+  "./tools/china-expat-salary-planner/app.js",
+  "./tools/name-spin-wheel/",
+  "./tools/name-spin-wheel/index.html",
+  "./tools/name-spin-wheel/css/tool.css",
+  "./tools/name-spin-wheel/js/tool.js",
+  "./tools/name-spin-wheel/manifest.webmanifest",
+  "./tools/partner-picker/",
+  "./tools/partner-picker/index.html",
+  "./tools/partner-picker/css/tool.css",
+  "./tools/partner-picker/js/tool.js",
+  "./tools/partner-picker/manifest.webmanifest",
+  "./tools/the-quiet-game/",
+  "./tools/the-quiet-game/index.html",
+  "./tools/the-quiet-game/css/tool.css",
+  "./tools/the-quiet-game/js/tool.js",
+  "./tools/the-quiet-game/manifest.webmanifest"
 ];
+
 
 
 

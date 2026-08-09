@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#1a3d2e">
+  <meta name="description" content="The Quiet Game — stay quiet so the gorilla never steals the banana.">
+  <title>The Quiet Game — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- MENU -->
+    <section id="screen-menu" class="screen">
+      <div class="hero-card">
+        <div class="hero-emoji" aria-hidden="true">🦍🍌</div>
+        <h1>The Quiet Game</h1>
+        <p class="tagline">Keep the class quiet — or the gorilla steals the banana!</p>
+
+        <div class="settings">
+          <label>
+            Quiet time
+            <select id="timer-select">
+              <option value="30">30 seconds</option>
+              <option value="60">1 minute</option>
+              <option value="120" selected>2 minutes</option>
+              <option value="180">3 minutes</option>
+              <option value="300">5 minutes</option>
+            </select>
+          </label>
+          <label>
+            Mic sensitivity
+            <input type="range" id="sensitivity" min="1" max="100" value="40">
+            <span id="sens-label">Normal</span>
+          </label>
+          <p class="hint">Lower sensitivity = harder to trigger the gorilla. Higher = more strict silence.</p>
+        </div>
+
+        <button type="button" id="start-btn" class="btn-start">Allow mic &amp; Start</button>
+        <p id="mic-error" class="error" hidden></p>
+        <p class="fine-print">Uses your microphone only on this device. Nothing is recorded or uploaded.</p>
+      </div>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen" hidden>
+      <header class="hud">
+        <div class="hud-item">
+          <span class="hud-label">Time left</span>
+          <span id="time-display" class="hud-value">2:00</span>
+        </div>
+        <div class="hud-item noise-item">
+          <span class="hud-label">Noise</span>
+          <div class="noise-bar-wrap">
+            <div id="noise-bar" class="noise-bar"></div>
+          </div>
+        </div>
+        <button type="button" id="quit-btn" class="btn-quit">End</button>
+      </header>
+      <canvas id="game" width="960" height="540" aria-label="The Quiet Game scene"></canvas>
+      <p id="status-line" class="status-line">Shhh… the gorilla is listening.</p>
+    </section>
+
+    <!-- RESULT -->
+    <section id="screen-result" class="screen" hidden>
+      <div class="hero-card result-card">
+        <div id="result-emoji" class="hero-emoji" aria-hidden="true">🎉</div>
+        <h1 id="result-title">You win!</h1>
+        <p id="result-msg" class="tagline"></p>
+        <div class="result-actions">
+          <button type="button" id="again-btn" class="btn-start">Play again</button>
+          <button type="button" id="new-timer-btn" class="btn-secondary">New timer</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install The Quiet Game</strong>
+      <span>Add to your device for quick classroom use.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/tool.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
