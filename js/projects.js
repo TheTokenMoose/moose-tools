@@ -1,14 +1,6 @@
 /**
  * The Token Moose - Project Data
  * Add new games and tools here. Keep IDs stable and unique.
- *
- * Games currently listed (ports pending):
- *   - Alphabet Hunt
- *   - One Button Hero
- *   - Phonics Pairing Quest
- *   - IB Little Explorers
- *
- * Screenshots and playUrl paths will be updated as each game is ported to web/PWA.
  */
 
 const PROJECTS = [
@@ -104,3 +96,16 @@ const PROJECTS = [
     featured: true
   }
 ];
+
+// Helper accessors used by app.js
+function getAllProjects() {
+  return PROJECTS;
+}
+
+function getProjectById(id) {
+  return PROJECTS.find((p) => p.id === id);
+}
+
+function getFeaturedProjects() {
+  return PROJECTS.filter((p) => p.featured);
+}
