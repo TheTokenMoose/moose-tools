@@ -1,0 +1,59 @@
+/* The Token Moose - Extra component styles */
+
+/* Featured section subtle accent */
+.featured-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-electric);
+  margin-bottom: 0.35rem;
+}
+
+/* Page intro text */
+.page-intro {
+  color: var(--text-muted);
+  max-width: 40em;
+  margin-bottom: 1.5rem;
+}
+
+/* Placeholder page (inside games/tools folders) */
+.placeholder-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+.placeholder-page h1 {
+  background: linear-gradient(135deg, var(--accent-soft-pink), var(--accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.placeholder-page p {
+  max-width: 28em;
+  color: var(--text-secondary);
+}
+
+.placeholder-page .back-link {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: white;
+  font-weight: 600;
+}
+
+.placeholder-page .back-link:hover {
+  color: white;
+  box-shadow: var(--glow-pink);
+}

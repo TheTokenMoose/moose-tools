@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#10203A">
+  <meta name="description" content="Phonics Pairing Quest — match sounds to pictures for young readers.">
+  <title>Phonics Pairing Quest — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <div id="game-wrap">
+    <canvas id="game" width="1120" height="760" aria-label="Phonics Pairing Quest game canvas"></canvas>
+  </div>
+  <noscript>
+    <p style="color:#fff;text-align:center;padding:2rem;font-family:sans-serif;">
+      Phonics Pairing Quest needs JavaScript enabled to play.
+    </p>
+  </noscript>
+  <script type="module" src="js/game.js"></script>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Phonics Pairing Quest</strong>
+      <span>Add this app to your device for offline play.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="pwa-install.js"></script>
+</body>
+</html>
