@@ -91,7 +91,6 @@ const PROJECTS = [
     playUrl: "tools/partner-picker/",
     installable: true,
     featured: true
-      featured: true
   },
   {
     id: "the-quiet-game",
