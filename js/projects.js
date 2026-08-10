@@ -154,10 +154,21 @@ const PROJECTS = [
     id: "story-sequence",
     title: "Story Sequence Board",
     type: "game",
-    description: "20 public-domain classics: sort story panels, then sentences. Extension: print a blank board to write your own tale.",
+    description: "20 public-domain classics: sort story panels, then sentences. Build sequence skills with fables and folk tales.",
     category: "Education",
     screenshot: "assets/screenshots/story-sequence.png",
     playUrl: "games/story-sequence/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "twenty-questions",
+    title: "20 Questions Wizard",
+    type: "game",
+    description: "Think of an animal, food, object, or place — a fortune-telling wizard asks yes/no questions and tries to guess within twenty.",
+    category: "Education",
+    screenshot: "assets/screenshots/twenty-questions.png",
+    playUrl: "games/twenty-questions/",
     installable: true,
     featured: true
   }

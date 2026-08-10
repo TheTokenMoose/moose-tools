@@ -99,7 +99,6 @@ class StorySequence {
     document.getElementById("btn-random").addEventListener("click", () => {
       this.startStory(Math.floor(Math.random() * this.stories.length));
     });
-    document.getElementById("btn-print-blank").addEventListener("click", () => this.printBlank());
     document.getElementById("btn-menu").addEventListener("click", () => this.showMenu());
     document.getElementById("btn-result-menu").addEventListener("click", () => this.showMenu());
     document.getElementById("btn-another").addEventListener("click", () => {
@@ -334,42 +333,6 @@ class StorySequence {
     }
   }
 
-  printBlank() {
-    const root = document.getElementById("print-root");
-    root.innerHTML = `
-      <div class="print-sheet">
-        <h1>My Story Sequence Board</h1>
-        <div class="meta-lines">
-          <span>Name:</span>
-          <span>Date:</span>
-          <span>Title:</span>
-        </div>
-        <div class="print-grid">
-          ${[1, 2, 3, 4]
-            .map(
-              (n) => `
-            <div class="print-panel">
-              <div class="num">Scene ${n}</div>
-              <div class="draw"></div>
-              <div class="write"></div>
-              <div class="write"></div>
-            </div>`
-            )
-            .join("")}
-        </div>
-        <div class="print-footer">
-          <p><strong>Write your story in order:</strong></p>
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-          <p style="margin-top:10px"><strong>Moral or message (optional):</strong></p>
-          <div class="line"></div>
-        </div>
-      </div>
-    `;
-    requestAnimationFrame(() => window.print());
-  }
 }
 
 function shuffle(arr) {

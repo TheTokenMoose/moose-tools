@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#0a0614">
+  <meta name="description" content="20 Questions Wizard — think of something; the oracle tries to guess.">
+  <title>20 Questions Wizard — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- INTRO -->
+    <section id="screen-intro" class="screen">
+      <div class="intro-stage">
+        <div class="orb-wrap" aria-hidden="true">
+          <div class="orb">
+            <div class="orb-glow"></div>
+            <div class="orb-core">🔮</div>
+          </div>
+        </div>
+        <h1>The Oracle of Twenty</h1>
+        <p class="tagline">Think of something from the realm… answer truly… I shall name it.</p>
+        <div class="intro-card">
+          <p>Choose a category, think of <strong>one thing</strong> inside it, then answer the wizard’s yes-or-no questions. You have twenty chances before the vision fades.</p>
+          <label class="field">Realm
+            <select id="category">
+              <option value="all">Whole realm (harder)</option>
+              <option value="animal" selected>Animals</option>
+              <option value="food">Food</option>
+              <option value="object">Classroom &amp; objects</option>
+              <option value="place">Places</option>
+            </select>
+          </label>
+          <button type="button" id="btn-begin" class="btn-magic">Gaze into the crystal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen" hidden>
+      <header class="hud">
+        <button type="button" id="btn-quit" class="btn-ghost">Give up</button>
+        <div class="counter" id="q-counter">Question 1 / 20</div>
+        <div class="candidates" id="candidates" title="Possibilities left">?</div>
+      </header>
+
+      <div class="wizard-stage">
+        <div class="wizard" aria-hidden="true">
+          <div class="wizard-hat">🧙</div>
+          <div class="wizard-body"></div>
+        </div>
+        <div class="crystal" id="crystal">
+          <div class="crystal-fog"></div>
+          <div class="crystal-icon" id="crystal-icon">✨</div>
+        </div>
+      </div>
+
+      <div class="speech">
+        <p id="wizard-line" class="wizard-line">Hmm… let me peer closer…</p>
+        <p id="question-text" class="question-text">Is it alive?</p>
+      </div>
+
+      <div class="answer-row">
+        <button type="button" class="btn-answer yes" data-a="yes">Yes</button>
+        <button type="button" class="btn-answer no" data-a="no">No</button>
+        <button type="button" class="btn-answer unknown" data-a="unknown">Not sure</button>
+      </div>
+    </section>
+
+    <!-- GUESS -->
+    <section id="screen-guess" class="screen" hidden>
+      <div class="result-veil">
+        <div class="crystal big">
+          <div class="crystal-fog"></div>
+          <div class="crystal-icon" id="guess-icon">🎯</div>
+        </div>
+        <h2 id="guess-title">The mists clear…</h2>
+        <p id="guess-text" class="guess-text">You are thinking of a <strong>fox</strong>.</p>
+        <div class="answer-row">
+          <button type="button" id="btn-correct" class="btn-answer yes">Correct!</button>
+          <button type="button" id="btn-wrong" class="btn-answer no">Wrong</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- END -->
+    <section id="screen-end" class="screen" hidden>
+      <div class="result-veil">
+        <div class="end-emoji" id="end-emoji">🌟</div>
+        <h2 id="end-title">The vision was true!</h2>
+        <p id="end-msg"></p>
+        <button type="button" id="btn-again" class="btn-magic">Another vision</button>
+        <button type="button" id="btn-home" class="btn-ghost" style="margin-top:10px">Change realm</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install 20 Questions Wizard</strong>
+      <span>Play offline anytime.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/knowledge.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
