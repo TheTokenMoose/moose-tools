@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#1a0f2e">
+  <meta name="description" content="Sentence Forge — build sentences and practice reading fluency.">
+  <title>Sentence Forge — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- TITLE -->
+    <section id="screen-title" class="screen">
+      <div class="title-card">
+        <div class="title-art" aria-hidden="true">📖✨</div>
+        <h1>Sentence Forge</h1>
+        <p class="tagline">Build the sentence. Read it with power.</p>
+        <div class="mode-picks">
+          <button type="button" class="mode-btn" data-mode="forge">
+            <span class="mode-icon">🔨</span>
+            <span class="mode-name">Forge</span>
+            <span class="mode-desc">Put the words in order</span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="fluency">
+            <span class="mode-icon">🗣️</span>
+            <span class="mode-name">Fluency</span>
+            <span class="mode-desc">Build, then race the highlight</span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="challenge">
+            <span class="mode-icon">⚡</span>
+            <span class="mode-name">Challenge</span>
+            <span class="mode-desc">Harder sentences · keep a streak</span>
+          </button>
+        </div>
+        <div class="title-row">
+          <label class="level-pick">Level
+            <select id="level-select">
+              <option value="1">1 · Early</option>
+              <option value="2" selected>2 · Growing</option>
+              <option value="3">3 · Fluent</option>
+            </select>
+          </label>
+          <button type="button" id="btn-mute" class="btn-ghost" title="Mute">🔊</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen" hidden>
+      <header class="hud">
+        <button type="button" id="btn-menu" class="btn-ghost">Menu</button>
+        <div class="hud-center">
+          <span id="hud-mode">Forge</span>
+          <span id="hud-score">Score 0</span>
+          <span id="hud-streak" hidden>Streak 0</span>
+        </div>
+        <button type="button" id="btn-mute-play" class="btn-ghost">🔊</button>
+      </header>
+
+      <div class="prompt-bar">
+        <p id="prompt-text">Tap the words in the right order.</p>
+      </div>
+
+      <!-- Built sentence slots -->
+      <div id="sentence-row" class="sentence-row" aria-label="Your sentence"></div>
+
+      <!-- Word bank -->
+      <div id="word-bank" class="word-bank" aria-label="Word bank"></div>
+
+      <div class="play-actions">
+        <button type="button" id="btn-check" class="btn-primary">Check</button>
+        <button type="button" id="btn-clear" class="btn-secondary">Clear</button>
+        <button type="button" id="btn-hint" class="btn-secondary">Hint</button>
+        <button type="button" id="btn-listen" class="btn-secondary">🔊 Hear it</button>
+      </div>
+
+      <!-- Fluency overlay phase -->
+      <div id="fluency-panel" class="fluency-panel" hidden>
+        <p class="fluency-label">Read along with the glow</p>
+        <div id="fluency-words" class="fluency-words"></div>
+        <div class="fluency-controls">
+          <label>Speed
+            <select id="wpm-select">
+              <option value="80">Slow</option>
+              <option value="120" selected>Steady</option>
+              <option value="160">Quick</option>
+            </select>
+          </label>
+          <button type="button" id="btn-fluency-go" class="btn-primary">Start reading</button>
+          <button type="button" id="btn-fluency-done" class="btn-secondary">I finished</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="screen-result" class="screen" hidden>
+      <div class="result-card">
+        <div id="result-stars" class="result-stars">⭐⭐⭐</div>
+        <h2 id="result-title">Great forge!</h2>
+        <p id="result-msg">You built the sentence.</p>
+        <p id="result-sentence" class="result-sentence"></p>
+        <div class="result-actions">
+          <button type="button" id="btn-next" class="btn-primary">Next sentence</button>
+          <button type="button" id="btn-result-menu" class="btn-secondary">Menu</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <canvas id="fx" width="1" height="1" aria-hidden="true"></canvas>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Sentence Forge</strong>
+      <span>Practice offline anytime.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

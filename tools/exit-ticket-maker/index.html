@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Exit Ticket Maker — build, project, and print classroom exit tickets.">
+  <title>Exit Ticket Maker — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back no-print"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app" class="no-print">
+    <header class="hero">
+      <h1>Exit Ticket Maker</h1>
+      <p class="tagline">Build a ticket → project it live → or print student copies</p>
+    </header>
+
+    <details class="howto" open>
+      <summary>How to use</summary>
+      <ol>
+        <li><strong>Pick a template</strong> (3-2-1, One question, Traffic light, Reflection, or Custom).</li>
+        <li><strong>Edit</strong> the title, prompts, and optional class / topic line.</li>
+        <li><strong>Live display</strong> — full-screen board for students to answer on whiteboards, sticky notes, or orally.</li>
+        <li><strong>Print</strong> — choose tickets per page, then use your browser Print dialog (Save as PDF works too).</li>
+        <li>Nothing is uploaded. Optional saves stay in this browser only.</li>
+      </ol>
+    </details>
+
+    <div class="layout">
+      <section class="panel">
+        <h2>1. Template</h2>
+        <div class="template-grid" id="templates"></div>
+
+        <h2>2. Details</h2>
+        <label class="field">Ticket title
+          <input type="text" id="title" maxlength="80" value="Exit Ticket">
+        </label>
+        <label class="field">Class / topic (optional)
+          <input type="text" id="meta" maxlength="100" placeholder="e.g. 3B · Fractions">
+        </label>
+        <label class="field">Date line
+          <select id="date-mode">
+            <option value="blank">Blank line for students</option>
+            <option value="today">Today’s date</option>
+            <option value="none">Hide date</option>
+          </select>
+        </label>
+        <label class="field">Name line
+          <select id="name-mode">
+            <option value="yes">Include name line</option>
+            <option value="no">No name line</option>
+          </select>
+        </label>
+
+        <h2>3. Prompts</h2>
+        <div id="prompts" class="prompts"></div>
+        <button type="button" id="btn-add-prompt" class="btn-secondary">+ Add prompt</button>
+
+        <h2>4. Print layout</h2>
+        <label class="field">Tickets per page
+          <select id="per-page">
+            <option value="1">1 (large)</option>
+            <option value="2">2</option>
+            <option value="4" selected>4</option>
+            <option value="6">6</option>
+          </select>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="show-lines" checked>
+          Answer lines under each prompt
+        </label>
+
+        <div class="actions">
+          <button type="button" id="btn-live" class="btn-primary">Live display</button>
+          <button type="button" id="btn-print" class="btn-accent">Print / PDF</button>
+          <button type="button" id="btn-save" class="btn-secondary">Save locally</button>
+        </div>
+        <p id="save-status" class="status" hidden></p>
+      </section>
+
+      <section class="panel preview-panel">
+        <h2>Preview</h2>
+        <div id="preview" class="ticket-preview"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Live classroom display -->
+  <div id="live" class="live" hidden>
+    <div class="live-bar no-print">
+      <span id="live-meta"></span>
+      <div class="live-actions">
+        <button type="button" id="live-fs" class="btn-secondary">Fullscreen</button>
+        <button type="button" id="live-close" class="btn-secondary">Close</button>
+      </div>
+    </div>
+    <div id="live-body" class="live-body"></div>
+  </div>
+
+  <!-- Print root (filled on print) -->
+  <div id="print-root" class="print-root" aria-hidden="true"></div>
+
+  <div id="pwa-install-bar" class="no-print" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Exit Ticket Maker</strong>
+      <span>Quick access for end-of-lesson tickets.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/tool.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

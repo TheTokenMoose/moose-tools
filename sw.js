@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v15";
+const CACHE_NAME = "token-moose-v19";
 
 
 
@@ -47,6 +47,10 @@ const CACHE_URLS = [
   "./assets/screenshots/partner-picker.png",
   "./assets/screenshots/the-quiet-game.png",
   "./assets/screenshots/classroom-timer.png",
+  "./assets/screenshots/sentence-forge.png",
+  "./assets/screenshots/reading-rally.png",
+  "./assets/screenshots/ib-pyp-guide.png",
+  "./assets/screenshots/exit-ticket-maker.png",
   "./games/placeholder-game/",
   "./games/placeholder-game/index.html",
   "./games/alphabet-hunt/",
@@ -91,6 +95,26 @@ const CACHE_URLS = [
   "./tools/classroom-timer/css/tool.css",
   "./tools/classroom-timer/js/tool.js",
   "./tools/classroom-timer/manifest.webmanifest"
+  ,"./games/sentence-forge/",
+  "./games/sentence-forge/index.html",
+  "./games/sentence-forge/css/game.css",
+  "./games/sentence-forge/js/game.js",
+  "./games/sentence-forge/manifest.webmanifest"
+  ,"./games/reading-rally/",
+  "./games/reading-rally/index.html",
+  "./games/reading-rally/css/game.css",
+  "./games/reading-rally/js/game.js",
+  "./games/reading-rally/manifest.webmanifest"
+  ,"./tools/ib-pyp-guide/",
+  "./tools/ib-pyp-guide/index.html",
+  "./tools/ib-pyp-guide/css/tool.css",
+  "./tools/ib-pyp-guide/js/tool.js",
+  "./tools/ib-pyp-guide/manifest.webmanifest"
+  ,"./tools/exit-ticket-maker/",
+  "./tools/exit-ticket-maker/index.html",
+  "./tools/exit-ticket-maker/css/tool.css",
+  "./tools/exit-ticket-maker/js/tool.js",
+  "./tools/exit-ticket-maker/manifest.webmanifest"
 ];
 
 

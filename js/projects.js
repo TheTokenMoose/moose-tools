@@ -49,6 +49,28 @@ const PROJECTS = [
     installable: true,
     featured: true
   },
+  {
+    id: "sentence-forge",
+    title: "Sentence Forge",
+    type: "game",
+    description: "Build sentences from word tiles, then practice fluency with guided highlighting. Forge, Fluency, and Challenge modes across three levels.",
+    category: "Education",
+    screenshot: "assets/screenshots/sentence-forge.png",
+    playUrl: "games/sentence-forge/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "reading-rally",
+    title: "Reading Rally",
+    type: "game",
+    description: "Hot-seat board game for 2–4 players. Race the trail, read words, rhyme, and hit IB PYP Learner Profile language moments.",
+    category: "Education",
+    screenshot: "assets/screenshots/reading-rally.png",
+    playUrl: "games/reading-rally/",
+    installable: true,
+    featured: true
+  },
 
   // ── Tools ──────────────────────────────────────────────────────────────
   {
@@ -103,6 +125,28 @@ const PROJECTS = [
     category: "Classroom",
     screenshot: "assets/screenshots/classroom-timer.png",
     playUrl: "tools/classroom-timer/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "ib-pyp-guide",
+    title: "IB PYP Pocket Guide",
+    type: "tool",
+    description: "Quick teacher reference for transdisciplinary themes, ATLs, Learner Profile, key concepts, inquiry, agency, and action.",
+    category: "Classroom",
+    screenshot: "assets/screenshots/ib-pyp-guide.png",
+    playUrl: "tools/ib-pyp-guide/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "exit-ticket-maker",
+    title: "Exit Ticket Maker",
+    type: "tool",
+    description: "Create exit tickets from templates, project a live classroom display, or print student copies (1–6 per page).",
+    category: "Classroom",
+    screenshot: "assets/screenshots/exit-ticket-maker.png",
+    playUrl: "tools/exit-ticket-maker/",
     installable: true,
     featured: true
   }

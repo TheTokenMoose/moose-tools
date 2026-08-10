@@ -1,0 +1,274 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: linear-gradient(165deg, #0c1929 0%, #132f4c 50%, #0a1628 100%);
+  color: #e8f1ff;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+.library-back { margin: 10px 16px 0; }
+.library-back a { color: #8ecae6; font-weight: 600; text-decoration: none; }
+.library-back a:hover { color: #ffd166; }
+
+#app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 16px 36px;
+  min-height: calc(100vh - 40px);
+}
+
+.screen[hidden] { display: none !important; }
+
+.hero { text-align: center; padding: 20px 8px 8px; }
+.hero-emoji { font-size: 2.8rem; }
+.hero h1 {
+  margin: 6px 0;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  background: linear-gradient(120deg, #ffd166, #8ecae6, #90ee90);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tagline { color: #9db4c0; margin: 0 0 16px; }
+
+.setup-card {
+  background: rgba(15, 30, 50, 0.85);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 20px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #c5d5e5;
+}
+.field select, .name-fields input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0a1628;
+  color: #e8f1ff;
+  font-size: 1rem;
+  width: 100%;
+}
+.name-fields { display: grid; gap: 8px; margin-bottom: 14px; }
+.name-fields label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #9db4c0;
+}
+.fine { color: #7a8fa0; font-size: 0.85rem; margin: 12px 0 0; text-align: center; }
+
+.btn-primary {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffd166, #f4a261);
+  color: #1a1200;
+  width: 100%;
+}
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: #e8f1ff;
+  margin-top: 8px;
+  width: 100%;
+}
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.06);
+  color: #e8f1ff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* HUD / board */
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.turn-banner {
+  font-weight: 900;
+  font-size: 1.15rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 209, 102, 0.15);
+  color: #ffd166;
+  border: 1px solid rgba(255, 209, 102, 0.35);
+}
+.scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+.player-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 2px solid transparent;
+  background: rgba(0,0,0,0.25);
+}
+.player-chip.active {
+  border-color: #ffd166;
+  box-shadow: 0 0 12px rgba(255, 209, 102, 0.3);
+}
+
+#board {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  background: #1b4332;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+.board-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+.btn-roll { width: auto; min-width: 140px; }
+.dice-face {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #fff;
+  color: #1a1200;
+  font-weight: 900;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.board-hint {
+  text-align: center;
+  color: #9db4c0;
+  font-weight: 600;
+  margin: 10px 0 0;
+  min-height: 1.4em;
+}
+
+/* Challenge */
+#screen-challenge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+.challenge-card {
+  background: rgba(12, 25, 41, 0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 28px 24px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+.ch-type {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(142, 202, 230, 0.2);
+  color: #8ecae6;
+  margin-bottom: 8px;
+}
+.ch-pyp {
+  font-size: 0.9rem;
+  color: #90ee90;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.challenge-card h2 { margin: 8px 0; color: #ffd166; }
+.ch-body {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.45;
+  margin: 12px 0 18px;
+  color: #f0f7ff;
+}
+.ch-choices {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ch-choices button {
+  border: 2px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: #e8f1ff;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+.ch-choices button:hover { border-color: #8ecae6; }
+.ch-choices button.correct { border-color: #90ee90; background: rgba(144, 238, 144, 0.15); }
+.ch-choices button.wrong { border-color: #f87171; background: rgba(248, 113, 113, 0.12); }
+.ch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.ch-actions .btn-primary,
+.ch-actions .btn-secondary { width: auto; }
+
+/* Win */
+#screen-win {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+.win-card {
+  text-align: center;
+  background: rgba(12, 25, 41, 0.95);
+  border-radius: 20px;
+  padding: 36px 28px;
+  border: 1px solid rgba(255,209,102,0.3);
+  max-width: 400px;
+  width: 100%;
+}
+.win-emoji { font-size: 3rem; }
+.win-card h2 { color: #ffd166; margin: 8px 0; }
+.win-card p { color: #9db4c0; }
+
+@media (max-width: 600px) {
+  .ch-body { font-size: 1.15rem; }
+}

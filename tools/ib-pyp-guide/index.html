@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d36">
+  <meta name="description" content="IB PYP Pocket Guide — themes, ATLs, Learner Profile, and key concepts for teachers.">
+  <title>IB PYP Pocket Guide — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <header class="hero">
+    <h1>IB PYP Pocket Guide</h1>
+    <p class="tagline">Themes · ATLs · Learner Profile · Key concepts — quick classroom reference</p>
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search themes, skills, attributes…" autocomplete="off">
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <button type="button" class="tab is-active" data-section="all">All</button>
+      <button type="button" class="tab" data-section="themes">Themes</button>
+      <button type="button" class="tab" data-section="atl">ATLs</button>
+      <button type="button" class="tab" data-section="profile">Learner Profile</button>
+      <button type="button" class="tab" data-section="concepts">Key concepts</button>
+      <button type="button" class="tab" data-section="more">More</button>
+    </nav>
+  </header>
+
+  <main id="content" class="content"></main>
+
+  <footer class="note">
+    <p>
+      Unofficial classroom aid for teachers. Align planning with your school’s Programme of Inquiry
+      and the latest IB PYP documentation. Not affiliated with or endorsed by the International Baccalaureate Organization.
+    </p>
+  </footer>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install IB PYP Pocket Guide</strong>
+      <span>Offline reference on your device.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/tool.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

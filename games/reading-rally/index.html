@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0c1929">
+  <meta name="description" content="Reading Rally — hot-seat board game for reading skills with IB PYP language.">
+  <title>Reading Rally — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- SETUP -->
+    <section id="screen-setup" class="screen">
+      <div class="hero">
+        <div class="hero-emoji">🗺️📚</div>
+        <h1>Reading Rally</h1>
+        <p class="tagline">Hot-seat board game · reading skills · IB PYP language</p>
+      </div>
+
+      <div class="setup-card">
+        <label class="field">Players (2–4)
+          <select id="player-count">
+            <option value="2" selected>2 players</option>
+            <option value="3">3 players</option>
+            <option value="4">4 players</option>
+          </select>
+        </label>
+        <div id="name-fields" class="name-fields"></div>
+        <label class="field">Goal
+          <select id="goal-select">
+            <option value="laps1">1 full lap</option>
+            <option value="laps2" selected>2 full laps</option>
+            <option value="stars15">First to 15 stars</option>
+          </select>
+        </label>
+        <label class="field">Reading level
+          <select id="level-select">
+            <option value="1">Early</option>
+            <option value="2" selected>Growing</option>
+            <option value="3">Fluent</option>
+          </select>
+        </label>
+        <button type="button" id="btn-start" class="btn-primary">Start rally</button>
+        <p class="fine">Pass the device each turn. Be kind communicators!</p>
+      </div>
+    </section>
+
+    <!-- BOARD -->
+    <section id="screen-board" class="screen" hidden>
+      <header class="hud">
+        <button type="button" id="btn-quit" class="btn-ghost">Quit</button>
+        <div id="turn-banner" class="turn-banner">Player 1</div>
+        <button type="button" id="btn-mute" class="btn-ghost">🔊</button>
+      </header>
+
+      <div id="scoreboard" class="scoreboard"></div>
+
+      <canvas id="board" width="900" height="520" aria-label="Rally map"></canvas>
+
+      <div class="board-actions">
+        <button type="button" id="btn-roll" class="btn-primary btn-roll">Roll dice</button>
+        <div id="dice-face" class="dice-face" aria-live="polite">–</div>
+      </div>
+      <p id="board-hint" class="board-hint">Roll to move around the trail.</p>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section id="screen-challenge" class="screen" hidden>
+      <div class="challenge-card">
+        <div id="ch-type" class="ch-type">Read aloud</div>
+        <div id="ch-pyp" class="ch-pyp" hidden></div>
+        <h2 id="ch-title">Your challenge</h2>
+        <p id="ch-body" class="ch-body"></p>
+        <div id="ch-choices" class="ch-choices"></div>
+        <div class="ch-actions">
+          <button type="button" id="ch-hear" class="btn-secondary">🔊 Hear it</button>
+          <button type="button" id="ch-ok" class="btn-primary" hidden>We did it!</button>
+          <button type="button" id="ch-skip" class="btn-ghost">Skip (−1 star)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIN -->
+    <section id="screen-win" class="screen" hidden>
+      <div class="win-card">
+        <div class="win-emoji">🏆</div>
+        <h2 id="win-title">Winner!</h2>
+        <p id="win-msg"></p>
+        <button type="button" id="btn-again" class="btn-primary">Play again</button>
+        <button type="button" id="btn-setup" class="btn-secondary">New setup</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Reading Rally</strong>
+      <span>Hot-seat reading board game offline.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
