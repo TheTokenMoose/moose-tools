@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v14";
+const CACHE_NAME = "token-moose-v15";
 
 
 

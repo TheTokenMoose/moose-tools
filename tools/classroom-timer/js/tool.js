@@ -1,6 +1,6 @@
 /**
  * Classroom Timer — goal-based visual timers
- * Scalable canvas stage, character along a timeline, Bomb Time fuse mode.
+ * Path characters + Bomb Time fuse, pause, lofi bed, mild boom.
  */
 
 const GOALS = [
@@ -66,6 +66,198 @@ function formatTime(sec) {
   return `${m}:${pad2(s)}`;
 }
 
+// ─── Audio (procedural — offline, no external files) ───────────────────────
+
+class TimerAudio {
+  constructor() {
+    this.ctx = null;
+    this.enabled = true;
+    this.master = null;
+    this.musicNodes = [];
+    this.musicTimer = null;
+    this.step = 0;
+  }
+
+  ensure() {
+    if (!this.ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = 0.22;
+      this.master.connect(this.ctx.destination);
+    }
+    if (this.ctx.state === "suspended") this.ctx.resume();
+    return this.ctx;
+  }
+
+  setEnabled(on) {
+    this.enabled = !!on;
+    if (!this.enabled) this.stopMusic();
+    else if (this._wantMusic) this.startMusic();
+  }
+
+  startMusic() {
+    this._wantMusic = true;
+    if (!this.enabled) return;
+    const ctx = this.ensure();
+    if (!ctx || this.musicTimer) return;
+
+    // Upbeat chill lofi-ish loop: soft keys + offbeat hi + warm bass
+    const chordSeq = [
+      [261.63, 329.63, 392.0],  // C major
+      [220.0, 261.63, 329.63],  // Am
+      [174.61, 220.0, 261.63],  // F
+      [196.0, 246.94, 293.66],  // G
+    ];
+    const bpm = 86;
+    const beat = 60 / bpm;
+    this.step = 0;
+
+    const tick = () => {
+      if (!this.enabled || !this._wantMusic || !this.ctx) return;
+      const t0 = this.ctx.currentTime;
+      const chord = chordSeq[Math.floor(this.step / 4) % chordSeq.length];
+      const beatInBar = this.step % 4;
+
+      // Soft pad chord
+      chord.forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        osc.type = i === 0 ? "triangle" : "sine";
+        osc.frequency.value = freq / 2;
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.045, t0 + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + beat * 1.1);
+        osc.connect(g);
+        g.connect(this.master);
+        osc.start(t0);
+        osc.stop(t0 + beat * 1.2);
+        this.musicNodes.push(osc);
+      });
+
+      // Melody pluck on beats 0 and 2
+      if (beatInBar === 0 || beatInBar === 2) {
+        const m = this.ctx.createOscillator();
+        const mg = this.ctx.createGain();
+        m.type = "sine";
+        m.frequency.value = chord[beatInBar === 0 ? 2 : 1] * 2;
+        mg.gain.setValueAtTime(0.0001, t0);
+        mg.gain.exponentialRampToValueAtTime(0.06, t0 + 0.02);
+        mg.gain.exponentialRampToValueAtTime(0.0001, t0 + beat * 0.7);
+        m.connect(mg);
+        mg.connect(this.master);
+        m.start(t0);
+        m.stop(t0 + beat * 0.8);
+        this.musicNodes.push(m);
+      }
+
+      // Soft offbeat tick
+      if (beatInBar === 1 || beatInBar === 3) {
+        const noise = this.ctx.createBufferSource();
+        const buffer = this.ctx.createBuffer(1, 800, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / 120);
+        noise.buffer = buffer;
+        const ng = this.ctx.createGain();
+        ng.gain.value = 0.03;
+        const filt = this.ctx.createBiquadFilter();
+        filt.type = "highpass";
+        filt.frequency.value = 4000;
+        noise.connect(filt);
+        filt.connect(ng);
+        ng.connect(this.master);
+        noise.start(t0);
+        this.musicNodes.push(noise);
+      }
+
+      this.step += 1;
+      this.musicTimer = setTimeout(tick, beat * 1000);
+    };
+    tick();
+  }
+
+  stopMusic() {
+    this._wantMusic = false;
+    if (this.musicTimer) {
+      clearTimeout(this.musicTimer);
+      this.musicTimer = null;
+    }
+    for (const n of this.musicNodes) {
+      try {
+        n.stop();
+      } catch (_) {}
+    }
+    this.musicNodes = [];
+  }
+
+  /** Mild classroom-friendly boom */
+  playBoom() {
+    if (!this.enabled) return;
+    const ctx = this.ensure();
+    if (!ctx) return;
+    const t0 = ctx.currentTime;
+
+    // Low thump
+    const osc = ctx.createOscillator();
+    const og = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(120, t0);
+    osc.frequency.exponentialRampToValueAtTime(40, t0 + 0.35);
+    og.gain.setValueAtTime(0.0001, t0);
+    og.gain.exponentialRampToValueAtTime(0.5, t0 + 0.02);
+    og.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.5);
+    osc.connect(og);
+    og.connect(this.master);
+    osc.start(t0);
+    osc.stop(t0 + 0.55);
+
+    // Soft noise burst
+    const len = Math.floor(ctx.sampleRate * 0.35);
+    const buffer = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < len; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.08));
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.35, t0);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.35);
+    const filt = ctx.createBiquadFilter();
+    filt.type = "lowpass";
+    filt.frequency.value = 800;
+    noise.connect(filt);
+    filt.connect(ng);
+    ng.connect(this.master);
+    noise.start(t0);
+  }
+
+  /** Soft chime for normal timer end */
+  playChime() {
+    if (!this.enabled) return;
+    const ctx = this.ensure();
+    if (!ctx) return;
+    const t0 = ctx.currentTime;
+    [523.25, 659.25, 783.99].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      const start = t0 + i * 0.12;
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.exponentialRampToValueAtTime(0.2, start + 0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, start + 0.6);
+      osc.connect(g);
+      g.connect(this.master);
+      osc.start(start);
+      osc.stop(start + 0.65);
+    });
+  }
+}
+
+// ─── App ───────────────────────────────────────────────────────────────────
+
 class ClassroomTimer {
   constructor() {
     this.canvas = document.getElementById("stage");
@@ -73,12 +265,14 @@ class ClassroomTimer {
     this.goal = GOALS[0];
     this.duration = 300;
     this.remaining = 300;
-    this.state = "menu"; // menu | run | done
+    this.state = "menu";
     this.running = false;
+    this.paused = false;
     this.lastTs = 0;
     this.raf = null;
-    this.phase = 0; // animation phase
+    this.phase = 0;
     this.dpr = 1;
+    this.audio = new TimerAudio();
 
     this.els = {
       menu: document.getElementById("screen-menu"),
@@ -95,6 +289,8 @@ class ClassroomTimer {
       doneEmoji: document.getElementById("done-emoji"),
       doneTitle: document.getElementById("done-title"),
       doneMsg: document.getElementById("done-msg"),
+      btnPause: document.getElementById("btn-pause"),
+      btnMute: document.getElementById("btn-mute"),
     };
 
     this._buildGoalGrid();
@@ -161,6 +357,8 @@ class ClassroomTimer {
     document.getElementById("btn-fs").addEventListener("click", () => this.toggleFullscreen());
     document.getElementById("done-restart").addEventListener("click", () => this.restart());
     document.getElementById("done-menu").addEventListener("click", () => this.showMenu());
+    this.els.btnPause.addEventListener("click", () => this.togglePause());
+    this.els.btnMute.addEventListener("click", () => this.toggleMute());
 
     document.addEventListener("fullscreenchange", () => {
       document.body.classList.toggle("is-fs", !!document.fullscreenElement);
@@ -168,14 +366,32 @@ class ClassroomTimer {
     });
   }
 
+  toggleMute() {
+    this.audio.setEnabled(!this.audio.enabled);
+    this.els.btnMute.textContent = this.audio.enabled ? "🔊" : "🔇";
+  }
+
+  togglePause() {
+    if (this.state !== "run") return;
+    this.paused = !this.paused;
+    this.els.btnPause.textContent = this.paused ? "Resume" : "Pause";
+    this.els.runHint.textContent = this.paused ? "Paused" : this.goal.hint;
+    if (this.paused) {
+      this.audio.stopMusic();
+      this.audio._wantMusic = true; // remember to resume
+    } else {
+      this.lastTs = performance.now();
+      this.audio.startMusic();
+      this.loop(this.lastTs);
+    }
+  }
+
   _resizeCanvas() {
     const canvas = this.canvas;
     const parent = canvas.parentElement;
     if (!parent) return;
-    const rect = parent.getBoundingClientRect();
-    // Prefer filling available run area
-    let cssW = rect.width;
-    let cssH = Math.max(240, rect.height - (this.state === "run" ? 100 : 0));
+    let cssW = parent.getBoundingClientRect().width;
+    let cssH = Math.max(240, 400);
     if (this.state === "run") {
       const chrome = parent.querySelector(".run-chrome");
       const hint = parent.querySelector(".run-hint");
@@ -201,6 +417,8 @@ class ClassroomTimer {
   showMenu() {
     this.stopLoop();
     this.running = false;
+    this.paused = false;
+    this.audio.stopMusic();
     this.show("menu");
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
@@ -215,12 +433,16 @@ class ClassroomTimer {
     }
     this.remaining = this.duration;
     this.running = true;
+    this.paused = false;
     this.phase = 0;
+    this.els.btnPause.textContent = "Pause";
     this.show("run");
     this.els.runGoal.textContent = `${this.goal.emoji} ${this.goal.name}`;
     this.els.runHint.textContent = this.goal.hint;
     this.els.runClock.textContent = formatTime(this.remaining);
     this._resizeCanvas();
+    this.audio.ensure();
+    this.audio.startMusic();
     this.lastTs = performance.now();
     this.loop(this.lastTs);
   }
@@ -229,12 +451,15 @@ class ClassroomTimer {
     this.stopLoop();
     this.remaining = this.duration;
     this.running = true;
+    this.paused = false;
     this.phase = 0;
+    this.els.btnPause.textContent = "Pause";
     this.show("run");
     this.els.runGoal.textContent = `${this.goal.emoji} ${this.goal.name}`;
     this.els.runHint.textContent = this.goal.hint;
     this.els.runClock.textContent = formatTime(this.remaining);
     this._resizeCanvas();
+    this.audio.startMusic();
     this.lastTs = performance.now();
     this.loop(this.lastTs);
   }
@@ -262,12 +487,16 @@ class ClassroomTimer {
   finish() {
     this.stopLoop();
     this.running = false;
+    this.paused = false;
+    this.audio.stopMusic();
     this.show("done");
     if (this.goal.bomb) {
+      this.audio.playBoom();
       this.els.doneEmoji.textContent = "💥";
       this.els.doneTitle.textContent = "BOOM!";
       this.els.doneMsg.textContent = "Time’s up — pencils down / answers ready!";
     } else {
+      this.audio.playChime();
       this.els.doneEmoji.textContent = "✅";
       this.els.doneTitle.textContent = "Time’s up!";
       this.els.doneMsg.textContent = `${this.goal.name} session complete. Nice work.`;
@@ -275,13 +504,12 @@ class ClassroomTimer {
   }
 
   loop(ts) {
-    if (!this.running) return;
+    if (!this.running || this.paused) return;
     const dt = Math.min(0.05, (ts - this.lastTs) / 1000);
     this.lastTs = ts;
     this.remaining -= dt;
     this.phase += dt;
     this.els.runClock.textContent = formatTime(this.remaining);
-    // urgency color on clock
     if (this.remaining <= 10) {
       this.els.runClock.style.color = "#fb7185";
     } else if (this.remaining <= 30) {
@@ -300,24 +528,20 @@ class ClassroomTimer {
     this.raf = requestAnimationFrame((t) => this.loop(t));
   }
 
-  // ── Drawing ────────────────────────────────────────────────────────────
-
   draw(ts) {
     const ctx = this.ctx;
     const W = this.canvas.width / this.dpr;
     const H = this.canvas.height / this.dpr;
-    const progress = 1 - Math.max(0, this.remaining) / this.duration; // 0 → 1
+    const progress = 1 - Math.max(0, this.remaining) / this.duration;
 
     ctx.clearRect(0, 0, W, H);
 
-    // Background gradient
     const g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, this.goal.theme.sky[0]);
     g.addColorStop(1, this.goal.theme.sky[1]);
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
-    // Soft vignette stars / dust
     ctx.globalAlpha = 0.35;
     for (let i = 0; i < 40; i++) {
       const x = (Math.sin(i * 12.3 + this.phase * 0.05) * 0.5 + 0.5) * W;
@@ -334,6 +558,16 @@ class ClassroomTimer {
     } else {
       this.drawPathScene(ctx, W, H, progress);
     }
+
+    if (this.paused) {
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#fef3c7";
+      ctx.font = "bold 42px Segoe UI, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("PAUSED", W / 2, H / 2);
+    }
   }
 
   drawPathScene(ctx, W, H, progress) {
@@ -341,11 +575,9 @@ class ClassroomTimer {
     const pathY = H * 0.62;
     const pathW = W - padX * 2;
 
-    // Ground band
     ctx.fillStyle = "rgba(0,0,0,0.25)";
     ctx.fillRect(0, pathY + 20, W, H - pathY);
 
-    // Timeline track
     ctx.strokeStyle = this.goal.theme.path;
     ctx.lineWidth = 14;
     ctx.lineCap = "round";
@@ -354,7 +586,6 @@ class ClassroomTimer {
     ctx.lineTo(padX + pathW, pathY);
     ctx.stroke();
 
-    // Progress fill
     ctx.strokeStyle = this.goal.theme.accent;
     ctx.lineWidth = 10;
     ctx.beginPath();
@@ -362,23 +593,18 @@ class ClassroomTimer {
     ctx.lineTo(padX + pathW * progress, pathY);
     ctx.stroke();
 
-    // Tick marks
     ctx.fillStyle = "rgba(255,255,255,0.25)";
     for (let i = 0; i <= 10; i++) {
       const x = padX + (pathW * i) / 10;
       ctx.fillRect(x - 1, pathY + 16, 2, 10);
     }
 
-    // Start / end flags
     this.drawFlag(ctx, padX, pathY - 8, "#94a3b8", "Start");
     this.drawFlag(ctx, padX + pathW, pathY - 8, this.goal.theme.accent, "Done");
 
-    // Character position
     const cx = padX + pathW * progress;
     const bob = Math.sin(this.phase * 6) * 4;
     this.drawCharacter(ctx, this.goal.id, cx, pathY - 10 + bob, this.phase);
-
-    // Big progress ring (top-right)
     this.drawProgressRing(ctx, W - 70, 70, 48, progress, this.goal.theme.accent);
   }
 
@@ -421,21 +647,18 @@ class ClassroomTimer {
     ctx.translate(x, y);
 
     if (id === "focus") {
-      // Student with book
       this._body(ctx, "#38bdf8");
       ctx.fillStyle = "#fef3c7";
       ctx.fillRect(10, -28, 18, 14);
       ctx.strokeStyle = "#92400e";
       ctx.strokeRect(10, -28, 18, 14);
     } else if (id === "pair") {
-      // Two small figures
       ctx.translate(-14, 0);
       this._body(ctx, "#c084fc", 0.85);
       ctx.translate(28, 0);
       this._body(ctx, "#f9a8d4", 0.85);
     } else if (id === "cleanup") {
       this._body(ctx, "#4ade80");
-      // Broom
       const swing = Math.sin(phase * 8) * 0.35;
       ctx.save();
       ctx.translate(16, -10);
@@ -450,10 +673,8 @@ class ClassroomTimer {
       ctx.fillRect(-10, 32, 20, 8);
       ctx.restore();
     } else if (id === "transition") {
-      // Walking lean
       ctx.rotate(Math.sin(phase * 8) * 0.08);
       this._body(ctx, "#fbbf24");
-      // Motion lines
       ctx.strokeStyle = "rgba(255,255,255,0.3)";
       ctx.lineWidth = 2;
       for (let i = 0; i < 3; i++) {
@@ -464,7 +685,6 @@ class ClassroomTimer {
       }
     } else if (id === "write") {
       this._body(ctx, "#67e8f9");
-      // Pencil
       const bob = Math.sin(phase * 10) * 3;
       ctx.save();
       ctx.translate(14, -18 + bob);
@@ -490,7 +710,6 @@ class ClassroomTimer {
   _body(ctx, color, scale = 1) {
     ctx.save();
     ctx.scale(scale, scale);
-    // legs
     ctx.strokeStyle = color;
     ctx.lineWidth = 5;
     ctx.lineCap = "round";
@@ -501,16 +720,13 @@ class ClassroomTimer {
     ctx.moveTo(6, 0);
     ctx.lineTo(8, 16 - leg);
     ctx.stroke();
-    // body
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.ellipse(0, -18, 14, 20, 0, 0, Math.PI * 2);
     ctx.fill();
-    // head
     ctx.beginPath();
     ctx.arc(0, -44, 12, 0, Math.PI * 2);
     ctx.fill();
-    // face
     ctx.fillStyle = "#0f172a";
     ctx.beginPath();
     ctx.arc(-4, -46, 2, 0, Math.PI * 2);
@@ -519,46 +735,47 @@ class ClassroomTimer {
     ctx.restore();
   }
 
+  /**
+   * Fuse burns FROM the free end TOWARD the bomb.
+   * progress 0 = full fuse, tip at free end (left)
+   * progress 1 = gone, tip at bomb
+   */
   drawBombScene(ctx, W, H, progress) {
-    // Fuse burns from full → empty as time runs out (progress 0→1)
-    const fuseLeft = 1 - progress;
-
-    // Danger floor
     ctx.fillStyle = "rgba(0,0,0,0.35)";
     ctx.fillRect(0, H * 0.7, W, H * 0.3);
 
-    // Fuse path (curve across screen)
-    const startX = W * 0.12;
-    const endX = W * 0.72;
+    const startX = W * 0.12; // free end of fuse
+    const endX = W * 0.72; // meets the bomb
     const y = H * 0.42;
-    const midY = y - H * 0.12;
 
-    // Draw remaining fuse
-    ctx.save();
+    const fuseY = (t) => y - Math.sin(t * Math.PI) * H * 0.1;
+
+    // Remaining fuse: from burn tip → bomb (progress → 1)
+    const tipT = Math.min(0.98, Math.max(0, progress));
     ctx.lineWidth = 8;
     ctx.lineCap = "round";
     ctx.strokeStyle = "#a3a3a3";
     ctx.beginPath();
     const steps = 60;
-    const drawUntil = Math.max(0.02, fuseLeft);
-    for (let i = 0; i <= steps * drawUntil; i++) {
+    let started = false;
+    for (let i = Math.floor(steps * tipT); i <= steps; i++) {
       const t = i / steps;
       const x = startX + (endX - startX) * t;
-      const yy = y + Math.sin(t * Math.PI) * (midY - y) * 2 * (t < 0.5 ? t * 2 : (1 - t) * 2);
-      // simpler quadratic-ish
-      const yy2 = y - Math.sin(t * Math.PI) * H * 0.1;
-      if (i === 0) ctx.moveTo(x, yy2);
-      else ctx.lineTo(x, yy2);
+      const yy = fuseY(t);
+      if (!started) {
+        ctx.moveTo(x, yy);
+        started = true;
+      } else {
+        ctx.lineTo(x, yy);
+      }
     }
-    ctx.stroke();
+    if (started) ctx.stroke();
 
-    // Burning tip + sparks
-    const tipT = fuseLeft;
+    // Burn tip + flame (moves toward bomb as progress increases)
     const tipX = startX + (endX - startX) * tipT;
-    const tipY = y - Math.sin(tipT * Math.PI) * H * 0.1;
+    const tipY = fuseY(tipT);
 
-    if (fuseLeft > 0.01) {
-      // Flame
+    if (progress < 0.99) {
       const flicker = 1 + Math.sin(this.phase * 20) * 0.15;
       const grd = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, 22 * flicker);
       grd.addColorStop(0, "#fef08a");
@@ -569,25 +786,29 @@ class ClassroomTimer {
       ctx.arc(tipX, tipY, 22 * flicker, 0, Math.PI * 2);
       ctx.fill();
 
-      // Sparks
       ctx.fillStyle = "#fde047";
       for (let i = 0; i < 8; i++) {
         const a = this.phase * 8 + i * 0.9;
         const dist = 12 + (i % 3) * 6;
         ctx.globalAlpha = 0.5 + Math.sin(a) * 0.4;
         ctx.beginPath();
-        ctx.arc(tipX + Math.cos(a) * dist, tipY + Math.sin(a * 1.3) * dist * 0.6 - 8, 2, 0, Math.PI * 2);
+        ctx.arc(
+          tipX + Math.cos(a) * dist,
+          tipY + Math.sin(a * 1.3) * dist * 0.6 - 8,
+          2,
+          0,
+          Math.PI * 2
+        );
         ctx.fill();
       }
       ctx.globalAlpha = 1;
     }
 
-    // Bomb at end of fuse
+    // Bomb
     const bx = endX + 50;
     const by = y + 10;
     ctx.save();
     ctx.translate(bx, by);
-    // body
     ctx.fillStyle = "#1f2937";
     ctx.beginPath();
     ctx.arc(0, 0, 48, 0, Math.PI * 2);
@@ -596,12 +817,10 @@ class ClassroomTimer {
     ctx.beginPath();
     ctx.arc(-12, -12, 14, 0, Math.PI * 2);
     ctx.fill();
-    // cap
     ctx.fillStyle = "#6b7280";
     ctx.fillRect(-14, -58, 28, 16);
     ctx.fillStyle = "#9ca3af";
     ctx.fillRect(-8, -68, 16, 12);
-    // angry face when low time
     if (progress > 0.7) {
       ctx.strokeStyle = "#f87171";
       ctx.lineWidth = 3;
@@ -629,10 +848,8 @@ class ClassroomTimer {
     }
     ctx.restore();
 
-    // Progress ring
     this.drawProgressRing(ctx, W - 70, 70, 48, progress, "#fb7185");
 
-    // Warning text
     if (progress > 0.85) {
       ctx.fillStyle = "rgba(251,113,133,0.85)";
       ctx.font = "bold 28px Segoe UI, sans-serif";
