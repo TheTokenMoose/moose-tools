@@ -29,7 +29,7 @@
         <h1>The Oracle of Twenty</h1>
         <p class="tagline">Think of something from the realm… answer truly… I shall name it.</p>
         <div class="intro-card">
-          <p>Choose a category, think of <strong>one thing</strong> inside it, then answer the wizard’s yes-or-no questions. You have twenty chances before the vision fades.</p>
+          <p>Choose a realm, think of <strong>one thing</strong> in it, then answer truly. The wizard asks up to <strong>20 questions</strong> and may <strong>guess without using a question</strong>. Wrong guesses do not end the game — deduction continues.</p>
           <label class="field">Realm
             <select id="category">
               <option value="all">Whole realm (harder)</option>
@@ -68,25 +68,28 @@
         <p id="question-text" class="question-text">Is it alive?</p>
       </div>
 
-      <div class="answer-row">
+      <div class="answer-grid">
         <button type="button" class="btn-answer yes" data-a="yes">Yes</button>
         <button type="button" class="btn-answer no" data-a="no">No</button>
-        <button type="button" class="btn-answer unknown" data-a="unknown">Not sure</button>
+        <button type="button" class="btn-answer mid" data-a="probably">Probably</button>
+        <button type="button" class="btn-answer mid" data-a="probably_not">Probably not</button>
+        <button type="button" class="btn-answer unknown" data-a="unknown">Don’t know</button>
       </div>
     </section>
 
-    <!-- GUESS -->
+    <!-- GUESS (does not use a question) -->
     <section id="screen-guess" class="screen" hidden>
       <div class="result-veil">
         <div class="crystal big">
           <div class="crystal-fog"></div>
           <div class="crystal-icon" id="guess-icon">🎯</div>
         </div>
-        <h2 id="guess-title">The mists clear…</h2>
-        <p id="guess-text" class="guess-text">You are thinking of a <strong>fox</strong>.</p>
+        <p class="guess-badge" id="guess-badge">Guess · does not use a question</p>
+        <h2 id="guess-title">I think I know…</h2>
+        <p id="guess-text" class="guess-text">Are you thinking of a <strong>fox</strong>?</p>
         <div class="answer-row">
-          <button type="button" id="btn-correct" class="btn-answer yes">Correct!</button>
-          <button type="button" id="btn-wrong" class="btn-answer no">Wrong</button>
+          <button type="button" id="btn-correct" class="btn-answer yes">Yes!</button>
+          <button type="button" id="btn-wrong" class="btn-answer no">No</button>
         </div>
       </div>
     </section>

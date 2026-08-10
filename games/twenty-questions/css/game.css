@@ -265,13 +265,18 @@ h1 {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
-.answer-row .unknown { grid-column: 1 / -1; }
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.answer-grid .unknown { grid-column: 1 / -1; }
 
 .btn-answer {
   border: none;
   border-radius: 14px;
-  padding: 16px;
-  font-size: 1.15rem;
+  padding: 14px 12px;
+  font-size: 1.05rem;
   font-weight: 800;
   cursor: pointer;
   font-family: system-ui, sans-serif;
@@ -287,11 +292,29 @@ h1 {
   background: linear-gradient(135deg, #fca5a5, #f87171);
   color: #7f1d1d;
 }
+.btn-answer.mid {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(129, 140, 248, 0.35));
+  color: #ede9fe;
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  font-size: 0.95rem;
+}
 .btn-answer.unknown {
   background: rgba(255,255,255,0.08);
   color: #e9d5ff;
   border: 1px solid rgba(255,255,255,0.12);
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+.guess-badge {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-family: system-ui, sans-serif;
+  color: #f0d48a;
+  background: rgba(240, 212, 138, 0.12);
+  border: 1px solid rgba(240, 212, 138, 0.3);
 }
 
 /* Result */
