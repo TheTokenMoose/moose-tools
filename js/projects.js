@@ -94,6 +94,17 @@ const PROJECTS = [
     playUrl: "tools/the-quiet-game/",
     installable: true,
     featured: true
+  },
+  {
+    id: "classroom-timer",
+    title: "Classroom Timer",
+    type: "tool",
+    description: "Goal-based visual timers: Focus, Pair work, Clean up, Transition, Write time — plus Bomb Time with a burning fuse.",
+    category: "Classroom",
+    screenshot: "assets/screenshots/classroom-timer.png",
+    playUrl: "tools/classroom-timer/",
+    installable: true,
+    featured: true
   }
 ];
 

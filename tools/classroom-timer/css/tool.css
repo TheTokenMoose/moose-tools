@@ -1,0 +1,276 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #0b1020;
+  color: #eef2ff;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+.library-back {
+  margin: 8px 14px 0;
+  position: relative;
+  z-index: 20;
+}
+.library-back a {
+  color: #9aa6c8;
+  font-weight: 600;
+  text-decoration: none;
+}
+.library-back a:hover { color: #7dd3fc; }
+
+#app {
+  min-height: calc(100vh - 36px);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 8px 14px 24px;
+}
+
+.screen {
+  width: min(1100px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.screen[hidden] { display: none !important; }
+
+/* ── Menu ─────────────────────────────────────────────────────────────── */
+
+.menu-hero {
+  text-align: center;
+  padding: 12px 8px 4px;
+}
+.menu-hero h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  background: linear-gradient(120deg, #f9a8d4, #a78bfa, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.menu-hero p {
+  margin: 8px 0 0;
+  color: #9aa6c8;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.goal-card {
+  border: 2px solid rgba(255,255,255,0.08);
+  background: linear-gradient(160deg, rgba(30,36,70,0.9), rgba(15,18,40,0.95));
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  color: inherit;
+  font: inherit;
+}
+.goal-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(167, 139, 250, 0.45);
+}
+.goal-card.is-selected {
+  border-color: #f9a8d4;
+  box-shadow: 0 0 0 2px rgba(249, 168, 212, 0.25), 0 12px 32px rgba(0,0,0,0.35);
+}
+.goal-card.bomb.is-selected {
+  border-color: #fb7185;
+  box-shadow: 0 0 0 2px rgba(251, 113, 133, 0.35), 0 12px 32px rgba(251, 113, 133, 0.15);
+}
+.goal-emoji { font-size: 2rem; line-height: 1.2; margin-bottom: 6px; }
+.goal-name { font-weight: 800; font-size: 0.95rem; }
+.goal-desc { font-size: 0.78rem; color: #9aa6c8; margin-top: 4px; }
+
+.time-panel {
+  background: rgba(18, 22, 48, 0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+.time-label {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #c7d2fe;
+}
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.presets button {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: #eef2ff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.presets button:hover { border-color: #a78bfa; }
+.presets button.is-active {
+  background: linear-gradient(135deg, rgba(249,168,212,0.25), rgba(167,139,250,0.25));
+  border-color: #f9a8d4;
+  color: #fce7f3;
+}
+.custom-time {
+  color: #9aa6c8;
+  font-size: 0.95rem;
+}
+.custom-time input {
+  width: 4.2rem;
+  margin: 0 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0b1020;
+  color: #eef2ff;
+  font-size: 1rem;
+}
+
+.btn-start {
+  align-self: center;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 36px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f472b6, #8b5cf6);
+  color: white;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.35);
+}
+.btn-start:hover { filter: brightness(1.06); }
+
+.btn-secondary {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: #eef2ff;
+  margin-left: 8px;
+}
+
+/* ── Run ──────────────────────────────────────────────────────────────── */
+
+#screen-run {
+  width: 100%;
+  max-width: none;
+  height: calc(100vh - 48px);
+  gap: 8px;
+}
+
+.run-chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 6px 4px;
+}
+.run-goal {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #f9a8d4;
+  min-width: 8rem;
+}
+.run-clock {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: #fef3c7;
+  text-shadow: 0 0 24px rgba(253, 224, 71, 0.25);
+}
+.run-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.btn-action {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #eef2ff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-action:hover { background: rgba(255,255,255,0.12); }
+.btn-action.danger {
+  border-color: rgba(251, 113, 133, 0.4);
+  color: #fecdd3;
+}
+.btn-action.danger:hover { background: rgba(251, 113, 133, 0.2); }
+
+#stage {
+  width: 100%;
+  flex: 1;
+  min-height: 280px;
+  display: block;
+  border-radius: 18px;
+  background: #111827;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.run-hint {
+  text-align: center;
+  margin: 0;
+  color: #9aa6c8;
+  font-weight: 600;
+  min-height: 1.3em;
+}
+
+/* Fullscreen: hide library back, expand stage */
+body.is-fs .library-back { display: none; }
+body.is-fs #app { padding: 0; min-height: 100vh; }
+body.is-fs #screen-run {
+  height: 100vh;
+  padding: 10px 14px 12px;
+  box-sizing: border-box;
+}
+body.is-fs #stage { border-radius: 12px; }
+
+/* ── Done ─────────────────────────────────────────────────────────────── */
+
+#screen-done {
+  align-items: center;
+  justify-content: center;
+}
+.done-card {
+  text-align: center;
+  background: rgba(18, 22, 48, 0.92);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+.done-emoji { font-size: 3rem; margin-bottom: 8px; }
+.done-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  color: #fde68a;
+}
+.done-card p { color: #9aa6c8; margin: 0 0 20px; }
+.done-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 640px) {
+  .run-clock { order: -1; width: 100%; text-align: center; }
+  .goal-grid { grid-template-columns: repeat(2, 1fr); }
+}

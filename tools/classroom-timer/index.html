@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Classroom Timer — goal-based visual timers with animated timeline characters.">
+  <title>Classroom Timer — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- MENU -->
+    <section id="screen-menu" class="screen">
+      <header class="menu-hero">
+        <h1>⏱ Classroom Timer</h1>
+        <p>Pick a goal, set the time, watch the journey.</p>
+      </header>
+
+      <div class="goal-grid" id="goal-grid" role="listbox" aria-label="Timer goals"></div>
+
+      <div class="time-panel">
+        <label class="time-label">Duration</label>
+        <div class="presets" id="presets">
+          <button type="button" data-sec="60">1 min</button>
+          <button type="button" data-sec="120">2 min</button>
+          <button type="button" data-sec="300" class="is-active">5 min</button>
+          <button type="button" data-sec="600">10 min</button>
+          <button type="button" data-sec="900">15 min</button>
+          <button type="button" data-sec="1800">30 min</button>
+        </div>
+        <div class="custom-time">
+          <label>Custom
+            <input type="number" id="custom-min" min="0" max="180" value="0" aria-label="Minutes"> min
+            <input type="number" id="custom-sec" min="0" max="59" value="0" aria-label="Seconds"> sec
+          </label>
+        </div>
+      </div>
+
+      <button type="button" id="start-btn" class="btn-start">Start timer</button>
+    </section>
+
+    <!-- RUN -->
+    <section id="screen-run" class="screen" hidden>
+      <div class="run-chrome">
+        <div class="run-goal" id="run-goal-label">Focus</div>
+        <div class="run-clock" id="run-clock">5:00</div>
+        <div class="run-actions">
+          <button type="button" id="btn-restart" class="btn-action">Restart</button>
+          <button type="button" id="btn-stop" class="btn-action danger">Stop</button>
+          <button type="button" id="btn-menu" class="btn-action">Menu</button>
+          <button type="button" id="btn-fs" class="btn-action" title="Fullscreen">⛶</button>
+        </div>
+      </div>
+      <canvas id="stage" width="1280" height="720" aria-label="Timer animation stage"></canvas>
+      <p class="run-hint" id="run-hint">Stay on task…</p>
+    </section>
+
+    <!-- DONE -->
+    <section id="screen-done" class="screen" hidden>
+      <div class="done-card">
+        <div class="done-emoji" id="done-emoji">✅</div>
+        <h2 id="done-title">Time’s up!</h2>
+        <p id="done-msg">Great work.</p>
+        <div class="done-actions">
+          <button type="button" id="done-restart" class="btn-start">Restart</button>
+          <button type="button" id="done-menu" class="btn-secondary">Menu</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Classroom Timer</strong>
+      <span>Quick access for everyday lessons.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/tool.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

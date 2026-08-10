@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v12";
+const CACHE_NAME = "token-moose-v14";
 
 
 
@@ -46,6 +46,7 @@ const CACHE_URLS = [
   "./assets/screenshots/name-spin-wheel.png",
   "./assets/screenshots/partner-picker.png",
   "./assets/screenshots/the-quiet-game.png",
+  "./assets/screenshots/classroom-timer.png",
   "./games/placeholder-game/",
   "./games/placeholder-game/index.html",
   "./games/alphabet-hunt/",
@@ -84,7 +85,12 @@ const CACHE_URLS = [
   "./tools/the-quiet-game/index.html",
   "./tools/the-quiet-game/css/tool.css",
   "./tools/the-quiet-game/js/tool.js",
-  "./tools/the-quiet-game/manifest.webmanifest"
+  "./tools/the-quiet-game/manifest.webmanifest",
+  "./tools/classroom-timer/",
+  "./tools/classroom-timer/index.html",
+  "./tools/classroom-timer/css/tool.css",
+  "./tools/classroom-timer/js/tool.js",
+  "./tools/classroom-timer/manifest.webmanifest"
 ];
 
 
