@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v19";
+const CACHE_NAME = "token-moose-v21";
 
 
 
@@ -51,6 +51,7 @@ const CACHE_URLS = [
   "./assets/screenshots/reading-rally.png",
   "./assets/screenshots/ib-pyp-guide.png",
   "./assets/screenshots/exit-ticket-maker.png",
+  "./assets/screenshots/story-sequence.png",
   "./games/placeholder-game/",
   "./games/placeholder-game/index.html",
   "./games/alphabet-hunt/",
@@ -115,6 +116,12 @@ const CACHE_URLS = [
   "./tools/exit-ticket-maker/css/tool.css",
   "./tools/exit-ticket-maker/js/tool.js",
   "./tools/exit-ticket-maker/manifest.webmanifest"
+  ,"./games/story-sequence/",
+  "./games/story-sequence/index.html",
+  "./games/story-sequence/css/game.css",
+  "./games/story-sequence/js/game.js",
+  "./games/story-sequence/js/stories.js",
+  "./games/story-sequence/manifest.webmanifest"
 ];
 
 

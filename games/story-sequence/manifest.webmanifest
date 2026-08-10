@@ -1,0 +1,26 @@
+{
+  "name": "Story Sequence Board",
+  "short_name": "Story Sequence",
+  "description": "Sort public-domain story panels and sentences. Print a blank board to write your own.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1c140f",
+  "theme_color": "#1c140f",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

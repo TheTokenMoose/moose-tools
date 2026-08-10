@@ -149,6 +149,17 @@ const PROJECTS = [
     playUrl: "tools/exit-ticket-maker/",
     installable: true,
     featured: true
+  },
+  {
+    id: "story-sequence",
+    title: "Story Sequence Board",
+    type: "game",
+    description: "20 public-domain classics: sort story panels, then sentences. Extension: print a blank board to write your own tale.",
+    category: "Education",
+    screenshot: "assets/screenshots/story-sequence.png",
+    playUrl: "games/story-sequence/",
+    installable: true,
+    featured: true
   }
 ];
 
