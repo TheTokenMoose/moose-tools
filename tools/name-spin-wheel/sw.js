@@ -1,46 +1,52 @@
 /**
- * Service worker for Name Spin Wheel
+ * Per-app service worker — network-first so updates appear without clearing storage.
+ * Offline: falls back to cache.
  */
-const CACHE = "name-spin-wheel-v2";
-const ASSETS = [
-  "./index.html",
-  "./css/tool.css",
-  "./js/tool.js",
-  "./manifest.webmanifest",
-  "./pwa-install.js",
-  "./pwa-install.css",
-  "./sw.js",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
-];
+const CACHE="name-spin-wheel-v3";
+const ASSETS=[ "./index.html", "./css/tool.css", "./js/tool.js", "./manifest.webmanifest", "./pwa-install.js", "./pwa-install.css", "./sw.js", "./icons/icon-192.png", "./icons/icon-512.png" ];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(ASSETS).catch(() => {})).then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
 
-self.addEventListener("fetch", (event) => {
-  const req = event.request;
-  if (req.method !== "GET") return;
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
-      return fetch(req).then((res) => {
-        const copy = res.clone();
-        if (res.ok && new URL(req.url).origin === self.location.origin) {
-          caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
-        }
-        return res;
-      }).catch(() => cached || new Response("Offline", { status: 503, statusText: "Offline" }));
-    })
-  );
+self.addEventListener("message", e => {
+  if (e.data && e.data.type === "SKIP_WAITING") self.skipWaiting();
+});
+
+async function networkFirst(req) {
+  const cache = await caches.open(CACHE);
+  try {
+    const fresh = await fetch(req);
+    if (fresh && fresh.ok) cache.put(req, fresh.clone()).catch(() => {});
+    return fresh;
+  } catch (_) {
+    const cached = await cache.match(req);
+    if (cached) return cached;
+    if (req.mode === "navigate") {
+      const f = await cache.match("./index.html");
+      if (f) return f;
+    }
+    return new Response("Offline", { status: 503 });
+  }
+}
+
+self.addEventListener("fetch", e => {
+  if (e.request.method !== "GET") return;
+  const url = new URL(e.request.url);
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.endsWith("sw.js")) {
+    e.respondWith(fetch(e.request));
+    return;
+  }
+  e.respondWith(networkFirst(e.request));
 });

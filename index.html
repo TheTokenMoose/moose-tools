@@ -44,33 +44,81 @@
       </p>
     </section>
 
-    <section aria-labelledby="library-heading">
-      <div class="section-header">
-        <h2 id="library-heading">Library</h2>
-      </div>
-
-      <div class="toolbar">
-        <div class="search-wrap">
-          <span class="search-icon" aria-hidden="true">⌕</span>
-          <label for="search-input" class="sr-only">Search projects</label>
-          <input type="search" id="search-input" placeholder="Search by title, description, category…" autocomplete="off">
+    <div class="home-layout">
+      <aside class="planner-sidebar" aria-label="Teacher planning calendar">
+        <div class="calendar-widget" id="calendar-widget">
+          <div class="cal-header">
+            <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
+            <h2 class="cal-title" id="cal-title">Month Year</h2>
+            <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">›</button>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+          </div>
+          <div class="cal-grid" id="cal-grid" role="grid" aria-labelledby="cal-title"></div>
+          <p class="cal-legend">
+            <span class="dot cn"></span> China
+            <span class="dot school"></span> School
+            <span class="dot global"></span> Global
+          </p>
+          <div class="cal-events">
+            <h3 class="cal-events-title">This month</h3>
+            <ul class="cal-event-list" id="cal-event-list"></ul>
+            <p class="cal-note" id="cal-note">Public holidays load live when online; school breaks are approximate nationwide windows.</p>
+          </div>
         </div>
-        <div class="filter-group" role="group" aria-label="Filter projects">
-          <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
-          <button type="button" class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
-          <button type="button" class="filter-btn" data-filter="tools" aria-pressed="false">Tools</button>
-          <button type="button" class="filter-btn" data-filter="favorites" aria-pressed="false">Favorites</button>
-        </div>
-      </div>
+      </aside>
 
-      <div id="project-grid" class="project-grid" aria-live="polite"></div>
-    </section>
+      <section class="library-panel" aria-labelledby="library-heading">
+        <div class="section-header">
+          <h2 id="library-heading">Library</h2>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <label for="search-input" class="sr-only">Search projects</label>
+            <input type="search" id="search-input" placeholder="Search by title, description, category…" autocomplete="off">
+          </div>
+          <div class="filter-group" role="group" aria-label="Filter projects">
+            <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
+            <button type="button" class="filter-btn" data-filter="tools" aria-pressed="false">Tools</button>
+            <button type="button" class="filter-btn" data-filter="favorites" aria-pressed="false">Favorites</button>
+          </div>
+        </div>
+
+        <div id="project-grid" class="project-grid" aria-live="polite"></div>
+      </section>
+
+      <aside class="todo-sidebar" id="todo-sidebar" aria-label="Teacher to-do list">
+        <div class="todo-widget" id="todo-widget">
+          <div class="todo-header">
+            <h2 class="todo-title">To-do</h2>
+            <button type="button" class="todo-hide-btn" id="todo-toggle-visibility" aria-pressed="false" title="Hide to-do list">Hide</button>
+          </div>
+          <form class="todo-form" id="todo-form" autocomplete="off">
+            <label class="sr-only" for="todo-text">Task</label>
+            <input type="text" id="todo-text" name="text" placeholder="Add a task…" required maxlength="200">
+            <label class="sr-only" for="todo-due">Deadline</label>
+            <input type="date" id="todo-due" name="due" title="Deadline (optional)">
+            <button type="submit" class="todo-add-btn">Add</button>
+          </form>
+          <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
+          <p class="todo-foot">Saved on this device only · no account</p>
+        </div>
+      </aside>
+    </div>
+
+    <button type="button" class="todo-show-fab" id="todo-show-fab" hidden aria-label="Show to-do list">Show to-do</button>
   </main>
 
   <footer class="site-footer">
     <p>The Token Moose · Open source · Made for learning and play</p>
   </footer>
 
+  <script src="js/calendar.js"></script>
+  <script src="js/todo.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/favorites.js"></script>
   <script src="js/install.js"></script>

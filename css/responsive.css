@@ -103,3 +103,23 @@
     margin-left: 0;
   }
 }
+
+@media (max-width: 959px) {
+  .planner-sidebar {
+    order: -1;
+  }
+  .calendar-widget {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 959px) {
+  .todo-sidebar {
+    order: 2;
+  }
+  .todo-widget {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}

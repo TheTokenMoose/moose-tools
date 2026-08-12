@@ -1,16 +1,17 @@
 /**
  * The Token Moose - Service Worker
- * Caches core site assets for offline use.
- * Expand CACHE_URLS when new games/tools are added.
+ *
+ * Strategy (so deploys show up without clearing site data):
+ * - HTML / CSS / JS / manifests → network-first (fresh when online)
+ * - Images & other static assets → stale-while-revalidate
+ * - Offline → fall back to cache
+ *
+ * Bump CACHE_NAME when you change this file or want a hard cache wipe.
  */
 
-const CACHE_NAME = "token-moose-v24";
+const CACHE_NAME = "token-moose-v27";
 
-
-
-
-
-const CACHE_URLS = [
+const PRECACHE_URLS = [
   "./",
   "./index.html",
   "./games.html",
@@ -26,177 +27,129 @@ const CACHE_URLS = [
   "./js/app.js",
   "./js/sw-register.js",
   "./manifest.webmanifest",
-  "./assets/icons/icon-192.svg",
-  "./assets/icons/icon-512.svg",
-  "./assets/icons/logo-avatar.png",
-  "./assets/icons/favicon.ico",
-  "./assets/icons/favicon-16.png",
-  "./assets/icons/favicon-32.png",
-  "./assets/icons/favicon-180.png",
   "./assets/icons/favicon-192.png",
   "./assets/icons/favicon-512.png",
-
-  "./assets/placeholders/game-placeholder.svg",
-  "./assets/placeholders/tool-placeholder.svg",
-  "./assets/screenshots/alphabet-hunt.png",
-  "./assets/screenshots/one-button-hero.png",
-  "./assets/screenshots/phonics-pairing-quest.png",
-  "./assets/screenshots/ib-little-explorers.png",
-  "./assets/screenshots/china-expat-salary-planner.png",
-  "./assets/screenshots/name-spin-wheel.png",
-  "./assets/screenshots/partner-picker.png",
-  "./assets/screenshots/the-quiet-game.png",
-  "./assets/screenshots/classroom-timer.png",
-  "./assets/screenshots/sentence-forge.png",
-  "./assets/screenshots/reading-rally.png",
-  "./assets/screenshots/ib-pyp-guide.png",
-  "./assets/screenshots/exit-ticket-maker.png",
-  "./assets/screenshots/story-sequence.png",
-  "./assets/screenshots/twenty-questions.png",
-  "./assets/screenshots/i-spy-spelling.png",
-  "./games/placeholder-game/",
-  "./games/placeholder-game/index.html",
-  "./games/alphabet-hunt/",
-  "./games/alphabet-hunt/index.html",
-  "./games/alphabet-hunt/css/game.css",
-  "./games/alphabet-hunt/js/game.js",
-  "./games/one-button-hero/",
-  "./games/one-button-hero/index.html",
-  "./games/one-button-hero/css/game.css",
-  "./games/one-button-hero/js/game.js",
-  "./games/phonics-pairing-quest/",
-  "./games/phonics-pairing-quest/index.html",
-  "./games/phonics-pairing-quest/css/game.css",
-  "./games/phonics-pairing-quest/js/game.js",
-  "./games/ib-little-explorers/",
-  "./games/ib-little-explorers/index.html",
-  "./games/ib-little-explorers/css/game.css",
-  "./games/ib-little-explorers/js/game.js",
-  "./tools/placeholder-tool/",
-  "./tools/placeholder-tool/index.html",
-  "./tools/china-expat-salary-planner/",
-  "./tools/china-expat-salary-planner/index.html",
-  "./tools/china-expat-salary-planner/style.css",
-  "./tools/china-expat-salary-planner/app.js",
-  "./tools/name-spin-wheel/",
-  "./tools/name-spin-wheel/index.html",
-  "./tools/name-spin-wheel/css/tool.css",
-  "./tools/name-spin-wheel/js/tool.js",
-  "./tools/name-spin-wheel/manifest.webmanifest",
-  "./tools/partner-picker/",
-  "./tools/partner-picker/index.html",
-  "./tools/partner-picker/css/tool.css",
-  "./tools/partner-picker/js/tool.js",
-  "./tools/partner-picker/manifest.webmanifest",
-  "./tools/the-quiet-game/",
-  "./tools/the-quiet-game/index.html",
-  "./tools/the-quiet-game/css/tool.css",
-  "./tools/the-quiet-game/js/tool.js",
-  "./tools/the-quiet-game/manifest.webmanifest",
-  "./tools/classroom-timer/",
-  "./tools/classroom-timer/index.html",
-  "./tools/classroom-timer/css/tool.css",
-  "./tools/classroom-timer/js/tool.js",
-  "./tools/classroom-timer/manifest.webmanifest"
-  ,"./games/sentence-forge/",
-  "./games/sentence-forge/index.html",
-  "./games/sentence-forge/css/game.css",
-  "./games/sentence-forge/js/game.js",
-  "./games/sentence-forge/manifest.webmanifest"
-  ,"./games/reading-rally/",
-  "./games/reading-rally/index.html",
-  "./games/reading-rally/css/game.css",
-  "./games/reading-rally/js/game.js",
-  "./games/reading-rally/manifest.webmanifest"
-  ,"./tools/ib-pyp-guide/",
-  "./tools/ib-pyp-guide/index.html",
-  "./tools/ib-pyp-guide/css/tool.css",
-  "./tools/ib-pyp-guide/js/tool.js",
-  "./tools/ib-pyp-guide/manifest.webmanifest"
-  ,"./tools/exit-ticket-maker/",
-  "./tools/exit-ticket-maker/index.html",
-  "./tools/exit-ticket-maker/css/tool.css",
-  "./tools/exit-ticket-maker/js/tool.js",
-  "./tools/exit-ticket-maker/manifest.webmanifest"
-  ,"./games/story-sequence/",
-  "./games/story-sequence/index.html",
-  "./games/story-sequence/css/game.css",
-  "./games/story-sequence/js/game.js",
-  "./games/story-sequence/js/stories.js",
-  "./games/story-sequence/manifest.webmanifest"
-  ,"./games/twenty-questions/",
-  "./games/twenty-questions/index.html",
-  "./games/twenty-questions/css/game.css",
-  "./games/twenty-questions/js/game.js",
-  "./games/twenty-questions/js/knowledge.js",
-  "./games/twenty-questions/manifest.webmanifest"
-  ,"./games/i-spy-spelling/",
-  "./games/i-spy-spelling/index.html",
-  "./games/i-spy-spelling/css/game.css",
-  "./games/i-spy-spelling/js/game.js",
-  "./games/i-spy-spelling/js/scenes.js",
-  "./games/i-spy-spelling/manifest.webmanifest"
+  "./assets/icons/logo-avatar.png",
 ];
 
+function isSameOrigin(url) {
+  return url.origin === self.location.origin;
+}
 
+function isAppShell(url) {
+  const p = url.pathname;
+  return (
+    p.endsWith(".html") ||
+    p.endsWith(".js") ||
+    p.endsWith(".css") ||
+    p.endsWith(".webmanifest") ||
+    p.endsWith("/") ||
+    p.endsWith("/moose-tools") ||
+    p.endsWith("/moose-tools/")
+  );
+}
 
-
+function isImage(url) {
+  return /\.(png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/i.test(url.pathname);
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(CACHE_URLS).catch((err) => {
-        console.warn("Some assets failed to cache during install:", err);
-      });
-    }).then(() => self.skipWaiting())
+    caches
+      .open(CACHE_NAME)
+      .then((cache) =>
+        cache.addAll(PRECACHE_URLS).catch((err) => {
+          console.warn("[SW] precache partial failure:", err);
+        })
+      )
+      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      );
-    }).then(() => self.clients.claim())
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      )
+      .then(() => self.clients.claim())
   );
 });
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+async function networkFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  try {
+    const fresh = await fetch(request);
+    if (fresh && fresh.ok) {
+      cache.put(request, fresh.clone()).catch(() => {});
+    }
+    return fresh;
+  } catch (err) {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    if (request.mode === "navigate") {
+      const fallback = await cache.match("./index.html");
+      if (fallback) return fallback;
+    }
+    return new Response("Offline", { status: 503, statusText: "Service Unavailable" });
+  }
+}
+
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  const networkPromise = fetch(request)
+    .then((response) => {
+      if (response && response.ok) {
+        cache.put(request, response.clone()).catch(() => {});
+      }
+      return response;
+    })
+    .catch(() => null);
+
+  if (cached) {
+    networkPromise.catch(() => {});
+    return cached;
+  }
+  const fresh = await networkPromise;
+  if (fresh) return fresh;
+  return new Response("Offline", { status: 503, statusText: "Service Unavailable" });
+}
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
+  let url;
+  try {
+    url = new URL(request.url);
+  } catch (_) {
+    return;
+  }
 
-      return fetch(request)
-        .then((response) => {
-          // Cache successful same-origin responses for future offline use
-          if (
-            response &&
-            response.status === 200 &&
-            response.type === "basic"
-          ) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, clone);
-            });
-          }
-          return response;
-        })
-        .catch(() => {
-          // Offline fallback for navigation requests
-          if (request.mode === "navigate") {
-            return caches.match("./index.html");
-          }
-          return new Response("Offline", {
-            status: 503,
-            statusText: "Service Unavailable"
-          });
-        });
-    })
-  );
+  if (!isSameOrigin(url)) return;
+
+  if (url.pathname.endsWith("/sw.js") || url.pathname.endsWith("sw.js")) {
+    event.respondWith(fetch(request));
+    return;
+  }
+
+  if (isAppShell(url) || request.mode === "navigate") {
+    event.respondWith(networkFirst(request));
+    return;
+  }
+
+  if (isImage(url)) {
+    event.respondWith(staleWhileRevalidate(request));
+    return;
+  }
+
+  event.respondWith(networkFirst(request));
 });

@@ -83,12 +83,30 @@
     });
   }
 
-    // Service workers require http(s) — skip on file:// standalone opens
+      // Service workers require http(s) — skip on file:// standalone opens
   if ("serviceWorker" in navigator && (location.protocol === "http:" || location.protocol === "https:")) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch((err) => {
-        console.warn("SW register failed", err);
-      });
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then((reg) => {
+          reg.update().catch(() => {});
+          reg.addEventListener("updatefound", () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener("statechange", () => {
+              if (nw.state === "installed" && navigator.serviceWorker.controller) {
+                nw.postMessage({ type: "SKIP_WAITING" });
+              }
+            });
+          });
+        })
+        .catch((err) => console.warn("SW register failed", err));
+    });
+    let reloading = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
     });
   }
 
