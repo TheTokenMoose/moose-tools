@@ -33,3 +33,10 @@ Notes on third-party and game content
 - Do not assume that third-party fonts, images, audio, or code you add later
   are covered by this MIT license; keep clear attribution and licenses for
   those assets.
+
+- Live China public-holiday lookups (optional, when online) may use the
+  public Nager.Date API (https://date.nager.at/). That data is not part of
+  this MIT-licensed source tree; the API’s own terms apply to live fetches.
+- Bundled fallback holiday lists and original game/tool code in this repo
+  remain under the MIT terms above unless a subfolder states otherwise.
+

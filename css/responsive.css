@@ -124,3 +124,15 @@
     margin: 0 auto;
   }
 }
+
+
+@media (max-width: 999px) {
+  .planner-rail { order: 2; }
+  .calendar-widget, .todo-widget { max-width: 420px; margin-left: auto; margin-right: auto; }
+}
+
+@media (min-width: 1000px) {
+  .library-panel .project-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
