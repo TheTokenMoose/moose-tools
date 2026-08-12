@@ -4,7 +4,7 @@
  * Expand CACHE_URLS when new games/tools are added.
  */
 
-const CACHE_NAME = "token-moose-v22";
+const CACHE_NAME = "token-moose-v24";
 
 
 
@@ -53,6 +53,7 @@ const CACHE_URLS = [
   "./assets/screenshots/exit-ticket-maker.png",
   "./assets/screenshots/story-sequence.png",
   "./assets/screenshots/twenty-questions.png",
+  "./assets/screenshots/i-spy-spelling.png",
   "./games/placeholder-game/",
   "./games/placeholder-game/index.html",
   "./games/alphabet-hunt/",
@@ -129,6 +130,12 @@ const CACHE_URLS = [
   "./games/twenty-questions/js/game.js",
   "./games/twenty-questions/js/knowledge.js",
   "./games/twenty-questions/manifest.webmanifest"
+  ,"./games/i-spy-spelling/",
+  "./games/i-spy-spelling/index.html",
+  "./games/i-spy-spelling/css/game.css",
+  "./games/i-spy-spelling/js/game.js",
+  "./games/i-spy-spelling/js/scenes.js",
+  "./games/i-spy-spelling/manifest.webmanifest"
 ];
 
 

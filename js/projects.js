@@ -171,6 +171,17 @@ const PROJECTS = [
     playUrl: "games/twenty-questions/",
     installable: true,
     featured: true
+  },
+  {
+    id: "i-spy-spelling",
+    title: "I Spy Spelling",
+    type: "game",
+    description: "Pretty scene packs: spot the object from an I Spy clue, then spell the word with letter tiles. Garden, beach, classroom, and space.",
+    category: "Education",
+    screenshot: "assets/screenshots/i-spy-spelling.png",
+    playUrl: "games/i-spy-spelling/",
+    installable: true,
+    featured: true
   }
 ];
 

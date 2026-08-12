@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#0c1a2e">
+  <meta name="description" content="I Spy Spelling — find the object, then spell it.">
+  <title>I Spy Spelling — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- MENU -->
+    <section id="screen-menu" class="screen">
+      <header class="hero">
+        <div class="hero-art" aria-hidden="true">
+          <span class="mag mag-1">🔍</span>
+          <span class="mag mag-2">✨</span>
+          <span class="mag mag-3">🔤</span>
+        </div>
+        <h1>I Spy Spelling</h1>
+        <p class="tagline">Find it with your eyes. Spell it with your letters.</p>
+      </header>
+
+      <div class="menu-card">
+        <p class="how">
+          Listen to the clue, tap the object in the picture, then spell the word.
+          Earn stars for clean spells!
+        </p>
+        <label class="field">Scene pack
+          <select id="pack-select"></select>
+        </label>
+        <label class="field">Difficulty
+          <select id="diff-select">
+            <option value="easy">Easy — first letter clue</option>
+            <option value="medium" selected>Medium — color or letter</option>
+            <option value="hard">Hard — riddle only</option>
+            <option value="challenge">Challenge — pure riddles</option>
+          </select>
+        </label>
+        <button type="button" id="btn-start" class="btn-primary">Start spying</button>
+        <button type="button" id="btn-mute" class="btn-ghost">🔊 Sound on</button>
+      </div>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen" hidden>
+      <header class="hud">
+        <button type="button" id="btn-menu" class="btn-ghost">Menu</button>
+        <div class="hud-mid">
+          <span id="hud-pack">Garden</span>
+          <span id="hud-progress">1 / 6</span>
+        </div>
+        <div class="hud-stars" id="hud-stars">⭐ 0</div>
+      </header>
+
+      <div class="clue-banner" id="clue-banner">
+        <button type="button" id="btn-speak" class="btn-speak" title="Hear clue">🔊</button>
+        <p id="clue-text">I spy with my little eye something beginning with <strong>B</strong>…</p>
+      </div>
+
+      <div class="scene-frame">
+        <div id="scene" class="scene" role="img" aria-label="I spy scene"></div>
+      </div>
+
+      <div id="spell-panel" class="spell-panel" hidden>
+        <p class="spell-prompt">You found it! Now spell <span id="spell-target-label">…</span></p>
+        <div class="letter-slots" id="letter-slots"></div>
+        <div class="letter-bank" id="letter-bank"></div>
+        <div class="spell-actions">
+          <button type="button" id="btn-clear" class="btn-secondary">Clear</button>
+          <button type="button" id="btn-check" class="btn-primary">Check spelling</button>
+        </div>
+      </div>
+
+      <p class="hint-line" id="hint-line">Tap the object that matches the clue.</p>
+    </section>
+
+    <!-- ROUND RESULT -->
+    <section id="screen-result" class="screen" hidden>
+      <div class="result-card">
+        <div class="result-emoji" id="result-emoji">🌟</div>
+        <h2 id="result-title">Brilliant!</h2>
+        <p id="result-word" class="result-word"></p>
+        <p id="result-msg"></p>
+        <div class="result-actions">
+          <button type="button" id="btn-next" class="btn-primary">Next clue</button>
+          <button type="button" id="btn-result-menu" class="btn-secondary">Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACK COMPLETE -->
+    <section id="screen-done" class="screen" hidden>
+      <div class="result-card">
+        <div class="result-emoji">🏆</div>
+        <h2>Scene complete!</h2>
+        <p id="done-msg">You found every spy word.</p>
+        <div class="result-actions">
+          <button type="button" id="btn-again" class="btn-primary">Play again</button>
+          <button type="button" id="btn-done-menu" class="btn-secondary">Menu</button>
+        </div>
+      </div>
+    </section>
+  <p class="asset-credit">Scene art: <a href="https://github.com/twitter/twemoji" target="_blank" rel="noopener">Twemoji</a> (CC-BY 4.0)</p>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install I Spy Spelling</strong>
+      <span>Find &amp; spell offline.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/scenes.js"></script>
+  <script src="js/game.js"></script>
+  <script>
+    // PWA manifest only works over http(s), not file://
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      const link = document.createElement("link");
+      link.rel = "manifest";
+      link.href = "manifest.webmanifest";
+      document.head.appendChild(link);
+    }
+  </script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
