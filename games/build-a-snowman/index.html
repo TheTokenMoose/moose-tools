@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1a2e">
+  <meta name="description" content="Build a Snowman — friendly word-guessing game for the classroom.">
+  <title>Build a Snowman — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <header class="top">
+      <h1>⛄ Build a Snowman</h1>
+      <p class="tag">Guess the word before the snowman is complete — kinder than hangman, just as fun.</p>
+    </header>
+
+    <section id="screen-menu" class="panel">
+      <h2>How do you want to play?</h2>
+      <div class="mode-grid">
+        <button type="button" class="mode-card" id="btn-auto">
+          <span class="me">🎲</span>
+          <strong>Auto word</strong>
+          <span>Computer picks from ~100 classroom words</span>
+        </button>
+        <button type="button" class="mode-card" id="btn-hotseat">
+          <span class="me">👥</span>
+          <strong>Hot seat</strong>
+          <span>Friend types a secret word · you guess</span>
+        </button>
+      </div>
+      <label class="field">Max wrong guesses
+        <select id="max-wrong">
+          <option value="6" selected>6 (classic snowman)</option>
+          <option value="8">8 (easier)</option>
+          <option value="5">5 (tougher)</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="screen-secret" class="panel" hidden>
+      <h2>Hot seat — enter a secret word</h2>
+      <p class="hint">Letters only. Spaces become separate gaps. Don’t let the guesser see!</p>
+      <input type="password" id="secret-input" maxlength="24" placeholder="Type secret word…" autocomplete="off" spellcheck="false">
+      <input type="text" id="secret-hint" maxlength="40" placeholder="Optional category hint (e.g. animal)">
+      <div class="row">
+        <button type="button" class="btn ghost" id="btn-secret-cancel">Back</button>
+        <button type="button" class="btn primary" id="btn-secret-start">Start guessing</button>
+      </div>
+    </section>
+
+    <section id="screen-play" class="play" hidden>
+      <div class="play-grid">
+        <div class="snow-stage" id="snow-stage" aria-label="Snowman progress"></div>
+        <div class="guess-panel">
+          <p class="hint-line" id="hint-line"></p>
+          <div class="word-slots" id="word-slots"></div>
+          <p class="status" id="status">Pick a letter</p>
+          <div class="keyboard" id="keyboard"></div>
+          <div class="row">
+            <button type="button" class="btn ghost" id="btn-quit">Menu</button>
+            <span class="lives" id="lives"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-end" class="panel center" hidden>
+      <div class="end-emoji" id="end-emoji">🎉</div>
+      <h2 id="end-title">You did it!</h2>
+      <p id="end-sub"></p>
+      <p class="reveal" id="end-word"></p>
+      <div class="row center">
+        <button type="button" class="btn primary" id="btn-again">Play again</button>
+        <button type="button" class="btn ghost" id="btn-menu">Menu</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Build a Snowman</strong>
+      <span>Offline classroom word game.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/words.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

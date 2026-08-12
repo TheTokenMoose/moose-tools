@@ -1,8 +1,11 @@
 /**
  * Comet Clash — whole-class projector review game
+ * Grade bands + flash FX
  */
 const TEAM_COLORS = ["#f472b6", "#60a5fa", "#34d399", "#fbbf24", "#a78bfa", "#2dd4bf"];
 const TEAM_DEFAULTS = ["Nebula", "Quasars", "Pulsars", "Comets", "Orbits", "Meteors"];
+
+const GRADE_ORDER = { K: 0, "1-2": 1, "3-4": 2 };
 
 class SFX {
   constructor() {
@@ -52,6 +55,9 @@ class SFX {
     this.tone(392, 0.1, "sawtooth", 0.06);
     this.tone(784, 0.15, "sine", 0.1, 0.08);
   }
+  launch() {
+    [330, 440, 550, 660].forEach((f, i) => this.tone(f, 0.1, "sine", 0.08, i * 0.05));
+  }
 }
 
 function shuffle(arr) {
@@ -63,11 +69,39 @@ function shuffle(arr) {
   return a;
 }
 
+function burstParticles(root, count, colors) {
+  if (!root) return;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("span");
+    p.className = "fx-particle";
+    const ang = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+    const dist = 60 + Math.random() * 140;
+    p.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+    p.style.setProperty("--dy", Math.sin(ang) * dist + "px");
+    p.style.background = colors[i % colors.length];
+    root.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+}
+
+function screenFlash(kind) {
+  const el = document.getElementById("screen-flash");
+  if (!el) return;
+  el.className = "screen-flash " + kind;
+  el.hidden = false;
+  requestAnimationFrame(() => el.classList.add("go"));
+  setTimeout(() => {
+    el.hidden = true;
+    el.className = "screen-flash";
+  }, 450);
+}
+
 class CometClash {
   constructor() {
     this.sfx = new SFX();
     this.teamCount = 3;
-    this.packId = "mix";
+    this.packId = "kinder";
+    this.grade = "K";
     this.questions = [];
     this.qi = 0;
     this.teams = [];
@@ -93,6 +127,7 @@ class CometClash {
       hudTimer: document.getElementById("hud-timer"),
       streak: document.getElementById("streak-banner"),
       fx: document.getElementById("fx-overlay"),
+      arena: document.querySelector(".arena"),
     };
 
     this.renderTeamSetup();
@@ -120,6 +155,15 @@ class CometClash {
     document.getElementById("opt-sound").addEventListener("change", (e) => {
       this.sfx.enabled = e.target.checked;
     });
+    document.querySelectorAll("[data-grade]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.grade = btn.getAttribute("data-grade");
+        document.querySelectorAll("[data-grade]").forEach((b) => {
+          b.classList.toggle("selected", b === btn);
+        });
+        this.renderPacks();
+      });
+    });
   }
 
   show(name) {
@@ -141,13 +185,11 @@ class CometClash {
       row.className = "team-row";
       const sw = document.createElement("span");
       sw.className = "team-swatch";
-      sw.style.color = TEAM_COLORS[i];
       sw.style.background = TEAM_COLORS[i];
       const input = document.createElement("input");
       input.type = "text";
       input.maxLength = 18;
       input.value = TEAM_DEFAULTS[i];
-      input.dataset.i = String(i);
       input.setAttribute("aria-label", `Team ${i + 1} name`);
       row.appendChild(sw);
       row.appendChild(input);
@@ -155,14 +197,44 @@ class CometClash {
     }
   }
 
+  packFitsGrade(pack) {
+    if (!pack.grades || !pack.grades.length) return true;
+    return pack.grades.includes(this.grade);
+  }
+
+  filterItems(items) {
+    const max = GRADE_ORDER[this.grade] ?? 2;
+    return items.filter((it) => {
+      const d = it.difficulty || "all";
+      if (d === "all") return true;
+      const lvl = GRADE_ORDER[d];
+      if (lvl === undefined) return true;
+      // K band: only K items
+      if (this.grade === "K") return d === "K";
+      // 1-2: K and 1-2
+      if (this.grade === "1-2") return lvl <= 1;
+      // 3-4: all
+      return true;
+    });
+  }
+
   renderPacks() {
     const box = this.els.packList;
     box.innerHTML = "";
-    (window.COMET_PACKS || []).forEach((p) => {
+    const packs = (window.COMET_PACKS || []).filter((p) => this.packFitsGrade(p));
+    if (!packs.find((p) => p.id === this.packId)) {
+      this.packId = packs[0]?.id || "mix";
+    }
+    packs.forEach((p) => {
+      const filtered = this.filterItems(p.items || []);
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "pack-card" + (p.id === this.packId ? " selected" : "");
-      btn.innerHTML = `<span class="pe">${p.emoji}</span><span class="pt">${p.title}</span><span class="pb">${p.blurb}</span>`;
+      btn.innerHTML =
+        `<span class="pe">${p.emoji}</span>` +
+        `<span class="pt">${p.title}</span>` +
+        `<span class="pb">${p.blurb}</span>` +
+        `<span class="pb">${filtered.length} Qs for this grade</span>`;
       btn.addEventListener("click", () => {
         this.packId = p.id;
         this.renderPacks();
@@ -187,28 +259,34 @@ class CometClash {
     this.sfx.enabled = document.getElementById("opt-sound").checked;
     this.powerups = document.getElementById("opt-powerups").checked;
     this.timerSecs = parseInt(document.getElementById("q-timer").value, 10) || 0;
+    // K default: longer time if still on 20 and they didn't change — leave as selected
+    if (this.grade === "K" && !document.getElementById("q-timer").dataset.touched) {
+      // keep user choice
+    }
     const count = parseInt(document.getElementById("q-count").value, 10) || 12;
 
     const pack = (window.COMET_PACKS || []).find((p) => p.id === this.packId) || window.COMET_PACKS[0];
-    let pool = shuffle(pack.items || []);
+    let pool = this.filterItems(pack.items || []);
     if (pack.id === "mix") {
-      // rebuild mix fresh
       const all = [];
       (window.COMET_PACKS || []).forEach((p) => {
         if (p.id === "mix") return;
-        p.items.forEach((it) => all.push({ ...it }));
+        this.filterItems(p.items).forEach((it) => all.push({ ...it }));
       });
-      pool = shuffle(all);
+      pool = all;
     }
-    if (pool.length < 4) {
-      alert("This pack needs more questions.");
+    pool = shuffle(pool);
+    if (pool.length < 3) {
+      alert("Not enough questions for this grade + pack. Try Cosmic Mix or another grade.");
       return;
     }
     this.questions = pool.slice(0, Math.min(count, pool.length));
     this.qi = 0;
     this.teams = this.readTeams();
     this.selectedTeam = 0;
-    this.els.hudPack.textContent = `${pack.emoji} ${pack.title}`;
+    this.els.hudPack.textContent = `${pack.emoji} ${pack.title} · Grade ${this.grade}`;
+    this.sfx.launch();
+    screenFlash("launch");
     this.show("play");
     this.renderScoreboard();
     this.showQuestion();
@@ -247,7 +325,7 @@ class CometClash {
       b.type = "button";
       b.className = "team-chip" + (i === this.selectedTeam ? " selected" : "");
       b.textContent = t.name;
-      b.style.borderColor = i === this.selectedTeam ? t.color : "";
+      if (i === this.selectedTeam) b.style.borderColor = t.color;
       b.addEventListener("click", () => {
         this.selectedTeam = i;
         this.renderTeamPick();
@@ -263,14 +341,18 @@ class CometClash {
     const q = this.questions[this.qi];
     this.els.hudProgress.textContent = `${this.qi + 1} / ${this.questions.length}`;
     this.els.question.textContent = q.q;
+    this.els.question.classList.remove("q-in");
+    void this.els.question.offsetWidth;
+    this.els.question.classList.add("q-in");
     this.els.streak.hidden = true;
 
     const choices = shuffle(q.choices || [q.a]);
     this.els.choices.innerHTML = "";
-    choices.forEach((c) => {
+    choices.forEach((c, idx) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "choice";
+      btn.style.animationDelay = idx * 0.05 + "s";
       btn.textContent = c;
       btn.addEventListener("click", () => this.answer(c, btn));
       this.els.choices.appendChild(btn);
@@ -315,6 +397,7 @@ class CometClash {
       team.shield = false;
     }
     this.sfx.bad();
+    screenFlash("bad");
     this.flash("⏰", "Time!", "No points this round", () => this.next());
   }
 
@@ -355,9 +438,18 @@ class CometClash {
         this.els.streak.hidden = false;
         this.els.streak.textContent = `🔥 ${team.name} streak ×${team.streak}`;
       }
+      screenFlash("good");
+      burstParticles(this.els.arena, 18, [team.color, "#fbbf24", "#fff", "#67e8f9"]);
+      // score pop
+      const sc = this.els.scoreboard.children[this.selectedTeam];
+      if (sc) {
+        sc.classList.add("pop");
+        setTimeout(() => sc.classList.remove("pop"), 400);
+      }
       this.flash("✨", "Correct!", sub, () => this.next());
     } else {
       this.sfx.bad();
+      screenFlash("bad");
       if (this.powerups && team.shield) {
         team.shield = false;
         team.streak = 0;
@@ -390,7 +482,6 @@ class CometClash {
       this.finish();
       return;
     }
-    // rotate default selected team
     this.selectedTeam = (this.selectedTeam + 1) % this.teams.length;
     this.showQuestion();
   }
@@ -399,6 +490,8 @@ class CometClash {
     this.clearTimer();
     this.show("results");
     this.sfx.win();
+    screenFlash("win");
+    burstParticles(document.querySelector(".results-wrap"), 28, ["#fbbf24", "#f9a8d4", "#67e8f9", "#fff"]);
     const ranked = this.teams.slice().sort((a, b) => b.score - a.score);
     const top = ranked[0];
     const tie = ranked.length > 1 && ranked[1].score === top.score;

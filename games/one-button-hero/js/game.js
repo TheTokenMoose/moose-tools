@@ -1988,6 +1988,7 @@ class Game {
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " " || e.key === "z" || e.key === "Z") {
+        // OS key-repeat must not spam jumps; one press = one hop
         if (e.repeat) return;
         e.preventDefault();
         this.sfx.ensure();
@@ -2043,9 +2044,31 @@ class Game {
       return;
     }
     if (this.state !== "playing") return;
+
+    // Match desktop: hop immediately on press when allowed.
+    // Keep holding to charge; release can upgrade the jump.
     this.btnHeld = true;
     this.btnHoldFrames = 0;
-    this.jumpBuffered = JUMP_BUFFER_FRAMES;
+    const h = this.hero;
+    h.isCharging = true;
+    h.chargeTimer = 0;
+    h.jumpedFromPress = false;
+    this.chargeSfxArmed = true;
+
+    const canJump = h.onGround || h.coyote > 0;
+    if (canJump) {
+      let spd = MOVE_SPEED * (h.speedTimer > 0 ? 1.4 : 1.0);
+      if (h.vx < spd) h.vx = spd;
+      h.vy = JUMP_FORCE;
+      h.onGround = false;
+      h.coyote = 0;
+      this.jumpBuffered = 0;
+      h.jumpedFromPress = true;
+      this.sfx.jump();
+    } else {
+      // Airborne: buffer for near-landing taps
+      this.jumpBuffered = JUMP_BUFFER_FRAMES;
+    }
   }
 
   onButtonUp() {
@@ -2054,26 +2077,44 @@ class Game {
       return;
     }
     const h = this.hero;
-    if (h.isCharging && h.chargeTimer > CHARGE_GRACE) {
-      // Release charged jump
-      if (h.onGround || h.coyote > 0) {
-        const t = h.chargeTimer - CHARGE_GRACE;
-        const force =
-          t >= CHARGE_SUPER - CHARGE_GRACE
-            ? CHARGE_JUMP_FORCE
-            : JUMP_FORCE + (CHARGE_JUMP_FORCE - JUMP_FORCE) * Math.min(1, t / (CHARGE_SUPER - CHARGE_GRACE));
-        h.vy = force;
-        h.onGround = false;
-        h.coyote = 0;
-        this.sfx.jump();
-        if (t >= CHARGE_MIN) {
-          h.dashTimer = DASH_DURATION;
-        }
-      }
+    if (!h.isCharging) {
+      this.btnHeld = false;
+      return;
     }
     h.isCharging = false;
+    const held = h.chargeTimer;
+    this.chargeSfxArmed = false;
     h.chargeTimer = 0;
     this.btnHeld = false;
+
+    let jumpPower = JUMP_FORCE;
+    if (held >= CHARGE_SUPER) {
+      jumpPower = CHARGE_JUMP_FORCE;
+    } else if (held >= CHARGE_MIN) {
+      jumpPower = JUMP_FORCE - 3.2;
+    }
+
+    const canJump =
+      h.onGround || h.coyote > 0 || this.jumpBuffered > 0;
+    const already = !!h.jumpedFromPress;
+
+    if (already && held >= CHARGE_MIN && h.vy < 0) {
+      // Upgrade press-hop to charged height while still rising
+      h.vy = Math.min(h.vy, jumpPower);
+      if (held >= CHARGE_MIN) h.dashTimer = DASH_DURATION;
+      this.sfx.jump();
+    } else if (canJump && !already) {
+      let spd = MOVE_SPEED * (h.speedTimer > 0 ? 1.4 : 1.0);
+      if (h.vx < spd) h.vx = spd;
+      h.vy = jumpPower;
+      h.onGround = false;
+      h.coyote = 0;
+      this.jumpBuffered = 0;
+      if (held >= CHARGE_MIN) h.dashTimer = DASH_DURATION;
+      this.sfx.jump();
+    }
+
+    h.jumpedFromPress = false;
   }
 
   loadScores() {
@@ -2148,6 +2189,7 @@ class Game {
       invincible: 0,
       isCharging: false,
       chargeTimer: 0,
+      jumpedFromPress: false,
       coyote: 0,
       dashTimer: 0,
       speedTimer: 0,
@@ -2262,19 +2304,24 @@ class Game {
 
     const h = this.hero;
 
-    // Button hold → charge
-    if (this.btnHeld && h.onGround) {
-      h.isCharging = true;
+    // Hold to charge (jump already fired on press when grounded)
+    if (this.btnHeld && h.isCharging) {
       h.chargeTimer += 1;
-      if (h.chargeTimer === CHARGE_GRACE + 1) this.sfx.charge();
-    } else if (!this.btnHeld && this.jumpBuffered > 0) {
-      // Quick tap jump
-      if (this.tryJump()) {
-        /* jumped */
+      if (this.chargeSfxArmed && h.chargeTimer >= CHARGE_MIN) {
+        this.sfx.charge();
+        this.chargeSfxArmed = false;
       }
-      this.jumpBuffered = 0;
     }
-    if (this.jumpBuffered > 0) this.jumpBuffered -= 1;
+
+    // Consume jump buffer on landing / coyote
+    if (this.jumpBuffered > 0) {
+      if ((h.onGround || h.coyote > 0) && !this.btnHeld && !h.jumpedFromPress) {
+        if (this.tryJump()) {
+          h.jumpedFromPress = true;
+        }
+      }
+      this.jumpBuffered -= 1;
+    }
 
     // Auto-run (one-button hero)
     let speed = MOVE_SPEED;

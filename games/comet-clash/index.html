@@ -16,6 +16,7 @@
   <div class="space" aria-hidden="true"></div>
   <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
 
+  <div id="screen-flash" class="screen-flash" hidden></div>
   <div id="app">
     <!-- SETUP -->
     <section id="screen-setup" class="screen">
@@ -42,7 +43,17 @@
         </div>
 
         <div class="panel">
-          <h2>3 · Rules of engagement</h2>
+          <h2>3 · Grade band</h2>
+          <p class="hint">Filters question difficulty for your class.</p>
+          <div class="grade-row" role="group" aria-label="Grade band">
+            <button type="button" class="grade-btn selected" data-grade="K">K · Kindergarten</button>
+            <button type="button" class="grade-btn" data-grade="1-2">Grades 1–2</button>
+            <button type="button" class="grade-btn" data-grade="3-4">Grades 3–4</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>4 · Rules of engagement</h2>
           <label class="field">Questions this match
             <select id="q-count">
               <option value="8">8 — quick warm-up</option>
@@ -55,8 +66,8 @@
             <select id="q-timer">
               <option value="0">Off (teacher paced)</option>
               <option value="15">15s</option>
-              <option value="20" selected>20s</option>
-              <option value="30">30s</option>
+              <option value="20">20s</option>
+              <option value="30" selected>30s</option>
               <option value="45">45s</option>
             </select>
           </label>

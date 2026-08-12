@@ -132,3 +132,34 @@ h1{margin:4px 0;font-size:clamp(2rem,5vw,3rem);
 .final-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;
   border-radius:14px;background:rgba(30,27,75,.85);border:1px solid rgba(165,180,252,.2);font-weight:800}
 .final-row.gold{border-color:#fbbf24;box-shadow:0 0 24px rgba(251,191,36,.25)}
+
+.grade-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.grade-btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(165,180,252,.25);
+  background:rgba(0,0,0,.25);color:#e2e8f0;font-weight:800;cursor:pointer;font-size:.9rem}
+.grade-btn.selected{border-color:#f9a8d4;background:rgba(249,168,212,.15);color:#fbcfe8;
+  box-shadow:0 0 0 2px rgba(249,168,212,.2)}
+
+.question.q-in{animation:qIn .35s ease}
+@keyframes qIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.choice{animation:choiceIn .35s ease both}
+@keyframes choiceIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+.score-card.pop{animation:scorePop .4s ease}
+@keyframes scorePop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+.screen-flash{position:fixed;inset:0;z-index:45;pointer-events:none;opacity:0}
+.screen-flash.go{animation:flashPulse .45s ease}
+.screen-flash.good{background:radial-gradient(circle at 50% 40%,rgba(52,211,153,.35),transparent 55%)}
+.screen-flash.bad{background:radial-gradient(circle at 50% 40%,rgba(248,113,113,.3),transparent 55%)}
+.screen-flash.launch{background:radial-gradient(circle at 50% 30%,rgba(167,139,250,.4),transparent 60%)}
+.screen-flash.win{background:radial-gradient(circle at 50% 40%,rgba(251,191,36,.4),transparent 55%)}
+@keyframes flashPulse{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+
+.arena{position:relative;overflow:hidden}
+.fx-particle{position:absolute;left:50%;top:45%;width:8px;height:8px;border-radius:50%;
+  pointer-events:none;z-index:6;animation:particleFly .85s ease-out forwards}
+@keyframes particleFly{
+  0%{transform:translate(0,0) scale(1);opacity:1}
+  100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}
+}
+.results-wrap{position:relative}

@@ -5,10 +5,21 @@
 
 const PROJECTS = [
   {
+    id: "build-a-snowman",
+    title: "Build a Snowman",
+    type: "game",
+    description: "Child-friendly word guessing: ~100 classroom words or hot-seat secret words. Build a snowman instead of a gallows.",
+    category: "Education",
+    screenshot: "assets/screenshots/build-a-snowman.png",
+    playUrl: "games/build-a-snowman/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "comet-clash",
     title: "Comet Clash",
     type: "game",
-    description: "Whole-class projector review game: teams, curriculum packs (phonics, IB Profile, maths, science), timers, streaks & power-ups. Your killer warm-up.",
+    description: "Whole-class projector review with grade bands (K / 1–2 / 3–4), flash effects, teams, curriculum packs, timers, streaks & power-ups.",
     category: "Education",
     screenshot: "assets/screenshots/comet-clash.png",
     playUrl: "games/comet-clash/",
