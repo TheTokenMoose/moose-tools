@@ -45,30 +45,6 @@
     </section>
 
     <div class="home-layout">
-      <aside class="planner-sidebar" aria-label="Teacher planning calendar">
-        <div class="calendar-widget" id="calendar-widget">
-          <div class="cal-header">
-            <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
-            <h2 class="cal-title" id="cal-title">Month Year</h2>
-            <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">›</button>
-          </div>
-          <div class="cal-weekdays" aria-hidden="true">
-            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
-          </div>
-          <div class="cal-grid" id="cal-grid" role="grid" aria-labelledby="cal-title"></div>
-          <p class="cal-legend">
-            <span class="dot cn"></span> China
-            <span class="dot school"></span> School
-            <span class="dot global"></span> Global
-          </p>
-          <div class="cal-events">
-            <h3 class="cal-events-title">This month</h3>
-            <ul class="cal-event-list" id="cal-event-list"></ul>
-            <p class="cal-note" id="cal-note">Public holidays load live when online; school breaks are approximate nationwide windows.</p>
-          </div>
-        </div>
-      </aside>
-
       <section class="library-panel" aria-labelledby="library-heading">
         <div class="section-header">
           <h2 id="library-heading">Library</h2>
@@ -91,26 +67,58 @@
         <div id="project-grid" class="project-grid" aria-live="polite"></div>
       </section>
 
-      <aside class="todo-sidebar" id="todo-sidebar" aria-label="Teacher to-do list">
-        <div class="todo-widget" id="todo-widget">
-          <div class="todo-header">
-            <h2 class="todo-title">To-do</h2>
-            <button type="button" class="todo-hide-btn" id="todo-toggle-visibility" aria-pressed="false" title="Hide to-do list">Hide</button>
+      <aside class="planner-rail" id="planner-rail" aria-label="Teacher planner">
+        <div class="todo-sidebar" id="todo-sidebar">
+          <div class="todo-widget" id="todo-widget">
+            <div class="todo-header">
+              <h2 class="todo-title">To-do</h2>
+              <button type="button" class="panel-hide-btn" id="todo-toggle-visibility" aria-pressed="false" title="Hide to-do list">Hide</button>
+            </div>
+            <form class="todo-form" id="todo-form" autocomplete="off">
+              <label class="sr-only" for="todo-text">Task</label>
+              <input type="text" id="todo-text" name="text" placeholder="Add a task…" required maxlength="200">
+              <label class="sr-only" for="todo-due">Deadline</label>
+              <input type="date" id="todo-due" name="due" title="Deadline (optional)">
+              <button type="submit" class="todo-add-btn">Add</button>
+            </form>
+            <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
+            <p class="todo-foot">Saved on this device only · no account</p>
           </div>
-          <form class="todo-form" id="todo-form" autocomplete="off">
-            <label class="sr-only" for="todo-text">Task</label>
-            <input type="text" id="todo-text" name="text" placeholder="Add a task…" required maxlength="200">
-            <label class="sr-only" for="todo-due">Deadline</label>
-            <input type="date" id="todo-due" name="due" title="Deadline (optional)">
-            <button type="submit" class="todo-add-btn">Add</button>
-          </form>
-          <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
-          <p class="todo-foot">Saved on this device only · no account</p>
+        </div>
+
+        <div class="planner-sidebar" id="calendar-sidebar">
+          <div class="calendar-widget" id="calendar-widget">
+            <div class="cal-top">
+              <div class="cal-header">
+                <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
+                <h2 class="cal-title" id="cal-title">Month Year</h2>
+                <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">›</button>
+              </div>
+              <button type="button" class="panel-hide-btn" id="cal-toggle-visibility" aria-pressed="false" title="Hide calendar">Hide</button>
+            </div>
+            <div class="cal-weekdays" aria-hidden="true">
+              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+            <div class="cal-grid" id="cal-grid" role="grid" aria-labelledby="cal-title"></div>
+            <p class="cal-legend">
+              <span class="dot cn"></span> China
+              <span class="dot school"></span> School
+              <span class="dot global"></span> Global
+            </p>
+            <div class="cal-events">
+              <h3 class="cal-events-title">This month</h3>
+              <ul class="cal-event-list" id="cal-event-list"></ul>
+              <p class="cal-note" id="cal-note">Public holidays load live when online; school breaks are approximate nationwide windows.</p>
+            </div>
+          </div>
         </div>
       </aside>
     </div>
 
-    <button type="button" class="todo-show-fab" id="todo-show-fab" hidden aria-label="Show to-do list">Show to-do</button>
+    <div class="panel-fabs" id="panel-fabs">
+      <button type="button" class="todo-show-fab" id="todo-show-fab" hidden aria-label="Show to-do list">Show to-do</button>
+      <button type="button" class="todo-show-fab" id="cal-show-fab" hidden aria-label="Show calendar">Show calendar</button>
+    </div>
   </main>
 
   <footer class="site-footer">

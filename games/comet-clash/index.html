@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050816">
+  <meta name="description" content="Comet Clash — whole-class review game for the projector. Teams, power-ups, curriculum packs.">
+  <title>Comet Clash — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <div class="space" aria-hidden="true"></div>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+
+  <div id="app">
+    <!-- SETUP -->
+    <section id="screen-setup" class="screen">
+      <header class="hero-block">
+        <div class="logo-mark" aria-hidden="true">☄️</div>
+        <h1>Comet Clash</h1>
+        <p class="tagline">The whole-class review game built for the projector.<br>Teams compete. Knowledge wins. Chaos is optional.</p>
+      </header>
+
+      <div class="setup-grid">
+        <div class="panel">
+          <h2>1 · Teams</h2>
+          <p class="hint">2–6 teams. Tap a name to edit.</p>
+          <div id="team-setup" class="team-setup"></div>
+          <div class="row-btns">
+            <button type="button" id="btn-add-team" class="btn ghost">+ Team</button>
+            <button type="button" id="btn-rem-team" class="btn ghost">− Team</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>2 · Mission pack</h2>
+          <div id="pack-list" class="pack-list"></div>
+        </div>
+
+        <div class="panel">
+          <h2>3 · Rules of engagement</h2>
+          <label class="field">Questions this match
+            <select id="q-count">
+              <option value="8">8 — quick warm-up</option>
+              <option value="12" selected>12 — standard</option>
+              <option value="16">16 — full period energy</option>
+              <option value="20">20 — championship</option>
+            </select>
+          </label>
+          <label class="field">Seconds per question
+            <select id="q-timer">
+              <option value="0">Off (teacher paced)</option>
+              <option value="15">15s</option>
+              <option value="20" selected>20s</option>
+              <option value="30">30s</option>
+              <option value="45">45s</option>
+            </select>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="opt-powerups" checked>
+            Power-ups (streak shields &amp; double points)
+          </label>
+          <label class="check">
+            <input type="checkbox" id="opt-sound" checked>
+            Sound effects
+          </label>
+          <button type="button" id="btn-launch" class="btn primary huge">Launch match 🚀</button>
+        </div>
+      </div>
+
+      <details class="howto">
+        <summary>How teachers run it</summary>
+        <ol>
+          <li>Project this page. Split the class into teams.</li>
+          <li>Read the question aloud (or let confident readers try).</li>
+          <li>Teams discuss; teacher or a rotating “captain” taps the answer.</li>
+          <li>Correct answers score points. Streaks unlock power-ups.</li>
+          <li>Highest score at the end wins galactic bragging rights.</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen" hidden>
+      <header class="play-hud">
+        <button type="button" id="btn-abort" class="btn ghost sm">Exit</button>
+        <div class="hud-mid">
+          <span id="hud-pack">Pack</span>
+          <span id="hud-progress">1 / 12</span>
+        </div>
+        <div id="hud-timer" class="hud-timer" hidden>20</div>
+      </header>
+
+      <div id="scoreboard" class="scoreboard"></div>
+
+      <div class="arena">
+        <div class="streak-banner" id="streak-banner" hidden></div>
+        <p class="q-label" id="q-label">Question</p>
+        <h2 class="question" id="question-text">…</h2>
+        <div class="choices" id="choices"></div>
+        <div class="play-actions">
+          <p class="turn-hint" id="turn-hint">Select the answering team, then their answer</p>
+          <div class="team-pick" id="team-pick"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEEDBACK flash -->
+    <div id="fx-overlay" class="fx-overlay" hidden>
+      <div class="fx-card" id="fx-card">
+        <div class="fx-emoji" id="fx-emoji">✨</div>
+        <div class="fx-title" id="fx-title">Correct!</div>
+        <div class="fx-sub" id="fx-sub"></div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <section id="screen-results" class="screen" hidden>
+      <div class="results-wrap">
+        <div class="trophy" aria-hidden="true">🏆</div>
+        <h1 id="winner-title">Victory</h1>
+        <p id="winner-sub" class="tagline"></p>
+        <div id="final-board" class="final-board"></div>
+        <div class="row-btns center">
+          <button type="button" id="btn-rematch" class="btn primary">Rematch</button>
+          <button type="button" id="btn-home" class="btn ghost">New setup</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Comet Clash</strong>
+      <span>Projector-ready offline.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/packs.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

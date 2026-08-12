@@ -348,6 +348,43 @@
       .replace(/"/g, "&quot;");
   }
 
+
+  const CAL_HIDDEN_KEY = "token-moose-calendar-hidden";
+
+  function isCalHidden() {
+    try {
+      return localStorage.getItem(CAL_HIDDEN_KEY) === "1";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function setCalHidden(v) {
+    try {
+      localStorage.setItem(CAL_HIDDEN_KEY, v ? "1" : "0");
+    } catch (_) {}
+  }
+
+  function applyCalVisibility() {
+    const sidebar = document.getElementById("calendar-sidebar");
+    const showFab = document.getElementById("cal-show-fab");
+    const hideBtn = document.getElementById("cal-toggle-visibility");
+    const rail = document.getElementById("planner-rail");
+    const layout = document.querySelector(".home-layout");
+    const hidden = isCalHidden();
+    if (sidebar) sidebar.hidden = hidden;
+    if (showFab) showFab.hidden = !hidden;
+    if (rail) rail.classList.toggle("cal-hidden", hidden);
+    if (layout) {
+      const todoHidden = document.getElementById("todo-sidebar")?.hidden;
+      layout.classList.toggle("rail-empty", hidden && !!todoHidden);
+    }
+    if (hideBtn) {
+      hideBtn.setAttribute("aria-pressed", hidden ? "true" : "false");
+      hideBtn.textContent = "Hide";
+    }
+  }
+
   function bind() {
     const prev = document.getElementById("cal-prev");
     const next = document.getElementById("cal-next");
@@ -372,12 +409,28 @@
         render();
       }
     });
+
+    const hideBtn = document.getElementById("cal-toggle-visibility");
+    const showFab = document.getElementById("cal-show-fab");
+    if (hideBtn) {
+      hideBtn.addEventListener("click", () => {
+        setCalHidden(true);
+        applyCalVisibility();
+      });
+    }
+    if (showFab) {
+      showFab.addEventListener("click", () => {
+        setCalHidden(false);
+        applyCalVisibility();
+      });
+    }
     return true;
   }
 
   function init() {
     if (!document.getElementById("calendar-widget")) return;
     if (!bind()) return;
+    applyCalVisibility();
     render();
     loadLiveHolidays(state.year).then(render);
   }

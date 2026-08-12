@@ -105,10 +105,11 @@
 }
 
 @media (max-width: 959px) {
-  .planner-sidebar {
-    order: -1;
+  .planner-rail {
+    order: 2;
   }
-  .calendar-widget {
+  .calendar-widget,
+  .todo-widget {
     max-width: 420px;
     margin: 0 auto;
   }

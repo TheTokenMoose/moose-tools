@@ -105,7 +105,12 @@
       const hidden = isHidden();
       sidebar.hidden = hidden;
       if (showFab) showFab.hidden = !hidden;
-      if (layout) layout.classList.toggle("todo-hidden", hidden);
+      const rail = document.getElementById("planner-rail");
+      if (rail) rail.classList.toggle("todo-hidden", hidden);
+      if (layout) {
+        const calHidden = document.getElementById("calendar-sidebar")?.hidden;
+        layout.classList.toggle("rail-empty", hidden && !!calHidden);
+      }
       if (hideBtn) {
         hideBtn.setAttribute("aria-pressed", hidden ? "true" : "false");
         hideBtn.textContent = "Hide";

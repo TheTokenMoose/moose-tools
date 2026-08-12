@@ -4,6 +4,17 @@
  */
 
 const PROJECTS = [
+  {
+    id: "comet-clash",
+    title: "Comet Clash",
+    type: "game",
+    description: "Whole-class projector review game: teams, curriculum packs (phonics, IB Profile, maths, science), timers, streaks & power-ups. Your killer warm-up.",
+    category: "Education",
+    screenshot: "assets/screenshots/comet-clash.png",
+    playUrl: "games/comet-clash/",
+    installable: true,
+    featured: true
+  },
   // ── Games ──────────────────────────────────────────────────────────────
   {
     id: "alphabet-hunt",
