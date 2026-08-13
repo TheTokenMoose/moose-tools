@@ -14,6 +14,15 @@
 <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  </script>
 </head>
 <body data-page="favorites">
   <header class="site-header">
@@ -32,7 +41,24 @@
         <a href="favorites.html" aria-current="page">Favorites</a>
         <a href="about.html">About</a>
       </nav>
-    </div>
+          <div class="theme-switcher">
+        <button type="button" class="theme-ball" id="theme-ball" aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu" title="Change theme"></button>
+        <div class="theme-menu" id="theme-menu" role="listbox" aria-label="Site theme" hidden>
+          <button type="button" class="theme-option" role="option" data-theme="night" aria-checked="false">
+            <span class="theme-swatch night" aria-hidden="true"></span>
+            <span class="theme-option-text">Night City<small>Soft neon · default</small></span>
+          </button>
+          <button type="button" class="theme-option" role="option" data-theme="day" aria-checked="false">
+            <span class="theme-swatch day" aria-hidden="true"></span>
+            <span class="theme-option-text">Daylight<small>Bright · airy · calm</small></span>
+          </button>
+          <button type="button" class="theme-option" role="option" data-theme="playful" aria-checked="false">
+            <span class="theme-swatch playful" aria-hidden="true"></span>
+            <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
+          </button>
+        </div>
+      </div>
+</div>
   </header>
 
   <main class="site-main">
@@ -69,6 +95,7 @@
   <script src="js/favorites.js"></script>
   <script src="js/install.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/sw-register.js"></script>
 </body>
 </html>
