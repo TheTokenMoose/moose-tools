@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3e2723">
+  <meta name="description" content="The Enchanted Library — choose-your-own-adventure book with multiple reading levels, branching paths, and 100 endings.">
+  <title>The Enchanted Library — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body>
+  <div class="lamp" aria-hidden="true"></div>
+  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
+  <div class="shelf-bar" aria-hidden="true"></div>
+
+  <div id="app">
+    <div class="book">
+      <div class="book-spine" aria-hidden="true"></div>
+      <div class="book-pages">
+
+        <section id="screen-menu" class="screen">
+          <h1 class="book-title">The Enchanted Library</h1>
+          <p class="book-sub">A choose-your-own-adventure book · click to choose · 100 possible endings</p>
+          <p class="page-text" style="text-align:center;min-height:0">
+            Dusty shelves. Warm lamps. One book hums when you touch it.
+            Open it, pick a reading path, then step through a doorway into the story.
+          </p>
+          <h2 style="font-family:Libre Baskerville,Georgia,serif;font-size:1.1rem;text-align:center;margin:0.5rem 0">Choose your reading level</h2>
+          <div id="level-grid" class="level-grid"></div>
+          <p class="hint">Every choice is a single tap. No page-flipping required.</p>
+        </section>
+
+        <section id="screen-worlds" class="screen" hidden>
+          <h1 class="book-title">Choose a doorway</h1>
+          <p id="worlds-hub" class="page-text" style="min-height:0"></p>
+          <div id="world-grid" class="world-grid"></div>
+          <div class="page-toolbar">
+            <button type="button" class="btn ghost" id="btn-back-menu">← Reading levels</button>
+          </div>
+        </section>
+
+        <section id="screen-page" class="screen" hidden>
+          <div class="page-toolbar">
+            <button type="button" class="btn hear" id="btn-hear">🔊 Hear the page</button>
+            <button type="button" class="btn ghost" id="btn-back-worlds">Doorways</button>
+            <span class="crumb" id="crumb"></span>
+          </div>
+          <p class="page-text" id="page-text"></p>
+          <div class="choices" id="choices"></div>
+        </section>
+
+        <section id="screen-ending" class="screen ending-wrap" hidden>
+          <p class="the-end">THE END</p>
+          <h2 class="ending-title" id="ending-title">A Happy Ending</h2>
+          <div class="ending-art" id="ending-art" role="img" aria-label="Closing picture"></div>
+          <p class="ending-text" id="ending-text"></p>
+          <div class="page-toolbar" style="justify-content:center">
+            <button type="button" class="btn hear" id="btn-hear-end">🔊 Hear the page</button>
+            <button type="button" class="btn primary" id="btn-again-world">Try another path</button>
+            <button type="button" class="btn ghost" id="btn-restart">New book</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install Enchanted Library</strong>
+      <span>Offline adventure book.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="js/stories.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

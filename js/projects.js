@@ -5,6 +5,28 @@
 
 const PROJECTS = [
   {
+    id: "candy-math",
+    title: "Candy Math Trail",
+    type: "game",
+    description: "Bright Candyland maths: 10 levels from basic addition to full multiplication. Sprint or timed Sugar Rush, streaks, and a classroom high-score jar on this device.",
+    category: "Education",
+    screenshot: "assets/screenshots/candy-math.png",
+    playUrl: "games/candy-math/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "enchanted-library",
+    title: "The Enchanted Library",
+    type: "game",
+    description: "Choose-your-own-adventure book in a rustic magical library. Three reading levels, branching paths, 100 endings, closing pictures, and Hear the page read-aloud.",
+    category: "Education",
+    screenshot: "assets/screenshots/enchanted-library.png",
+    playUrl: "games/enchanted-library/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "build-a-snowman",
     title: "Build a Snowman",
     type: "game",
