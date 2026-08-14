@@ -1,5 +1,6 @@
 /* Theme tokens — applied via html[data-theme="…"] */
 
+/* ── Night City (default) ─────────────────────────────────────────── */
 html[data-theme="night"],
 html:not([data-theme]) {
   --bg-deep: #0a0b1a;
@@ -7,6 +8,7 @@ html:not([data-theme]) {
   --bg-card: rgba(22, 26, 55, 0.75);
   --bg-card-hover: rgba(30, 36, 70, 0.85);
   --bg-glass: rgba(18, 22, 48, 0.6);
+
   --accent-pink: #ff4d9e;
   --accent-hot-pink: #ff2d8a;
   --accent-purple: #a855f7;
@@ -14,83 +16,147 @@ html:not([data-theme]) {
   --accent-blue: #3b82f6;
   --accent-electric: #22d3ee;
   --accent-soft-pink: #f9a8d4;
+
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
+
   --border-subtle: rgba(139, 92, 246, 0.25);
   --border-glow: rgba(255, 77, 158, 0.4);
   --glow-pink: 0 0 20px rgba(255, 77, 158, 0.35);
   --glow-purple: 0 0 18px rgba(168, 85, 247, 0.3);
   --glow-blue: 0 0 16px rgba(34, 211, 238, 0.25);
+
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
   --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(168, 85, 247, 0.15);
+
   --header-bg: rgba(10, 11, 26, 0.85);
   --theme-wash-1: rgba(168, 85, 247, 0.12);
   --theme-wash-2: rgba(255, 77, 158, 0.08);
   --theme-wash-3: rgba(34, 211, 238, 0.06);
   --theme-color-meta: #0a0b1a;
+
+  /* Shared translucent fills (used by nav, filters, badges) */
+  --fill-accent-soft: rgba(255, 77, 158, 0.12);
+  --fill-accent-mid: rgba(168, 85, 247, 0.15);
+  --fill-accent-strong: rgba(255, 77, 158, 0.2);
+  --fill-nav-hover: rgba(139, 92, 246, 0.15);
+  --fill-nav-active: rgba(255, 77, 158, 0.12);
+  --fill-filter-active: linear-gradient(135deg, rgba(255, 77, 158, 0.22), rgba(168, 85, 247, 0.22));
+  --thumb-fallback: linear-gradient(135deg, #1a1f3a, #12162e);
+  --btn-primary-grad: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  --hero-title-grad: linear-gradient(135deg, var(--accent-soft-pink), var(--accent-purple), var(--accent-electric));
+
+  /* Theme ball face */
+  --theme-ball-face: conic-gradient(from 210deg, #ff4d9e, #a855f7, #22d3ee, #f9a8d4, #ff4d9e);
+  --theme-ball-glow: 0 0 0 0 rgba(255, 77, 158, 0.55);
+  --theme-ball-glow-mid: 0 0 0 8px rgba(168, 85, 247, 0);
+  --theme-ball-border: rgba(255, 255, 255, 0.35);
 }
 
+/* ── Daylight — sky / teal / soft coral (not night-purple) ─────────── */
 html[data-theme="day"] {
-  --bg-deep: #f0f4fa;
-  --bg-navy: #e8eef8;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-card-hover: rgba(255, 255, 255, 1);
-  --bg-glass: rgba(255, 255, 255, 0.75);
-  --accent-pink: #db2777;
-  --accent-hot-pink: #be185d;
-  --accent-purple: #7c3aed;
-  --accent-violet: #6d28d9;
+  --bg-deep: #eef5fb;
+  --bg-navy: #e2eef8;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-hover: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+
+  --accent-pink: #0ea5e9;          /* sky — primary accent for day */
+  --accent-hot-pink: #0284c7;
+  --accent-purple: #0891b2;        /* teal instead of violet */
+  --accent-violet: #0d9488;
   --accent-blue: #2563eb;
-  --accent-electric: #0891b2;
-  --accent-soft-pink: #ec4899;
+  --accent-electric: #059669;      /* green accent */
+  --accent-soft-pink: #38bdf8;     /* light sky for “active” text */
+
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
-  --border-subtle: rgba(37, 99, 235, 0.18);
-  --border-glow: rgba(124, 58, 237, 0.35);
-  --glow-pink: 0 0 18px rgba(219, 39, 119, 0.15);
-  --glow-purple: 0 0 16px rgba(124, 58, 237, 0.12);
-  --glow-blue: 0 0 14px rgba(8, 145, 178, 0.12);
+
+  --border-subtle: rgba(14, 165, 233, 0.28);
+  --border-glow: rgba(8, 145, 178, 0.35);
+  --glow-pink: 0 0 18px rgba(14, 165, 233, 0.2);
+  --glow-purple: 0 0 16px rgba(8, 145, 178, 0.15);
+  --glow-blue: 0 0 14px rgba(5, 150, 105, 0.12);
+
   --shadow-card: 0 8px 28px rgba(15, 23, 42, 0.08);
-  --shadow-hover: 0 12px 36px rgba(15, 23, 42, 0.12), 0 0 20px rgba(124, 58, 237, 0.08);
-  --header-bg: rgba(255, 255, 255, 0.88);
-  --theme-wash-1: rgba(56, 189, 248, 0.2);
-  --theme-wash-2: rgba(167, 243, 208, 0.25);
-  --theme-wash-3: rgba(253, 224, 71, 0.15);
-  --theme-color-meta: #e8eef8;
+  --shadow-hover: 0 12px 36px rgba(14, 165, 233, 0.12), 0 0 20px rgba(8, 145, 178, 0.08);
+
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --theme-wash-1: rgba(56, 189, 248, 0.28);
+  --theme-wash-2: rgba(167, 243, 208, 0.3);
+  --theme-wash-3: rgba(253, 224, 71, 0.18);
+  --theme-color-meta: #e2eef8;
+
+  --fill-accent-soft: rgba(14, 165, 233, 0.12);
+  --fill-accent-mid: rgba(8, 145, 178, 0.14);
+  --fill-accent-strong: rgba(14, 165, 233, 0.2);
+  --fill-nav-hover: rgba(14, 165, 233, 0.12);
+  --fill-nav-active: rgba(8, 145, 178, 0.14);
+  --fill-filter-active: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(5, 150, 105, 0.18));
+  --thumb-fallback: linear-gradient(135deg, #bae6fd, #a7f3d0);
+  --btn-primary-grad: linear-gradient(135deg, #0ea5e9, #059669);
+  --hero-title-grad: linear-gradient(135deg, #0284c7, #0d9488, #2563eb);
+
+  --theme-ball-face: conic-gradient(from 200deg, #38bdf8, #a7f3d0, #fde68a, #7dd3fc, #38bdf8);
+  --theme-ball-glow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+  --theme-ball-glow-mid: 0 0 0 8px rgba(14, 165, 233, 0);
+  --theme-ball-border: rgba(2, 132, 199, 0.45);
 }
 
+/* ── Preschool Playful — candy orange / coral / lime ───────────────── */
 html[data-theme="playful"] {
   --bg-deep: #fff7ed;
   --bg-navy: #ffedd5;
-  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card: rgba(255, 255, 255, 0.96);
   --bg-card-hover: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.8);
-  --accent-pink: #f43f5e;
-  --accent-hot-pink: #e11d48;
-  --accent-purple: #a855f7;
-  --accent-violet: #c026d3;
-  --accent-blue: #3b82f6;
-  --accent-electric: #14b8a6;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --accent-pink: #f97316;          /* orange */
+  --accent-hot-pink: #ea580c;
+  --accent-purple: #f43f5e;        /* coral-rose */
+  --accent-violet: #e11d48;
+  --accent-blue: #22c55e;          /* green */
+  --accent-electric: #eab308;      /* gold */
   --accent-soft-pink: #fb7185;
-  --text-primary: #3b0764;
-  --text-secondary: #5b21b6;
-  --text-muted: #7c3aed;
-  --border-subtle: rgba(249, 115, 22, 0.28);
+
+  --text-primary: #7c2d12;
+  --text-secondary: #9a3412;
+  --text-muted: #c2410c;
+
+  --border-subtle: rgba(249, 115, 22, 0.32);
   --border-glow: rgba(244, 63, 94, 0.4);
-  --glow-pink: 0 0 18px rgba(244, 63, 94, 0.2);
-  --glow-purple: 0 0 16px rgba(168, 85, 247, 0.18);
-  --glow-blue: 0 0 14px rgba(20, 184, 166, 0.15);
-  --shadow-card: 0 8px 28px rgba(251, 146, 60, 0.15);
-  --shadow-hover: 0 12px 36px rgba(244, 63, 94, 0.12), 0 0 20px rgba(168, 85, 247, 0.1);
-  --header-bg: rgba(255, 247, 237, 0.92);
-  --theme-wash-1: rgba(253, 186, 116, 0.45);
+  --glow-pink: 0 0 18px rgba(249, 115, 22, 0.25);
+  --glow-purple: 0 0 16px rgba(244, 63, 94, 0.18);
+  --glow-blue: 0 0 14px rgba(234, 179, 8, 0.18);
+
+  --shadow-card: 0 8px 28px rgba(251, 146, 60, 0.16);
+  --shadow-hover: 0 12px 36px rgba(244, 63, 94, 0.12), 0 0 20px rgba(249, 115, 22, 0.12);
+
+  --header-bg: rgba(255, 247, 237, 0.94);
+  --theme-wash-1: rgba(253, 186, 116, 0.5);
   --theme-wash-2: rgba(249, 168, 212, 0.35);
-  --theme-wash-3: rgba(125, 211, 252, 0.3);
+  --theme-wash-3: rgba(134, 239, 172, 0.3);
   --theme-color-meta: #ffedd5;
+
+  --fill-accent-soft: rgba(249, 115, 22, 0.14);
+  --fill-accent-mid: rgba(244, 63, 94, 0.12);
+  --fill-accent-strong: rgba(249, 115, 22, 0.22);
+  --fill-nav-hover: rgba(249, 115, 22, 0.12);
+  --fill-nav-active: rgba(244, 63, 94, 0.14);
+  --fill-filter-active: linear-gradient(135deg, rgba(249, 115, 22, 0.22), rgba(244, 63, 94, 0.18));
+  --thumb-fallback: linear-gradient(135deg, #fdba74, #fda4af);
+  --btn-primary-grad: linear-gradient(135deg, #f97316, #f43f5e);
+  --hero-title-grad: linear-gradient(135deg, #ea580c, #f43f5e, #eab308);
+
+  --theme-ball-face: conic-gradient(from 200deg, #fb7185, #fbbf24, #4ade80, #60a5fa, #fb7185);
+  --theme-ball-glow: 0 0 0 0 rgba(249, 115, 22, 0.55);
+  --theme-ball-glow-mid: 0 0 0 8px rgba(249, 115, 22, 0);
+  --theme-ball-border: rgba(234, 88, 12, 0.5);
 }
 
+/* Body wash driven by theme tokens */
 body {
   background: var(--bg-deep);
   background-image:
@@ -99,12 +165,14 @@ body {
     radial-gradient(ellipse 80% 50% at 50% 100%, var(--theme-wash-3), transparent 40%),
     linear-gradient(180deg, var(--bg-navy) 0%, var(--bg-deep) 100%);
   background-attachment: fixed;
+  color: var(--text-primary);
 }
 
 .site-header {
   background: var(--header-bg) !important;
 }
 
+/* ── Theme switcher control ───────────────────────────────────────── */
 .theme-switcher {
   position: relative;
   margin-left: 0.35rem;
@@ -112,22 +180,42 @@ body {
 }
 
 .theme-ball {
-  width: 2.15rem;
-  height: 2.15rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
-  border: 2px solid var(--border-subtle);
+  border: 2px solid var(--theme-ball-border);
   cursor: pointer;
   padding: 0;
   display: grid;
   place-items: center;
-  background: conic-gradient(from 210deg, var(--accent-pink), var(--accent-purple), var(--accent-electric), var(--accent-soft-pink), var(--accent-pink));
-  box-shadow: var(--glow-pink);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  background: var(--theme-ball-face);
+  box-shadow: var(--glow-pink), 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.35s ease, border-color 0.35s ease;
+  /* slow subtle pulse so newcomers notice it */
+  animation: theme-ball-pulse 2.8s ease-in-out infinite;
 }
 .theme-ball:hover,
 .theme-ball[aria-expanded="true"] {
-  transform: scale(1.08);
-  box-shadow: var(--glow-purple);
+  transform: scale(1.1);
+  animation: none;
+  box-shadow: var(--glow-purple), 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes theme-ball-pulse {
+  0%, 100% {
+    box-shadow: var(--theme-ball-glow), 0 2px 8px rgba(0, 0, 0, 0.12);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: var(--theme-ball-glow-mid), 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-ball {
+    animation: none;
+  }
 }
 
 .theme-menu {
@@ -139,6 +227,7 @@ body {
   border-radius: 12px;
   border: 1px solid var(--border-subtle);
   background: var(--bg-card);
+  color: var(--text-primary);
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow-card);
   z-index: 120;
@@ -165,12 +254,13 @@ body {
 }
 .theme-option:hover,
 .theme-option:focus-visible {
-  background: rgba(127, 127, 127, 0.12);
+  background: var(--fill-accent-soft);
   outline: none;
 }
 .theme-option.is-active {
-  background: linear-gradient(135deg, rgba(255, 77, 158, 0.12), rgba(168, 85, 247, 0.12));
+  background: var(--fill-filter-active);
   box-shadow: inset 0 0 0 1px var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .theme-swatch {
@@ -178,7 +268,7 @@ body {
   height: 1.15rem;
   border-radius: 50%;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 .theme-swatch.night { background: conic-gradient(from 200deg, #ff4d9e, #a855f7, #22d3ee, #ff4d9e); }
@@ -210,5 +300,5 @@ html[data-theme="playful"] .calendar-widget {
 
 @media (max-width: 768px) {
   .theme-switcher { margin-left: 0.15rem; }
-  .theme-ball { width: 1.9rem; height: 1.9rem; }
+  .theme-ball { width: 2rem; height: 2rem; }
 }

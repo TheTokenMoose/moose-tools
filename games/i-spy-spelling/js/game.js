@@ -7,6 +7,7 @@ class SFX {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this._voice = window.TokenMooseVoice ? TokenMooseVoice.create("i-spy-spelling") : null;
     this.musicOn = true;
     this._musicNodes = [];
     this._musicTimer = null;
@@ -62,7 +63,9 @@ class SFX {
 
   setEnabled(on) {
     this.enabled = !!on;
+    if (this._voice) this._voice.setEnabled(this.enabled);
     if (!this.enabled) {
+      if (this._voice) this._voice.stop();
       this.stopMusic();
       try {
         speechSynthesis.cancel();
@@ -108,18 +111,14 @@ class SFX {
 
   /** Soft, slower classroom-friendly voice */
   speak(text) {
-    if (!this.enabled || !window.speechSynthesis) return;
+    if (!this.enabled) return;
+    if (this._voice) { this._voice.speak(text); return; }
+    if (!window.speechSynthesis) return;
     try {
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      if (this._voice) u.voice = this._voice;
-      u.rate = 0.82; // slower, clearer for kids
-      u.pitch = 0.95; // slightly softer
-      u.volume = 0.9;
-      // Prefer English
-      u.lang = (this._voice && this._voice.lang) || "en-GB";
       speechSynthesis.speak(u);
-    } catch (_) {}
+    } catch (e) {}
   }
 
   /** Gentle looping ambient music (procedural, free) */
@@ -531,3 +530,12 @@ class ISpySpelling {
 document.addEventListener("DOMContentLoaded", () => {
   new ISpySpelling();
 });
+
+(function () {
+  function mount() {
+    const slot = document.getElementById("tm-voice-slot");
+    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("i-spy-spelling").mountPicker(slot);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();

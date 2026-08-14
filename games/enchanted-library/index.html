@@ -46,6 +46,7 @@
         <section id="screen-page" class="screen" hidden>
           <div class="page-toolbar">
             <button type="button" class="btn hear" id="btn-hear">🔊 Hear the page</button>
+            <span id="tm-voice-slot"></span>
             <button type="button" class="btn ghost" id="btn-back-worlds">Doorways</button>
             <span class="crumb" id="crumb"></span>
           </div>
@@ -60,6 +61,7 @@
           <p class="ending-text" id="ending-text"></p>
           <div class="page-toolbar" style="justify-content:center">
             <button type="button" class="btn hear" id="btn-hear-end">🔊 Hear the page</button>
+            <span id="tm-voice-slot-end"></span>
             <button type="button" class="btn primary" id="btn-again-world">Try another path</button>
             <button type="button" class="btn ghost" id="btn-restart">New book</button>
           </div>
@@ -78,6 +80,7 @@
     <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
   </div>
 
+  <script src="../../js/voice.js"></script>
   <script src="js/stories.js"></script>
   <script src="js/game.js"></script>
   <script src="pwa-install.js"></script>

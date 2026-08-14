@@ -141,6 +141,7 @@ class SFX {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this._voice = window.TokenMooseVoice ? TokenMooseVoice.create("reading-rally") : null;
     this.master = null;
   }
   ensure() {
@@ -155,7 +156,7 @@ class SFX {
     if (this.ctx.state === "suspended") this.ctx.resume();
     return this.ctx;
   }
-  setEnabled(on) { this.enabled = !!on; }
+  setEnabled(on) { this.enabled = !!on; if (this._voice) { this._voice.setEnabled(this.enabled); if (!this.enabled) this._voice.stop(); } }
   tone(freq, dur, type = "sine", vol = 0.2, when = 0) {
     if (!this.enabled) return;
     const ctx = this.ensure();
@@ -179,13 +180,14 @@ class SFX {
   fail() { this.tone(180, 0.15, "sawtooth", 0.08); }
   win() { [523, 659, 784, 1046].forEach((f, i) => this.tone(f, 0.15, "sine", 0.18, i * 0.12)); }
   speak(text) {
-    if (!this.enabled || !window.speechSynthesis) return;
+    if (!this.enabled) return;
+    if (this._voice) { this._voice.speak(text); return; }
+    if (!window.speechSynthesis) return;
     try {
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.rate = 0.92;
       speechSynthesis.speak(u);
-    } catch (_) {}
+    } catch (e) {}
   }
 }
 
@@ -637,3 +639,12 @@ function escapeHtml(s) {
 document.addEventListener("DOMContentLoaded", () => {
   new ReadingRally();
 });
+
+(function () {
+  function mount() {
+    const slot = document.getElementById("tm-voice-slot");
+    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("reading-rally").mountPicker(slot);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();

@@ -1,9 +1,11 @@
 /**
  * The Enchanted Library — choose-your-own-adventure
+ * Supports expanded story graphs (any node/choice/ending counts).
  * Click choices · multiple reading levels · TTS "Hear the page"
  */
 (function () {
   const DATA = () => window.ENCHANTED_STORIES;
+
   const SCENE_EMOJI = {
     treasure: "🗝️",
     dragon_friend: "🐉",
@@ -27,6 +29,79 @@
     sun: "☀️",
   };
   const WORLD_EMOJI = { forest: "🌲", castle: "🏰", sea: "🌊", stars: "⭐" };
+  const KNOWN_SCENES = new Set(Object.keys(SCENE_EMOJI));
+
+  /**
+   * Validate story graph integrity once at load.
+   * Does not traverse for play — only checks structure.
+   */
+  function validateStories(data) {
+    const errors = [];
+    if (!data || typeof data !== "object") {
+      return ["ENCHANTED_STORIES is missing or not an object"];
+    }
+    if (!data.levels || typeof data.levels !== "object") {
+      errors.push("Missing levels");
+    }
+    if (!data.nodes || typeof data.nodes !== "object") {
+      errors.push("Missing nodes");
+    }
+    if (errors.length) return errors;
+
+    const nodes = data.nodes;
+    const nodeIds = new Set(Object.keys(nodes));
+
+    Object.keys(data.levels).forEach((lid) => {
+      const L = data.levels[lid];
+      if (!L || !Array.isArray(L.worlds)) {
+        errors.push(`Level "${lid}" missing worlds array`);
+        return;
+      }
+      L.worlds.forEach((w) => {
+        if (!w || !w.start) {
+          errors.push(`Level "${lid}" has a world without start`);
+          return;
+        }
+        if (!nodeIds.has(w.start)) {
+          errors.push(`World start missing: ${lid}/${w.id || "?"} → ${w.start}`);
+        }
+      });
+    });
+
+    Object.keys(nodes).forEach((id) => {
+      const n = nodes[id];
+      if (!n || typeof n !== "object") {
+        errors.push(`Invalid node object: ${id}`);
+        return;
+      }
+      if (n.ending === true) {
+        if (!n.text) errors.push(`Ending missing text: ${id}`);
+        if (!n.title) errors.push(`Ending missing title: ${id}`);
+        if (n.scene && !KNOWN_SCENES.has(n.scene)) {
+          errors.push(`Ending unknown scene "${n.scene}": ${id}`);
+        }
+      } else {
+        const choices = n.choices;
+        if (!Array.isArray(choices) || choices.length === 0) {
+          errors.push(`Non-ending node has no choices: ${id}`);
+          return;
+        }
+        choices.forEach((c, i) => {
+          if (!c || typeof c !== "object") {
+            errors.push(`Bad choice #${i} on ${id}`);
+            return;
+          }
+          if (!c.next) {
+            errors.push(`Choice missing next on ${id} (#${i})`);
+          } else if (!nodeIds.has(c.next)) {
+            errors.push(`Broken choice target: ${id} → ${c.next}`);
+          }
+        });
+      }
+    });
+
+    return errors;
+  }
 
   class Adventure {
     constructor() {
@@ -53,9 +128,18 @@
         hearEnd: document.getElementById("btn-hear-end"),
       };
 
+      this.voice = window.TokenMooseVoice
+        ? TokenMooseVoice.create("enchanted-library")
+        : null;
       this.bind();
       this.renderLevels();
       this.show("menu");
+      if (this.voice) {
+        const slot = document.getElementById("tm-voice-slot");
+        const slotEnd = document.getElementById("tm-voice-slot-end");
+        if (slot) this.voice.mountPicker(slot);
+        if (slotEnd) this.voice.mountPicker(slotEnd);
+      }
     }
 
     bind() {
@@ -91,16 +175,23 @@
       const data = DATA();
       const box = this.els.levelGrid;
       box.innerHTML = "";
-      ["easy", "medium", "hard"].forEach((id) => {
+      const order = ["easy", "medium", "hard"];
+      const ids = order.filter((id) => data.levels && data.levels[id]);
+      // Include any extra levels not in the preferred order
+      Object.keys(data.levels || {}).forEach((id) => {
+        if (!ids.includes(id)) ids.push(id);
+      });
+      ids.forEach((id) => {
         const L = data.levels[id];
         if (!L) return;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "menu-card";
+        const emoji = id === "easy" ? "📗" : id === "medium" ? "📘" : id === "hard" ? "📙" : "📖";
         btn.innerHTML =
-          `<div class="emoji">${id === "easy" ? "📗" : id === "medium" ? "📘" : "📙"}</div>` +
-          `<strong>${escapeHtml(L.label)}</strong>` +
-          `<span>${escapeHtml(L.blurb)}</span>`;
+          `<div class="emoji">${emoji}</div>` +
+          `<strong>${escapeHtml(L.label || id)}</strong>` +
+          `<span>${escapeHtml(L.blurb || "")}</span>`;
         btn.addEventListener("click", () => {
           this.level = id;
           this.renderWorlds();
@@ -116,14 +207,14 @@
       const box = this.els.worldGrid;
       box.innerHTML = "";
       document.getElementById("worlds-hub").textContent =
-        data.hubs[this.level] || "Choose a doorway into the story.";
+        (data.hubs && data.hubs[this.level]) || "Choose a doorway into the story.";
       (L.worlds || []).forEach((w) => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "menu-card";
         btn.innerHTML =
           `<div class="emoji">${WORLD_EMOJI[w.id] || "📖"}</div>` +
-          `<strong>${escapeHtml(w.title)}</strong>` +
+          `<strong>${escapeHtml(w.title || w.id)}</strong>` +
           `<span>A branching path · many endings</span>`;
         btn.addEventListener("click", () => this.startWorld(w));
         box.appendChild(btn);
@@ -134,44 +225,93 @@
       this.world = w;
       this.nodeId = w.start;
       this.renderNode();
-      this.show("page");
     }
 
     getNode() {
-      return DATA().nodes[this.nodeId];
+      const data = DATA();
+      if (!data || !data.nodes) return null;
+      return data.nodes[this.nodeId] || null;
     }
 
     renderNode() {
       this.stopSpeech();
       const n = this.getNode();
-      if (!n) return;
-      if (n.ending) {
+      if (!n) {
+        console.error("[Enchanted Library] Missing node:", this.nodeId);
+        this.els.pageText.textContent =
+          "This page is missing from the book (node: " + (this.nodeId || "?") + "). Try another doorway.";
+        this.els.choices.innerHTML = "";
+        const back = document.createElement("button");
+        back.type = "button";
+        back.className = "choice-btn";
+        back.textContent = "Return to doorways";
+        back.addEventListener("click", () => {
+          this.renderWorlds();
+          this.show("worlds");
+        });
+        this.els.choices.appendChild(back);
+        this.show("page");
+        return;
+      }
+
+      // Ending detection: explicit flag only (not id naming)
+      if (n.ending === true) {
         this.showEnding(n);
         return;
       }
-      this.els.pageText.textContent = n.text;
-      this.els.crumb.textContent = `${DATA().levels[this.level].label} · ${this.world.title}`;
+
+      this.els.pageText.textContent = n.text || "";
+      const levelLabel =
+        (DATA().levels[this.level] && DATA().levels[this.level].label) || this.level;
+      const worldTitle = (this.world && this.world.title) || "";
+      this.els.crumb.textContent = levelLabel + (worldTitle ? " · " + worldTitle : "");
+
       const box = this.els.choices;
       box.innerHTML = "";
-      (n.choices || []).forEach((c) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "choice-btn";
-        btn.textContent = c.text;
-        btn.addEventListener("click", () => {
-          this.nodeId = c.next;
-          this.renderNode();
+      const choices = Array.isArray(n.choices) ? n.choices : [];
+      if (!choices.length) {
+        console.error("[Enchanted Library] Node has no choices:", this.nodeId);
+        const back = document.createElement("button");
+        back.type = "button";
+        back.className = "choice-btn";
+        back.textContent = "Return to doorways";
+        back.addEventListener("click", () => {
+          this.renderWorlds();
+          this.show("worlds");
         });
-        box.appendChild(btn);
-      });
+        box.appendChild(back);
+      } else {
+        // Dynamic: 1, 2, 3, 4+ choices — never assume a fixed count
+        choices.forEach((c) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "choice-btn";
+          btn.textContent = c.text || "Continue";
+          btn.addEventListener("click", () => {
+            if (!c.next) {
+              console.error("[Enchanted Library] Choice missing next on", this.nodeId);
+              return;
+            }
+            this.nodeId = c.next;
+            this.renderNode();
+          });
+          box.appendChild(btn);
+        });
+      }
       this.show("page");
+      // Keep current passage in view after navigation
+      if (this.els.pageText && this.els.pageText.scrollIntoView) {
+        try {
+          this.els.pageText.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        } catch (_) {}
+      }
     }
 
     showEnding(n) {
       this.stopSpeech();
-      const scene = n.scene || "library_return";
+      const scene = n.scene && KNOWN_SCENES.has(n.scene) ? n.scene : "library_return";
       this.els.endingTitle.textContent = n.title || "The End";
-      this.els.endingText.textContent = n.text;
+      this.els.endingText.textContent = n.text || "";
       this.els.endingArt.className = "ending-art scene-" + scene;
       this.els.endingArt.innerHTML =
         `<span aria-hidden="true">${SCENE_EMOJI[scene] || "📖"}</span>` +
@@ -182,16 +322,15 @@
     pageSpeechText() {
       const n = this.getNode();
       if (!n) return "";
-      let t = n.text;
-      if (!n.ending && n.choices) {
-        t += " Your choices are: " + n.choices.map((c) => c.text).join(". ");
+      let t = n.text || "";
+      if (n.ending !== true && Array.isArray(n.choices) && n.choices.length) {
+        t += " Your choices are: " + n.choices.map((c) => c.text || "").filter(Boolean).join(". ");
       }
       return t;
     }
 
     speakPage() {
-      const text = this.pageSpeechText();
-      this.speak(text, this.els.hearBtn);
+      this.speak(this.pageSpeechText(), this.els.hearBtn);
     }
 
     speakEnding() {
@@ -204,7 +343,8 @@
     }
 
     speak(text, btn) {
-      if (!window.speechSynthesis) {
+      if (!text) return;
+      if (!window.speechSynthesis && !this.voice) {
         alert("Sorry — read-aloud is not available in this browser.");
         return;
       }
@@ -212,34 +352,32 @@
         this.stopSpeech();
         return;
       }
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.rate = 0.95;
-      u.pitch = 1;
-      const voices = window.speechSynthesis.getVoices();
-      const en = voices.find((v) => /en[-_]?US/i.test(v.lang) && /child|female|samantha|google/i.test(v.name))
-        || voices.find((v) => /^en/i.test(v.lang));
-      if (en) u.voice = en;
-      u.onend = () => {
-        this.speaking = false;
-        if (btn) btn.classList.remove("is-speaking");
-        if (btn) btn.textContent = "🔊 Hear the page";
-      };
-      u.onerror = () => {
-        this.speaking = false;
-        if (btn) btn.classList.remove("is-speaking");
-      };
-      this.utterance = u;
       this.speaking = true;
       if (btn) {
         btn.classList.add("is-speaking");
         btn.textContent = "⏹ Stop";
       }
-      window.speechSynthesis.speak(u);
+      const clear = () => {
+        this.speaking = false;
+        if (btn) {
+          btn.classList.remove("is-speaking");
+          btn.textContent = "🔊 Hear the page";
+        }
+      };
+      if (this.voice) {
+        this.voice.speak(text, { onend: clear, onerror: clear });
+      } else {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.onend = clear;
+        u.onerror = clear;
+        window.speechSynthesis.speak(u);
+      }
     }
 
     stopSpeech() {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      if (this.voice) this.voice.stop();
+      else if (window.speechSynthesis) window.speechSynthesis.cancel();
       this.speaking = false;
       [this.els.hearBtn, this.els.hearEnd].forEach((b) => {
         if (!b) return;
@@ -257,17 +395,95 @@
       .replace(/"/g, "&quot;");
   }
 
-  // Chrome often loads voices async
-  if (window.speechSynthesis) {
-    window.speechSynthesis.getVoices();
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  /**
+   * Lightweight path tests (no DOM): walk random and forced routes.
+   * Runs only in console via window.__testEnchantedLibrary()
+   */
+  function testAllWorlds() {
+    const data = DATA();
+    const report = [];
+    Object.keys(data.levels).forEach((lid) => {
+      data.levels[lid].worlds.forEach((w) => {
+        // Path A: always first choice
+        let id = w.start;
+        const pathA = [id];
+        let guard = 0;
+        while (guard++ < 50) {
+          const n = data.nodes[id];
+          if (!n) {
+            report.push(`FAIL ${lid}/${w.id} pathA missing ${id}`);
+            break;
+          }
+          if (n.ending === true) {
+            report.push(`OK ${lid}/${w.id} pathA → "${n.title}" (${pathA.length} steps)`);
+            break;
+          }
+          if (!n.choices || !n.choices.length) {
+            report.push(`FAIL ${lid}/${w.id} pathA no choices at ${id}`);
+            break;
+          }
+          id = n.choices[0].next;
+          pathA.push(id);
+        }
+        // Path B: prefer last choice when multiple (side adventures)
+        id = w.start;
+        const pathB = [id];
+        guard = 0;
+        while (guard++ < 50) {
+          const n = data.nodes[id];
+          if (!n) {
+            report.push(`FAIL ${lid}/${w.id} pathB missing ${id}`);
+            break;
+          }
+          if (n.ending === true) {
+            report.push(`OK ${lid}/${w.id} pathB → "${n.title}" (${pathB.length} steps)`);
+            break;
+          }
+          const ch = n.choices || [];
+          id = ch[ch.length - 1].next;
+          pathB.push(id);
+        }
+        // 3-choice nodes reachable?
+        const with3 = [];
+        const seen = new Set();
+        const q = [w.start];
+        while (q.length) {
+          const cur = q.pop();
+          if (seen.has(cur)) continue;
+          seen.add(cur);
+          const n = data.nodes[cur];
+          if (!n || n.ending === true) continue;
+          const ch = n.choices || [];
+          if (ch.length >= 3) with3.push(cur);
+          ch.forEach((c) => q.push(c.next));
+        }
+        report.push(
+          `INFO ${lid}/${w.id}: reachable ${seen.size}, nodes with 3+ choices: ${with3.length}`
+        );
+      });
+    });
+    return report;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     if (!window.ENCHANTED_STORIES) {
-      console.error("Stories not loaded");
+      console.error("[Enchanted Library] Stories not loaded (window.ENCHANTED_STORIES missing)");
       return;
     }
+    const errs = validateStories(window.ENCHANTED_STORIES);
+    if (errs.length) {
+      console.error("[Enchanted Library] Story validation failed:");
+      errs.forEach((e) => console.error("  ·", e));
+    } else {
+      const n = Object.keys(window.ENCHANTED_STORIES.nodes).length;
+      const ends = Object.keys(window.ENCHANTED_STORIES.nodes).filter(
+        (k) => window.ENCHANTED_STORIES.nodes[k].ending === true
+      ).length;
+      console.info(
+        `[Enchanted Library] Story graph OK · ${n} nodes · ${ends} endings`
+      );
+    }
+    window.__testEnchantedLibrary = testAllWorlds;
     new Adventure();
   });
 })();

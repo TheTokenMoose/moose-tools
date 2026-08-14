@@ -215,6 +215,7 @@ class SoundManager {
     this.muted = false;
     this.speechOn = true;
     this.enabled = true;
+    this._voice = (typeof window !== "undefined" && window.TokenMooseVoice) ? window.TokenMooseVoice.create("ib-little-explorers") : null;
   }
 
   ensure() {
@@ -282,16 +283,15 @@ class SoundManager {
   }
 
   speak(text) {
-    if (!this.speechOn || !text || !window.speechSynthesis) return;
+    if (!this.speechOn || !text) return;
+    if (this._voice) { this._voice.speak(text); return; }
+    if (!window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.rate = 0.95;
-      u.pitch = 1;
       window.speechSynthesis.speak(u);
-    } catch (_) {
-      /* ignore */
-    }
+    } catch (e) {}
   }
 }
 
@@ -455,6 +455,7 @@ class IBLittleExplorers {
       } else if (key === "speech") {
         this.speechOn = !this.speechOn;
         this.sound.speechOn = this.speechOn;
+        if (this.sound._voice) this.sound._voice.setEnabled(this.speechOn);
       } else if (key === "menu") {
         this.clearTimers();
         this.state = "MENU";
@@ -925,3 +926,8 @@ const canvas = document.getElementById("game");
 if (canvas) {
   new IBLittleExplorers(canvas);
 }
+
+try {
+  const slot = document.getElementById("tm-voice-slot");
+  if (slot && window.TokenMooseVoice) window.TokenMooseVoice.create("ib-little-explorers").mountPicker(slot);
+} catch (_) {}

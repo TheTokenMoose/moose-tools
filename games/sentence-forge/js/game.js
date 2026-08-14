@@ -50,6 +50,7 @@ class GameAudio {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this._voice = window.TokenMooseVoice ? TokenMooseVoice.create("sentence-forge") : null;
     this.master = null;
   }
 
@@ -68,6 +69,10 @@ class GameAudio {
 
   setEnabled(on) {
     this.enabled = !!on;
+    if (this._voice) {
+      this._voice.setEnabled(this.enabled);
+      if (!this.enabled) this._voice.stop();
+    }
   }
 
   _beep(freq, dur, type = "sine", vol = 0.2, when = 0) {
@@ -118,7 +123,12 @@ class GameAudio {
 
   /** Speak sentence via speechSynthesis when available */
   speak(text) {
-    if (!this.enabled || !window.speechSynthesis) return;
+    if (!this.enabled) return;
+    if (this._voice) {
+      this._voice.speak(text);
+      return;
+    }
+    if (!window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
@@ -544,3 +554,12 @@ function escapeHtml(s) {
 document.addEventListener("DOMContentLoaded", () => {
   new SentenceForge();
 });
+
+(function () {
+  function mount() {
+    const slot = document.getElementById("tm-voice-slot");
+    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("sentence-forge").mountPicker(slot);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();

@@ -32,7 +32,7 @@
 }
 
 .placeholder-page h1 {
-  background: linear-gradient(135deg, var(--accent-soft-pink), var(--accent-purple));
+  background: var(--hero-title-grad);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -48,7 +48,7 @@
   display: inline-flex;
   padding: 0.6rem 1.25rem;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  background: var(--btn-primary-grad);
   color: white;
   font-weight: 600;
 }

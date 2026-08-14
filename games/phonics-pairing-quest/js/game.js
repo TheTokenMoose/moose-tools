@@ -130,12 +130,19 @@ function pick(arr) {
 class Speech {
   constructor() {
     this.enabled = true;
+    this._voice = (typeof window !== "undefined" && window.TokenMooseVoice) ? window.TokenMooseVoice.create("phonics-pairing-quest") : null;
   }
   setEnabled(on) {
     this.enabled = !!on;
+    if (this._voice) {
+      this._voice.setEnabled(this.enabled);
+      if (!this.enabled) this._voice.stop();
+    }
   }
   speak(text) {
-    if (!this.enabled || !text || !window.speechSynthesis) return;
+    if (!this.enabled || !text) return;
+    if (this._voice) { this._voice.speak(text); return; }
+    if (!window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
@@ -658,3 +665,8 @@ class PhonicsPairingQuest {
 
 const canvas = document.getElementById("game");
 if (canvas) new PhonicsPairingQuest(canvas);
+
+try {
+  const slot = document.getElementById("tm-voice-slot");
+  if (slot && window.TokenMooseVoice) window.TokenMooseVoice.create("phonics-pairing-quest").mountPicker(slot);
+} catch (_) {}

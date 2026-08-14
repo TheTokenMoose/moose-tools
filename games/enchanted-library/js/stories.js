@@ -11,25 +11,25 @@ window.ENCHANTED_STORIES = {
           "id": "forest",
           "title": "Forest Path",
           "start": "easy_forest_root",
-          "endings": 7
+          "endings": 18
         },
         {
           "id": "castle",
           "title": "Castle Door",
           "start": "easy_castle_root",
-          "endings": 7
+          "endings": 18
         },
         {
           "id": "sea",
           "title": "Sea Shell",
           "start": "easy_sea_root",
-          "endings": 7
+          "endings": 18
         },
         {
           "id": "stars",
           "title": "Star Ladder",
           "start": "easy_stars_root",
-          "endings": 7
+          "endings": 18
         }
       ]
     },
@@ -42,25 +42,25 @@ window.ENCHANTED_STORIES = {
           "id": "forest",
           "title": "Forest Path",
           "start": "medium_forest_root",
-          "endings": 9
+          "endings": 24
         },
         {
           "id": "castle",
           "title": "Castle Door",
           "start": "medium_castle_root",
-          "endings": 9
+          "endings": 24
         },
         {
           "id": "sea",
           "title": "Sea Shell",
           "start": "medium_sea_root",
-          "endings": 9
+          "endings": 24
         },
         {
           "id": "stars",
           "title": "Star Ladder",
           "start": "medium_stars_root",
-          "endings": 9
+          "endings": 24
         }
       ]
     },
@@ -73,33 +73,33 @@ window.ENCHANTED_STORIES = {
           "id": "forest",
           "title": "Forest Path",
           "start": "hard_forest_root",
-          "endings": 9
+          "endings": 22
         },
         {
           "id": "castle",
           "title": "Castle Door",
           "start": "hard_castle_root",
-          "endings": 9
+          "endings": 22
         },
         {
           "id": "sea",
           "title": "Sea Shell",
           "start": "hard_sea_root",
-          "endings": 9
+          "endings": 22
         },
         {
           "id": "stars",
           "title": "Star Ladder",
           "start": "hard_stars_root",
-          "endings": 9
+          "endings": 22
         }
       ]
     }
   },
   "hubs": {
-    "easy": "You open a big magic book. Four glowing doors appear. Which door will you choose?",
-    "medium": "The enchanted book opens across your lap. Four doorways shimmer between the pages, each leading to a different adventure.",
-    "hard": "The leather cover warms beneath your hand. The book unfolds into a grand library of possibilities, where four luminous thresholds wait."
+    "easy": "You open a big magic book. Four glowing doors appear. Behind each one is a little adventure with a secret waiting to be found. Which door will you choose?",
+    "medium": "The enchanted book opens across your lap. Four doorways shimmer between the pages, each leading to an adventure with a problem to solve, friends to meet, and more than one way home.",
+    "hard": "The leather cover warms beneath your hand. The book unfolds into a living library of possibilities: four luminous thresholds, each hiding a longer journey shaped by what you notice, whom you help, and which mystery you choose to follow."
   },
   "nodes": {
     "easy_forest_e4": {
@@ -119,11 +119,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Open the little door",
-          "next": "easy_forest_e4"
+          "next": "easy_forest_choice_001"
         },
         {
           "text": "Help the baby owl",
-          "next": "easy_forest_e5"
+          "next": "easy_forest_choice_002"
         }
       ]
     },
@@ -144,11 +144,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Open the little door",
-          "next": "easy_forest_e7"
+          "next": "easy_forest_choice_003"
         },
         {
           "text": "Help the baby owl",
-          "next": "easy_forest_e8"
+          "next": "easy_forest_choice_004"
         }
       ]
     },
@@ -162,6 +162,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Follow the silver feathers",
           "next": "easy_forest_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the fireflies",
+          "next": "easy_forest_d2_ra0a0_2_side"
         }
       ]
     },
@@ -182,11 +186,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Open the little door",
-          "next": "easy_forest_e11"
+          "next": "easy_forest_choice_005"
         },
         {
           "text": "Help the baby owl",
-          "next": "easy_forest_e12"
+          "next": "easy_forest_choice_006"
         }
       ]
     },
@@ -201,7 +205,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Open the little door",
-          "next": "easy_forest_e14"
+          "next": "easy_forest_choice_007"
         }
       ]
     },
@@ -215,6 +219,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Help the owl",
           "next": "easy_forest_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the fireflies",
+          "next": "easy_forest_d2_ra0b1_9_side"
         }
       ]
     },
@@ -257,11 +265,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Take the recipe",
-          "next": "easy_castle_e4"
+          "next": "easy_castle_choice_008"
         },
         {
           "text": "Help the cat",
-          "next": "easy_castle_e5"
+          "next": "easy_castle_choice_009"
         }
       ]
     },
@@ -282,11 +290,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Take the recipe",
-          "next": "easy_castle_e7"
+          "next": "easy_castle_choice_010"
         },
         {
           "text": "Help the cat",
-          "next": "easy_castle_e8"
+          "next": "easy_castle_choice_011"
         }
       ]
     },
@@ -300,6 +308,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Reach the little crown",
           "next": "easy_castle_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the bell",
+          "next": "easy_castle_d2_ra0a0_2_side"
         }
       ]
     },
@@ -320,11 +332,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Take the recipe",
-          "next": "easy_castle_e11"
+          "next": "easy_castle_choice_012"
         },
         {
           "text": "Help the cat",
-          "next": "easy_castle_e12"
+          "next": "easy_castle_choice_013"
         }
       ]
     },
@@ -339,7 +351,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Take the recipe",
-          "next": "easy_castle_e14"
+          "next": "easy_castle_choice_014"
         }
       ]
     },
@@ -353,6 +365,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Help the baker",
           "next": "easy_castle_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the bell",
+          "next": "easy_castle_d2_ra0b1_9_side"
         }
       ]
     },
@@ -395,11 +411,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the lighthouse bell",
-          "next": "easy_sea_e4"
+          "next": "easy_sea_choice_015"
         },
         {
           "text": "Explore the sea cave",
-          "next": "easy_sea_e5"
+          "next": "easy_sea_choice_016"
         }
       ]
     },
@@ -420,11 +436,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the lighthouse bell",
-          "next": "easy_sea_e7"
+          "next": "easy_sea_choice_017"
         },
         {
           "text": "Explore the sea cave",
-          "next": "easy_sea_e8"
+          "next": "easy_sea_choice_018"
         }
       ]
     },
@@ -438,6 +454,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Follow the crab",
           "next": "easy_sea_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the silver gull",
+          "next": "easy_sea_d2_ra0a0_2_side"
         }
       ]
     },
@@ -458,11 +478,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the lighthouse bell",
-          "next": "easy_sea_e11"
+          "next": "easy_sea_choice_019"
         },
         {
           "text": "Explore the sea cave",
-          "next": "easy_sea_e12"
+          "next": "easy_sea_choice_020"
         }
       ]
     },
@@ -477,7 +497,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the lighthouse bell",
-          "next": "easy_sea_e14"
+          "next": "easy_sea_choice_021"
         }
       ]
     },
@@ -491,6 +511,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Search the shore",
           "next": "easy_sea_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the silver gull",
+          "next": "easy_sea_d2_ra0b1_9_side"
         }
       ]
     },
@@ -533,11 +557,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the star map",
-          "next": "easy_stars_e4"
+          "next": "easy_stars_choice_022"
         },
         {
           "text": "Guide the ship",
-          "next": "easy_stars_e5"
+          "next": "easy_stars_choice_023"
         }
       ]
     },
@@ -558,11 +582,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the star map",
-          "next": "easy_stars_e7"
+          "next": "easy_stars_choice_024"
         },
         {
           "text": "Guide the ship",
-          "next": "easy_stars_e8"
+          "next": "easy_stars_choice_025"
         }
       ]
     },
@@ -576,6 +600,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Cross the moon bridge",
           "next": "easy_stars_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the tiny comet",
+          "next": "easy_stars_d2_ra0a0_2_side"
         }
       ]
     },
@@ -596,11 +624,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the star map",
-          "next": "easy_stars_e11"
+          "next": "easy_stars_choice_026"
         },
         {
           "text": "Guide the ship",
-          "next": "easy_stars_e12"
+          "next": "easy_stars_choice_027"
         }
       ]
     },
@@ -615,7 +643,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the star map",
-          "next": "easy_stars_e14"
+          "next": "easy_stars_choice_028"
         }
       ]
     },
@@ -629,6 +657,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Follow the comet",
           "next": "easy_stars_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the tiny comet",
+          "next": "easy_stars_d2_ra0b1_9_side"
         }
       ]
     },
@@ -671,11 +703,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Return the song page",
-          "next": "medium_forest_e4"
+          "next": "medium_forest_choice_029"
         },
         {
           "text": "Follow the fox",
-          "next": "medium_forest_e5"
+          "next": "medium_forest_choice_030"
         }
       ]
     },
@@ -696,11 +728,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Wake the flowers",
-          "next": "medium_forest_e7"
+          "next": "medium_forest_choice_031"
         },
         {
           "text": "Find the missing page",
-          "next": "medium_forest_e8"
+          "next": "medium_forest_choice_032"
         }
       ]
     },
@@ -714,6 +746,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Read the silver bell",
           "next": "medium_forest_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the fireflies",
+          "next": "medium_forest_d2_ra0a0_2_side"
         }
       ]
     },
@@ -734,11 +770,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Follow the songbird",
-          "next": "medium_forest_e11"
+          "next": "medium_forest_choice_033"
         },
         {
           "text": "Mark the safe trail",
-          "next": "medium_forest_e12"
+          "next": "medium_forest_choice_034"
         }
       ]
     },
@@ -759,11 +795,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Share the recovered song",
-          "next": "medium_forest_e14"
+          "next": "medium_forest_choice_035"
         },
         {
           "text": "Explore the clearing",
-          "next": "medium_forest_e15"
+          "next": "medium_forest_choice_036"
         }
       ]
     },
@@ -777,6 +813,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Search the stump",
           "next": "medium_forest_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the fireflies",
+          "next": "medium_forest_d2_ra0b1_9_side"
         }
       ]
     },
@@ -804,7 +844,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Hum the missing tune",
-          "next": "medium_forest_e18"
+          "next": "medium_forest_choice_037"
+        },
+        {
+          "text": "Follow the fireflies",
+          "next": "medium_forest_d2_rb1a0_17_side"
         }
       ]
     },
@@ -847,11 +891,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Repair the bell",
-          "next": "medium_castle_e4"
+          "next": "medium_castle_choice_038"
         },
         {
           "text": "Relight the fire",
-          "next": "medium_castle_e5"
+          "next": "medium_castle_choice_039"
         }
       ]
     },
@@ -872,11 +916,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Help the steward",
-          "next": "medium_castle_e7"
+          "next": "medium_castle_choice_040"
         },
         {
           "text": "Meet the dragon",
-          "next": "medium_castle_e8"
+          "next": "medium_castle_choice_041"
         }
       ]
     },
@@ -890,6 +934,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Help the kitchen",
           "next": "medium_castle_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the servant’s candle",
+          "next": "medium_castle_d2_ra0a0_2_side"
         }
       ]
     },
@@ -910,11 +958,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Repair the clock",
-          "next": "medium_castle_e11"
+          "next": "medium_castle_choice_042"
         },
         {
           "text": "Open the garden",
-          "next": "medium_castle_e12"
+          "next": "medium_castle_choice_043"
         }
       ]
     },
@@ -935,11 +983,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Save the feast",
-          "next": "medium_castle_e14"
+          "next": "medium_castle_choice_044"
         },
         {
           "text": "Ring the quiet bell",
-          "next": "medium_castle_e15"
+          "next": "medium_castle_choice_045"
         }
       ]
     },
@@ -953,6 +1001,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Find the missing gear",
           "next": "medium_castle_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the servant’s candle",
+          "next": "medium_castle_d2_ra0b1_9_side"
         }
       ]
     },
@@ -980,7 +1032,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Wake the kitchen fire",
-          "next": "medium_castle_e18"
+          "next": "medium_castle_choice_046"
+        },
+        {
+          "text": "Follow the servant’s candle",
+          "next": "medium_castle_d2_rb1a0_17_side"
         }
       ]
     },
@@ -1023,11 +1079,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Restore the signal",
-          "next": "medium_sea_e4"
+          "next": "medium_sea_choice_047"
         },
         {
           "text": "Read the journal",
-          "next": "medium_sea_e5"
+          "next": "medium_sea_choice_048"
         }
       ]
     },
@@ -1048,11 +1104,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Follow the seal",
-          "next": "medium_sea_e7"
+          "next": "medium_sea_choice_049"
         },
         {
           "text": "Build the harbor map",
-          "next": "medium_sea_e8"
+          "next": "medium_sea_choice_050"
         }
       ]
     },
@@ -1066,6 +1122,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Search the tide pool",
           "next": "medium_sea_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the tide song",
+          "next": "medium_sea_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1086,11 +1146,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Light the harbor",
-          "next": "medium_sea_e11"
+          "next": "medium_sea_choice_051"
         },
         {
           "text": "Cross the inlet",
-          "next": "medium_sea_e12"
+          "next": "medium_sea_choice_052"
         }
       ]
     },
@@ -1111,11 +1171,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Protect the garden",
-          "next": "medium_sea_e14"
+          "next": "medium_sea_choice_053"
         },
         {
           "text": "Enter the sea cave",
-          "next": "medium_sea_e15"
+          "next": "medium_sea_choice_054"
         }
       ]
     },
@@ -1129,6 +1189,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Read the keeper's journal",
           "next": "medium_sea_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the tide song",
+          "next": "medium_sea_d2_ra0b1_9_side"
         }
       ]
     },
@@ -1156,7 +1220,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Check the old marker",
-          "next": "medium_sea_e18"
+          "next": "medium_sea_choice_055"
+        },
+        {
+          "text": "Follow the tide song",
+          "next": "medium_sea_d2_rb1a0_17_side"
         }
       ]
     },
@@ -1199,11 +1267,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Restore the constellation",
-          "next": "medium_stars_e4"
+          "next": "medium_stars_choice_056"
         },
         {
           "text": "Find the star key",
-          "next": "medium_stars_e5"
+          "next": "medium_stars_choice_057"
         }
       ]
     },
@@ -1224,11 +1292,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Open the moon route",
-          "next": "medium_stars_e7"
+          "next": "medium_stars_choice_058"
         },
         {
           "text": "Grow the comet garden",
-          "next": "medium_stars_e8"
+          "next": "medium_stars_choice_059"
         }
       ]
     },
@@ -1242,6 +1310,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Search the tiny moon",
           "next": "medium_stars_d3_ra0a0b1_6"
+        },
+        {
+          "text": "Follow the blue signal",
+          "next": "medium_stars_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1262,11 +1334,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Chart the safe route",
-          "next": "medium_stars_e11"
+          "next": "medium_stars_choice_060"
         },
         {
           "text": "Visit the moon castle",
-          "next": "medium_stars_e12"
+          "next": "medium_stars_choice_061"
         }
       ]
     },
@@ -1287,11 +1359,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Watch the sunrise",
-          "next": "medium_stars_e14"
+          "next": "medium_stars_choice_062"
         },
         {
           "text": "Listen to the star choir",
-          "next": "medium_stars_e15"
+          "next": "medium_stars_choice_063"
         }
       ]
     },
@@ -1305,6 +1377,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Guide the pilot",
           "next": "medium_stars_d3_ra0b1b1_13"
+        },
+        {
+          "text": "Follow the blue signal",
+          "next": "medium_stars_d2_ra0b1_9_side"
         }
       ]
     },
@@ -1332,7 +1408,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Search the observatory",
-          "next": "medium_stars_e18"
+          "next": "medium_stars_choice_064"
+        },
+        {
+          "text": "Follow the blue signal",
+          "next": "medium_stars_d2_rb1a0_17_side"
         }
       ]
     },
@@ -1375,11 +1455,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Restore the seed vault",
-          "next": "hard_forest_e4"
+          "next": "hard_forest_choice_065"
         },
         {
           "text": "Record the trail",
-          "next": "hard_forest_e5"
+          "next": "hard_forest_choice_066"
         }
       ]
     },
@@ -1400,11 +1480,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Strengthen the bridge",
-          "next": "hard_forest_e7"
+          "next": "hard_forest_choice_067"
         },
         {
           "text": "Test the crossing",
-          "next": "hard_forest_e8"
+          "next": "hard_forest_choice_068"
         }
       ]
     },
@@ -1425,11 +1505,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Find the whistle",
-          "next": "hard_forest_e10"
+          "next": "hard_forest_choice_069"
         },
         {
           "text": "Leave it untouched",
-          "next": "hard_forest_e11"
+          "next": "hard_forest_choice_070"
         }
       ]
     },
@@ -1447,6 +1527,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Study the seed vault",
           "next": "hard_forest_d3_ra0a0c2_9"
+        },
+        {
+          "text": "Read the forest ledger",
+          "next": "hard_forest_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1467,11 +1551,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Guide the animals",
-          "next": "hard_forest_e14"
+          "next": "hard_forest_choice_071"
         },
         {
           "text": "Map the safe crossing",
-          "next": "hard_forest_e15"
+          "next": "hard_forest_choice_072"
         }
       ]
     },
@@ -1486,7 +1570,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Follow the twilight trail",
-          "next": "hard_forest_e17"
+          "next": "hard_forest_choice_073"
         }
       ]
     },
@@ -1500,6 +1584,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Follow the fox",
           "next": "hard_forest_d3_ra0b1b1_16"
+        },
+        {
+          "text": "Read the forest ledger",
+          "next": "hard_forest_d2_ra0b1_12_side"
         }
       ]
     },
@@ -1542,11 +1630,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Restore the keeper's promise",
-          "next": "hard_castle_e4"
+          "next": "hard_castle_choice_074"
         },
         {
           "text": "Open the castle gates",
-          "next": "hard_castle_e5"
+          "next": "hard_castle_choice_075"
         }
       ]
     },
@@ -1567,11 +1655,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Meet the clockwork dragon",
-          "next": "hard_castle_e7"
+          "next": "hard_castle_choice_076"
         },
         {
           "text": "Help the evening feast",
-          "next": "hard_castle_e8"
+          "next": "hard_castle_choice_077"
         }
       ]
     },
@@ -1592,11 +1680,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Enter the garden",
-          "next": "hard_castle_e10"
+          "next": "hard_castle_choice_078"
         },
         {
           "text": "Repair the archive",
-          "next": "hard_castle_e11"
+          "next": "hard_castle_choice_079"
         }
       ]
     },
@@ -1614,6 +1702,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Search the old portrait",
           "next": "hard_castle_d3_ra0a0c2_9"
+        },
+        {
+          "text": "Study the old service passage",
+          "next": "hard_castle_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1634,11 +1726,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Protect the castle's promise",
-          "next": "hard_castle_e14"
+          "next": "hard_castle_choice_080"
         },
         {
           "text": "Return the key",
-          "next": "hard_castle_e15"
+          "next": "hard_castle_choice_081"
         }
       ]
     },
@@ -1653,7 +1745,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Ring the midnight bell",
-          "next": "hard_castle_e17"
+          "next": "hard_castle_choice_082"
         }
       ]
     },
@@ -1667,6 +1759,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Find the ceremonial key",
           "next": "hard_castle_d3_ra0b1b1_16"
+        },
+        {
+          "text": "Study the old service passage",
+          "next": "hard_castle_d2_ra0b1_12_side"
         }
       ]
     },
@@ -1709,11 +1805,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Mark the safe channel",
-          "next": "hard_sea_e4"
+          "next": "hard_sea_choice_083"
         },
         {
           "text": "Complete the chart",
-          "next": "hard_sea_e5"
+          "next": "hard_sea_choice_084"
         }
       ]
     },
@@ -1734,11 +1830,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Explore the sheltered cove",
-          "next": "hard_sea_e7"
+          "next": "hard_sea_choice_085"
         },
         {
           "text": "Secure the marker",
-          "next": "hard_sea_e8"
+          "next": "hard_sea_choice_086"
         }
       ]
     },
@@ -1759,11 +1855,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Restore the harbor signal",
-          "next": "hard_sea_e10"
+          "next": "hard_sea_choice_087"
         },
         {
           "text": "Choose the safer route",
-          "next": "hard_sea_e11"
+          "next": "hard_sea_choice_088"
         }
       ]
     },
@@ -1781,6 +1877,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Check the reef warning",
           "next": "hard_sea_d3_ra0a0c2_9"
+        },
+        {
+          "text": "Trace the old current map",
+          "next": "hard_sea_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1801,11 +1901,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Help the harbor village",
-          "next": "hard_sea_e14"
+          "next": "hard_sea_choice_089"
         },
         {
           "text": "Recover the markers",
-          "next": "hard_sea_e15"
+          "next": "hard_sea_choice_090"
         }
       ]
     },
@@ -1820,7 +1920,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Light the moon signal",
-          "next": "hard_sea_e17"
+          "next": "hard_sea_choice_091"
         }
       ]
     },
@@ -1834,6 +1934,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Guide the signal",
           "next": "hard_sea_d3_ra0b1b1_16"
+        },
+        {
+          "text": "Trace the old current map",
+          "next": "hard_sea_d2_ra0b1_12_side"
         }
       ]
     },
@@ -1876,11 +1980,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Unfold the hidden story",
-          "next": "hard_stars_e4"
+          "next": "hard_stars_choice_092"
         },
         {
           "text": "Repair the astrolabe",
-          "next": "hard_stars_e5"
+          "next": "hard_stars_choice_093"
         }
       ]
     },
@@ -1901,11 +2005,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Cross the moon bridge",
-          "next": "hard_stars_e7"
+          "next": "hard_stars_choice_094"
         },
         {
           "text": "Tell the star-flowers a story",
-          "next": "hard_stars_e8"
+          "next": "hard_stars_choice_095"
         }
       ]
     },
@@ -1926,11 +2030,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Chart the safe routes",
-          "next": "hard_stars_e10"
+          "next": "hard_stars_choice_096"
         },
         {
           "text": "Explore the new path",
-          "next": "hard_stars_e11"
+          "next": "hard_stars_choice_097"
         }
       ]
     },
@@ -1948,6 +2052,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Trace the hidden route",
           "next": "hard_stars_d3_ra0a0c2_9"
+        },
+        {
+          "text": "Decode the silent signal",
+          "next": "hard_stars_d2_ra0a0_2_side"
         }
       ]
     },
@@ -1968,11 +2076,11 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Guide the starship",
-          "next": "hard_stars_e14"
+          "next": "hard_stars_choice_098"
         },
         {
           "text": "Study the star archive",
-          "next": "hard_stars_e15"
+          "next": "hard_stars_choice_099"
         }
       ]
     },
@@ -1987,7 +2095,7 @@ window.ENCHANTED_STORIES = {
       "choices": [
         {
           "text": "Climb the silver mountain",
-          "next": "hard_stars_e17"
+          "next": "hard_stars_choice_100"
         }
       ]
     },
@@ -2001,6 +2109,10 @@ window.ENCHANTED_STORIES = {
         {
           "text": "Restore the moon bridge",
           "next": "hard_stars_d3_ra0b1b1_16"
+        },
+        {
+          "text": "Decode the silent signal",
+          "next": "hard_stars_d2_ra0b1_12_side"
         }
       ]
     },
@@ -2025,6 +2137,2606 @@ window.ENCHANTED_STORIES = {
           "next": "hard_stars_d1_ra0_1"
         }
       ]
+    },
+    "easy_forest_choice_001": {
+      "text": "The moment called “The Lost Book” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e4"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_001_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_001_alt": {
+      "ending": true,
+      "title": "The Lost Book: The Longer Trail",
+      "scene": "garden",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_002": {
+      "text": "The moment called “Owl's New Nest” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e5"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_002_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_002_alt": {
+      "ending": true,
+      "title": "Owl's New Nest: The Longer Trail",
+      "scene": "map",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_003": {
+      "text": "The moment called “Berry Picnic” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e7"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_003_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_003_alt": {
+      "ending": true,
+      "title": "Berry Picnic: The Longer Trail",
+      "scene": "village",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_004": {
+      "text": "The moment called “The Singing Acorn” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e8"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_004_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_004_alt": {
+      "ending": true,
+      "title": "The Singing Acorn: The Longer Trail",
+      "scene": "forest_home",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_005": {
+      "text": "The moment called “Moonlit Shortcut” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e11"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_005_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_005_alt": {
+      "ending": true,
+      "title": "Moonlit Shortcut: The Longer Trail",
+      "scene": "garden",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_006": {
+      "text": "The moment called “Rainy Treehouse” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e12"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_006_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_006_alt": {
+      "ending": true,
+      "title": "Rainy Treehouse: The Longer Trail",
+      "scene": "map",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_forest_choice_007": {
+      "text": "The moment called “Forest Map” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return to the library",
+          "next": "easy_forest_e14"
+        },
+        {
+          "text": "Explore one more trail",
+          "next": "easy_forest_choice_007_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_007_alt": {
+      "ending": true,
+      "title": "Forest Map: The Longer Trail",
+      "scene": "village",
+      "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
+    },
+    "easy_castle_choice_008": {
+      "text": "The moment called “The Baker's Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e4"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_008_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_008_alt": {
+      "ending": true,
+      "title": "The Baker's Bell: One Last Door",
+      "scene": "castle",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_009": {
+      "text": "The moment called “The Tiny Crown” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e5"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_009_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_009_alt": {
+      "ending": true,
+      "title": "The Tiny Crown: One Last Door",
+      "scene": "feast",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_010": {
+      "text": "The moment called “Secret Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e7"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_010_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_010_alt": {
+      "ending": true,
+      "title": "Secret Garden: One Last Door",
+      "scene": "crown",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_011": {
+      "text": "The moment called “The Recipe Book” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e8"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_011_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_011_alt": {
+      "ending": true,
+      "title": "The Recipe Book: One Last Door",
+      "scene": "garden",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_012": {
+      "text": "The moment called “Tower Star” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e11"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_012_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_012_alt": {
+      "ending": true,
+      "title": "Tower Star: One Last Door",
+      "scene": "castle",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_013": {
+      "text": "The moment called “Kind Knight” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e12"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_013_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_013_alt": {
+      "ending": true,
+      "title": "Kind Knight: One Last Door",
+      "scene": "feast",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_castle_choice_014": {
+      "text": "The moment called “Castle Treasure” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Accept the thanks",
+          "next": "easy_castle_e14"
+        },
+        {
+          "text": "Climb one last stair",
+          "next": "easy_castle_choice_014_alt"
+        }
+      ]
+    },
+    "easy_castle_choice_014_alt": {
+      "ending": true,
+      "title": "Castle Treasure: One Last Door",
+      "scene": "crown",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+    },
+    "easy_sea_choice_015": {
+      "text": "The moment called “The Lighthouse Bell” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e4"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_015_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_015_alt": {
+      "ending": true,
+      "title": "The Lighthouse Bell: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_016": {
+      "text": "The moment called “Pearl Gate” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e5"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_016_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_016_alt": {
+      "ending": true,
+      "title": "Pearl Gate: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_017": {
+      "text": "The moment called “Dolphin Ride” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e7"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_017_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_017_alt": {
+      "ending": true,
+      "title": "Dolphin Ride: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_018": {
+      "text": "The moment called “Shell Message” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e8"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_018_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_018_alt": {
+      "ending": true,
+      "title": "Shell Message: Beyond the Harbor",
+      "scene": "moon",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_019": {
+      "text": "The moment called “Lighthouse Garden” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e11"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_019_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_019_alt": {
+      "ending": true,
+      "title": "Lighthouse Garden: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_020": {
+      "text": "The moment called “Crab's Treasure” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e12"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_020_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_020_alt": {
+      "ending": true,
+      "title": "Crab's Treasure: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_sea_choice_021": {
+      "text": "The moment called “Moon Tide” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Sail for home",
+          "next": "easy_sea_e14"
+        },
+        {
+          "text": "Follow the lantern",
+          "next": "easy_sea_choice_021_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_021_alt": {
+      "ending": true,
+      "title": "Moon Tide: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book."
+    },
+    "easy_stars_choice_022": {
+      "text": "The moment called “The Comet Garden” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e4"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_022_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_022_alt": {
+      "ending": true,
+      "title": "The Comet Garden: Beyond the Map",
+      "scene": "sun",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_023": {
+      "text": "The moment called “Star Pilot's Map” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e5"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_023_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_023_alt": {
+      "ending": true,
+      "title": "Star Pilot's Map: Beyond the Map",
+      "scene": "map",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_024": {
+      "text": "The moment called “Moon Bridge” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e7"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_024_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_024_alt": {
+      "ending": true,
+      "title": "Moon Bridge: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_025": {
+      "text": "The moment called “Pocket Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e8"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_025_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_025_alt": {
+      "ending": true,
+      "title": "Pocket Constellation: Beyond the Map",
+      "scene": "moon",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_026": {
+      "text": "The moment called “Cloud Whale” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e11"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_026_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_026_alt": {
+      "ending": true,
+      "title": "Cloud Whale: Beyond the Map",
+      "scene": "sun",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_027": {
+      "text": "The moment called “Little Planet” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e12"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_027_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_027_alt": {
+      "ending": true,
+      "title": "Little Planet: Beyond the Map",
+      "scene": "map",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "easy_stars_choice_028": {
+      "text": "The moment called “Book of Stars” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Chart the way home",
+          "next": "easy_stars_e14"
+        },
+        {
+          "text": "Follow the bright star",
+          "next": "easy_stars_choice_028_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_028_alt": {
+      "ending": true,
+      "title": "Book of Stars: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home."
+    },
+    "medium_forest_choice_029": {
+      "text": "The moment called “The Songbird's Return” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e4"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_029_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_029_alt": {
+      "ending": true,
+      "title": "The Songbird's Return: The Longer Trail",
+      "scene": "garden",
+      "text": "You follow the new trail beyond the place where “The Songbird's Return” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_030": {
+      "text": "The moment called “The Silver Bell” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e5"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_030_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_030_alt": {
+      "ending": true,
+      "title": "The Silver Bell: The Longer Trail",
+      "scene": "map",
+      "text": "You follow the new trail beyond the place where “The Silver Bell” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_031": {
+      "text": "The moment called “Bridge of Ribbons” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e7"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_031_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_031_alt": {
+      "ending": true,
+      "title": "Bridge of Ribbons: The Longer Trail",
+      "scene": "village",
+      "text": "You follow the new trail beyond the place where “Bridge of Ribbons” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_032": {
+      "text": "The moment called “The Listening Garden” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e8"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_032_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_032_alt": {
+      "ending": true,
+      "title": "The Listening Garden: The Longer Trail",
+      "scene": "forest_home",
+      "text": "You follow the new trail beyond the place where “The Listening Garden” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_033": {
+      "text": "The moment called “Fox's Thank-You” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e11"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_033_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_033_alt": {
+      "ending": true,
+      "title": "Fox's Thank-You: The Longer Trail",
+      "scene": "garden",
+      "text": "You follow the new trail beyond the place where “Fox's Thank-You” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_034": {
+      "text": "The moment called “The Lost Page” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e12"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_034_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_034_alt": {
+      "ending": true,
+      "title": "The Lost Page: The Longer Trail",
+      "scene": "map",
+      "text": "You follow the new trail beyond the place where “The Lost Page” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_035": {
+      "text": "The moment called “Owl at Dusk” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e14"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_035_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_035_alt": {
+      "ending": true,
+      "title": "Owl at Dusk: The Longer Trail",
+      "scene": "village",
+      "text": "You follow the new trail beyond the place where “Owl at Dusk” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_036": {
+      "text": "The moment called “The Acorn Archive” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e15"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_036_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_036_alt": {
+      "ending": true,
+      "title": "The Acorn Archive: The Longer Trail",
+      "scene": "forest_home",
+      "text": "You follow the new trail beyond the place where “The Acorn Archive” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_forest_choice_037": {
+      "text": "The moment called “A Song to Keep” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Return the discovery",
+          "next": "medium_forest_e18"
+        },
+        {
+          "text": "Follow the new trail",
+          "next": "medium_forest_choice_037_alt"
+        }
+      ]
+    },
+    "medium_forest_choice_037_alt": {
+      "ending": true,
+      "title": "A Song to Keep: The Longer Trail",
+      "scene": "garden",
+      "text": "You follow the new trail beyond the place where “A Song to Keep” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader."
+    },
+    "medium_castle_choice_038": {
+      "text": "The moment called “The Tower Rings” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e4"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_038_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_038_alt": {
+      "ending": true,
+      "title": "The Tower Rings: One Last Door",
+      "scene": "crown",
+      "text": "You climb beyond the place where “The Tower Rings” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_039": {
+      "text": "The moment called “The Builder's Map” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e5"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_039_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_039_alt": {
+      "ending": true,
+      "title": "The Builder's Map: One Last Door",
+      "scene": "garden",
+      "text": "You climb beyond the place where “The Builder's Map” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_040": {
+      "text": "The moment called “A Feast Restored” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e7"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_040_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_040_alt": {
+      "ending": true,
+      "title": "A Feast Restored: One Last Door",
+      "scene": "castle",
+      "text": "You climb beyond the place where “A Feast Restored” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_041": {
+      "text": "The moment called “The Sleeping Dragon” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e8"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_041_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_041_alt": {
+      "ending": true,
+      "title": "The Sleeping Dragon: One Last Door",
+      "scene": "feast",
+      "text": "You climb beyond the place where “The Sleeping Dragon” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_042": {
+      "text": "The moment called “Cat of the Tower” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e11"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_042_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_042_alt": {
+      "ending": true,
+      "title": "Cat of the Tower: One Last Door",
+      "scene": "crown",
+      "text": "You climb beyond the place where “Cat of the Tower” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_043": {
+      "text": "The moment called “The Brass Matchbox” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e12"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_043_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_043_alt": {
+      "ending": true,
+      "title": "The Brass Matchbox: One Last Door",
+      "scene": "garden",
+      "text": "You climb beyond the place where “The Brass Matchbox” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_044": {
+      "text": "The moment called “Sunset Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e14"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_044_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_044_alt": {
+      "ending": true,
+      "title": "Sunset Garden: One Last Door",
+      "scene": "castle",
+      "text": "You climb beyond the place where “Sunset Garden” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_045": {
+      "text": "The moment called “Royal Librarian” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e15"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_045_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_045_alt": {
+      "ending": true,
+      "title": "Royal Librarian: One Last Door",
+      "scene": "feast",
+      "text": "You climb beyond the place where “Royal Librarian” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_castle_choice_046": {
+      "text": "The moment called “The Quiet Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Help restore the keep",
+          "next": "medium_castle_e18"
+        },
+        {
+          "text": "Enter the last tower",
+          "next": "medium_castle_choice_046_alt"
+        }
+      ]
+    },
+    "medium_castle_choice_046_alt": {
+      "ending": true,
+      "title": "The Quiet Bell: One Last Door",
+      "scene": "crown",
+      "text": "You climb beyond the place where “The Quiet Bell” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway."
+    },
+    "medium_sea_choice_047": {
+      "text": "The moment called “The Harbor Signal” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e4"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_047_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_047_alt": {
+      "ending": true,
+      "title": "The Harbor Signal: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the turning tide beyond the place where “The Harbor Signal” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_048": {
+      "text": "The moment called “Keeper's Journal” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e5"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_048_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_048_alt": {
+      "ending": true,
+      "title": "Keeper's Journal: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the turning tide beyond the place where “Keeper's Journal” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_049": {
+      "text": "The moment called “The Seal's Secret” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e7"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_049_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_049_alt": {
+      "ending": true,
+      "title": "The Seal's Secret: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the turning tide beyond the place where “The Seal's Secret” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_050": {
+      "text": "The moment called “Tide Pool Garden” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e8"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_050_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_050_alt": {
+      "ending": true,
+      "title": "Tide Pool Garden: Beyond the Harbor",
+      "scene": "moon",
+      "text": "You follow the turning tide beyond the place where “Tide Pool Garden” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_051": {
+      "text": "The moment called “The Signal Flags” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e11"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_051_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_051_alt": {
+      "ending": true,
+      "title": "The Signal Flags: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the turning tide beyond the place where “The Signal Flags” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_052": {
+      "text": "The moment called “Moonlit Harbor” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e12"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_052_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_052_alt": {
+      "ending": true,
+      "title": "Moonlit Harbor: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the turning tide beyond the place where “Moonlit Harbor” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_053": {
+      "text": "The moment called “The Hidden Marker” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e14"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_053_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_053_alt": {
+      "ending": true,
+      "title": "The Hidden Marker: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the turning tide beyond the place where “The Hidden Marker” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_054": {
+      "text": "The moment called “A Friendly Crew” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e15"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_054_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_054_alt": {
+      "ending": true,
+      "title": "A Friendly Crew: Beyond the Harbor",
+      "scene": "moon",
+      "text": "You follow the turning tide beyond the place where “A Friendly Crew” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_sea_choice_055": {
+      "text": "The moment called “The Singing Shell” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Signal the harbor",
+          "next": "medium_sea_e18"
+        },
+        {
+          "text": "Follow the turning tide",
+          "next": "medium_sea_choice_055_alt"
+        }
+      ]
+    },
+    "medium_sea_choice_055_alt": {
+      "ending": true,
+      "title": "The Singing Shell: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the turning tide beyond the place where “The Singing Shell” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home."
+    },
+    "medium_stars_choice_056": {
+      "text": "The moment called “Restore the Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e4"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_056_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_056_alt": {
+      "ending": true,
+      "title": "Restore the Constellation: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You follow the new signal beyond the route recorded at “Restore the Constellation.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_057": {
+      "text": "The moment called “The Star Key” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e5"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_057_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_057_alt": {
+      "ending": true,
+      "title": "The Star Key: Beyond the Map",
+      "scene": "moon",
+      "text": "You follow the new signal beyond the route recorded at “The Star Key.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_058": {
+      "text": "The moment called “Moon Bridge Home” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e7"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_058_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_058_alt": {
+      "ending": true,
+      "title": "Moon Bridge Home: Beyond the Map",
+      "scene": "sun",
+      "text": "You follow the new signal beyond the route recorded at “Moon Bridge Home.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_059": {
+      "text": "The moment called “The Observatory” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e8"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_059_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_059_alt": {
+      "ending": true,
+      "title": "The Observatory: Beyond the Map",
+      "scene": "map",
+      "text": "You follow the new signal beyond the route recorded at “The Observatory.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_060": {
+      "text": "The moment called “Comet Garden” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e11"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_060_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_060_alt": {
+      "ending": true,
+      "title": "Comet Garden: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You follow the new signal beyond the route recorded at “Comet Garden.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_061": {
+      "text": "The moment called “A Safe Route” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e12"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_061_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_061_alt": {
+      "ending": true,
+      "title": "A Safe Route: Beyond the Map",
+      "scene": "moon",
+      "text": "You follow the new signal beyond the route recorded at “A Safe Route.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_062": {
+      "text": "The moment called “The Night Watch” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e14"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_062_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_062_alt": {
+      "ending": true,
+      "title": "The Night Watch: Beyond the Map",
+      "scene": "sun",
+      "text": "You follow the new signal beyond the route recorded at “The Night Watch.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_063": {
+      "text": "The moment called “Sunrise Orbit” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e15"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_063_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_063_alt": {
+      "ending": true,
+      "title": "Sunrise Orbit: Beyond the Map",
+      "scene": "map",
+      "text": "You follow the new signal beyond the route recorded at “Sunrise Orbit.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "medium_stars_choice_064": {
+      "text": "The moment called “The Star Choir” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Record the route",
+          "next": "medium_stars_e18"
+        },
+        {
+          "text": "Follow the new signal",
+          "next": "medium_stars_choice_064_alt"
+        }
+      ]
+    },
+    "medium_stars_choice_064_alt": {
+      "ending": true,
+      "title": "The Star Choir: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You follow the new signal beyond the route recorded at “The Star Choir.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map."
+    },
+    "hard_forest_choice_065": {
+      "text": "The moment called “Keeper of the Seeds” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e4"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_065_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_065_alt": {
+      "ending": true,
+      "title": "Keeper of the Seeds: The Longer Trail",
+      "scene": "garden",
+      "text": "Instead of closing the chapter at “Keeper of the Seeds,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_066": {
+      "text": "The moment called “The Living Bridge” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e5"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_066_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_066_alt": {
+      "ending": true,
+      "title": "The Living Bridge: The Longer Trail",
+      "scene": "map",
+      "text": "Instead of closing the chapter at “The Living Bridge,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_067": {
+      "text": "The moment called “Compass of the Woods” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e7"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_067_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_067_alt": {
+      "ending": true,
+      "title": "Compass of the Woods: The Longer Trail",
+      "scene": "village",
+      "text": "Instead of closing the chapter at “Compass of the Woods,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_068": {
+      "text": "The moment called “The Whistle's Rest” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e8"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_068_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_068_alt": {
+      "ending": true,
+      "title": "The Whistle's Rest: The Longer Trail",
+      "scene": "forest_home",
+      "text": "Instead of closing the chapter at “The Whistle's Rest,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_069": {
+      "text": "The moment called “Seed Garden” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e10"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_069_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_069_alt": {
+      "ending": true,
+      "title": "Seed Garden: The Longer Trail",
+      "scene": "garden",
+      "text": "Instead of closing the chapter at “Seed Garden,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_070": {
+      "text": "The moment called “Fox at Twilight” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e11"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_070_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_070_alt": {
+      "ending": true,
+      "title": "Fox at Twilight: The Longer Trail",
+      "scene": "map",
+      "text": "Instead of closing the chapter at “Fox at Twilight,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_071": {
+      "text": "The moment called “The Woodland Archive” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e14"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_071_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_071_alt": {
+      "ending": true,
+      "title": "The Woodland Archive: The Longer Trail",
+      "scene": "village",
+      "text": "Instead of closing the chapter at “The Woodland Archive,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_072": {
+      "text": "The moment called “Wind Lantern” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e15"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_072_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_072_alt": {
+      "ending": true,
+      "title": "Wind Lantern: The Longer Trail",
+      "scene": "forest_home",
+      "text": "Instead of closing the chapter at “Wind Lantern,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_forest_choice_073": {
+      "text": "The moment called “A New Trail” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.",
+      "choices": [
+        {
+          "text": "Record what you learned",
+          "next": "hard_forest_e17"
+        },
+        {
+          "text": "Follow the hidden trail",
+          "next": "hard_forest_choice_073_alt"
+        }
+      ]
+    },
+    "hard_forest_choice_073_alt": {
+      "ending": true,
+      "title": "A New Trail: The Longer Trail",
+      "scene": "garden",
+      "text": "Instead of closing the chapter at “A New Trail,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely."
+    },
+    "hard_castle_choice_074": {
+      "text": "The moment called “The Keeper's Promise” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e4"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_074_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_074_alt": {
+      "ending": true,
+      "title": "The Keeper's Promise: One Last Door",
+      "scene": "crown",
+      "text": "You refuse to rush past the final clue in “The Keeper's Promise.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_075": {
+      "text": "The moment called “The Open Castle” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e5"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_075_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_075_alt": {
+      "ending": true,
+      "title": "The Open Castle: One Last Door",
+      "scene": "garden",
+      "text": "You refuse to rush past the final clue in “The Open Castle.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_076": {
+      "text": "The moment called “The Archive's Secret” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e7"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_076_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_076_alt": {
+      "ending": true,
+      "title": "The Archive's Secret: One Last Door",
+      "scene": "castle",
+      "text": "You refuse to rush past the final clue in “The Archive's Secret.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_077": {
+      "text": "The moment called “The Clockwork Dragon” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e8"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_077_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_077_alt": {
+      "ending": true,
+      "title": "The Clockwork Dragon: One Last Door",
+      "scene": "feast",
+      "text": "You refuse to rush past the final clue in “The Clockwork Dragon.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_078": {
+      "text": "The moment called “Feast at Sunset” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e10"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_078_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_078_alt": {
+      "ending": true,
+      "title": "Feast at Sunset: One Last Door",
+      "scene": "crown",
+      "text": "You refuse to rush past the final clue in “Feast at Sunset.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_079": {
+      "text": "The moment called “The Brass Key” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e11"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_079_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_079_alt": {
+      "ending": true,
+      "title": "The Brass Key: One Last Door",
+      "scene": "garden",
+      "text": "You refuse to rush past the final clue in “The Brass Key.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_080": {
+      "text": "The moment called “Tower Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e14"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_080_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_080_alt": {
+      "ending": true,
+      "title": "Tower Garden: One Last Door",
+      "scene": "castle",
+      "text": "You refuse to rush past the final clue in “Tower Garden.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_081": {
+      "text": "The moment called “The Castle Map” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e15"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_081_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_081_alt": {
+      "ending": true,
+      "title": "The Castle Map: One Last Door",
+      "scene": "feast",
+      "text": "You refuse to rush past the final clue in “The Castle Map.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_castle_choice_082": {
+      "text": "The moment called “The Midnight Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "choices": [
+        {
+          "text": "Seal the castle record",
+          "next": "hard_castle_e17"
+        },
+        {
+          "text": "Unlock the final chamber",
+          "next": "hard_castle_choice_082_alt"
+        }
+      ]
+    },
+    "hard_castle_choice_082_alt": {
+      "ending": true,
+      "title": "The Midnight Bell: One Last Door",
+      "scene": "crown",
+      "text": "You refuse to rush past the final clue in “The Midnight Bell.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery."
+    },
+    "hard_sea_choice_083": {
+      "text": "The moment called “The Safe Harbor” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e4"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_083_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_083_alt": {
+      "ending": true,
+      "title": "The Safe Harbor: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the distant light instead of ending the voyage at “The Safe Harbor.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_084": {
+      "text": "The moment called “The Reef Chart” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e5"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_084_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_084_alt": {
+      "ending": true,
+      "title": "The Reef Chart: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the distant light instead of ending the voyage at “The Reef Chart.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_085": {
+      "text": "The moment called “The Sheltered Cove” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e7"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_085_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_085_alt": {
+      "ending": true,
+      "title": "The Sheltered Cove: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the distant light instead of ending the voyage at “The Sheltered Cove.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_086": {
+      "text": "The moment called “Keeper of the Light” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e8"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_086_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_086_alt": {
+      "ending": true,
+      "title": "Keeper of the Light: Beyond the Harbor",
+      "scene": "moon",
+      "text": "You follow the distant light instead of ending the voyage at “Keeper of the Light.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_087": {
+      "text": "The moment called “The Brass Markers” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e10"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_087_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_087_alt": {
+      "ending": true,
+      "title": "The Brass Markers: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the distant light instead of ending the voyage at “The Brass Markers.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_088": {
+      "text": "The moment called “Storm Moon” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e11"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_088_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_088_alt": {
+      "ending": true,
+      "title": "Storm Moon: Beyond the Harbor",
+      "scene": "ocean_boat",
+      "text": "You follow the distant light instead of ending the voyage at “Storm Moon.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_089": {
+      "text": "The moment called “Garden by the Sea” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e14"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_089_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_089_alt": {
+      "ending": true,
+      "title": "Garden by the Sea: Beyond the Harbor",
+      "scene": "village",
+      "text": "You follow the distant light instead of ending the voyage at “Garden by the Sea.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_090": {
+      "text": "The moment called “The Lighthouse Bridge” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e15"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_090_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_090_alt": {
+      "ending": true,
+      "title": "The Lighthouse Bridge: Beyond the Harbor",
+      "scene": "moon",
+      "text": "You follow the distant light instead of ending the voyage at “The Lighthouse Bridge.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_sea_choice_091": {
+      "text": "The moment called “The Harbor's Memory” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
+      "choices": [
+        {
+          "text": "Mark the safe harbor",
+          "next": "hard_sea_e17"
+        },
+        {
+          "text": "Follow the distant light",
+          "next": "hard_sea_choice_091_alt"
+        }
+      ]
+    },
+    "hard_sea_choice_091_alt": {
+      "ending": true,
+      "title": "The Harbor's Memory: Beyond the Harbor",
+      "scene": "bridge",
+      "text": "You follow the distant light instead of ending the voyage at “The Harbor's Memory.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed."
+    },
+    "hard_stars_choice_092": {
+      "text": "The moment called “The Hidden Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e4"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_092_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_092_alt": {
+      "ending": true,
+      "title": "The Hidden Constellation: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You cross beyond the boundary marked by “The Hidden Constellation.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_093": {
+      "text": "The moment called “The Astrolabe” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e5"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_093_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_093_alt": {
+      "ending": true,
+      "title": "The Astrolabe: Beyond the Map",
+      "scene": "moon",
+      "text": "You cross beyond the boundary marked by “The Astrolabe.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_094": {
+      "text": "The moment called “The Moon Bridge” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e7"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_094_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_094_alt": {
+      "ending": true,
+      "title": "The Moon Bridge: Beyond the Map",
+      "scene": "sun",
+      "text": "You cross beyond the boundary marked by “The Moon Bridge.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_095": {
+      "text": "The moment called “Garden of True Stories” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e8"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_095_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_095_alt": {
+      "ending": true,
+      "title": "Garden of True Stories: Beyond the Map",
+      "scene": "map",
+      "text": "You cross beyond the boundary marked by “Garden of True Stories.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_096": {
+      "text": "The moment called “The Forgotten Story” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e10"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_096_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_096_alt": {
+      "ending": true,
+      "title": "The Forgotten Story: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You cross beyond the boundary marked by “The Forgotten Story.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_097": {
+      "text": "The moment called “Dawn Beyond the Clouds” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e11"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_097_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_097_alt": {
+      "ending": true,
+      "title": "Dawn Beyond the Clouds: Beyond the Map",
+      "scene": "moon",
+      "text": "You cross beyond the boundary marked by “Dawn Beyond the Clouds.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_098": {
+      "text": "The moment called “The Star Archive” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e14"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_098_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_098_alt": {
+      "ending": true,
+      "title": "The Star Archive: Beyond the Map",
+      "scene": "sun",
+      "text": "You cross beyond the boundary marked by “The Star Archive.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_099": {
+      "text": "The moment called “Phoenix of Starlight” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e15"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_099_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_099_alt": {
+      "ending": true,
+      "title": "Phoenix of Starlight: Beyond the Map",
+      "scene": "map",
+      "text": "You cross beyond the boundary marked by “Phoenix of Starlight.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "hard_stars_choice_100": {
+      "text": "The moment called “The Quiet Planet” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.",
+      "choices": [
+        {
+          "text": "Archive the discovery",
+          "next": "hard_stars_e17"
+        },
+        {
+          "text": "Cross the unknown bridge",
+          "next": "hard_stars_choice_100_alt"
+        }
+      ]
+    },
+    "hard_stars_choice_100_alt": {
+      "ending": true,
+      "title": "The Quiet Planet: Beyond the Map",
+      "scene": "star_ship",
+      "text": "You cross beyond the boundary marked by “The Quiet Planet.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader."
+    },
+    "easy_forest_d2_ra0a0_2_side": {
+      "text": "A line of fireflies gathers beside the trail. They lead you to a tiny clearing where something from the forest has been waiting for a helper.",
+      "choices": [
+        {
+          "text": "Firefly Garden",
+          "next": "easy_forest_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "Lantern Leaf",
+          "next": "easy_forest_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "easy_forest_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "Firefly Garden",
+      "scene": "garden",
+      "text": "The fireflies guide you to a garden of night flowers. You help them find a lost seed, and every flower opens like a little lantern."
+    },
+    "easy_forest_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "Lantern Leaf",
+      "scene": "forest_home",
+      "text": "A golden leaf lights your way back to the main trail. You tuck it into the book, where it glows whenever someone needs courage."
+    },
+    "easy_forest_d2_ra0b1_9_side": {
+      "text": "A line of fireflies gathers beside the trail. They lead you to a tiny clearing where something from the forest has been waiting for a helper.",
+      "choices": [
+        {
+          "text": "Firefly Garden",
+          "next": "easy_forest_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "Lantern Leaf",
+          "next": "easy_forest_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "easy_forest_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "Firefly Garden",
+      "scene": "garden",
+      "text": "The fireflies guide you to a garden of night flowers. You help them find a lost seed, and every flower opens like a little lantern."
+    },
+    "easy_forest_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "Lantern Leaf",
+      "scene": "forest_home",
+      "text": "A golden leaf lights your way back to the main trail. You tuck it into the book, where it glows whenever someone needs courage."
+    },
+    "easy_castle_d2_ra0a0_2_side": {
+      "text": "A small bell rings from somewhere behind the walls. You follow the sound and find a hidden room with two friendly choices waiting.",
+      "choices": [
+        {
+          "text": "The Bell Room",
+          "next": "easy_castle_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "Midnight Feast",
+          "next": "easy_castle_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "easy_castle_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Bell Room",
+      "scene": "castle",
+      "text": "You polish the old bell until it shines. When you ring it, the castle lights come on one by one, all the way to the library door."
+    },
+    "easy_castle_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "Midnight Feast",
+      "scene": "feast",
+      "text": "The hidden room is a tiny kitchen prepared for travellers. You share the warm food with the castle helpers before heading home."
+    },
+    "easy_castle_d2_ra0b1_9_side": {
+      "text": "A small bell rings from somewhere behind the walls. You follow the sound and find a hidden room with two friendly choices waiting.",
+      "choices": [
+        {
+          "text": "The Bell Room",
+          "next": "easy_castle_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "Midnight Feast",
+          "next": "easy_castle_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "easy_castle_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "The Bell Room",
+      "scene": "castle",
+      "text": "You polish the old bell until it shines. When you ring it, the castle lights come on one by one, all the way to the library door."
+    },
+    "easy_castle_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "Midnight Feast",
+      "scene": "feast",
+      "text": "The hidden room is a tiny kitchen prepared for travellers. You share the warm food with the castle helpers before heading home."
+    },
+    "easy_sea_d2_ra0a0_2_side": {
+      "text": "A silver gull circles above you three times, then flies toward a quiet strip of shore. Something shiny waits beneath the foam.",
+      "choices": [
+        {
+          "text": "Gull’s Cove",
+          "next": "easy_sea_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "Shell Garden",
+          "next": "easy_sea_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "easy_sea_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "Gull’s Cove",
+      "scene": "ocean_boat",
+      "text": "The shiny object is a little compass that points toward safe water. You thank the gull and leave the compass where another sailor can find it."
+    },
+    "easy_sea_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "Shell Garden",
+      "scene": "garden",
+      "text": "The cove is filled with tiny shells arranged in a spiral. You add one shell of your own and watch the tide turn the pattern into a shining picture."
+    },
+    "easy_sea_d2_ra0b1_9_side": {
+      "text": "A silver gull circles above you three times, then flies toward a quiet strip of shore. Something shiny waits beneath the foam.",
+      "choices": [
+        {
+          "text": "Gull’s Cove",
+          "next": "easy_sea_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "Shell Garden",
+          "next": "easy_sea_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "easy_sea_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "Gull’s Cove",
+      "scene": "ocean_boat",
+      "text": "The shiny object is a little compass that points toward safe water. You thank the gull and leave the compass where another sailor can find it."
+    },
+    "easy_sea_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "Shell Garden",
+      "scene": "garden",
+      "text": "The cove is filled with tiny shells arranged in a spiral. You add one shell of your own and watch the tide turn the pattern into a shining picture."
+    },
+    "easy_stars_d2_ra0a0_2_side": {
+      "text": "A tiny comet zips past your shoulder and leaves a trail of blue sparkles. The sparkles form a little door in the air.",
+      "choices": [
+        {
+          "text": "Comet Door",
+          "next": "easy_stars_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "Cloud Observatory",
+          "next": "easy_stars_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "easy_stars_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "Comet Door",
+      "scene": "garden",
+      "text": "The door opens onto a garden floating beside a moon. You plant one glowing seed, and it becomes a new star-shaped flower."
+    },
+    "easy_stars_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "Cloud Observatory",
+      "scene": "map",
+      "text": "The comet carries you to a soft cloud where you can see the whole storybook below. You wave to the library and mark the view on your map."
+    },
+    "easy_stars_d2_ra0b1_9_side": {
+      "text": "A tiny comet zips past your shoulder and leaves a trail of blue sparkles. The sparkles form a little door in the air.",
+      "choices": [
+        {
+          "text": "Comet Door",
+          "next": "easy_stars_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "Cloud Observatory",
+          "next": "easy_stars_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "easy_stars_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "Comet Door",
+      "scene": "garden",
+      "text": "The door opens onto a garden floating beside a moon. You plant one glowing seed, and it becomes a new star-shaped flower."
+    },
+    "easy_stars_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "Cloud Observatory",
+      "scene": "map",
+      "text": "The comet carries you to a soft cloud where you can see the whole storybook below. You wave to the library and mark the view on your map."
+    },
+    "medium_forest_d2_ra0a0_2_side": {
+      "text": "Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.",
+      "choices": [
+        {
+          "text": "The Firefly Grove",
+          "next": "medium_forest_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Night Guide",
+          "next": "medium_forest_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "medium_forest_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Firefly Grove",
+      "scene": "garden",
+      "text": "The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate."
+    },
+    "medium_forest_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Night Guide",
+      "scene": "map",
+      "text": "One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess."
+    },
+    "medium_forest_d2_ra0b1_9_side": {
+      "text": "Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.",
+      "choices": [
+        {
+          "text": "The Firefly Grove",
+          "next": "medium_forest_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "The Night Guide",
+          "next": "medium_forest_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "medium_forest_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "The Firefly Grove",
+      "scene": "garden",
+      "text": "The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate."
+    },
+    "medium_forest_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "The Night Guide",
+      "scene": "map",
+      "text": "One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess."
+    },
+    "medium_forest_d2_rb1a0_17_side": {
+      "text": "Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.",
+      "choices": [
+        {
+          "text": "The Firefly Grove",
+          "next": "medium_forest_d2_rb1a0_17_side_a"
+        },
+        {
+          "text": "The Night Guide",
+          "next": "medium_forest_d2_rb1a0_17_side_b"
+        }
+      ]
+    },
+    "medium_forest_d2_rb1a0_17_side_a": {
+      "ending": true,
+      "title": "The Firefly Grove",
+      "scene": "garden",
+      "text": "The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate."
+    },
+    "medium_forest_d2_rb1a0_17_side_b": {
+      "ending": true,
+      "title": "The Night Guide",
+      "scene": "map",
+      "text": "One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess."
+    },
+    "medium_castle_d2_ra0a0_2_side": {
+      "text": "A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.",
+      "choices": [
+        {
+          "text": "The Keeper’s Pantry",
+          "next": "medium_castle_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Hidden Stair",
+          "next": "medium_castle_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "medium_castle_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Keeper’s Pantry",
+      "scene": "feast",
+      "text": "You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor."
+    },
+    "medium_castle_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Hidden Stair",
+      "scene": "map",
+      "text": "The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map."
+    },
+    "medium_castle_d2_ra0b1_9_side": {
+      "text": "A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.",
+      "choices": [
+        {
+          "text": "The Keeper’s Pantry",
+          "next": "medium_castle_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "The Hidden Stair",
+          "next": "medium_castle_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "medium_castle_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "The Keeper’s Pantry",
+      "scene": "feast",
+      "text": "You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor."
+    },
+    "medium_castle_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "The Hidden Stair",
+      "scene": "map",
+      "text": "The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map."
+    },
+    "medium_castle_d2_rb1a0_17_side": {
+      "text": "A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.",
+      "choices": [
+        {
+          "text": "The Keeper’s Pantry",
+          "next": "medium_castle_d2_rb1a0_17_side_a"
+        },
+        {
+          "text": "The Hidden Stair",
+          "next": "medium_castle_d2_rb1a0_17_side_b"
+        }
+      ]
+    },
+    "medium_castle_d2_rb1a0_17_side_a": {
+      "ending": true,
+      "title": "The Keeper’s Pantry",
+      "scene": "feast",
+      "text": "You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor."
+    },
+    "medium_castle_d2_rb1a0_17_side_b": {
+      "ending": true,
+      "title": "The Hidden Stair",
+      "scene": "map",
+      "text": "The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map."
+    },
+    "medium_sea_d2_ra0a0_2_side": {
+      "text": "The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.",
+      "choices": [
+        {
+          "text": "The Tide Garden",
+          "next": "medium_sea_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Sailor’s Marker",
+          "next": "medium_sea_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "medium_sea_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Tide Garden",
+      "scene": "garden",
+      "text": "The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom."
+    },
+    "medium_sea_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Sailor’s Marker",
+      "scene": "bridge",
+      "text": "You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find."
+    },
+    "medium_sea_d2_ra0b1_9_side": {
+      "text": "The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.",
+      "choices": [
+        {
+          "text": "The Tide Garden",
+          "next": "medium_sea_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "The Sailor’s Marker",
+          "next": "medium_sea_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "medium_sea_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "The Tide Garden",
+      "scene": "garden",
+      "text": "The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom."
+    },
+    "medium_sea_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "The Sailor’s Marker",
+      "scene": "bridge",
+      "text": "You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find."
+    },
+    "medium_sea_d2_rb1a0_17_side": {
+      "text": "The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.",
+      "choices": [
+        {
+          "text": "The Tide Garden",
+          "next": "medium_sea_d2_rb1a0_17_side_a"
+        },
+        {
+          "text": "The Sailor’s Marker",
+          "next": "medium_sea_d2_rb1a0_17_side_b"
+        }
+      ]
+    },
+    "medium_sea_d2_rb1a0_17_side_a": {
+      "ending": true,
+      "title": "The Tide Garden",
+      "scene": "garden",
+      "text": "The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom."
+    },
+    "medium_sea_d2_rb1a0_17_side_b": {
+      "ending": true,
+      "title": "The Sailor’s Marker",
+      "scene": "bridge",
+      "text": "You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find."
+    },
+    "medium_stars_d2_ra0a0_2_side": {
+      "text": "A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.",
+      "choices": [
+        {
+          "text": "The Signal Garden",
+          "next": "medium_stars_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Orbit Map",
+          "next": "medium_stars_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "medium_stars_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Signal Garden",
+      "scene": "garden",
+      "text": "The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message."
+    },
+    "medium_stars_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Orbit Map",
+      "scene": "map",
+      "text": "The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home."
+    },
+    "medium_stars_d2_ra0b1_9_side": {
+      "text": "A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.",
+      "choices": [
+        {
+          "text": "The Signal Garden",
+          "next": "medium_stars_d2_ra0b1_9_side_a"
+        },
+        {
+          "text": "The Orbit Map",
+          "next": "medium_stars_d2_ra0b1_9_side_b"
+        }
+      ]
+    },
+    "medium_stars_d2_ra0b1_9_side_a": {
+      "ending": true,
+      "title": "The Signal Garden",
+      "scene": "garden",
+      "text": "The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message."
+    },
+    "medium_stars_d2_ra0b1_9_side_b": {
+      "ending": true,
+      "title": "The Orbit Map",
+      "scene": "map",
+      "text": "The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home."
+    },
+    "medium_stars_d2_rb1a0_17_side": {
+      "text": "A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.",
+      "choices": [
+        {
+          "text": "The Signal Garden",
+          "next": "medium_stars_d2_rb1a0_17_side_a"
+        },
+        {
+          "text": "The Orbit Map",
+          "next": "medium_stars_d2_rb1a0_17_side_b"
+        }
+      ]
+    },
+    "medium_stars_d2_rb1a0_17_side_a": {
+      "ending": true,
+      "title": "The Signal Garden",
+      "scene": "garden",
+      "text": "The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message."
+    },
+    "medium_stars_d2_rb1a0_17_side_b": {
+      "ending": true,
+      "title": "The Orbit Map",
+      "scene": "map",
+      "text": "The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home."
+    },
+    "hard_forest_d2_ra0a0_2_side": {
+      "text": "A narrow strip of bark bears a list of names and dates. It seems to be a record of everyone who has helped the woods, and one empty line waits for your choice.",
+      "choices": [
+        {
+          "text": "The Forest Ledger",
+          "next": "hard_forest_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Unmarked Grove",
+          "next": "hard_forest_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "hard_forest_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Forest Ledger",
+      "scene": "library_return",
+      "text": "You add the truth about what you discovered rather than taking credit for everything. The ancient trees rustle in approval, and the ledger becomes a little more complete."
+    },
+    "hard_forest_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Unmarked Grove",
+      "scene": "map",
+      "text": "The ledger points toward a grove missing from every map. You find it thriving quietly beyond the known trail and leave its location for careful explorers to discover later."
+    },
+    "hard_forest_d2_ra0b1_12_side": {
+      "text": "A narrow strip of bark bears a list of names and dates. It seems to be a record of everyone who has helped the woods, and one empty line waits for your choice.",
+      "choices": [
+        {
+          "text": "The Forest Ledger",
+          "next": "hard_forest_d2_ra0b1_12_side_a"
+        },
+        {
+          "text": "The Unmarked Grove",
+          "next": "hard_forest_d2_ra0b1_12_side_b"
+        }
+      ]
+    },
+    "hard_forest_d2_ra0b1_12_side_a": {
+      "ending": true,
+      "title": "The Forest Ledger",
+      "scene": "library_return",
+      "text": "You add the truth about what you discovered rather than taking credit for everything. The ancient trees rustle in approval, and the ledger becomes a little more complete."
+    },
+    "hard_forest_d2_ra0b1_12_side_b": {
+      "ending": true,
+      "title": "The Unmarked Grove",
+      "scene": "map",
+      "text": "The ledger points toward a grove missing from every map. You find it thriving quietly beyond the known trail and leave its location for careful explorers to discover later."
+    },
+    "hard_castle_d2_ra0a0_2_side": {
+      "text": "A draft carries the smell of dust and cedar from a passage used by cooks, messengers, and librarians long ago. Its walls are covered with small notes about the castle’s daily life.",
+      "choices": [
+        {
+          "text": "The Service Chronicle",
+          "next": "hard_castle_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Overlook",
+          "next": "hard_castle_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "hard_castle_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Service Chronicle",
+      "scene": "library_return",
+      "text": "You piece together the notes and realise the castle was kept running by hundreds of small acts of care. You preserve the record in the library archive."
+    },
+    "hard_castle_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Overlook",
+      "scene": "map",
+      "text": "The passage ends at an overlook above the whole keep. From there, you understand why the corridors were built as they were and sketch the design for future readers."
+    },
+    "hard_castle_d2_ra0b1_12_side": {
+      "text": "A draft carries the smell of dust and cedar from a passage used by cooks, messengers, and librarians long ago. Its walls are covered with small notes about the castle’s daily life.",
+      "choices": [
+        {
+          "text": "The Service Chronicle",
+          "next": "hard_castle_d2_ra0b1_12_side_a"
+        },
+        {
+          "text": "The Overlook",
+          "next": "hard_castle_d2_ra0b1_12_side_b"
+        }
+      ]
+    },
+    "hard_castle_d2_ra0b1_12_side_a": {
+      "ending": true,
+      "title": "The Service Chronicle",
+      "scene": "library_return",
+      "text": "You piece together the notes and realise the castle was kept running by hundreds of small acts of care. You preserve the record in the library archive."
+    },
+    "hard_castle_d2_ra0b1_12_side_b": {
+      "ending": true,
+      "title": "The Overlook",
+      "scene": "map",
+      "text": "The passage ends at an overlook above the whole keep. From there, you understand why the corridors were built as they were and sketch the design for future readers."
+    },
+    "hard_sea_d2_ra0a0_2_side": {
+      "text": "A faded chart has been scratched into a piece of driftwood. Its currents do not match the modern harbor, suggesting the coastline has changed over time.",
+      "choices": [
+        {
+          "text": "The Changing Coast",
+          "next": "hard_sea_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Deepwater Bell",
+          "next": "hard_sea_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "hard_sea_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Changing Coast",
+      "scene": "map",
+      "text": "You compare the old chart with what you can see and realise the sea has quietly redrawn the shore. Your careful notes become a valuable addition to the library’s maps."
+    },
+    "hard_sea_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Deepwater Bell",
+      "scene": "ocean_boat",
+      "text": "The old current leads you to a bell beneath the surface. Its sound marks a safe channel, and you learn that the best clues are sometimes heard rather than seen."
+    },
+    "hard_sea_d2_ra0b1_12_side": {
+      "text": "A faded chart has been scratched into a piece of driftwood. Its currents do not match the modern harbor, suggesting the coastline has changed over time.",
+      "choices": [
+        {
+          "text": "The Changing Coast",
+          "next": "hard_sea_d2_ra0b1_12_side_a"
+        },
+        {
+          "text": "The Deepwater Bell",
+          "next": "hard_sea_d2_ra0b1_12_side_b"
+        }
+      ]
+    },
+    "hard_sea_d2_ra0b1_12_side_a": {
+      "ending": true,
+      "title": "The Changing Coast",
+      "scene": "map",
+      "text": "You compare the old chart with what you can see and realise the sea has quietly redrawn the shore. Your careful notes become a valuable addition to the library’s maps."
+    },
+    "hard_sea_d2_ra0b1_12_side_b": {
+      "ending": true,
+      "title": "The Deepwater Bell",
+      "scene": "ocean_boat",
+      "text": "The old current leads you to a bell beneath the surface. Its sound marks a safe channel, and you learn that the best clues are sometimes heard rather than seen."
+    },
+    "hard_stars_d2_ra0a0_2_side": {
+      "text": "The signal has no sound, yet its rhythm is unmistakable. You compare it with the patterns you have already seen and realise it is describing a route rather than a destination.",
+      "choices": [
+        {
+          "text": "The Patient Observatory",
+          "next": "hard_stars_d2_ra0a0_2_side_a"
+        },
+        {
+          "text": "The Unfinished Chart",
+          "next": "hard_stars_d2_ra0a0_2_side_b"
+        }
+      ]
+    },
+    "hard_stars_d2_ra0a0_2_side_a": {
+      "ending": true,
+      "title": "The Patient Observatory",
+      "scene": "wizard",
+      "text": "You follow the route to an observatory that has been waiting for someone willing to look closely. Inside, you learn that some discoveries arrive only after patience."
+    },
+    "hard_stars_d2_ra0a0_2_side_b": {
+      "ending": true,
+      "title": "The Unfinished Chart",
+      "scene": "map",
+      "text": "The signal reveals a map with three missing sections. You resist the urge to invent them, record what is known, and leave the blank spaces for future explorers."
+    },
+    "hard_stars_d2_ra0b1_12_side": {
+      "text": "The signal has no sound, yet its rhythm is unmistakable. You compare it with the patterns you have already seen and realise it is describing a route rather than a destination.",
+      "choices": [
+        {
+          "text": "The Patient Observatory",
+          "next": "hard_stars_d2_ra0b1_12_side_a"
+        },
+        {
+          "text": "The Unfinished Chart",
+          "next": "hard_stars_d2_ra0b1_12_side_b"
+        }
+      ]
+    },
+    "hard_stars_d2_ra0b1_12_side_a": {
+      "ending": true,
+      "title": "The Patient Observatory",
+      "scene": "wizard",
+      "text": "You follow the route to an observatory that has been waiting for someone willing to look closely. Inside, you learn that some discoveries arrive only after patience."
+    },
+    "hard_stars_d2_ra0b1_12_side_b": {
+      "ending": true,
+      "title": "The Unfinished Chart",
+      "scene": "map",
+      "text": "The signal reveals a map with three missing sections. You resist the urge to invent them, record what is known, and leave the blank spaces for future explorers."
     }
   }
 };
