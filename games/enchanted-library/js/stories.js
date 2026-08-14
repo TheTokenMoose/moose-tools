@@ -1,4 +1,4 @@
-{
+window.ENCHANTED_STORIES = {
   "title": "The Enchanted Library",
   "subtitle": "A choose-your-own-adventure book",
   "levels": {
@@ -2027,4 +2027,4 @@
       ]
     }
   }
-}
+};
