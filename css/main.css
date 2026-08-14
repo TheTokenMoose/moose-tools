@@ -1135,3 +1135,24 @@ a:focus:not(:focus-visible) {
 }
 .todo-show-fab:hover { filter: brightness(1.08); }
 .todo-show-fab[hidden] { display: none !important; }
+
+
+/* Learning skill tags on game cards */
+.card-skills {
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.card-skills li {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: var(--fill-accent-soft, rgba(127, 127, 127, 0.12));
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}

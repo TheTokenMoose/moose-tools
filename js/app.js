@@ -47,10 +47,13 @@ function createCard(project) {
     </div>
     <div class="card-body">
       <h3 class="card-title">${escapeHtml(project.title)}</h3>
-      <p class="card-category">${escapeHtml(project.category)}</p>
+      <p class="card-category">${escapeHtml(project.subject || project.category)}${project.type === "game" && project.category ? ` · ${escapeHtml(project.category)}` : ""}</p>
       <p class="card-desc">${escapeHtml(project.description)}</p>
+      ${Array.isArray(project.skills) && project.skills.length
+        ? `<ul class="card-skills">${project.skills.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ul>`
+        : ""}
       <div class="card-actions">
-        <a href="${project.playUrl}" class="btn btn-primary" target="_blank" rel="noopener" aria-label="${actionAria}">
+        <a href="${project.playUrl}" class="btn btn-primary" aria-label="${actionAria}">
           ${actionLabel}
         </a>
         ${project.installable ? `
@@ -200,13 +203,18 @@ function setupSearchAndFilter(options = {}) {
     // Search
     if (currentQuery.trim()) {
       const q = currentQuery.trim().toLowerCase();
-      list = list.filter(
-        (p) =>
+      list = list.filter((p) => {
+        const skills = Array.isArray(p.skills) ? p.skills.join(" ").toLowerCase() : "";
+        const subject = (p.subject || "").toLowerCase();
+        return (
           p.title.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||
           p.category.toLowerCase().includes(q) ||
-          p.type.toLowerCase().includes(q)
-      );
+          p.type.toLowerCase().includes(q) ||
+          subject.includes(q) ||
+          skills.includes(q)
+        );
+      });
     }
 
     renderProjects(list, grid);
@@ -298,12 +306,17 @@ function initPage() {
         const q = searchInput.value.trim().toLowerCase();
         let list = getFavoriteProjects();
         if (q) {
-          list = list.filter(
-            (p) =>
+          list = list.filter((p) => {
+            const skills = Array.isArray(p.skills) ? p.skills.join(" ").toLowerCase() : "";
+            const subject = (p.subject || "").toLowerCase();
+            return (
               p.title.toLowerCase().includes(q) ||
               p.description.toLowerCase().includes(q) ||
-              p.category.toLowerCase().includes(q)
-          );
+              p.category.toLowerCase().includes(q) ||
+              subject.includes(q) ||
+              skills.includes(q)
+            );
+          });
         }
         renderProjects(list, grid);
         // Keep empty state accurate only when no search

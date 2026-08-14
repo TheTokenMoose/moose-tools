@@ -9,7 +9,7 @@
  * Bump CACHE_NAME when you change this file or want a hard cache wipe.
  */
 
-const CACHE_NAME = "token-moose-v40";
+const CACHE_NAME = "token-moose-v43";
 
 const PRECACHE_URLS = [
   "./js/voice.js",
