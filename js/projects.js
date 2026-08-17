@@ -19,7 +19,7 @@ const PROJECTS = [
     subject: "Math",
     skills: ["Addition", "Subtraction", "Multiplication", "Fluency", "Timed practice"],
     category: "Education",
-    screenshot: "assets/screenshots/candy-math.png",
+    screenshot: "assets/screenshots/candy-math.jpg",
     playUrl: "games/candy-math/",
     installable: true,
     featured: true
@@ -33,7 +33,7 @@ const PROJECTS = [
     subject: "Literacy",
     skills: ["Reading comprehension", "Choice & consequence", "Vocabulary in context", "Listening (TTS)", "Differentiated levels"],
     category: "Education",
-    screenshot: "assets/screenshots/enchanted-library.png",
+    screenshot: "assets/screenshots/enchanted-library.jpg",
     playUrl: "games/enchanted-library/",
     installable: true,
     featured: true
@@ -47,7 +47,7 @@ const PROJECTS = [
     subject: "Literacy",
     skills: ["Spelling", "Word recognition", "Letter patterns", "Partner / hot-seat", "Vocabulary"],
     category: "Education",
-    screenshot: "assets/screenshots/build-a-snowman.png",
+    screenshot: "assets/screenshots/build-a-snowman.jpg",
     playUrl: "games/build-a-snowman/",
     installable: true,
     featured: true
@@ -61,7 +61,7 @@ const PROJECTS = [
     subject: "Mixed review",
     skills: ["Whole-class review", "Oral response", "Team collaboration", "Listening", "Grade-banded content"],
     category: "Education",
-    screenshot: "assets/screenshots/comet-clash.png",
+    screenshot: "assets/screenshots/comet-clash.jpg",
     playUrl: "games/comet-clash/",
     installable: true,
     featured: true
@@ -75,7 +75,7 @@ const PROJECTS = [
     subject: "Phonics / Literacy",
     skills: ["Letter recognition", "Alphabet knowledge", "Visual scanning", "Early phonics", "Fine motor / touch"],
     category: "Education",
-    screenshot: "assets/screenshots/alphabet-hunt.png",
+    screenshot: "assets/screenshots/alphabet-hunt.jpg",
     playUrl: "games/alphabet-hunt/",
     installable: true,
     featured: true
@@ -89,7 +89,7 @@ const PROJECTS = [
     subject: "Physical / Computing play",
     skills: ["Timing", "Cause & effect", "Hand–eye coordination", "Persistence", "One-button accessibility"],
     category: "Action",
-    screenshot: "assets/screenshots/one-button-hero.png",
+    screenshot: "assets/screenshots/one-button-hero.jpg",
     playUrl: "games/one-button-hero/",
     installable: true,
     featured: false
@@ -103,7 +103,7 @@ const PROJECTS = [
     subject: "Phonics",
     skills: ["Letter–sound correspondence", "Phonemic awareness", "Listening", "Visual discrimination", "Stamina / timed practice"],
     category: "Education",
-    screenshot: "assets/screenshots/phonics-pairing-quest.png",
+    screenshot: "assets/screenshots/phonics-pairing-quest.jpg",
     playUrl: "games/phonics-pairing-quest/",
     installable: true,
     featured: true
@@ -117,7 +117,7 @@ const PROJECTS = [
     subject: "IB PYP / SEL",
     skills: ["Learner Profile", "Social awareness", "Vocabulary (traits)", "Decision making", "ESL oral language"],
     category: "Education",
-    screenshot: "assets/screenshots/ib-little-explorers.png",
+    screenshot: "assets/screenshots/ib-little-explorers.jpg",
     playUrl: "games/ib-little-explorers/",
     installable: true,
     featured: true
@@ -131,7 +131,7 @@ const PROJECTS = [
     subject: "Literacy / Writing",
     skills: ["Sentence structure", "Word order", "Reading fluency", "Grammar in context", "ESL frames"],
     category: "Education",
-    screenshot: "assets/screenshots/sentence-forge.png",
+    screenshot: "assets/screenshots/sentence-forge.jpg",
     playUrl: "games/sentence-forge/",
     installable: true,
     featured: true
@@ -145,7 +145,7 @@ const PROJECTS = [
     subject: "Literacy",
     skills: ["Oral reading", "Rhyming", "Turn-taking", "IB language", "Small-group collaboration"],
     category: "Education",
-    screenshot: "assets/screenshots/reading-rally.png",
+    screenshot: "assets/screenshots/reading-rally.jpg",
     playUrl: "games/reading-rally/",
     installable: true,
     featured: true
@@ -159,7 +159,7 @@ const PROJECTS = [
     subject: "Literacy",
     skills: ["Story sequencing", "Retelling", "Reading order", "Listening to stories", "Logical order"],
     category: "Education",
-    screenshot: "assets/screenshots/story-sequence.png",
+    screenshot: "assets/screenshots/story-sequence.jpg",
     playUrl: "games/story-sequence/",
     installable: true,
     featured: true
@@ -173,7 +173,7 @@ const PROJECTS = [
     subject: "Inquiry / Oral language",
     skills: ["Questioning", "Deduction", "Categories", "Yes/no language", "Listening"],
     category: "Education",
-    screenshot: "assets/screenshots/twenty-questions.png",
+    screenshot: "assets/screenshots/twenty-questions.jpg",
     playUrl: "games/twenty-questions/",
     installable: true,
     featured: true
@@ -187,7 +187,7 @@ const PROJECTS = [
     subject: "Literacy / Spelling",
     skills: ["Spelling", "Visual discrimination", "Vocabulary", "Encoding", "Attention"],
     category: "Education",
-    screenshot: "assets/screenshots/i-spy-spelling.png",
+    screenshot: "assets/screenshots/i-spy-spelling.jpg",
     playUrl: "games/i-spy-spelling/",
     installable: true,
     featured: true
@@ -201,7 +201,7 @@ const PROJECTS = [
     description:
       "TCRWP-style writing workshop companion for elementary classrooms. Three boards: Fantasy narrative (Who / What / Where story sparks), How-to procedural writing (topics + sequence step frames), and Opinion/Persuasive (claim, audience, reasons, evidence stems). Use during mini-lessons, independent writing, or share. Soft pastel visuals with emoji reading cues. Not affiliated with Teachers College.",
     category: "Classroom",
-    screenshot: "assets/screenshots/writing-workshop-spark.png",
+    screenshot: "assets/screenshots/writing-workshop-spark.jpg",
     playUrl: "tools/writing-workshop-spark/",
     installable: true,
     featured: true
@@ -212,7 +212,7 @@ const PROJECTS = [
     type: "tool",
     description: "Estimate take-home pay and costs for teaching in China. Local-only calculations for planning conversations.",
     category: "Planning",
-    screenshot: "assets/screenshots/china-expat-salary-planner.png",
+    screenshot: "assets/screenshots/china-expat-salary-planner.jpg",
     playUrl: "tools/china-expat-salary-planner/",
     installable: true,
     featured: false
@@ -223,7 +223,7 @@ const PROJECTS = [
     type: "tool",
     description: "Paste a class list and spin to pick a student. Standard spin or spin-and-remove so everyone gets a turn.",
     category: "Classroom",
-    screenshot: "assets/screenshots/name-spin-wheel.png",
+    screenshot: "assets/screenshots/name-spin-wheel.jpg",
     playUrl: "tools/name-spin-wheel/",
     installable: true,
     featured: true
@@ -234,7 +234,7 @@ const PROJECTS = [
     type: "tool",
     description: "Split a class list into fruit-coloured groups, then drag-and-drop to fine-tune partnerships or table groups.",
     category: "Classroom",
-    screenshot: "assets/screenshots/partner-picker.png",
+    screenshot: "assets/screenshots/partner-picker.jpg",
     playUrl: "tools/partner-picker/",
     installable: true,
     featured: true
@@ -245,7 +245,7 @@ const PROJECTS = [
     type: "tool",
     description: "Noise-meter calm-down game: stay quiet or the gorilla steals the banana. Mic sensitivity and teacher-set timers.",
     category: "Classroom",
-    screenshot: "assets/screenshots/the-quiet-game.png",
+    screenshot: "assets/screenshots/the-quiet-game.jpg",
     playUrl: "tools/the-quiet-game/",
     installable: true,
     featured: true
@@ -256,7 +256,7 @@ const PROJECTS = [
     type: "tool",
     description: "Goal-based visual timers: Focus, Pair work, Clean up, Transition, Write time — plus Bomb Time with a burning fuse.",
     category: "Classroom",
-    screenshot: "assets/screenshots/classroom-timer.png",
+    screenshot: "assets/screenshots/classroom-timer.jpg",
     playUrl: "tools/classroom-timer/",
     installable: true,
     featured: true
@@ -267,7 +267,7 @@ const PROJECTS = [
     type: "tool",
     description: "Quick teacher reference for transdisciplinary themes, ATLs, Learner Profile, key concepts, inquiry, agency, and action.",
     category: "Classroom",
-    screenshot: "assets/screenshots/ib-pyp-guide.png",
+    screenshot: "assets/screenshots/ib-pyp-guide.jpg",
     playUrl: "tools/ib-pyp-guide/",
     installable: true,
     featured: true
@@ -278,7 +278,7 @@ const PROJECTS = [
     type: "tool",
     description: "Create exit tickets from templates, project a live classroom display, or print student copies (1–6 per page).",
     category: "Classroom",
-    screenshot: "assets/screenshots/exit-ticket-maker.png",
+    screenshot: "assets/screenshots/exit-ticket-maker.jpg",
     playUrl: "tools/exit-ticket-maker/",
     installable: true,
     featured: true
