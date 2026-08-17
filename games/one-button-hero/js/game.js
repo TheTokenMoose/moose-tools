@@ -101,7 +101,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 700,
+        "patrolStart": 702,
         "patrolEnd": 880,
         "type": "patrol"
       }
@@ -223,18 +223,18 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1.2,
-        "patrolStart": 800,
+        "patrolStart": 802,
         "patrolEnd": 930,
         "type": "patrol"
       },
       {
         "x": 1400,
-        "y": 318,
+        "y": 268,
         "w": 24,
         "h": 32,
         "vx": -1,
-        "patrolStart": 1350,
-        "patrolEnd": 1530,
+        "patrolStart": 1352,
+        "patrolEnd": 1448,
         "type": "patrol"
       }
     ],
@@ -395,8 +395,8 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 400,
-        "patrolEnd": 550,
+        "patrolStart": 402,
+        "patrolEnd": 548,
         "type": "patrol"
       },
       {
@@ -405,7 +405,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1.5,
-        "patrolStart": 1200,
+        "patrolStart": 1202,
         "patrolEnd": 1380,
         "type": "patrol"
       }
@@ -575,11 +575,11 @@ const LEVELS = [
       },
       {
         "x": 1000,
-        "y": 180,
+        "y": 168,
         "w": 24,
         "h": 24,
         "vx": 0,
-        "baseY": 180,
+        "baseY": 168,
         "amp": 50,
         "type": "floater"
       },
@@ -589,7 +589,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1.2,
-        "patrolStart": 1350,
+        "patrolStart": 1352,
         "patrolEnd": 1620,
         "type": "patrol"
       }
@@ -735,7 +735,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 750,
+        "patrolStart": 752,
         "patrolEnd": 930,
         "type": "jumper"
       },
@@ -745,7 +745,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": -1.2,
-        "patrolStart": 1200,
+        "patrolStart": 1202,
         "patrolEnd": 1330,
         "type": "jumper"
       },
@@ -755,7 +755,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 500,
+        "patrolStart": 502,
         "patrolEnd": 630,
         "type": "patrol"
       }
@@ -895,7 +895,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 350,
+        "patrolStart": 352,
         "patrolEnd": 480,
         "type": "chaser"
       },
@@ -905,7 +905,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 1100,
+        "patrolStart": 1102,
         "patrolEnd": 1270,
         "type": "chaser"
       },
@@ -915,7 +915,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 600,
+        "patrolStart": 602,
         "patrolEnd": 780,
         "type": "patrol"
       }
@@ -1079,21 +1079,21 @@ const LEVELS = [
     "enemies": [
       {
         "x": 750,
-        "y": 200,
+        "y": 178,
         "w": 24,
         "h": 24,
         "vx": 0,
-        "baseY": 200,
+        "baseY": 178,
         "amp": 30,
         "type": "floater"
       },
       {
         "x": 1200,
-        "y": 210,
+        "y": 183,
         "w": 24,
         "h": 24,
         "vx": 0,
-        "baseY": 210,
+        "baseY": 183,
         "amp": 35,
         "type": "floater"
       },
@@ -1103,7 +1103,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 600,
+        "patrolStart": 602,
         "patrolEnd": 730,
         "type": "chaser"
       },
@@ -1113,7 +1113,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 1050,
+        "patrolStart": 1052,
         "patrolEnd": 1230,
         "type": "chaser"
       }
@@ -1285,7 +1285,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 820,
+        "patrolStart": 822,
         "patrolEnd": 900,
         "type": "jumper"
       },
@@ -1295,7 +1295,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1.2,
-        "patrolStart": 320,
+        "patrolStart": 322,
         "patrolEnd": 500,
         "type": "patrol"
       },
@@ -1305,7 +1305,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": -1,
-        "patrolStart": 600,
+        "patrolStart": 602,
         "patrolEnd": 780,
         "type": "patrol"
       },
@@ -1315,7 +1315,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 900,
+        "patrolStart": 902,
         "patrolEnd": 1080,
         "type": "patrol"
       }
@@ -1501,17 +1501,17 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 480,
+        "patrolStart": 482,
         "patrolEnd": 610,
         "type": "patrol"
       },
       {
         "x": 600,
-        "y": 250,
+        "y": 108,
         "w": 24,
         "h": 24,
         "vx": 0,
-        "baseY": 250,
+        "baseY": 108,
         "amp": 40,
         "type": "floater"
       },
@@ -1521,7 +1521,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 850,
+        "patrolStart": 852,
         "patrolEnd": 930,
         "type": "jumper"
       },
@@ -1531,7 +1531,7 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 1350,
+        "patrolStart": 1352,
         "patrolEnd": 1480,
         "type": "chaser"
       }
@@ -1707,17 +1707,17 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1.5,
-        "patrolStart": 650,
+        "patrolStart": 652,
         "patrolEnd": 780,
         "type": "patrol"
       },
       {
         "x": 950,
-        "y": 240,
+        "y": 213,
         "w": 24,
         "h": 24,
         "vx": 0,
-        "baseY": 240,
+        "baseY": 213,
         "amp": 35,
         "type": "floater"
       },
@@ -1727,17 +1727,17 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": -1.2,
-        "patrolStart": 1100,
+        "patrolStart": 1102,
         "patrolEnd": 1230,
         "type": "jumper"
       },
       {
-        "x": 1600,
+        "x": 1596,
         "y": 218,
         "w": 24,
         "h": 32,
         "vx": 0,
-        "patrolStart": 1550,
+        "patrolStart": 1552,
         "patrolEnd": 1620,
         "type": "chaser"
       },
@@ -1747,8 +1747,8 @@ const LEVELS = [
         "w": 24,
         "h": 32,
         "vx": 1,
-        "patrolStart": 1950,
-        "patrolEnd": 2120,
+        "patrolStart": 1952,
+        "patrolEnd": 2048,
         "type": "patrol"
       }
     ],
@@ -2381,22 +2381,8 @@ class Game {
       const etype = e.type || "patrol";
       e.animTimer = (e.animTimer || 0) + 1;
 
-      if (etype === "patrol") {
-        e.x += e.vx;
-        if (e.x <= e.patrolStart || e.x + e.w >= e.patrolEnd) e.vx *= -1;
-      } else if (etype === "floater") {
-        e.phase = (e.phase || 0) + 0.04;
-        e.y = e.baseY + Math.sin(e.phase) * (e.amp || 40);
-      } else if (etype === "jumper") {
-        e.x += e.vx;
-        if (e.x <= e.patrolStart || e.x + e.w >= e.patrolEnd) e.vx *= -1;
-        e.jumpTimer = (e.jumpTimer || 0) + 1;
-        if (e.onGround && e.jumpTimer > 90) {
-          e.vy = -10;
-          e.jumpTimer = 0;
-          e.onGround = false;
-        }
-        e.vy += GRAVITY;
+      const applyGroundPhysics = () => {
+        e.vy = (e.vy || 0) + GRAVITY;
         e.y += e.vy;
         e.onGround = false;
         for (const p of this.platforms) {
@@ -2404,7 +2390,8 @@ class Game {
             e.x < p.x + p.w &&
             e.x + e.w > p.x &&
             e.y + e.h >= p.y &&
-            e.y + e.h - e.vy <= p.y + 5
+            e.y + e.h - e.vy <= p.y + 6 &&
+            e.vy >= 0
           ) {
             e.y = p.y - e.h;
             e.vy = 0;
@@ -2412,6 +2399,34 @@ class Game {
             break;
           }
         }
+        // Turn around at patrol ends (and if about to walk off current platform)
+        if (e.patrolStart != null && e.patrolEnd != null) {
+          if (e.x <= e.patrolStart) {
+            e.x = e.patrolStart;
+            e.vx = Math.abs(e.vx || 1);
+          } else if (e.x + e.w >= e.patrolEnd) {
+            e.x = e.patrolEnd - e.w;
+            e.vx = -Math.abs(e.vx || 1);
+          }
+        }
+      };
+
+      if (etype === "patrol") {
+        e.x += e.vx || 1;
+        applyGroundPhysics();
+      } else if (etype === "floater") {
+        if (e.baseY == null) e.baseY = e.y;
+        e.phase = (e.phase || 0) + 0.04;
+        e.y = e.baseY + Math.sin(e.phase) * (e.amp || 40);
+      } else if (etype === "jumper") {
+        e.x += e.vx || 1;
+        e.jumpTimer = (e.jumpTimer || 0) + 1;
+        if (e.onGround && e.jumpTimer > 90) {
+          e.vy = -10;
+          e.jumpTimer = 0;
+          e.onGround = false;
+        }
+        applyGroundPhysics();
       } else if (etype === "chaser") {
         const distX = h.x - e.x;
         const distY = Math.abs(h.y - e.y);
@@ -2419,8 +2434,14 @@ class Game {
           e.x += distX > 0 ? 2.5 : -2.5;
         } else {
           e.x += e.vx || 0.5;
-          if (e.x <= e.patrolStart || e.x + e.w >= e.patrolEnd) e.vx = (e.vx || 0.5) * -1;
         }
+        applyGroundPhysics();
+      }
+
+      // Despawn enemies that fell off the level
+      if (e.y > DESIGN_H + 80) {
+        this.enemies.splice(i, 1);
+        continue;
       }
 
       const star = h.starTimer > 0;

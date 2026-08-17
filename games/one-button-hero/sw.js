@@ -2,7 +2,7 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="one-button-hero-v4";
+const CACHE="one-button-hero-v3";
 const ASSETS=[ "./index.html", "./css/game.css", "./js/game.js", "./manifest.webmanifest", ./pwa-install.js, ./pwa-install.css, "./sw.js", "./icons/icon-192.png", "./icons/icon-512.png" ];
 
 self.addEventListener("install", e => {
