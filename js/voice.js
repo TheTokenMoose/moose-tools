@@ -102,20 +102,49 @@
     function speak(text, speakOpts) {
       if (!enabled || !text) return null;
       const so = speakOpts || {};
-      if (global.MooseTTS && typeof global.MooseTTS.speak === "function") {
-        global.MooseTTS.speak(String(text), {
-          rate: so.rate != null ? so.rate : rate,
-        }).then(function () {
+      const r = so.rate != null ? so.rate : rate;
+
+      // Piper catalog selection stored as "piper:<id>"
+      if (selectedURI && String(selectedURI).indexOf("piper:") === 0 && global.MooseTTS) {
+        const pid = String(selectedURI).slice(6);
+        global.MooseTTS.speak(String(text), { rate: r, voiceId: pid }).then(function () {
           if (so.onend) try { so.onend(); } catch (_) {}
         }).catch(function (err) {
           if (so.onerror) try { so.onerror(err); } catch (_) {}
         });
         return { engine: "MooseTTS" };
       }
+
+      // Explicit system voice → browser engine
+      if (selectedURI && String(selectedURI).indexOf("piper:") !== 0) {
+        if (global.MooseTTS && typeof global.MooseTTS.speak === "function") {
+          global.MooseTTS.speak(String(text), {
+            rate: r,
+            engine: "browser",
+            browserVoiceURI: selectedURI,
+          }).then(function () {
+            if (so.onend) try { so.onend(); } catch (_) {}
+          }).catch(function (err) {
+            if (so.onerror) try { so.onerror(err); } catch (_) {}
+          });
+          return { engine: "browser" };
+        }
+      }
+
+      // Auto: prefer MooseTTS (Piper default + fallback)
+      if (!selectedURI && global.MooseTTS && typeof global.MooseTTS.speak === "function") {
+        global.MooseTTS.speak(String(text), { rate: r }).then(function () {
+          if (so.onend) try { so.onend(); } catch (_) {}
+        }).catch(function (err) {
+          if (so.onerror) try { so.onerror(err); } catch (_) {}
+        });
+        return { engine: "MooseTTS" };
+      }
+
       if (!global.speechSynthesis) return null;
-      global.speechSynthesis.cancel();
+      try { global.speechSynthesis.cancel(); } catch (_) {}
       const u = new SpeechSynthesisUtterance(String(text));
-      u.rate = so.rate != null ? so.rate : rate;
+      u.rate = r;
       u.pitch = so.pitch != null ? so.pitch : pitch;
       const voices = listVoices();
       const voice = resolveVoice(voices);
@@ -159,11 +188,18 @@
     }
 
     function getVoiceLabel() {
-      const voices = listVoices();
       if (!selectedURI) {
+        if (global.MooseTTS) return "Auto · Piper";
+        const voices = listVoices();
         const best = pickBest(voices.filter((v) => /^en/i.test(v.lang || "")) || voices);
         return best ? `Auto · ${shortName(best)}` : "Auto · system";
       }
+      if (String(selectedURI).indexOf("piper:") === 0) {
+        const pid = String(selectedURI).slice(6);
+        const cat = global.MooseTTSCatalog && global.MooseTTSCatalog.get(pid);
+        return cat ? (cat.label || cat.name) : pid;
+      }
+      const voices = listVoices();
       const v = findByURI(voices, selectedURI);
       return v ? shortName(v) : "Saved voice";
     }
@@ -248,10 +284,11 @@
         autoBtn.type = "button";
         autoBtn.className = "tm-voice-option" + (!selectedURI ? " is-active" : "");
         autoBtn.setAttribute("role", "option");
-        const best = pickBest(voices.filter((v) => /^en/i.test(v.lang || "")) || voices);
         autoBtn.innerHTML =
           "Auto (best available)" +
-          (best ? "<small>Currently: " + escapeHtml(shortName(best)) + "</small>" : "");
+          "<small>" +
+          (global.MooseTTS ? "Piper when ready, else browser" : "System voice") +
+          "</small>";
         autoBtn.addEventListener("click", () => {
           setVoiceURI(null);
           close();
@@ -259,9 +296,31 @@
         });
         menu.appendChild(autoBtn);
 
+        // Piper UK voices (if catalog loaded)
+        const piperList = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+        piperList.forEach((pv) => {
+          const key = "piper:" + pv.id;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "tm-voice-option" + (selectedURI === key ? " is-active" : "");
+          b.setAttribute("role", "option");
+          b.innerHTML =
+            escapeHtml(pv.label || pv.name) +
+            "<small>Piper · " +
+            escapeHtml(pv.locale || "en-GB") +
+            " · neural</small>";
+          b.addEventListener("click", () => {
+            setVoiceURI(key);
+            if (global.MooseTTS) global.MooseTTS.setVoice(pv.id);
+            close();
+            if (mo.preview !== false) speak("Hello! This is how I sound.");
+          });
+          menu.appendChild(b);
+        });
+
         const en = voices.filter((v) => /^en/i.test(v.lang || ""));
         const list = en.length ? en : voices;
-        if (!list.length) {
+        if (!list.length && !piperList.length) {
           const empty = document.createElement("div");
           empty.className = "tm-voice-empty";
           empty.textContent = "No voices found in this browser yet. Try again in a moment.";
@@ -310,7 +369,7 @@
     // Warm voices list
     ensureVoicesLoaded(() => {});
 
-    return {
+    const api = {
       appId: id,
       speak,
       stop,
@@ -323,6 +382,29 @@
       listVoices,
       ensureVoicesLoaded,
     };
+
+    // Mount into shared top-center chrome slot when present
+    function tryMountChrome() {
+      const slot = document.getElementById("tm-voice-slot");
+      if (slot && !slot.querySelector(".tm-voice-picker")) {
+        mountPicker(slot);
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(tryMountChrome, 0);
+      });
+    } else {
+      setTimeout(tryMountChrome, 0);
+    }
+    let tries = 0;
+    const iv = setInterval(function () {
+      tries += 1;
+      tryMountChrome();
+      if (tries > 25 || document.querySelector("#tm-voice-slot .tm-voice-picker")) clearInterval(iv);
+    }, 120);
+
+    return api;
   }
 
   function escapeHtml(s) {

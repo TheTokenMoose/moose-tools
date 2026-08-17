@@ -10,7 +10,7 @@
  */
 
 // Voice .onnx models: same-origin assets; copied to OPFS on first use — not SW precache.
-const CACHE_NAME = "token-moose-v52";
+const CACHE_NAME = "token-moose-v53";
 
 const PRECACHE_URLS = [
   "./js/voice.js",
@@ -19,6 +19,9 @@ const PRECACHE_URLS = [
   "./js/tts/tts-settings.js",
   "./js/tts/moose-tts.js",
   "./js/tts/voice-catalog.js",
+  "./assets/tts/runtime/voices_static-D_OtJDHM.js",
+  "./assets/tts/runtime/piper-o91UDS6e.js",
+  "./assets/tts/runtime/piper-tts-web.js",
 
 
   "./",
