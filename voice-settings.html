@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Voice settings for The Token Moose — Piper neural TTS and browser speech.">
+  <meta name="description" content="Optional voice preferences for The Token Moose.">
   <meta name="theme-color" content="#0a0b1a">
-  <title>Voice Settings — The Token Moose</title>
+  <title>Voices — The Token Moose</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
   <link rel="stylesheet" href="css/main.css">
@@ -16,9 +16,7 @@
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
-      if (t === "day" || t === "playful" || t === "night") {
-        document.documentElement.setAttribute("data-theme", t);
-      }
+      if (t === "day" || t === "playful" || t === "night") document.documentElement.setAttribute("data-theme", t);
     } catch (e) {}
   </script>
 </head>
@@ -29,9 +27,7 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <span>THE TOKEN MOOSE</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
-        <span></span>
-      </button>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
       <nav id="main-nav" class="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
         <a href="games.html">Games</a>
@@ -43,19 +39,10 @@
       <div class="theme-switcher"></div>
     </div>
   </header>
-
   <main class="site-main">
-    <section class="page-hero">
-      <h1>Voices</h1>
-      <p>Choose neural Piper voices for reading games, or keep browser speech. Downloads stay on this device.</p>
-    </section>
     <div id="moose-tts-settings"></div>
   </main>
-
-  <footer class="site-footer">
-    <p>Open source · No accounts · Speech runs in your browser</p>
-  </footer>
-
+  <footer class="site-footer"><p>Optional settings · Speech works without visiting this page</p></footer>
   <script src="js/theme.js"></script>
   <script src="js/tts/voice-catalog.js"></script>
   <script src="js/tts/moose-tts.js"></script>

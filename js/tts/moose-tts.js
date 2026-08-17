@@ -1,41 +1,39 @@
 /**
- * MooseTTS — centralized client-side TTS for The Token Moose / Moose Tools
- *
- * Preferred path: Piper (ONNX Runtime Web + piper-wasm) via @mintplex-labs/piper-tts-web
- * Fallback: browser speechSynthesis
- *
- * Models download on demand into OPFS (not localStorage, not SW precache).
- * Runtime WASM lives under assets/tts/runtime/ (same-origin, SW cacheable).
+ * MooseTTS — hands-free Piper TTS for The Token Moose
+ * Models & runtime are same-origin under assets/tts/
+ * First use copies needed files into OPFS via piper-tts-web (no Hugging Face at runtime).
  */
 (function (global) {
-  const PREFS_KEY = "token-moose-tts-prefs";
+  const PREFS_KEY = "token-moose-tts-prefs-v2";
+  const READY_KEY = "token-moose-tts-ready-v2"; // which voice ids prepared in OPFS
+  const DEFAULT_ID = () =>
+    (global.MooseTTSCatalog && global.MooseTTSCatalog.defaultId) || "en_GB-alba-medium";
 
   const defaultPrefs = {
-    engine: "auto", // auto | piper | browser
-    voiceId: "en_GB-alba-medium",
+    voiceId: null, // filled after catalog load
     rate: 1,
-    pitch: 1,
-    volume: 1,
-    enabled: true,
+    muted: false,
+    engine: "auto",
   };
 
   let prefs = loadPrefs();
   let piperMod = null;
-  let piperLoadPromise = null;
-  let currentAudio = null;
+  let preparePromise = null;
+  let audioEl = null;
   let speaking = false;
-  let speakSeq = 0;
-  const listeners = new Set();
+  let seq = 0;
+  let toastEl = null;
+  const readySet = loadReady();
 
   function siteBase() {
-    // Resolve project root for GitHub Pages /moose-tools/ and local /
-    const scripts = document.querySelectorAll("script[src*='moose-tts'],script[src*='voice.js'],script[src*='app-chrome']");
+    const scripts = document.querySelectorAll(
+      "script[src*='moose-tts'],script[src*='voice.js'],script[src*='app-chrome']"
+    );
     for (const s of scripts) {
       const src = s.getAttribute("src") || "";
       const i = src.indexOf("js/");
       if (i >= 0) return src.slice(0, i);
     }
-    // fallback from path
     const path = location.pathname;
     if (path.includes("/games/") || path.includes("/tools/")) {
       return path.replace(/\/(games|tools)\/.*$/, "/");
@@ -43,320 +41,304 @@
     return path.endsWith("/") ? path : path.replace(/\/[^/]*$/, "/");
   }
 
-  function piperModuleUrl() {
-    return siteBase() + "assets/tts/runtime/piper-tts-web.js";
-  }
-
-  function runtimePaths() {
-    const base = siteBase() + "assets/tts/runtime/";
-    return {
-      onnxWasm: base, // directory; ort looks for wasm beside ort.min.js pattern
-      piperData: base + "piper_phonemize.data",
-      piperWasm: base + "piper_phonemize.wasm",
-      ortScript: base + "ort.min.js",
-    };
+  function absUrl(rel) {
+    if (/^https?:/i.test(rel)) return rel;
+    const base = siteBase();
+    return new URL(rel.replace(/^\//, ""), location.origin + base).href;
   }
 
   function loadPrefs() {
     try {
-      const raw = localStorage.getItem(PREFS_KEY);
-      if (!raw) return { ...defaultPrefs };
-      return { ...defaultPrefs, ...JSON.parse(raw) };
+      return { ...defaultPrefs, ...JSON.parse(localStorage.getItem(PREFS_KEY) || "{}") };
     } catch (_) {
       return { ...defaultPrefs };
     }
   }
-
   function savePrefs() {
     try {
       localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
     } catch (_) {}
-    emit("prefs", prefs);
+  }
+  function loadReady() {
+    try {
+      const a = JSON.parse(localStorage.getItem(READY_KEY) || "[]");
+      return new Set(Array.isArray(a) ? a : []);
+    } catch (_) {
+      return new Set();
+    }
+  }
+  function saveReady() {
+    try {
+      localStorage.setItem(READY_KEY, JSON.stringify([...readySet]));
+    } catch (_) {}
   }
 
-  function emit(type, detail) {
-    listeners.forEach((fn) => {
+  function showToast(msg) {
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.id = "moose-tts-toast";
+      toastEl.setAttribute("role", "status");
+      toastEl.style.cssText =
+        "position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);z-index:10060;" +
+        "padding:0.55rem 1rem;border-radius:999px;font:600 0.85rem system-ui,sans-serif;" +
+        "background:rgba(20,18,40,0.9);color:#fff;border:1px solid rgba(255,255,255,0.2);" +
+        "box-shadow:0 8px 24px rgba(0,0,0,0.35);max-width:90vw;pointer-events:none;";
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+  }
+  function hideToast() {
+    if (toastEl) toastEl.hidden = true;
+  }
+
+  /** Map Hugging Face / CDN model URLs to local assets */
+  function installFetchShim() {
+    if (global.__mooseTtsFetchShim) return;
+    global.__mooseTtsFetchShim = true;
+    const orig = global.fetch.bind(global);
+    global.fetch = function (input, init) {
       try {
-        fn({ type, detail });
+        const url = typeof input === "string" ? input : input && input.url ? input.url : String(input);
+        if (/huggingface\.co|cdn\.jsdelivr\.net.*piper/i.test(url)) {
+          const cat = global.MooseTTSCatalog && global.MooseTTSCatalog.list();
+          if (cat) {
+            for (const v of cat) {
+              if (url.includes(v.id + ".onnx.json")) return orig(absUrl(v.configPath), init);
+              if (url.includes(v.id + ".onnx")) return orig(absUrl(v.modelPath), init);
+            }
+          }
+          // runtime wasm already local via wasmPaths; ignore other HF
+        }
       } catch (_) {}
-    });
-  }
-
-  function on(fn) {
-    listeners.add(fn);
-    return () => listeners.delete(fn);
-  }
-
-  function getPrefs() {
-    return { ...prefs };
-  }
-
-  function setPrefs(partial) {
-    prefs = { ...prefs, ...partial };
-    savePrefs();
-  }
-
-  async function loadPiperModule() {
-    if (piperMod) return piperMod;
-    if (piperLoadPromise) return piperLoadPromise;
-    piperLoadPromise = (async () => {
-      // Dynamic import of ESM library
-      const mod = await import(/* webpackIgnore: true */ piperModuleUrl());
-      piperMod = mod;
-      return mod;
-    })().catch((err) => {
-      piperLoadPromise = null;
-      console.warn("[MooseTTS] Piper module load failed:", err);
-      throw err;
-    });
-    return piperLoadPromise;
-  }
-
-  function piperWasmPaths() {
-    const r = runtimePaths();
-    // mintplex expects onnxWasm as base URL for ort wasm files
-    return {
-      onnxWasm: r.onnxWasm,
-      piperData: r.piperData,
-      piperWasm: r.piperWasm,
+      return orig(input, init);
     };
   }
 
-  async function storedVoiceIds() {
+  async function loadPiper() {
+    if (piperMod) return piperMod;
+    installFetchShim();
+    const url = absUrl("assets/tts/runtime/piper-tts-web.js");
+    piperMod = await import(/* webpackIgnore: true */ url);
+    return piperMod;
+  }
+
+  function wasmPaths() {
+    const base = absUrl("assets/tts/runtime/");
+    return {
+      onnxWasm: base,
+      piperData: base + "piper_phonemize.data",
+      piperWasm: base + "piper_phonemize.wasm",
+    };
+  }
+
+  function selectedId() {
+    return prefs.voiceId || DEFAULT_ID();
+  }
+
+  async function isPrepared(id) {
+    if (readySet.has(id)) return true;
     try {
-      const mod = await loadPiperModule();
-      if (mod.stored) return await mod.stored();
-    } catch (_) {}
-    return [];
-  }
-
-  async function isVoiceDownloaded(id) {
-    const list = await storedVoiceIds();
-    return list.includes(id);
-  }
-
-  async function downloadVoice(id, onProgress) {
-    const mod = await loadPiperModule();
-    if (!mod.download) throw new Error("Download not supported");
-    await mod.download(id, (p) => {
-      if (onProgress) {
-        const pct = p.total ? Math.round((p.loaded / p.total) * 100) : 0;
-        onProgress({ loaded: p.loaded, total: p.total, percent: pct, url: p.url });
+      const mod = await loadPiper();
+      const stored = (await mod.stored()) || [];
+      if (stored.includes(id)) {
+        readySet.add(id);
+        saveReady();
+        return true;
       }
-      emit("download-progress", { id, ...p });
-    });
-    emit("download-complete", { id });
-  }
-
-  async function deleteVoice(id) {
-    const mod = await loadPiperModule();
-    if (mod.remove) await mod.remove(id);
-    emit("voice-deleted", { id });
-  }
-
-  function stopBrowser() {
-    try {
-      if (global.speechSynthesis) global.speechSynthesis.cancel();
     } catch (_) {}
+    return false;
   }
 
-  function stopAudio() {
-    if (currentAudio) {
-      try {
-        currentAudio.pause();
-        currentAudio.src = "";
-      } catch (_) {}
-      currentAudio = null;
+  async function prepareVoice(id, { quiet } = {}) {
+    id = id || selectedId();
+    if (await isPrepared(id)) return true;
+    if (!quiet) showToast("Preparing Moose Tools voices…");
+    try {
+      const mod = await loadPiper();
+      // download() uses fetch — shim rewrites HF → local assets, then OPFS stores bytes
+      await mod.download(id, (p) => {
+        if (p && p.total && !quiet) {
+          const pct = Math.min(99, Math.round((p.loaded / p.total) * 100));
+          showToast("Preparing Moose Tools voices… " + pct + "%");
+        }
+      });
+      readySet.add(id);
+      saveReady();
+      if (!quiet) {
+        showToast("Voices ready");
+        setTimeout(hideToast, 1600);
+      }
+      return true;
+    } catch (err) {
+      console.warn("[MooseTTS] prepare failed", id, err);
+      hideToast();
+      return false;
     }
-    speaking = false;
+  }
+
+  /** Background: default first, then rest of catalog */
+  function startBackgroundPrepare() {
+    if (preparePromise) return preparePromise;
+    preparePromise = (async () => {
+      const def = selectedId();
+      await prepareVoice(def, { quiet: false });
+      const list = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+      for (const v of list) {
+        if (v.id === def) continue;
+        await prepareVoice(v.id, { quiet: true });
+      }
+    })().catch((e) => console.warn("[MooseTTS] background prepare", e));
+    return preparePromise;
   }
 
   function stop() {
-    speakSeq += 1;
-    stopBrowser();
-    stopAudio();
-    emit("stop");
+    seq += 1;
+    speaking = false;
+    try {
+      if (global.speechSynthesis) global.speechSynthesis.cancel();
+    } catch (_) {}
+    if (audioEl) {
+      try {
+        audioEl.pause();
+        audioEl.removeAttribute("src");
+      } catch (_) {}
+      audioEl = null;
+    }
   }
 
-  function isSpeaking() {
-    return speaking;
-  }
-
-  function browserSpeak(text, options) {
+  function browserSpeak(text, rate) {
     return new Promise((resolve, reject) => {
-      if (!global.speechSynthesis) {
-        reject(new Error("No speechSynthesis"));
-        return;
-      }
-      stopBrowser();
+      if (!global.speechSynthesis) return reject(new Error("no speechSynthesis"));
+      global.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.rate = options.rate != null ? options.rate : prefs.rate;
-      u.pitch = options.pitch != null ? options.pitch : prefs.pitch;
-      u.volume = options.volume != null ? options.volume : prefs.volume;
-      // optional system voice URI
-      if (options.browserVoiceURI) {
-        const voices = global.speechSynthesis.getVoices() || [];
-        const v = voices.find((x) => x.voiceURI === options.browserVoiceURI);
-        if (v) u.voice = v;
-      }
+      u.rate = rate;
       u.onend = () => {
         speaking = false;
         resolve();
       };
-      u.onerror = (e) => {
+      u.onerror = () => {
         speaking = false;
-        reject(e.error || e);
+        resolve();
       };
       speaking = true;
       global.speechSynthesis.speak(u);
     });
   }
 
-  async function piperSpeak(text, options) {
-    const mod = await loadPiperModule();
-    const voiceId = options.voiceId || prefs.voiceId;
-    const downloaded = await isVoiceDownloaded(voiceId);
-    if (!downloaded) {
-      throw new Error("Voice not downloaded: " + voiceId);
-    }
-
-    // predict returns Blob (wav)
-    const blob = await mod.predict(
-      { text, voiceId },
-      options.progress
-    );
-
-    stopAudio();
+  async function piperSpeak(text, voiceId, rate) {
+    const mod = await loadPiper();
+    const blob = await mod.predict({ text, voiceId });
+    stop();
     const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    currentAudio = audio;
-    audio.volume = Math.max(0, Math.min(1, options.volume != null ? options.volume : prefs.volume));
-    // rate via playbackRate
-    audio.playbackRate = Math.max(0.5, Math.min(2, options.rate != null ? options.rate : prefs.rate));
-
+    const a = new Audio(url);
+    audioEl = a;
+    a.playbackRate = Math.max(0.5, Math.min(2, rate));
     speaking = true;
-    await new Promise((resolve, reject) => {
-      audio.onended = () => {
+    await new Promise((resolve) => {
+      a.onended = () => {
         speaking = false;
         URL.revokeObjectURL(url);
         resolve();
       };
-      audio.onerror = () => {
+      a.onerror = () => {
         speaking = false;
         URL.revokeObjectURL(url);
-        reject(new Error("Audio playback failed"));
+        resolve();
       };
-      const p = audio.play();
-      if (p && p.catch) p.catch(reject);
+      a.play().catch(() => {
+        speaking = false;
+        resolve();
+      });
     });
   }
 
   async function speak(text, options) {
     options = options || {};
-    if (!prefs.enabled && options.force !== true) return;
+    if (prefs.muted && !options.force) return;
     const t = String(text || "").trim();
     if (!t) return;
+    const my = ++seq;
+    stop();
+    seq = my;
+    const rate = options.rate != null ? options.rate : prefs.rate || 1;
+    const voiceId = options.voiceId || selectedId();
 
-    const mySeq = ++speakSeq;
-    stopBrowser();
-    stopAudio();
-
-    const engine = options.engine || prefs.engine || "auto";
-    const preferPiper = engine === "piper" || engine === "auto";
-
-    if (preferPiper) {
-      try {
-        const voiceId = options.voiceId || prefs.voiceId;
-        if (await isVoiceDownloaded(voiceId)) {
-          if (mySeq !== speakSeq) return;
-          await piperSpeak(t, options);
-          return;
-        }
-        if (engine === "piper") {
-          emit("error", { message: "Selected Piper voice is not downloaded yet." });
-          // fall through to browser
-        }
-      } catch (err) {
-        console.warn("[MooseTTS] Piper speak failed, falling back:", err);
-        emit("error", { message: String(err && err.message ? err.message : err) });
-        if (engine === "piper" && options.fallback === false) throw err;
-      }
-    }
-
-    if (mySeq !== speakSeq) return;
+    // Ensure default prepared (non-blocking start already running)
     try {
-      await browserSpeak(t, options);
+      if (!(await isPrepared(voiceId))) {
+        await prepareVoice(voiceId, { quiet: false });
+      }
+      if (my !== seq) return;
+      if (await isPrepared(voiceId)) {
+        await piperSpeak(t, voiceId, rate);
+        return;
+      }
     } catch (err) {
-      speaking = false;
-      emit("error", { message: "Speech unavailable in this browser." });
-      if (options.fallback === false) throw err;
+      console.warn("[MooseTTS] piper failed, browser fallback", err);
     }
-  }
-
-  async function previewVoice(id) {
-    const sample = "Hello! This is how I sound when reading with Moose Tools.";
-    // If not downloaded, browser fallback for preview tone
-    if (await isVoiceDownloaded(id)) {
-      return speak(sample, { voiceId: id, engine: "piper", force: true });
-    }
-    return speak(sample, { engine: "browser", force: true });
+    if (my !== seq) return;
+    try {
+      await browserSpeak(t, rate);
+    } catch (_) {}
   }
 
   function getVoices() {
-    const cat = global.MooseTTSCatalog ? global.MooseTTSCatalog.list() : [];
-    return cat;
-  }
-
-  function getSelectedVoice() {
-    return prefs.voiceId;
+    return (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
   }
 
   function setVoice(id) {
-    setPrefs({ voiceId: id });
+    prefs.voiceId = id;
+    savePrefs();
+    prepareVoice(id, { quiet: true });
   }
 
-  function setEnabled(on) {
-    setPrefs({ enabled: !!on });
-    if (!on) stop();
+  function mute() {
+    prefs.muted = true;
+    savePrefs();
+    stop();
+  }
+  function unmute() {
+    prefs.muted = false;
+    savePrefs();
   }
 
-  function isEnabled() {
-    return !!prefs.enabled;
+  // Boot: prefs default + background prepare
+  if (!prefs.voiceId) {
+    prefs.voiceId = DEFAULT_ID();
+    savePrefs();
   }
 
-  // Public API
-  const api = {
+  function boot() {
+    // Kick preparation after a tick so first paint isn't blocked
+    setTimeout(() => startBackgroundPrepare(), 400);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  global.MooseTTS = {
     speak,
     stop,
-    pause() {
-      if (currentAudio) currentAudio.pause();
-      try {
-        if (global.speechSynthesis) global.speechSynthesis.pause();
-      } catch (_) {}
-    },
-    resume() {
-      if (currentAudio) currentAudio.play().catch(() => {});
-      try {
-        if (global.speechSynthesis) global.speechSynthesis.resume();
-      } catch (_) {}
-    },
-    isSpeaking,
+    isSpeaking: () => speaking,
     getVoices,
-    getSelectedVoice,
+    getSelectedVoice: selectedId,
     setVoice,
-    previewVoice,
-    isVoiceDownloaded,
-    downloadVoice,
-    deleteVoice,
-    getPrefs,
-    setPrefs,
-    setEnabled,
-    isEnabled,
-    on,
-    /** @internal */
-    _loadPiperModule: loadPiperModule,
-    _runtimePaths: runtimePaths,
+    mute,
+    unmute,
+    isMuted: () => !!prefs.muted,
+    getPrefs: () => ({ ...prefs }),
+    setPrefs: (p) => {
+      prefs = { ...prefs, ...p };
+      savePrefs();
+    },
+    prepareVoice,
+    isPrepared,
+    startBackgroundPrepare,
+    previewVoice(id) {
+      return speak("Hello! This is how I sound in the classroom.", {
+        voiceId: id || selectedId(),
+        force: true,
+      });
+    },
   };
-
-  global.MooseTTS = api;
 })(typeof window !== "undefined" ? window : globalThis);

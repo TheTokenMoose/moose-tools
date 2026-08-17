@@ -1,38 +1,30 @@
-# Moose Tools — TTS voices & licenses
+# TTS voices (UK English)
 
-## Runtime (bundled under `assets/tts/runtime/`)
+## Runtime (`assets/tts/runtime/`)
+| File | Role | License |
+|------|------|---------|
+| ort.min.js / ort-wasm*.wasm | ONNX Runtime Web 1.18 | MIT (Microsoft) |
+| piper_phonemize.* | Phonemizer WASM | MIT (piper-wasm / eSpeak-NG lineage) |
+| piper-tts-web.js | Browser Piper helper | MIT (Mintplex Labs / diffusionstudio) |
 
-| Component | Source | License |
-|-----------|--------|---------|
-| ONNX Runtime Web 1.18 | Microsoft / onnxruntime | MIT |
-| piper-wasm (phonemize) | @diffusionstudio/piper-wasm | MIT (Piper / eSpeak-NG lineage) |
-| @mintplex-labs/piper-tts-web | Mintplex Labs (fork of diffusionstudio/vits-web) | MIT |
+## Voices (`assets/tts/voices/en_GB/`)
+Bundled in this repository. Served same-origin. Prepared into OPFS on first use.
 
-These files are **same-origin** so they can work offline after the first visit (service worker may cache them when requested). They are **not** listed in the tiny HTML precache list.
+All models from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) (MIT). Review each MODEL_CARD in the voice folder.
 
-## Downloadable Piper voice models
+| ID | Display | Quality | Notes |
+|----|---------|---------|-------|
+| en_GB-alba-medium | Alba — Clear | medium | **Default** — clear classroom female |
+| en_GB-alan-low | Alan — Soft | low | Male |
+| en_GB-alan-medium | Alan — Clear | medium | Male |
+| en_GB-aru-medium | Aru — Clear | medium | Female |
+| en_GB-cori-medium | Cori — Clear | medium | Female |
+| en_GB-jenny_dioco-medium | Jenny — Clear | medium | Female |
+| en_GB-northern_english_male-medium | Northern English Male | medium | Male |
+| en_GB-semaine-medium | Semaine — Clear | medium | Female |
+| en_GB-southern_english_female-low | Southern English Female | low | Female |
+| en_GB-vctk-medium | VCTK — Clear | medium | Neutral |
 
-Models are **not** shipped in the repo. Users download them on demand into **OPFS** via the Piper web library.
+**Not included:** `en_GB-cori-high` (~114 MB) exceeds GitHub’s 100 MB file limit.
 
-Upstream catalog: [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) (repository license: **MIT**).
-
-Always review the individual `MODEL_CARD` for a voice before redistributing it yourself.
-
-### Curated English voices in Moose Tools UI
-
-| Voice ID | Display | Locale | License | Notes |
-|----------|---------|--------|---------|-------|
-| en_GB-alan-medium | Alan (male) | en-GB | MIT | Rhasspy Piper |
-| en_GB-alba-medium | Alba (female) | en-GB | MIT | Rhasspy Piper |
-| en_US-lessac-medium | Lessac (female) | en-US | MIT | Rhasspy Piper |
-| en_US-ryan-medium | Ryan (male) | en-US | MIT | Rhasspy Piper |
-| en_US-hfc_female-medium | HFC Female | en-US | MIT | Rhasspy Piper |
-| en_US-hfc_male-medium | HFC Male | en-US | MIT | Rhasspy Piper |
-
-### Attribution
-
-Speech synthesis models are from the **Piper** project and **Rhasspy** voice pack.  
-Runtime inference uses **ONNX Runtime Web**.  
-Phonemization uses **piper-wasm** (eSpeak-NG based).
-
-If you redistribute this site, keep this file and the About credits section.
+No Hugging Face access is required at runtime when these files are deployed with the site.

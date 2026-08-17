@@ -102,15 +102,12 @@
     function speak(text, speakOpts) {
       if (!enabled || !text) return null;
       const so = speakOpts || {};
-      // Prefer centralized MooseTTS (Piper + browser fallback)
       if (global.MooseTTS && typeof global.MooseTTS.speak === "function") {
         global.MooseTTS.speak(String(text), {
           rate: so.rate != null ? so.rate : rate,
-          pitch: so.pitch != null ? so.pitch : pitch,
-          volume: so.volume,
-        }).then(() => {
+        }).then(function () {
           if (so.onend) try { so.onend(); } catch (_) {}
-        }).catch((err) => {
+        }).catch(function (err) {
           if (so.onerror) try { so.onerror(err); } catch (_) {}
         });
         return { engine: "MooseTTS" };
@@ -131,9 +128,7 @@
     }
 
     function stop() {
-      if (global.MooseTTS && typeof global.MooseTTS.stop === "function") {
-        global.MooseTTS.stop();
-      }
+      if (global.MooseTTS && typeof global.MooseTTS.stop === "function") global.MooseTTS.stop();
       if (global.speechSynthesis) global.speechSynthesis.cancel();
       currentUtterance = null;
     }
@@ -315,7 +310,7 @@
     // Warm voices list
     ensureVoicesLoaded(() => {});
 
-    const api = {
+    return {
       appId: id,
       speak,
       stop,
@@ -328,28 +323,6 @@
       listVoices,
       ensureVoicesLoaded,
     };
-
-    // Uniform placement: top-center chrome voice slot when present
-    function tryMountChrome() {
-      const slot = document.getElementById("tm-voice-slot");
-      if (slot && !slot.querySelector(".tm-voice-picker")) {
-        mountPicker(slot);
-      }
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => setTimeout(tryMountChrome, 0));
-    } else {
-      setTimeout(tryMountChrome, 0);
-    }
-    // Retry a few times in case app-chrome mounts slightly later
-    let tries = 0;
-    const iv = setInterval(() => {
-      tries += 1;
-      tryMountChrome();
-      if (tries > 20 || document.querySelector("#tm-voice-slot .tm-voice-picker")) clearInterval(iv);
-    }, 100);
-
-    return api;
   }
 
   function escapeHtml(s) {

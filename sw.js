@@ -9,9 +9,8 @@
  * Bump CACHE_NAME when you change this file or want a hard cache wipe.
  */
 
-// Large Piper models live in OPFS (via piper-tts-web), not here.
-// assets/tts/runtime/*.wasm are cached on demand (stale-while-revalidate), never precached.
-const CACHE_NAME = "token-moose-v50";
+// Voice .onnx models: same-origin assets; copied to OPFS on first use — not SW precache.
+const CACHE_NAME = "token-moose-v52";
 
 const PRECACHE_URLS = [
   "./js/voice.js",
@@ -20,6 +19,8 @@ const PRECACHE_URLS = [
   "./js/tts/tts-settings.js",
   "./js/tts/moose-tts.js",
   "./js/tts/voice-catalog.js",
+
+
   "./",
   "./index.html",
   "./games.html",
@@ -55,6 +56,10 @@ function isAppShell(url) {
     p.endsWith("/moose-tools") ||
     p.endsWith("/moose-tools/")
   );
+}
+
+function isTtsRuntime(url) {
+  return url.pathname.includes("/assets/tts/runtime/");
 }
 
 function isImage(url) {
@@ -154,7 +159,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (isImage(url)) {
+  if (isTtsRuntime(url) || isImage(url)) {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
