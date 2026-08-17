@@ -100,8 +100,22 @@
     }
 
     function speak(text, speakOpts) {
-      if (!enabled || !text || !global.speechSynthesis) return null;
+      if (!enabled || !text) return null;
       const so = speakOpts || {};
+      // Prefer centralized MooseTTS (Piper + browser fallback)
+      if (global.MooseTTS && typeof global.MooseTTS.speak === "function") {
+        global.MooseTTS.speak(String(text), {
+          rate: so.rate != null ? so.rate : rate,
+          pitch: so.pitch != null ? so.pitch : pitch,
+          volume: so.volume,
+        }).then(() => {
+          if (so.onend) try { so.onend(); } catch (_) {}
+        }).catch((err) => {
+          if (so.onerror) try { so.onerror(err); } catch (_) {}
+        });
+        return { engine: "MooseTTS" };
+      }
+      if (!global.speechSynthesis) return null;
       global.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(String(text));
       u.rate = so.rate != null ? so.rate : rate;
@@ -117,6 +131,9 @@
     }
 
     function stop() {
+      if (global.MooseTTS && typeof global.MooseTTS.stop === "function") {
+        global.MooseTTS.stop();
+      }
       if (global.speechSynthesis) global.speechSynthesis.cancel();
       currentUtterance = null;
     }

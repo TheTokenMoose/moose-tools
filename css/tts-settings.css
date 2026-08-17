@@ -1,0 +1,82 @@
+.moose-tts-panel {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 0 2rem;
+  color: var(--text-primary);
+}
+.moose-tts-lead,
+.moose-tts-note {
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+.moose-tts-row,
+.moose-tts-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+}
+.moose-tts-field select,
+.moose-tts-field input[type="range"] {
+  flex: 1;
+  min-width: 160px;
+}
+.moose-tts-val {
+  min-width: 3rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.moose-tts-voice-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1.25rem;
+}
+.moose-tts-voice-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.moose-tts-voice-card.is-selected {
+  border-color: var(--border-glow, rgba(168, 85, 247, 0.55));
+  box-shadow: 0 0 0 1px var(--accent-electric, #22d3ee);
+}
+.moose-tts-voice-title {
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+.moose-tts-voice-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.moose-tts-voice-status {
+  margin: 0.45rem 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.moose-tts-voice-status.is-ready {
+  color: var(--accent-electric, #22d3ee);
+}
+.moose-tts-voice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.moose-tts-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(127, 127, 127, 0.25);
+  overflow: hidden;
+  margin: 0.4rem 0;
+}
+.moose-tts-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-pink, #ff4d9e), var(--accent-purple, #a855f7));
+  transition: width 0.15s ease;
+}

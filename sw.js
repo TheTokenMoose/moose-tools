@@ -9,10 +9,17 @@
  * Bump CACHE_NAME when you change this file or want a hard cache wipe.
  */
 
-const CACHE_NAME = "token-moose-v49";
+// Large Piper models live in OPFS (via piper-tts-web), not here.
+// assets/tts/runtime/*.wasm are cached on demand (stale-while-revalidate), never precached.
+const CACHE_NAME = "token-moose-v50";
 
 const PRECACHE_URLS = [
   "./js/voice.js",
+  "./voice-settings.html",
+  "./css/tts-settings.css",
+  "./js/tts/tts-settings.js",
+  "./js/tts/moose-tts.js",
+  "./js/tts/voice-catalog.js",
   "./",
   "./index.html",
   "./games.html",

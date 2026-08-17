@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Voice settings for The Token Moose — Piper neural TTS and browser speech.">
+  <meta name="theme-color" content="#0a0b1a">
+  <title>Voice Settings — The Token Moose</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/tts-settings.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night") {
+        document.documentElement.setAttribute("data-theme", t);
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body data-page="voices">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="The Token Moose home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>THE TOKEN MOOSE</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+      </button>
+      <nav id="main-nav" class="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="tools.html">Tools</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="voice-settings.html" aria-current="page">Voices</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="theme-switcher"></div>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="page-hero">
+      <h1>Voices</h1>
+      <p>Choose neural Piper voices for reading games, or keep browser speech. Downloads stay on this device.</p>
+    </section>
+    <div id="moose-tts-settings"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Open source · No accounts · Speech runs in your browser</p>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/tts/voice-catalog.js"></script>
+  <script src="js/tts/moose-tts.js"></script>
+  <script src="js/tts/tts-settings.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/sw-register.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.MooseTTSSettings) MooseTTSSettings.mount("#moose-tts-settings");
+    });
+  </script>
+</body>
+</html>
