@@ -1,0 +1,3269 @@
+THE ENCHANTED LIBRARY — STORY EDITOR FILE
+========================================================================
+Edit this file carefully. Structure must stay readable for re-import.
+Format per node:
+  [NODE id]
+  TEXT: ...
+  CHOICE: option text -> next_node_id
+  or for endings:
+  ENDING: true
+  TITLE: ...
+  SCENE: ...
+  TEXT: ...
+
+Title: The Enchanted Library
+Subtitle: A choose-your-own-adventure book
+
+LEVELS & WORLDS
+------------------------------------------------------------------------
+
+## LEVEL: easy — Picture Path
+Blurb: Short sentences · big choices · ages ~5–7
+  WORLD: forest | Forest Path | start=easy_forest_root | endings≈18
+  WORLD: castle | Castle Door | start=easy_castle_root | endings≈18
+  WORLD: sea | Sea Shell | start=easy_sea_root | endings≈18
+  WORLD: stars | Star Ladder | start=easy_stars_root | endings≈18
+
+## LEVEL: medium — Story Path
+Blurb: Richer sentences · more branches · ages ~7–9
+  WORLD: forest | Forest Path | start=medium_forest_root | endings≈24
+  WORLD: castle | Castle Door | start=medium_castle_root | endings≈24
+  WORLD: sea | Sea Shell | start=medium_sea_root | endings≈24
+  WORLD: stars | Star Ladder | start=medium_stars_root | endings≈24
+
+## LEVEL: hard — Chapter Path
+Blurb: Longer text · deeper choices · ages ~9–11
+  WORLD: forest | Forest Path | start=hard_forest_root | endings≈22
+  WORLD: castle | Castle Door | start=hard_castle_root | endings≈22
+  WORLD: sea | Sea Shell | start=hard_sea_root | endings≈22
+  WORLD: stars | Star Ladder | start=hard_stars_root | endings≈22
+
+
+
+NODES
+========================================================================
+Total nodes: 492
+
+
+[NODE easy_castle_root]
+TEXT: A round castle tower rises from the page. A bell rings once, and a little blue flag points inside. You step through the gate.
+CHOICE: Enter the castle -> easy_castle_d1_ra0_1
+---
+
+[NODE easy_forest_root]
+TEXT: A tiny lantern hangs from a branch. It lights a trail between the trees. You hear a squirrel call. Follow it?
+CHOICE: Follow the lantern -> easy_forest_d1_ra0_1
+---
+
+[NODE easy_sea_root]
+TEXT: Blue waves ripple out from the page. A little boat waits beside a shell path. You climb aboard and hear a dolphin whistle.
+CHOICE: Climb into the boat -> easy_sea_d1_ra0_1
+---
+
+[NODE easy_stars_root]
+TEXT: A silver ladder rises from the library floor into a sky full of stars. One bright star blinks three times, as if it wants you to follow.
+CHOICE: Climb the silver ladder -> easy_stars_d1_ra0_1
+---
+
+[NODE hard_castle_root]
+TEXT: The castle's clock has stopped at the same moment on every tower. Servants whisper that the keep is waiting for a missing page from its founding story, and the castle cat carries a ribbon toward the archives.
+CHOICE: Follow the archive cat -> hard_castle_d1_ra0_1
+---
+
+[NODE hard_forest_root]
+TEXT: The Whispering Woods are unusually still. A trail of silver leaves leads beneath ancient oaks, where a fox waits beside a stone marked with a half-erased compass.
+CHOICE: Follow the silver leaves -> hard_forest_d1_ra0_1
+---
+
+[NODE hard_sea_root]
+TEXT: A storm is building beyond the lighthouse, but the harbor itself remains strangely calm. An old chart has washed ashore, marked with a route that disappears beneath the tide.
+CHOICE: Study the old chart -> hard_sea_d1_ra0_1
+---
+
+[NODE hard_stars_root]
+TEXT: Beyond the library's highest window, the stars have formed an unfamiliar pattern. A starship waits beside a moon bridge, its navigator convinced that one constellation has been deliberately hidden.
+CHOICE: Study the unfamiliar constellation -> hard_stars_d1_ra0_1
+---
+
+[NODE medium_castle_root]
+TEXT: Torchlight flickers across the castle walls. Somewhere above you, a bell should be ringing, but the tower is silent. The castle cat waits beside two stairways.
+CHOICE: Climb the tower -> medium_castle_d1_ra0_1
+CHOICE: Enter the great hall -> medium_castle_d1_rb1_16
+---
+
+[NODE medium_forest_root]
+TEXT: Moss cushions your steps as you enter the Whispering Woods. Ahead, a fox carries a red ribbon, while a woodpecker taps a warning beside an old stone bridge.
+CHOICE: Follow the fox -> medium_forest_d1_ra0_1
+CHOICE: Study the woodpecker's warning -> medium_forest_d1_rb1_16
+---
+
+[NODE medium_sea_root]
+TEXT: The tide is rising around a little lighthouse island. A wooden boat waits at the dock, and a seal keeps circling one dark patch of water.
+CHOICE: Follow the seal -> medium_sea_d1_ra0_1
+CHOICE: Climb the lighthouse steps -> medium_sea_d1_rb1_16
+---
+
+[NODE medium_stars_root]
+TEXT: The starway opens above the library like a silver road. A constellation has gone dark, and a small starship waits nearby with its engine humming.
+CHOICE: Follow the starship -> medium_stars_d1_ra0_1
+CHOICE: Cross the moon bridge -> medium_stars_d1_rb1_16
+---
+
+[NODE easy_castle_choice_008]
+TEXT: The moment called “The Baker's Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e4
+CHOICE: Climb one last stair -> easy_castle_choice_008_alt
+---
+
+[NODE easy_castle_choice_008_alt]
+ENDING: true
+TITLE: The Baker's Bell: One Last Door
+SCENE: castle
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_009]
+TEXT: The moment called “The Tiny Crown” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e5
+CHOICE: Climb one last stair -> easy_castle_choice_009_alt
+---
+
+[NODE easy_castle_choice_009_alt]
+ENDING: true
+TITLE: The Tiny Crown: One Last Door
+SCENE: feast
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_010]
+TEXT: The moment called “Secret Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e7
+CHOICE: Climb one last stair -> easy_castle_choice_010_alt
+---
+
+[NODE easy_castle_choice_010_alt]
+ENDING: true
+TITLE: Secret Garden: One Last Door
+SCENE: crown
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_011]
+TEXT: The moment called “The Recipe Book” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e8
+CHOICE: Climb one last stair -> easy_castle_choice_011_alt
+---
+
+[NODE easy_castle_choice_011_alt]
+ENDING: true
+TITLE: The Recipe Book: One Last Door
+SCENE: garden
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_012]
+TEXT: The moment called “Tower Star” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e11
+CHOICE: Climb one last stair -> easy_castle_choice_012_alt
+---
+
+[NODE easy_castle_choice_012_alt]
+ENDING: true
+TITLE: Tower Star: One Last Door
+SCENE: castle
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_013]
+TEXT: The moment called “Kind Knight” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e12
+CHOICE: Climb one last stair -> easy_castle_choice_013_alt
+---
+
+[NODE easy_castle_choice_013_alt]
+ENDING: true
+TITLE: Kind Knight: One Last Door
+SCENE: feast
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_choice_014]
+TEXT: The moment called “Castle Treasure” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Accept the thanks -> easy_castle_e14
+CHOICE: Climb one last stair -> easy_castle_choice_014_alt
+---
+
+[NODE easy_castle_choice_014_alt]
+ENDING: true
+TITLE: Castle Treasure: One Last Door
+SCENE: crown
+TEXT: You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes.
+---
+
+[NODE easy_castle_d1_ra0_1]
+TEXT: A sleepy castle cat pads ahead and stops beside two doors: one smells like bread, and one glitters with light.
+CHOICE: Follow the bread smell -> easy_castle_d2_ra0a0_2
+CHOICE: Follow the glittering hall -> easy_castle_d2_ra0b1_9
+---
+
+[NODE easy_castle_d2_ra0a0_2]
+TEXT: The bread door opens into the kitchen. A tray of warm rolls is ready, but the baker cannot find the recipe.
+CHOICE: Find the recipe -> easy_castle_d3_ra0a0a0_3
+CHOICE: Reach the little crown -> easy_castle_d3_ra0a0b1_6
+CHOICE: Follow the bell -> easy_castle_d2_ra0a0_2_side
+---
+
+[NODE easy_castle_d2_ra0a0_2_side]
+TEXT: A small bell rings from somewhere behind the walls. You follow the sound and find a hidden room with two friendly choices waiting.
+CHOICE: The Bell Room -> easy_castle_d2_ra0a0_2_side_a
+CHOICE: Midnight Feast -> easy_castle_d2_ra0a0_2_side_b
+---
+
+[NODE easy_castle_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Bell Room
+SCENE: castle
+TEXT: You polish the old bell until it shines. When you ring it, the castle lights come on one by one, all the way to the library door.
+---
+
+[NODE easy_castle_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: Midnight Feast
+SCENE: feast
+TEXT: The hidden room is a tiny kitchen prepared for travellers. You share the warm food with the castle helpers before heading home.
+---
+
+[NODE easy_castle_d2_ra0b1_9]
+TEXT: The glittering door leads to a hall where a small crown is stuck high on a shelf.
+CHOICE: Reach the little crown -> easy_castle_d3_ra0b1a0_10
+CHOICE: Help the baker -> easy_castle_d3_ra0b1b1_13
+CHOICE: Follow the bell -> easy_castle_d2_ra0b1_9_side
+---
+
+[NODE easy_castle_d2_ra0b1_9_side]
+TEXT: A small bell rings from somewhere behind the walls. You follow the sound and find a hidden room with two friendly choices waiting.
+CHOICE: The Bell Room -> easy_castle_d2_ra0b1_9_side_a
+CHOICE: Midnight Feast -> easy_castle_d2_ra0b1_9_side_b
+---
+
+[NODE easy_castle_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: The Bell Room
+SCENE: castle
+TEXT: You polish the old bell until it shines. When you ring it, the castle lights come on one by one, all the way to the library door.
+---
+
+[NODE easy_castle_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: Midnight Feast
+SCENE: feast
+TEXT: The hidden room is a tiny kitchen prepared for travellers. You share the warm food with the castle helpers before heading home.
+---
+
+[NODE easy_castle_d3_ra0a0a0_3]
+TEXT: You search the kitchen shelves and find the missing recipe tucked inside a flour tin.
+CHOICE: Take the recipe -> easy_castle_choice_008
+CHOICE: Help the cat -> easy_castle_choice_009
+---
+
+[NODE easy_castle_d3_ra0a0b1_6]
+TEXT: You help the cat pull a soft cushion beneath the shelf so you can reach the little crown.
+CHOICE: Take the recipe -> easy_castle_choice_010
+CHOICE: Help the cat -> easy_castle_choice_011
+---
+
+[NODE easy_castle_d3_ra0b1a0_10]
+TEXT: You search the kitchen shelves and find the missing recipe tucked inside a flour tin.
+CHOICE: Take the recipe -> easy_castle_choice_012
+CHOICE: Help the cat -> easy_castle_choice_013
+---
+
+[NODE easy_castle_d3_ra0b1b1_13]
+TEXT: You help the cat pull a soft cushion beneath the shelf so you can reach the little crown.
+CHOICE: Take the recipe -> easy_castle_choice_014
+---
+
+[NODE easy_castle_e11]
+ENDING: true
+TITLE: Tower Star
+SCENE: star_ship
+TEXT: The glittering hall reveals a window shaped like a star. Through it you see a tiny starship sailing past the castle moon.
+---
+
+[NODE easy_castle_e12]
+ENDING: true
+TITLE: Kind Knight
+SCENE: castle
+TEXT: A young knight thanks you for helping the castle instead of rushing ahead. The two of you polish the little crown until it shines.
+---
+
+[NODE easy_castle_e14]
+ENDING: true
+TITLE: Castle Treasure
+SCENE: treasure
+TEXT: The baker gives you a small golden spoon as a thank-you. It is not a royal treasure, but it becomes your favorite souvenir from the castle.
+---
+
+[NODE easy_castle_e4]
+ENDING: true
+TITLE: The Baker's Bell
+SCENE: feast
+TEXT: You return the recipe to the baker. The bell rings, and everyone gathers for warm rolls and apple slices. The cat gets the first tiny piece.
+---
+
+[NODE easy_castle_e5]
+ENDING: true
+TITLE: The Tiny Crown
+SCENE: crown
+TEXT: You rescue the little crown without climbing too high. The castle king thanks you for solving the problem safely and gives you a royal bow.
+---
+
+[NODE easy_castle_e7]
+ENDING: true
+TITLE: Secret Garden
+SCENE: garden
+TEXT: The cat leads you through a hidden door behind the kitchen. You find a sunny garden where herbs, flowers, and tiny blue flags grow together.
+---
+
+[NODE easy_castle_e8]
+ENDING: true
+TITLE: The Recipe Book
+SCENE: library_return
+TEXT: The missing recipe belongs to an old storybook. You return it to the enchanted library, where its pages smell wonderfully like cinnamon.
+---
+
+[NODE easy_forest_choice_001]
+TEXT: The moment called “The Lost Book” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e4
+CHOICE: Explore one more trail -> easy_forest_choice_001_alt
+---
+
+[NODE easy_forest_choice_001_alt]
+ENDING: true
+TITLE: The Lost Book: The Longer Trail
+SCENE: garden
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_002]
+TEXT: The moment called “Owl's New Nest” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e5
+CHOICE: Explore one more trail -> easy_forest_choice_002_alt
+---
+
+[NODE easy_forest_choice_002_alt]
+ENDING: true
+TITLE: Owl's New Nest: The Longer Trail
+SCENE: map
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_003]
+TEXT: The moment called “Berry Picnic” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e7
+CHOICE: Explore one more trail -> easy_forest_choice_003_alt
+---
+
+[NODE easy_forest_choice_003_alt]
+ENDING: true
+TITLE: Berry Picnic: The Longer Trail
+SCENE: village
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_004]
+TEXT: The moment called “The Singing Acorn” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e8
+CHOICE: Explore one more trail -> easy_forest_choice_004_alt
+---
+
+[NODE easy_forest_choice_004_alt]
+ENDING: true
+TITLE: The Singing Acorn: The Longer Trail
+SCENE: forest_home
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_005]
+TEXT: The moment called “Moonlit Shortcut” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e11
+CHOICE: Explore one more trail -> easy_forest_choice_005_alt
+---
+
+[NODE easy_forest_choice_005_alt]
+ENDING: true
+TITLE: Moonlit Shortcut: The Longer Trail
+SCENE: garden
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_006]
+TEXT: The moment called “Rainy Treehouse” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e12
+CHOICE: Explore one more trail -> easy_forest_choice_006_alt
+---
+
+[NODE easy_forest_choice_006_alt]
+ENDING: true
+TITLE: Rainy Treehouse: The Longer Trail
+SCENE: map
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_choice_007]
+TEXT: The moment called “Forest Map” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return to the library -> easy_forest_e14
+CHOICE: Explore one more trail -> easy_forest_choice_007_alt
+---
+
+[NODE easy_forest_choice_007_alt]
+ENDING: true
+TITLE: Forest Map: The Longer Trail
+SCENE: village
+TEXT: You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark.
+---
+
+[NODE easy_forest_d1_ra0_1]
+TEXT: The squirrel leads you to a fallen log beside a bright stream.
+CHOICE: Search under the log -> easy_forest_d2_ra0a0_2
+CHOICE: Cross the stream -> easy_forest_d2_ra0b1_9
+---
+
+[NODE easy_forest_d2_ra0a0_2]
+TEXT: Under the log you find a little wooden key and a note: FIND WHAT IS LOST.
+CHOICE: Open the tree door -> easy_forest_d3_ra0a0a0_3
+CHOICE: Follow the silver feathers -> easy_forest_d3_ra0a0b1_6
+CHOICE: Follow the fireflies -> easy_forest_d2_ra0a0_2_side
+---
+
+[NODE easy_forest_d2_ra0a0_2_side]
+TEXT: A line of fireflies gathers beside the trail. They lead you to a tiny clearing where something from the forest has been waiting for a helper.
+CHOICE: Firefly Garden -> easy_forest_d2_ra0a0_2_side_a
+CHOICE: Lantern Leaf -> easy_forest_d2_ra0a0_2_side_b
+---
+
+[NODE easy_forest_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: Firefly Garden
+SCENE: garden
+TEXT: The fireflies guide you to a garden of night flowers. You help them find a lost seed, and every flower opens like a little lantern.
+---
+
+[NODE easy_forest_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: Lantern Leaf
+SCENE: forest_home
+TEXT: A golden leaf lights your way back to the main trail. You tuck it into the book, where it glows whenever someone needs courage.
+---
+
+[NODE easy_forest_d2_ra0b1_9]
+TEXT: Across the stream, you spot silver feathers caught in the reeds.
+CHOICE: Follow the silver feathers -> easy_forest_d3_ra0b1a0_10
+CHOICE: Help the owl -> easy_forest_d3_ra0b1b1_13
+CHOICE: Follow the fireflies -> easy_forest_d2_ra0b1_9_side
+---
+
+[NODE easy_forest_d2_ra0b1_9_side]
+TEXT: A line of fireflies gathers beside the trail. They lead you to a tiny clearing where something from the forest has been waiting for a helper.
+CHOICE: Firefly Garden -> easy_forest_d2_ra0b1_9_side_a
+CHOICE: Lantern Leaf -> easy_forest_d2_ra0b1_9_side_b
+---
+
+[NODE easy_forest_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: Firefly Garden
+SCENE: garden
+TEXT: The fireflies guide you to a garden of night flowers. You help them find a lost seed, and every flower opens like a little lantern.
+---
+
+[NODE easy_forest_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: Lantern Leaf
+SCENE: forest_home
+TEXT: A golden leaf lights your way back to the main trail. You tuck it into the book, where it glows whenever someone needs courage.
+---
+
+[NODE easy_forest_d3_ra0a0a0_3]
+TEXT: The key opens a tree door. Inside, a lost storybook is waiting for its reader.
+CHOICE: Open the little door -> easy_forest_choice_001
+CHOICE: Help the baby owl -> easy_forest_choice_002
+---
+
+[NODE easy_forest_d3_ra0a0b1_6]
+TEXT: The feathers lead to a baby owl who cannot find its nest.
+CHOICE: Open the little door -> easy_forest_choice_003
+CHOICE: Help the baby owl -> easy_forest_choice_004
+---
+
+[NODE easy_forest_d3_ra0b1a0_10]
+TEXT: The key opens a tree door. Inside, a lost storybook is waiting for its reader.
+CHOICE: Open the little door -> easy_forest_choice_005
+CHOICE: Help the baby owl -> easy_forest_choice_006
+---
+
+[NODE easy_forest_d3_ra0b1b1_13]
+TEXT: The feathers lead to a baby owl who cannot find its nest.
+CHOICE: Open the little door -> easy_forest_choice_007
+---
+
+[NODE easy_forest_e11]
+ENDING: true
+TITLE: Moonlit Shortcut
+SCENE: moon
+TEXT: The squirrel leads you along a safe trail that glows under the moon. You wave goodbye as the little lantern guides you back to the book.
+---
+
+[NODE easy_forest_e12]
+ENDING: true
+TITLE: Rainy Treehouse
+SCENE: forest_home
+TEXT: Rain begins to fall, and you discover a dry treehouse filled with cushions and old picture books. You read until the rain stops.
+---
+
+[NODE easy_forest_e14]
+ENDING: true
+TITLE: Forest Map
+SCENE: map
+TEXT: The owl gives you a leaf-map showing every safe trail in the woods. You tuck it into the enchanted book so the next reader can explore too.
+---
+
+[NODE easy_forest_e4]
+ENDING: true
+TITLE: The Lost Book
+SCENE: library_return
+TEXT: You unlock the tree door and find a storybook that has been missing from the enchanted library. You carry it home, and the shelves glow as it slips into its place.
+---
+
+[NODE easy_forest_e5]
+ENDING: true
+TITLE: Owl's New Nest
+SCENE: forest_home
+TEXT: You follow the feathers and help the baby owl find its nest. At sunset, its family settles close together while the forest hums a happy song.
+---
+
+[NODE easy_forest_e7]
+ENDING: true
+TITLE: Berry Picnic
+SCENE: feast
+TEXT: A friendly fox shows you a hidden berry patch. You share the berries with the animals, then spread a little picnic blanket beneath the trees.
+---
+
+[NODE easy_forest_e8]
+ENDING: true
+TITLE: The Singing Acorn
+SCENE: treasure
+TEXT: The wooden key opens a tiny acorn-shaped box. Inside is a golden seed that sings when you hold it, so you plant it beside the trail.
+---
+
+[NODE easy_sea_choice_015]
+TEXT: The moment called “The Lighthouse Bell” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e4
+CHOICE: Follow the lantern -> easy_sea_choice_015_alt
+---
+
+[NODE easy_sea_choice_015_alt]
+ENDING: true
+TITLE: The Lighthouse Bell: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_016]
+TEXT: The moment called “Pearl Gate” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e5
+CHOICE: Follow the lantern -> easy_sea_choice_016_alt
+---
+
+[NODE easy_sea_choice_016_alt]
+ENDING: true
+TITLE: Pearl Gate: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_017]
+TEXT: The moment called “Dolphin Ride” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e7
+CHOICE: Follow the lantern -> easy_sea_choice_017_alt
+---
+
+[NODE easy_sea_choice_017_alt]
+ENDING: true
+TITLE: Dolphin Ride: Beyond the Harbor
+SCENE: village
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_018]
+TEXT: The moment called “Shell Message” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e8
+CHOICE: Follow the lantern -> easy_sea_choice_018_alt
+---
+
+[NODE easy_sea_choice_018_alt]
+ENDING: true
+TITLE: Shell Message: Beyond the Harbor
+SCENE: moon
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_019]
+TEXT: The moment called “Lighthouse Garden” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e11
+CHOICE: Follow the lantern -> easy_sea_choice_019_alt
+---
+
+[NODE easy_sea_choice_019_alt]
+ENDING: true
+TITLE: Lighthouse Garden: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_020]
+TEXT: The moment called “Crab's Treasure” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e12
+CHOICE: Follow the lantern -> easy_sea_choice_020_alt
+---
+
+[NODE easy_sea_choice_020_alt]
+ENDING: true
+TITLE: Crab's Treasure: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_choice_021]
+TEXT: The moment called “Moon Tide” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Sail for home -> easy_sea_e14
+CHOICE: Follow the lantern -> easy_sea_choice_021_alt
+---
+
+[NODE easy_sea_choice_021_alt]
+ENDING: true
+TITLE: Moon Tide: Beyond the Harbor
+SCENE: village
+TEXT: You follow the lantern across the calm water. It leads to a tiny harbor where the sea friends wave, and a warm breeze carries you safely back to the book.
+---
+
+[NODE easy_sea_d1_ra0_1]
+TEXT: The dolphin circles the boat and points toward a lighthouse on a small island.
+CHOICE: Follow the dolphin -> easy_sea_d2_ra0a0_2
+CHOICE: Follow the shells -> easy_sea_d2_ra0b1_9
+---
+
+[NODE easy_sea_d2_ra0a0_2]
+TEXT: Near the lighthouse, you find a message in a bottle asking for help.
+CHOICE: Search for the bell -> easy_sea_d3_ra0a0a0_3
+CHOICE: Follow the crab -> easy_sea_d3_ra0a0b1_6
+CHOICE: Follow the silver gull -> easy_sea_d2_ra0a0_2_side
+---
+
+[NODE easy_sea_d2_ra0a0_2_side]
+TEXT: A silver gull circles above you three times, then flies toward a quiet strip of shore. Something shiny waits beneath the foam.
+CHOICE: Gull’s Cove -> easy_sea_d2_ra0a0_2_side_a
+CHOICE: Shell Garden -> easy_sea_d2_ra0a0_2_side_b
+---
+
+[NODE easy_sea_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: Gull’s Cove
+SCENE: ocean_boat
+TEXT: The shiny object is a little compass that points toward safe water. You thank the gull and leave the compass where another sailor can find it.
+---
+
+[NODE easy_sea_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: Shell Garden
+SCENE: garden
+TEXT: The cove is filled with tiny shells arranged in a spiral. You add one shell of your own and watch the tide turn the pattern into a shining picture.
+---
+
+[NODE easy_sea_d2_ra0b1_9]
+TEXT: A trail of bright shells leads into a tide pool where a tiny crab is carrying a pearl.
+CHOICE: Follow the crab -> easy_sea_d3_ra0b1a0_10
+CHOICE: Search the shore -> easy_sea_d3_ra0b1b1_13
+CHOICE: Follow the silver gull -> easy_sea_d2_ra0b1_9_side
+---
+
+[NODE easy_sea_d2_ra0b1_9_side]
+TEXT: A silver gull circles above you three times, then flies toward a quiet strip of shore. Something shiny waits beneath the foam.
+CHOICE: Gull’s Cove -> easy_sea_d2_ra0b1_9_side_a
+CHOICE: Shell Garden -> easy_sea_d2_ra0b1_9_side_b
+---
+
+[NODE easy_sea_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: Gull’s Cove
+SCENE: ocean_boat
+TEXT: The shiny object is a little compass that points toward safe water. You thank the gull and leave the compass where another sailor can find it.
+---
+
+[NODE easy_sea_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: Shell Garden
+SCENE: garden
+TEXT: The cove is filled with tiny shells arranged in a spiral. You add one shell of your own and watch the tide turn the pattern into a shining picture.
+---
+
+[NODE easy_sea_d3_ra0a0a0_3]
+TEXT: Inside the bottle is a picture of the lighthouse keeper's missing bell. You search the shore for it.
+CHOICE: Find the lighthouse bell -> easy_sea_choice_015
+CHOICE: Explore the sea cave -> easy_sea_choice_016
+---
+
+[NODE easy_sea_d3_ra0a0b1_6]
+TEXT: The crab drops the pearl into a rock pool. It opens a hidden gate beneath the water.
+CHOICE: Find the lighthouse bell -> easy_sea_choice_017
+CHOICE: Explore the sea cave -> easy_sea_choice_018
+---
+
+[NODE easy_sea_d3_ra0b1a0_10]
+TEXT: Inside the bottle is a picture of the lighthouse keeper's missing bell. You search the shore for it.
+CHOICE: Find the lighthouse bell -> easy_sea_choice_019
+CHOICE: Explore the sea cave -> easy_sea_choice_020
+---
+
+[NODE easy_sea_d3_ra0b1b1_13]
+TEXT: The crab drops the pearl into a rock pool. It opens a hidden gate beneath the water.
+CHOICE: Find the lighthouse bell -> easy_sea_choice_021
+---
+
+[NODE easy_sea_e11]
+ENDING: true
+TITLE: Lighthouse Garden
+SCENE: garden
+TEXT: Behind the lighthouse you discover a garden watered by sea mist. Tiny flowers open when you ring the bell.
+---
+
+[NODE easy_sea_e12]
+ENDING: true
+TITLE: Crab's Treasure
+SCENE: cave_light
+TEXT: The crab shows you a small sea cave where sunlight makes the walls glow. You thank your new guide and leave the pearl where it belongs.
+---
+
+[NODE easy_sea_e14]
+ENDING: true
+TITLE: Moon Tide
+SCENE: moon
+TEXT: The tide rises beneath a silver moon. You and the dolphin watch the water sparkle before the magical book carries you home.
+---
+
+[NODE easy_sea_e4]
+ENDING: true
+TITLE: The Lighthouse Bell
+SCENE: village
+TEXT: You find the missing bell beneath a pile of seaweed and return it to the lighthouse. Its bright ring tells every boat that the shore is safe.
+---
+
+[NODE easy_sea_e5]
+ENDING: true
+TITLE: Pearl Gate
+SCENE: treasure
+TEXT: The pearl opens a small underwater gate filled with smooth stones that sparkle like stars. You take one little stone as a memory of the sea.
+---
+
+[NODE easy_sea_e7]
+ENDING: true
+TITLE: Dolphin Ride
+SCENE: ocean_boat
+TEXT: The dolphin leads you around the island before bringing you safely back to shore. You wave as it disappears beneath a shining wave.
+---
+
+[NODE easy_sea_e8]
+ENDING: true
+TITLE: Shell Message
+SCENE: map
+TEXT: The message in the bottle turns into a map of safe places along the coast. You place it in the enchanted book for another explorer.
+---
+
+[NODE easy_stars_choice_022]
+TEXT: The moment called “The Comet Garden” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e4
+CHOICE: Follow the bright star -> easy_stars_choice_022_alt
+---
+
+[NODE easy_stars_choice_022_alt]
+ENDING: true
+TITLE: The Comet Garden: Beyond the Map
+SCENE: sun
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_023]
+TEXT: The moment called “Star Pilot's Map” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e5
+CHOICE: Follow the bright star -> easy_stars_choice_023_alt
+---
+
+[NODE easy_stars_choice_023_alt]
+ENDING: true
+TITLE: Star Pilot's Map: Beyond the Map
+SCENE: map
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_024]
+TEXT: The moment called “Moon Bridge” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e7
+CHOICE: Follow the bright star -> easy_stars_choice_024_alt
+---
+
+[NODE easy_stars_choice_024_alt]
+ENDING: true
+TITLE: Moon Bridge: Beyond the Map
+SCENE: star_ship
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_025]
+TEXT: The moment called “Pocket Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e8
+CHOICE: Follow the bright star -> easy_stars_choice_025_alt
+---
+
+[NODE easy_stars_choice_025_alt]
+ENDING: true
+TITLE: Pocket Constellation: Beyond the Map
+SCENE: moon
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_026]
+TEXT: The moment called “Cloud Whale” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e11
+CHOICE: Follow the bright star -> easy_stars_choice_026_alt
+---
+
+[NODE easy_stars_choice_026_alt]
+ENDING: true
+TITLE: Cloud Whale: Beyond the Map
+SCENE: sun
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_027]
+TEXT: The moment called “Little Planet” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e12
+CHOICE: Follow the bright star -> easy_stars_choice_027_alt
+---
+
+[NODE easy_stars_choice_027_alt]
+ENDING: true
+TITLE: Little Planet: Beyond the Map
+SCENE: map
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_choice_028]
+TEXT: The moment called “Book of Stars” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Chart the way home -> easy_stars_e14
+CHOICE: Follow the bright star -> easy_stars_choice_028_alt
+---
+
+[NODE easy_stars_choice_028_alt]
+ENDING: true
+TITLE: Book of Stars: Beyond the Map
+SCENE: star_ship
+TEXT: You follow the bright star and find a tiny moon where a friendly pilot waves from a little ship. Together you draw a new star on the map before sailing home.
+---
+
+[NODE easy_stars_d1_ra0_1]
+TEXT: At the top, you find a moon bridge. A tiny comet has landed beside it and looks a little lost.
+CHOICE: Follow the comet -> easy_stars_d2_ra0a0_2
+CHOICE: Visit the little planet -> easy_stars_d2_ra0b1_9
+---
+
+[NODE easy_stars_d2_ra0a0_2]
+TEXT: You follow the comet to a small planet where a garden of glowing flowers needs one missing seed.
+CHOICE: Find the missing seed -> easy_stars_d3_ra0a0a0_3
+CHOICE: Cross the moon bridge -> easy_stars_d3_ra0a0b1_6
+CHOICE: Follow the tiny comet -> easy_stars_d2_ra0a0_2_side
+---
+
+[NODE easy_stars_d2_ra0a0_2_side]
+TEXT: A tiny comet zips past your shoulder and leaves a trail of blue sparkles. The sparkles form a little door in the air.
+CHOICE: Comet Door -> easy_stars_d2_ra0a0_2_side_a
+CHOICE: Cloud Observatory -> easy_stars_d2_ra0a0_2_side_b
+---
+
+[NODE easy_stars_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: Comet Door
+SCENE: garden
+TEXT: The door opens onto a garden floating beside a moon. You plant one glowing seed, and it becomes a new star-shaped flower.
+---
+
+[NODE easy_stars_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: Cloud Observatory
+SCENE: map
+TEXT: The comet carries you to a soft cloud where you can see the whole storybook below. You wave to the library and mark the view on your map.
+---
+
+[NODE easy_stars_d2_ra0b1_9]
+TEXT: You cross the moon bridge and meet a friendly star pilot whose ship has lost its map.
+CHOICE: Cross the moon bridge -> easy_stars_d3_ra0b1a0_10
+CHOICE: Follow the comet -> easy_stars_d3_ra0b1b1_13
+CHOICE: Follow the tiny comet -> easy_stars_d2_ra0b1_9_side
+---
+
+[NODE easy_stars_d2_ra0b1_9_side]
+TEXT: A tiny comet zips past your shoulder and leaves a trail of blue sparkles. The sparkles form a little door in the air.
+CHOICE: Comet Door -> easy_stars_d2_ra0b1_9_side_a
+CHOICE: Cloud Observatory -> easy_stars_d2_ra0b1_9_side_b
+---
+
+[NODE easy_stars_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: Comet Door
+SCENE: garden
+TEXT: The door opens onto a garden floating beside a moon. You plant one glowing seed, and it becomes a new star-shaped flower.
+---
+
+[NODE easy_stars_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: Cloud Observatory
+SCENE: map
+TEXT: The comet carries you to a soft cloud where you can see the whole storybook below. You wave to the library and mark the view on your map.
+---
+
+[NODE easy_stars_d3_ra0a0a0_3]
+TEXT: The comet leads you to the missing seed, hidden under a soft blue stone.
+CHOICE: Find the star map -> easy_stars_choice_022
+CHOICE: Guide the ship -> easy_stars_choice_023
+---
+
+[NODE easy_stars_d3_ra0a0b1_6]
+TEXT: The star pilot shows you the last place the map was seen: a quiet cloud shaped like a whale.
+CHOICE: Find the star map -> easy_stars_choice_024
+CHOICE: Guide the ship -> easy_stars_choice_025
+---
+
+[NODE easy_stars_d3_ra0b1a0_10]
+TEXT: The comet leads you to the missing seed, hidden under a soft blue stone.
+CHOICE: Find the star map -> easy_stars_choice_026
+CHOICE: Guide the ship -> easy_stars_choice_027
+---
+
+[NODE easy_stars_d3_ra0b1b1_13]
+TEXT: The star pilot shows you the last place the map was seen: a quiet cloud shaped like a whale.
+CHOICE: Find the star map -> easy_stars_choice_028
+---
+
+[NODE easy_stars_e11]
+ENDING: true
+TITLE: Cloud Whale
+SCENE: sun
+TEXT: The cloud whale carries you gently across the sky. When morning light reaches the page, it releases you beside the library ladder.
+---
+
+[NODE easy_stars_e12]
+ENDING: true
+TITLE: Little Planet
+SCENE: mountain
+TEXT: You help the garden grow, and the planet's hill fills with glowing flowers. From the top, you can see the whole starry storybook.
+---
+
+[NODE easy_stars_e14]
+ENDING: true
+TITLE: Book of Stars
+SCENE: library_return
+TEXT: The star pilot gives you a blank star map. Back in the library, it fills itself with every place you visited.
+---
+
+[NODE easy_stars_e4]
+ENDING: true
+TITLE: The Comet Garden
+SCENE: garden
+TEXT: You return the missing seed to the glowing garden. Every flower opens at once, making the tiny planet look like a lantern.
+---
+
+[NODE easy_stars_e5]
+ENDING: true
+TITLE: Star Pilot's Map
+SCENE: star_ship
+TEXT: You find the map inside the whale-shaped cloud and return it to the pilot. The little starship gives a cheerful beep before sailing home.
+---
+
+[NODE easy_stars_e7]
+ENDING: true
+TITLE: Moon Bridge
+SCENE: moon
+TEXT: You cross the moon bridge with the friendly comet beside you. At the far end, a silver doorway opens back into the enchanted library.
+---
+
+[NODE easy_stars_e8]
+ENDING: true
+TITLE: Pocket Constellation
+SCENE: treasure
+TEXT: A tiny flower gives you one glowing petal. When you place it in the book, it becomes a new constellation drawn just for you.
+---
+
+[NODE hard_castle_choice_074]
+TEXT: The moment called “The Keeper's Promise” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e4
+CHOICE: Unlock the final chamber -> hard_castle_choice_074_alt
+---
+
+[NODE hard_castle_choice_074_alt]
+ENDING: true
+TITLE: The Keeper's Promise: One Last Door
+SCENE: crown
+TEXT: You refuse to rush past the final clue in “The Keeper's Promise.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_075]
+TEXT: The moment called “The Open Castle” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e5
+CHOICE: Unlock the final chamber -> hard_castle_choice_075_alt
+---
+
+[NODE hard_castle_choice_075_alt]
+ENDING: true
+TITLE: The Open Castle: One Last Door
+SCENE: garden
+TEXT: You refuse to rush past the final clue in “The Open Castle.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_076]
+TEXT: The moment called “The Archive's Secret” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e7
+CHOICE: Unlock the final chamber -> hard_castle_choice_076_alt
+---
+
+[NODE hard_castle_choice_076_alt]
+ENDING: true
+TITLE: The Archive's Secret: One Last Door
+SCENE: castle
+TEXT: You refuse to rush past the final clue in “The Archive's Secret.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_077]
+TEXT: The moment called “The Clockwork Dragon” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e8
+CHOICE: Unlock the final chamber -> hard_castle_choice_077_alt
+---
+
+[NODE hard_castle_choice_077_alt]
+ENDING: true
+TITLE: The Clockwork Dragon: One Last Door
+SCENE: feast
+TEXT: You refuse to rush past the final clue in “The Clockwork Dragon.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_078]
+TEXT: The moment called “Feast at Sunset” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e10
+CHOICE: Unlock the final chamber -> hard_castle_choice_078_alt
+---
+
+[NODE hard_castle_choice_078_alt]
+ENDING: true
+TITLE: Feast at Sunset: One Last Door
+SCENE: crown
+TEXT: You refuse to rush past the final clue in “Feast at Sunset.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_079]
+TEXT: The moment called “The Brass Key” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e11
+CHOICE: Unlock the final chamber -> hard_castle_choice_079_alt
+---
+
+[NODE hard_castle_choice_079_alt]
+ENDING: true
+TITLE: The Brass Key: One Last Door
+SCENE: garden
+TEXT: You refuse to rush past the final clue in “The Brass Key.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_080]
+TEXT: The moment called “Tower Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e14
+CHOICE: Unlock the final chamber -> hard_castle_choice_080_alt
+---
+
+[NODE hard_castle_choice_080_alt]
+ENDING: true
+TITLE: Tower Garden: One Last Door
+SCENE: castle
+TEXT: You refuse to rush past the final clue in “Tower Garden.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_081]
+TEXT: The moment called “The Castle Map” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e15
+CHOICE: Unlock the final chamber -> hard_castle_choice_081_alt
+---
+
+[NODE hard_castle_choice_081_alt]
+ENDING: true
+TITLE: The Castle Map: One Last Door
+SCENE: feast
+TEXT: You refuse to rush past the final clue in “The Castle Map.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_choice_082]
+TEXT: The moment called “The Midnight Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Seal the castle record -> hard_castle_e17
+CHOICE: Unlock the final chamber -> hard_castle_choice_082_alt
+---
+
+[NODE hard_castle_choice_082_alt]
+ENDING: true
+TITLE: The Midnight Bell: One Last Door
+SCENE: crown
+TEXT: You refuse to rush past the final clue in “The Midnight Bell.” The last chamber contains the castle’s unfinished record, and by reading it carefully you discover that preserving a story can matter just as much as solving its mystery.
+---
+
+[NODE hard_castle_d1_ra0_1]
+TEXT: You follow the cat into the archive and find three histories of the castle. Only one contains the symbol engraved on the silent clock.
+CHOICE: Study the founding histories -> hard_castle_d2_ra0a0_2
+CHOICE: Climb the eastern tower -> hard_castle_d2_ra0b1_12
+---
+
+[NODE hard_castle_d2_ra0a0_2]
+TEXT: You climb the eastern tower and discover that its gears are moving, but the hands cannot agree on the hour. A brass inscription asks the reader to choose what the castle should remember.
+CHOICE: Find the true history -> hard_castle_d3_ra0a0a0_3
+CHOICE: Study the clock inscription -> hard_castle_d3_ra0a0b1_6
+CHOICE: Search the old portrait -> hard_castle_d3_ra0a0c2_9
+CHOICE: Study the old service passage -> hard_castle_d2_ra0a0_2_side
+---
+
+[NODE hard_castle_d2_ra0a0_2_side]
+TEXT: A draft carries the smell of dust and cedar from a passage used by cooks, messengers, and librarians long ago. Its walls are covered with small notes about the castle’s daily life.
+CHOICE: The Service Chronicle -> hard_castle_d2_ra0a0_2_side_a
+CHOICE: The Overlook -> hard_castle_d2_ra0a0_2_side_b
+---
+
+[NODE hard_castle_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Service Chronicle
+SCENE: library_return
+TEXT: You piece together the notes and realise the castle was kept running by hundreds of small acts of care. You preserve the record in the library archive.
+---
+
+[NODE hard_castle_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Overlook
+SCENE: map
+TEXT: The passage ends at an overlook above the whole keep. From there, you understand why the corridors were built as they were and sketch the design for future readers.
+---
+
+[NODE hard_castle_d2_ra0b1_12]
+TEXT: The great hall is prepared for a feast, yet the tables remain empty because the castle's ceremonial key has vanished.
+CHOICE: Repair the tower clock -> hard_castle_d3_ra0b1a0_13
+CHOICE: Find the ceremonial key -> hard_castle_d3_ra0b1b1_16
+CHOICE: Study the old service passage -> hard_castle_d2_ra0b1_12_side
+---
+
+[NODE hard_castle_d2_ra0b1_12_side]
+TEXT: A draft carries the smell of dust and cedar from a passage used by cooks, messengers, and librarians long ago. Its walls are covered with small notes about the castle’s daily life.
+CHOICE: The Service Chronicle -> hard_castle_d2_ra0b1_12_side_a
+CHOICE: The Overlook -> hard_castle_d2_ra0b1_12_side_b
+---
+
+[NODE hard_castle_d2_ra0b1_12_side_a]
+ENDING: true
+TITLE: The Service Chronicle
+SCENE: library_return
+TEXT: You piece together the notes and realise the castle was kept running by hundreds of small acts of care. You preserve the record in the library archive.
+---
+
+[NODE hard_castle_d2_ra0b1_12_side_b]
+ENDING: true
+TITLE: The Overlook
+SCENE: map
+TEXT: The passage ends at an overlook above the whole keep. From there, you understand why the corridors were built as they were and sketch the design for future readers.
+---
+
+[NODE hard_castle_d3_ra0a0a0_3]
+TEXT: The founding history describes a promise made by the first keeper: the castle would remain open to anyone who came in peace.
+CHOICE: Restore the keeper's promise -> hard_castle_choice_074
+CHOICE: Open the castle gates -> hard_castle_choice_075
+---
+
+[NODE hard_castle_d3_ra0a0b1_6]
+TEXT: The eastern tower inscription suggests that the clock is not measuring time at all; it is measuring whether the castle still keeps its promise.
+CHOICE: Meet the clockwork dragon -> hard_castle_choice_076
+CHOICE: Help the evening feast -> hard_castle_choice_077
+---
+
+[NODE hard_castle_d3_ra0a0c2_9]
+TEXT: The ceremonial key is found inside a locked display case beside a portrait of the first keeper.
+CHOICE: Enter the garden -> hard_castle_choice_078
+CHOICE: Repair the archive -> hard_castle_choice_079
+---
+
+[NODE hard_castle_d3_ra0b1a0_13]
+TEXT: The founding history describes a promise made by the first keeper: the castle would remain open to anyone who came in peace.
+CHOICE: Protect the castle's promise -> hard_castle_choice_080
+CHOICE: Return the key -> hard_castle_choice_081
+---
+
+[NODE hard_castle_d3_ra0b1b1_16]
+TEXT: The eastern tower inscription suggests that the clock is not measuring time at all; it is measuring whether the castle still keeps its promise.
+CHOICE: Ring the midnight bell -> hard_castle_choice_082
+---
+
+[NODE hard_castle_e10]
+ENDING: true
+TITLE: Feast at Sunset
+SCENE: feast
+TEXT: The restored clock reaches sunset, and the empty tables fill with food as if the castle has been waiting for that exact moment. Everyone is invited to share the meal.
+---
+
+[NODE hard_castle_e11]
+ENDING: true
+TITLE: The Brass Key
+SCENE: treasure
+TEXT: The ceremonial key is placed back in its display case, but the castle gives you a small brass copy for your courage. You carry it home as a reminder of the keeper's promise.
+---
+
+[NODE hard_castle_e14]
+ENDING: true
+TITLE: Tower Garden
+SCENE: garden
+TEXT: Behind the eastern clock you discover a roof garden planted by the first keeper. Its flowers open whenever the castle acts with kindness.
+---
+
+[NODE hard_castle_e15]
+ENDING: true
+TITLE: The Castle Map
+SCENE: map
+TEXT: The archives reveal a detailed map of every tower, hall, and hidden stair. You return it to its proper shelf so future visitors can navigate the keep safely.
+---
+
+[NODE hard_castle_e17]
+ENDING: true
+TITLE: The Midnight Bell
+SCENE: moon
+TEXT: At midnight, every clock gives a single gentle chime. The castle settles into peaceful silence, its promise preserved for another generation.
+---
+
+[NODE hard_castle_e4]
+ENDING: true
+TITLE: The Keeper's Promise
+SCENE: crown
+TEXT: You restore the founding page and read the old promise aloud. The clocks begin moving together, and the castle welcomes you as an honorary keeper.
+---
+
+[NODE hard_castle_e5]
+ENDING: true
+TITLE: The Open Castle
+SCENE: castle
+TEXT: You use the ceremonial key to unlock the castle's gates. The servants cheer as the keep becomes bright and welcoming once more.
+---
+
+[NODE hard_castle_e7]
+ENDING: true
+TITLE: The Archive's Secret
+SCENE: library_return
+TEXT: You return the correct founding history to the archive and leave the false copies untouched. The librarian thanks you for preserving the story rather than changing it.
+---
+
+[NODE hard_castle_e8]
+ENDING: true
+TITLE: The Clockwork Dragon
+SCENE: dragon_friend
+TEXT: The silent clock opens to reveal a tiny mechanical dragon keeping its gears in order. You repair its loose spring, and it bows before returning to its clockwork nest.
+---
+
+[NODE hard_forest_choice_065]
+TEXT: The moment called “Keeper of the Seeds” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e4
+CHOICE: Follow the hidden trail -> hard_forest_choice_065_alt
+---
+
+[NODE hard_forest_choice_065_alt]
+ENDING: true
+TITLE: Keeper of the Seeds: The Longer Trail
+SCENE: garden
+TEXT: Instead of closing the chapter at “Keeper of the Seeds,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_066]
+TEXT: The moment called “The Living Bridge” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e5
+CHOICE: Follow the hidden trail -> hard_forest_choice_066_alt
+---
+
+[NODE hard_forest_choice_066_alt]
+ENDING: true
+TITLE: The Living Bridge: The Longer Trail
+SCENE: map
+TEXT: Instead of closing the chapter at “The Living Bridge,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_067]
+TEXT: The moment called “Compass of the Woods” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e7
+CHOICE: Follow the hidden trail -> hard_forest_choice_067_alt
+---
+
+[NODE hard_forest_choice_067_alt]
+ENDING: true
+TITLE: Compass of the Woods: The Longer Trail
+SCENE: village
+TEXT: Instead of closing the chapter at “Compass of the Woods,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_068]
+TEXT: The moment called “The Whistle's Rest” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e8
+CHOICE: Follow the hidden trail -> hard_forest_choice_068_alt
+---
+
+[NODE hard_forest_choice_068_alt]
+ENDING: true
+TITLE: The Whistle's Rest: The Longer Trail
+SCENE: forest_home
+TEXT: Instead of closing the chapter at “The Whistle's Rest,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_069]
+TEXT: The moment called “Seed Garden” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e10
+CHOICE: Follow the hidden trail -> hard_forest_choice_069_alt
+---
+
+[NODE hard_forest_choice_069_alt]
+ENDING: true
+TITLE: Seed Garden: The Longer Trail
+SCENE: garden
+TEXT: Instead of closing the chapter at “Seed Garden,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_070]
+TEXT: The moment called “Fox at Twilight” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e11
+CHOICE: Follow the hidden trail -> hard_forest_choice_070_alt
+---
+
+[NODE hard_forest_choice_070_alt]
+ENDING: true
+TITLE: Fox at Twilight: The Longer Trail
+SCENE: map
+TEXT: Instead of closing the chapter at “Fox at Twilight,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_071]
+TEXT: The moment called “The Woodland Archive” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e14
+CHOICE: Follow the hidden trail -> hard_forest_choice_071_alt
+---
+
+[NODE hard_forest_choice_071_alt]
+ENDING: true
+TITLE: The Woodland Archive: The Longer Trail
+SCENE: village
+TEXT: Instead of closing the chapter at “The Woodland Archive,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_072]
+TEXT: The moment called “Wind Lantern” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e15
+CHOICE: Follow the hidden trail -> hard_forest_choice_072_alt
+---
+
+[NODE hard_forest_choice_072_alt]
+ENDING: true
+TITLE: Wind Lantern: The Longer Trail
+SCENE: forest_home
+TEXT: Instead of closing the chapter at “Wind Lantern,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_choice_073]
+TEXT: The moment called “A New Trail” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Record what you learned -> hard_forest_e17
+CHOICE: Follow the hidden trail -> hard_forest_choice_073_alt
+---
+
+[NODE hard_forest_choice_073_alt]
+ENDING: true
+TITLE: A New Trail: The Longer Trail
+SCENE: garden
+TEXT: Instead of closing the chapter at “A New Trail,” you follow the forest’s final invitation. The trail reveals how several small choices were connected all along, and you return to the library with a map that will help another reader travel wisely.
+---
+
+[NODE hard_forest_d1_ra0_1]
+TEXT: You examine the compass stone and realize the forest paths are being rearranged by a wandering wind. If the wind continues, the woodland animals may lose their familiar routes.
+CHOICE: Examine the compass stone -> hard_forest_d2_ra0a0_2
+CHOICE: Follow the stream -> hard_forest_d2_ra0b1_12
+---
+
+[NODE hard_forest_d2_ra0a0_2]
+TEXT: You follow the silver leaves to a clearing where an old seed vault has been opened. Several enchanted seeds are scattered across the moss.
+CHOICE: Sort the enchanted seeds -> hard_forest_d3_ra0a0a0_3
+CHOICE: Trace the silver whistle -> hard_forest_d3_ra0a0b1_6
+CHOICE: Study the seed vault -> hard_forest_d3_ra0a0c2_9
+CHOICE: Read the forest ledger -> hard_forest_d2_ra0a0_2_side
+---
+
+[NODE hard_forest_d2_ra0a0_2_side]
+TEXT: A narrow strip of bark bears a list of names and dates. It seems to be a record of everyone who has helped the woods, and one empty line waits for your choice.
+CHOICE: The Forest Ledger -> hard_forest_d2_ra0a0_2_side_a
+CHOICE: The Unmarked Grove -> hard_forest_d2_ra0a0_2_side_b
+---
+
+[NODE hard_forest_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Forest Ledger
+SCENE: library_return
+TEXT: You add the truth about what you discovered rather than taking credit for everything. The ancient trees rustle in approval, and the ledger becomes a little more complete.
+---
+
+[NODE hard_forest_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Unmarked Grove
+SCENE: map
+TEXT: The ledger points toward a grove missing from every map. You find it thriving quietly beyond the known trail and leave its location for careful explorers to discover later.
+---
+
+[NODE hard_forest_d2_ra0b1_12]
+TEXT: The fox guides you toward a stream where the wind has tangled a bridge of living vines. A nest hangs precariously above the water.
+CHOICE: Secure the vine bridge -> hard_forest_d3_ra0b1a0_13
+CHOICE: Follow the fox -> hard_forest_d3_ra0b1b1_16
+CHOICE: Read the forest ledger -> hard_forest_d2_ra0b1_12_side
+---
+
+[NODE hard_forest_d2_ra0b1_12_side]
+TEXT: A narrow strip of bark bears a list of names and dates. It seems to be a record of everyone who has helped the woods, and one empty line waits for your choice.
+CHOICE: The Forest Ledger -> hard_forest_d2_ra0b1_12_side_a
+CHOICE: The Unmarked Grove -> hard_forest_d2_ra0b1_12_side_b
+---
+
+[NODE hard_forest_d2_ra0b1_12_side_a]
+ENDING: true
+TITLE: The Forest Ledger
+SCENE: library_return
+TEXT: You add the truth about what you discovered rather than taking credit for everything. The ancient trees rustle in approval, and the ledger becomes a little more complete.
+---
+
+[NODE hard_forest_d2_ra0b1_12_side_b]
+ENDING: true
+TITLE: The Unmarked Grove
+SCENE: map
+TEXT: The ledger points toward a grove missing from every map. You find it thriving quietly beyond the known trail and leave its location for careful explorers to discover later.
+---
+
+[NODE hard_forest_d3_ra0a0a0_3]
+TEXT: The compass points toward the seed vault. You carefully sort the seeds by the pictures carved on their shells.
+CHOICE: Restore the seed vault -> hard_forest_choice_065
+CHOICE: Record the trail -> hard_forest_choice_066
+---
+
+[NODE hard_forest_d3_ra0a0b1_6]
+TEXT: You anchor the vine bridge with fallen branches, creating a safe crossing for the animals.
+CHOICE: Strengthen the bridge -> hard_forest_choice_067
+CHOICE: Test the crossing -> hard_forest_choice_068
+---
+
+[NODE hard_forest_d3_ra0a0c2_9]
+TEXT: The fox reveals that the wandering wind follows the sound of a silver whistle hidden somewhere in the woods.
+CHOICE: Find the whistle -> hard_forest_choice_069
+CHOICE: Leave it untouched -> hard_forest_choice_070
+---
+
+[NODE hard_forest_d3_ra0b1a0_13]
+TEXT: The compass points toward the seed vault. You carefully sort the seeds by the pictures carved on their shells.
+CHOICE: Guide the animals -> hard_forest_choice_071
+CHOICE: Map the safe crossing -> hard_forest_choice_072
+---
+
+[NODE hard_forest_d3_ra0b1b1_16]
+TEXT: You anchor the vine bridge with fallen branches, creating a safe crossing for the animals.
+CHOICE: Follow the twilight trail -> hard_forest_choice_073
+---
+
+[NODE hard_forest_e10]
+ENDING: true
+TITLE: Seed Garden
+SCENE: garden
+TEXT: The scattered seeds are planted in the proper places, and a hidden garden blooms around the vault. Each flower carries the color of a different forest trail.
+---
+
+[NODE hard_forest_e11]
+ENDING: true
+TITLE: Fox at Twilight
+SCENE: moon
+TEXT: The fox leads you home by a route that only appears at twilight. From the hilltop, you watch the restored paths glow faintly beneath the moon.
+---
+
+[NODE hard_forest_e14]
+ENDING: true
+TITLE: The Woodland Archive
+SCENE: library_return
+TEXT: You bring the compass rubbing and the seed record back to the enchanted library. The librarian adds them to a new volume about caring for magical places.
+---
+
+[NODE hard_forest_e15]
+ENDING: true
+TITLE: Wind Lantern
+SCENE: wizard
+TEXT: The silver leaves become a lantern when gathered gently. A forest wizard teaches you how to hang it where its glow will guide travelers without changing their path.
+---
+
+[NODE hard_forest_e17]
+ENDING: true
+TITLE: A New Trail
+SCENE: mountain
+TEXT: You discover that the wandering wind has opened a trail toward a distant green mountain. You mark the route carefully, knowing that another adventure will begin there someday.
+---
+
+[NODE hard_forest_e4]
+ENDING: true
+TITLE: Keeper of the Seeds
+SCENE: forest_home
+TEXT: You return every enchanted seed to the vault and close it securely. When the wind settles, new leaves appear along the correct trails, restoring the forest's natural paths.
+---
+
+[NODE hard_forest_e5]
+ENDING: true
+TITLE: The Living Bridge
+SCENE: bridge
+TEXT: You strengthen the vine bridge without cutting its living strands. The animals cross safely, and the bridge curls back into a graceful arch.
+---
+
+[NODE hard_forest_e7]
+ENDING: true
+TITLE: Compass of the Woods
+SCENE: map
+TEXT: The compass stone becomes clear once the wind quiets. You copy its markings into a map and leave the map in the library for future woodland travelers.
+---
+
+[NODE hard_forest_e8]
+ENDING: true
+TITLE: The Whistle's Rest
+SCENE: treasure
+TEXT: You find the silver whistle beneath an old stump and choose not to blow it. Instead, you return it to its keeper, who explains that some magic is safest when left quiet.
+---
+
+[NODE hard_sea_choice_083]
+TEXT: The moment called “The Safe Harbor” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e4
+CHOICE: Follow the distant light -> hard_sea_choice_083_alt
+---
+
+[NODE hard_sea_choice_083_alt]
+ENDING: true
+TITLE: The Safe Harbor: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the distant light instead of ending the voyage at “The Safe Harbor.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_084]
+TEXT: The moment called “The Reef Chart” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e5
+CHOICE: Follow the distant light -> hard_sea_choice_084_alt
+---
+
+[NODE hard_sea_choice_084_alt]
+ENDING: true
+TITLE: The Reef Chart: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the distant light instead of ending the voyage at “The Reef Chart.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_085]
+TEXT: The moment called “The Sheltered Cove” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e7
+CHOICE: Follow the distant light -> hard_sea_choice_085_alt
+---
+
+[NODE hard_sea_choice_085_alt]
+ENDING: true
+TITLE: The Sheltered Cove: Beyond the Harbor
+SCENE: village
+TEXT: You follow the distant light instead of ending the voyage at “The Sheltered Cove.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_086]
+TEXT: The moment called “Keeper of the Light” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e8
+CHOICE: Follow the distant light -> hard_sea_choice_086_alt
+---
+
+[NODE hard_sea_choice_086_alt]
+ENDING: true
+TITLE: Keeper of the Light: Beyond the Harbor
+SCENE: moon
+TEXT: You follow the distant light instead of ending the voyage at “Keeper of the Light.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_087]
+TEXT: The moment called “The Brass Markers” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e10
+CHOICE: Follow the distant light -> hard_sea_choice_087_alt
+---
+
+[NODE hard_sea_choice_087_alt]
+ENDING: true
+TITLE: The Brass Markers: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the distant light instead of ending the voyage at “The Brass Markers.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_088]
+TEXT: The moment called “Storm Moon” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e11
+CHOICE: Follow the distant light -> hard_sea_choice_088_alt
+---
+
+[NODE hard_sea_choice_088_alt]
+ENDING: true
+TITLE: Storm Moon: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the distant light instead of ending the voyage at “Storm Moon.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_089]
+TEXT: The moment called “Garden by the Sea” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e14
+CHOICE: Follow the distant light -> hard_sea_choice_089_alt
+---
+
+[NODE hard_sea_choice_089_alt]
+ENDING: true
+TITLE: Garden by the Sea: Beyond the Harbor
+SCENE: village
+TEXT: You follow the distant light instead of ending the voyage at “Garden by the Sea.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_090]
+TEXT: The moment called “The Lighthouse Bridge” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e15
+CHOICE: Follow the distant light -> hard_sea_choice_090_alt
+---
+
+[NODE hard_sea_choice_090_alt]
+ENDING: true
+TITLE: The Lighthouse Bridge: Beyond the Harbor
+SCENE: moon
+TEXT: You follow the distant light instead of ending the voyage at “The Lighthouse Bridge.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_choice_091]
+TEXT: The moment called “The Harbor's Memory” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Mark the safe harbor -> hard_sea_e17
+CHOICE: Follow the distant light -> hard_sea_choice_091_alt
+---
+
+[NODE hard_sea_choice_091_alt]
+ENDING: true
+TITLE: The Harbor's Memory: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the distant light instead of ending the voyage at “The Harbor's Memory.” Beyond the familiar water lies an overlooked inlet whose markers complete the harbor map, turning your journey into a lesson about noticing what earlier explorers missed.
+---
+
+[NODE hard_sea_d1_ra0_1]
+TEXT: You study the chart and notice that the missing section matches the shape of the lighthouse lens. Perhaps the route was meant to be read through light.
+CHOICE: Follow the lighthouse clue -> hard_sea_d2_ra0a0_2
+CHOICE: Follow the harbor markers -> hard_sea_d2_ra0b1_12
+---
+
+[NODE hard_sea_d2_ra0a0_2]
+TEXT: You follow a seal to a tide pool where several brass markers form a pattern. The pattern resembles a warning used by the old harbor keepers.
+CHOICE: Align the brass markers -> hard_sea_d3_ra0a0a0_3
+CHOICE: Read the hidden chart -> hard_sea_d3_ra0a0b1_6
+CHOICE: Check the reef warning -> hard_sea_d3_ra0a0c2_9
+CHOICE: Trace the old current map -> hard_sea_d2_ra0a0_2_side
+---
+
+[NODE hard_sea_d2_ra0a0_2_side]
+TEXT: A faded chart has been scratched into a piece of driftwood. Its currents do not match the modern harbor, suggesting the coastline has changed over time.
+CHOICE: The Changing Coast -> hard_sea_d2_ra0a0_2_side_a
+CHOICE: The Deepwater Bell -> hard_sea_d2_ra0a0_2_side_b
+---
+
+[NODE hard_sea_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Changing Coast
+SCENE: map
+TEXT: You compare the old chart with what you can see and realise the sea has quietly redrawn the shore. Your careful notes become a valuable addition to the library’s maps.
+---
+
+[NODE hard_sea_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Deepwater Bell
+SCENE: ocean_boat
+TEXT: The old current leads you to a bell beneath the surface. Its sound marks a safe channel, and you learn that the best clues are sometimes heard rather than seen.
+---
+
+[NODE hard_sea_d2_ra0b1_12]
+TEXT: At the lighthouse, the keeper explains that the storm can be safely guided around the island if the forgotten signal sequence is restored.
+CHOICE: Read the keeper's journal -> hard_sea_d3_ra0b1a0_13
+CHOICE: Guide the signal -> hard_sea_d3_ra0b1b1_16
+CHOICE: Trace the old current map -> hard_sea_d2_ra0b1_12_side
+---
+
+[NODE hard_sea_d2_ra0b1_12_side]
+TEXT: A faded chart has been scratched into a piece of driftwood. Its currents do not match the modern harbor, suggesting the coastline has changed over time.
+CHOICE: The Changing Coast -> hard_sea_d2_ra0b1_12_side_a
+CHOICE: The Deepwater Bell -> hard_sea_d2_ra0b1_12_side_b
+---
+
+[NODE hard_sea_d2_ra0b1_12_side_a]
+ENDING: true
+TITLE: The Changing Coast
+SCENE: map
+TEXT: You compare the old chart with what you can see and realise the sea has quietly redrawn the shore. Your careful notes become a valuable addition to the library’s maps.
+---
+
+[NODE hard_sea_d2_ra0b1_12_side_b]
+ENDING: true
+TITLE: The Deepwater Bell
+SCENE: ocean_boat
+TEXT: The old current leads you to a bell beneath the surface. Its sound marks a safe channel, and you learn that the best clues are sometimes heard rather than seen.
+---
+
+[NODE hard_sea_d3_ra0a0a0_3]
+TEXT: The brass markers identify a submerged reef. You place them in a line that reveals the safest channel for boats.
+CHOICE: Mark the safe channel -> hard_sea_choice_083
+CHOICE: Complete the chart -> hard_sea_choice_084
+---
+
+[NODE hard_sea_d3_ra0a0b1_6]
+TEXT: The old chart becomes readable when the lighthouse beam passes across it. A hidden route appears toward a sheltered cove.
+CHOICE: Explore the sheltered cove -> hard_sea_choice_085
+CHOICE: Secure the marker -> hard_sea_choice_086
+---
+
+[NODE hard_sea_d3_ra0a0c2_9]
+TEXT: The keeper gives you responsibility for one signal: a choice between warning ships away or guiding them toward the protected harbor.
+CHOICE: Restore the harbor signal -> hard_sea_choice_087
+CHOICE: Choose the safer route -> hard_sea_choice_088
+---
+
+[NODE hard_sea_d3_ra0b1a0_13]
+TEXT: The brass markers identify a submerged reef. You place them in a line that reveals the safest channel for boats.
+CHOICE: Help the harbor village -> hard_sea_choice_089
+CHOICE: Recover the markers -> hard_sea_choice_090
+---
+
+[NODE hard_sea_d3_ra0b1b1_16]
+TEXT: The old chart becomes readable when the lighthouse beam passes across it. A hidden route appears toward a sheltered cove.
+CHOICE: Light the moon signal -> hard_sea_choice_091
+---
+
+[NODE hard_sea_e10]
+ENDING: true
+TITLE: The Brass Markers
+SCENE: treasure
+TEXT: You recover the brass markers and polish them until their symbols shine. The keeper stores them safely for the next stormy night.
+---
+
+[NODE hard_sea_e11]
+ENDING: true
+TITLE: Storm Moon
+SCENE: moon
+TEXT: The clouds break just as the final signal is lit. Under the moon, the sea settles into long silver lines around the quiet harbor.
+---
+
+[NODE hard_sea_e14]
+ENDING: true
+TITLE: Garden by the Sea
+SCENE: garden
+TEXT: Behind the lighthouse, rainwater fills a small garden basin. Salt-tolerant flowers bloom there, and you help the keeper protect them from the wind.
+---
+
+[NODE hard_sea_e15]
+ENDING: true
+TITLE: The Lighthouse Bridge
+SCENE: bridge
+TEXT: The old route crosses a narrow rocky inlet. You secure its rope bridge before anyone crosses, turning a dangerous shortcut into a safe passage.
+---
+
+[NODE hard_sea_e17]
+ENDING: true
+TITLE: The Harbor's Memory
+SCENE: library_return
+TEXT: You bring a copy of the restored signal code back to the enchanted library. Its pages whisper with the sound of waves whenever another reader opens it.
+---
+
+[NODE hard_sea_e4]
+ENDING: true
+TITLE: The Safe Harbor
+SCENE: ocean_boat
+TEXT: You restore the signal sequence before the storm arrives. Boats follow the lighthouse beam into the protected harbor, where the waves cannot reach them.
+---
+
+[NODE hard_sea_e5]
+ENDING: true
+TITLE: The Reef Chart
+SCENE: map
+TEXT: You complete the old chart with the submerged reef markings. The finished map becomes part of the lighthouse archive and the enchanted library.
+---
+
+[NODE hard_sea_e7]
+ENDING: true
+TITLE: The Sheltered Cove
+SCENE: cave_light
+TEXT: The hidden route leads to a cave where the storm sounds distant. Inside, the walls glow with shells left by generations of careful sailors.
+---
+
+[NODE hard_sea_e8]
+ENDING: true
+TITLE: Keeper of the Light
+SCENE: village
+TEXT: The lighthouse keeper invites you to the harbor village after the storm passes. The villagers thank you for taking the signal work seriously.
+---
+
+[NODE hard_stars_choice_092]
+TEXT: The moment called “The Hidden Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e4
+CHOICE: Cross the unknown bridge -> hard_stars_choice_092_alt
+---
+
+[NODE hard_stars_choice_092_alt]
+ENDING: true
+TITLE: The Hidden Constellation: Beyond the Map
+SCENE: star_ship
+TEXT: You cross beyond the boundary marked by “The Hidden Constellation.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_093]
+TEXT: The moment called “The Astrolabe” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e5
+CHOICE: Cross the unknown bridge -> hard_stars_choice_093_alt
+---
+
+[NODE hard_stars_choice_093_alt]
+ENDING: true
+TITLE: The Astrolabe: Beyond the Map
+SCENE: moon
+TEXT: You cross beyond the boundary marked by “The Astrolabe.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_094]
+TEXT: The moment called “The Moon Bridge” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e7
+CHOICE: Cross the unknown bridge -> hard_stars_choice_094_alt
+---
+
+[NODE hard_stars_choice_094_alt]
+ENDING: true
+TITLE: The Moon Bridge: Beyond the Map
+SCENE: sun
+TEXT: You cross beyond the boundary marked by “The Moon Bridge.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_095]
+TEXT: The moment called “Garden of True Stories” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e8
+CHOICE: Cross the unknown bridge -> hard_stars_choice_095_alt
+---
+
+[NODE hard_stars_choice_095_alt]
+ENDING: true
+TITLE: Garden of True Stories: Beyond the Map
+SCENE: map
+TEXT: You cross beyond the boundary marked by “Garden of True Stories.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_096]
+TEXT: The moment called “The Forgotten Story” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e10
+CHOICE: Cross the unknown bridge -> hard_stars_choice_096_alt
+---
+
+[NODE hard_stars_choice_096_alt]
+ENDING: true
+TITLE: The Forgotten Story: Beyond the Map
+SCENE: star_ship
+TEXT: You cross beyond the boundary marked by “The Forgotten Story.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_097]
+TEXT: The moment called “Dawn Beyond the Clouds” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e11
+CHOICE: Cross the unknown bridge -> hard_stars_choice_097_alt
+---
+
+[NODE hard_stars_choice_097_alt]
+ENDING: true
+TITLE: Dawn Beyond the Clouds: Beyond the Map
+SCENE: moon
+TEXT: You cross beyond the boundary marked by “Dawn Beyond the Clouds.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_098]
+TEXT: The moment called “The Star Archive” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e14
+CHOICE: Cross the unknown bridge -> hard_stars_choice_098_alt
+---
+
+[NODE hard_stars_choice_098_alt]
+ENDING: true
+TITLE: The Star Archive: Beyond the Map
+SCENE: sun
+TEXT: You cross beyond the boundary marked by “The Star Archive.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_099]
+TEXT: The moment called “Phoenix of Starlight” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e15
+CHOICE: Cross the unknown bridge -> hard_stars_choice_099_alt
+---
+
+[NODE hard_stars_choice_099_alt]
+ENDING: true
+TITLE: Phoenix of Starlight: Beyond the Map
+SCENE: map
+TEXT: You cross beyond the boundary marked by “Phoenix of Starlight.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_choice_100]
+TEXT: The moment called “The Quiet Planet” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Archive the discovery -> hard_stars_e17
+CHOICE: Cross the unknown bridge -> hard_stars_choice_100_alt
+---
+
+[NODE hard_stars_choice_100_alt]
+ENDING: true
+TITLE: The Quiet Planet: Beyond the Map
+SCENE: star_ship
+TEXT: You cross beyond the boundary marked by “The Quiet Planet.” The unknown bridge leads to an observatory where the earlier clues form a larger pattern, and you choose to record what is known while leaving the unanswered stars for another reader.
+---
+
+[NODE hard_stars_d1_ra0_1]
+TEXT: You compare the sky with an old atlas and notice that the missing constellation marks a route between the library and worlds that have never appeared in the book.
+CHOICE: Repair the astrolabe -> hard_stars_d2_ra0a0_2
+CHOICE: Cross toward the observatory -> hard_stars_d2_ra0b1_12
+---
+
+[NODE hard_stars_d2_ra0a0_2]
+TEXT: You enter the observatory and find a damaged astrolabe. Its final ring points toward a silent planet wrapped in pale clouds.
+CHOICE: Compare the old atlas -> hard_stars_d3_ra0a0a0_3
+CHOICE: Study the silent planet -> hard_stars_d3_ra0a0b1_6
+CHOICE: Trace the hidden route -> hard_stars_d3_ra0a0c2_9
+CHOICE: Decode the silent signal -> hard_stars_d2_ra0a0_2_side
+---
+
+[NODE hard_stars_d2_ra0a0_2_side]
+TEXT: The signal has no sound, yet its rhythm is unmistakable. You compare it with the patterns you have already seen and realise it is describing a route rather than a destination.
+CHOICE: The Patient Observatory -> hard_stars_d2_ra0a0_2_side_a
+CHOICE: The Unfinished Chart -> hard_stars_d2_ra0a0_2_side_b
+---
+
+[NODE hard_stars_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Patient Observatory
+SCENE: wizard
+TEXT: You follow the route to an observatory that has been waiting for someone willing to look closely. Inside, you learn that some discoveries arrive only after patience.
+---
+
+[NODE hard_stars_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Unfinished Chart
+SCENE: map
+TEXT: The signal reveals a map with three missing sections. You resist the urge to invent them, record what is known, and leave the blank spaces for future explorers.
+---
+
+[NODE hard_stars_d2_ra0b1_12]
+TEXT: The starship's navigator asks you to inspect the moon bridge, where a trail of blue light disappears before reaching the other side.
+CHOICE: Wake the star-flowers -> hard_stars_d3_ra0b1a0_13
+CHOICE: Restore the moon bridge -> hard_stars_d3_ra0b1b1_16
+CHOICE: Decode the silent signal -> hard_stars_d2_ra0b1_12_side
+---
+
+[NODE hard_stars_d2_ra0b1_12_side]
+TEXT: The signal has no sound, yet its rhythm is unmistakable. You compare it with the patterns you have already seen and realise it is describing a route rather than a destination.
+CHOICE: The Patient Observatory -> hard_stars_d2_ra0b1_12_side_a
+CHOICE: The Unfinished Chart -> hard_stars_d2_ra0b1_12_side_b
+---
+
+[NODE hard_stars_d2_ra0b1_12_side_a]
+ENDING: true
+TITLE: The Patient Observatory
+SCENE: wizard
+TEXT: You follow the route to an observatory that has been waiting for someone willing to look closely. Inside, you learn that some discoveries arrive only after patience.
+---
+
+[NODE hard_stars_d2_ra0b1_12_side_b]
+ENDING: true
+TITLE: The Unfinished Chart
+SCENE: map
+TEXT: The signal reveals a map with three missing sections. You resist the urge to invent them, record what is known, and leave the blank spaces for future explorers.
+---
+
+[NODE hard_stars_d3_ra0a0a0_3]
+TEXT: The astrolabe reveals that the hidden constellation is not missing; it has been folded into the pages of a forgotten story.
+CHOICE: Unfold the hidden story -> hard_stars_choice_092
+CHOICE: Repair the astrolabe -> hard_stars_choice_093
+---
+
+[NODE hard_stars_d3_ra0a0b1_6]
+TEXT: On the silent planet, you discover a garden of sleeping star-flowers that brighten when someone tells a true story.
+CHOICE: Cross the moon bridge -> hard_stars_choice_094
+CHOICE: Tell the star-flowers a story -> hard_stars_choice_095
+---
+
+[NODE hard_stars_d3_ra0a0c2_9]
+TEXT: The moon bridge responds when you place the astrolabe's ring against its first stone.
+CHOICE: Chart the safe routes -> hard_stars_choice_096
+CHOICE: Explore the new path -> hard_stars_choice_097
+---
+
+[NODE hard_stars_d3_ra0b1a0_13]
+TEXT: The astrolabe reveals that the hidden constellation is not missing; it has been folded into the pages of a forgotten story.
+CHOICE: Guide the starship -> hard_stars_choice_098
+CHOICE: Study the star archive -> hard_stars_choice_099
+---
+
+[NODE hard_stars_d3_ra0b1b1_16]
+TEXT: On the silent planet, you discover a garden of sleeping star-flowers that brighten when someone tells a true story.
+CHOICE: Climb the silver mountain -> hard_stars_choice_100
+---
+
+[NODE hard_stars_e10]
+ENDING: true
+TITLE: The Forgotten Story
+SCENE: library_return
+TEXT: You return the unfolded story to the enchanted library and give it a new place on the shelf. The librarian leaves the cover blank so another reader may add to it.
+---
+
+[NODE hard_stars_e11]
+ENDING: true
+TITLE: Dawn Beyond the Clouds
+SCENE: sun
+TEXT: The starship rises above the cloud layer just as dawn begins. The stars fade, but their route remains written in the ship's memory.
+---
+
+[NODE hard_stars_e14]
+ENDING: true
+TITLE: The Star Archive
+SCENE: map
+TEXT: The repaired astrolabe reveals a vast archive of routes. You copy only the safe ones into the library's map book, leaving the unknown paths for future explorers.
+---
+
+[NODE hard_stars_e15]
+ENDING: true
+TITLE: Phoenix of Starlight
+SCENE: phoenix
+TEXT: A phoenix made from scattered starlight emerges from the hidden constellation. It circles the ship once, then settles near the observatory as its new guardian.
+---
+
+[NODE hard_stars_e17]
+ENDING: true
+TITLE: The Quiet Planet
+SCENE: mountain
+TEXT: You climb a small silver mountain and see the entire constellation reflected in its snowy slopes. The navigator decides to name the peak after the first reader who found it.
+---
+
+[NODE hard_stars_e4]
+ENDING: true
+TITLE: The Hidden Constellation
+SCENE: star_ship
+TEXT: You unfold the forgotten story and release the hidden constellation into the sky. The starship's route becomes clear, and its navigator charts a new path for curious readers.
+---
+
+[NODE hard_stars_e5]
+ENDING: true
+TITLE: The Astrolabe
+SCENE: treasure
+TEXT: You repair the astrolabe without replacing its unusual pieces. Its rings now turn smoothly, revealing that every journey can be measured in more than distance.
+---
+
+[NODE hard_stars_e7]
+ENDING: true
+TITLE: The Moon Bridge
+SCENE: moon
+TEXT: You restore the bridge one stone at a time. When the final stone glows, a silver road appears between the library and the quiet stars.
+---
+
+[NODE hard_stars_e8]
+ENDING: true
+TITLE: Garden of True Stories
+SCENE: garden
+TEXT: You tell the star-flowers a story about a time when asking for help mattered. One by one they bloom, illuminating the silent planet.
+---
+
+[NODE medium_castle_choice_038]
+TEXT: The moment called “The Tower Rings” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e4
+CHOICE: Enter the last tower -> medium_castle_choice_038_alt
+---
+
+[NODE medium_castle_choice_038_alt]
+ENDING: true
+TITLE: The Tower Rings: One Last Door
+SCENE: crown
+TEXT: You climb beyond the place where “The Tower Rings” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_039]
+TEXT: The moment called “The Builder's Map” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e5
+CHOICE: Enter the last tower -> medium_castle_choice_039_alt
+---
+
+[NODE medium_castle_choice_039_alt]
+ENDING: true
+TITLE: The Builder's Map: One Last Door
+SCENE: garden
+TEXT: You climb beyond the place where “The Builder's Map” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_040]
+TEXT: The moment called “A Feast Restored” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e7
+CHOICE: Enter the last tower -> medium_castle_choice_040_alt
+---
+
+[NODE medium_castle_choice_040_alt]
+ENDING: true
+TITLE: A Feast Restored: One Last Door
+SCENE: castle
+TEXT: You climb beyond the place where “A Feast Restored” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_041]
+TEXT: The moment called “The Sleeping Dragon” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e8
+CHOICE: Enter the last tower -> medium_castle_choice_041_alt
+---
+
+[NODE medium_castle_choice_041_alt]
+ENDING: true
+TITLE: The Sleeping Dragon: One Last Door
+SCENE: feast
+TEXT: You climb beyond the place where “The Sleeping Dragon” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_042]
+TEXT: The moment called “Cat of the Tower” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e11
+CHOICE: Enter the last tower -> medium_castle_choice_042_alt
+---
+
+[NODE medium_castle_choice_042_alt]
+ENDING: true
+TITLE: Cat of the Tower: One Last Door
+SCENE: crown
+TEXT: You climb beyond the place where “Cat of the Tower” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_043]
+TEXT: The moment called “The Brass Matchbox” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e12
+CHOICE: Enter the last tower -> medium_castle_choice_043_alt
+---
+
+[NODE medium_castle_choice_043_alt]
+ENDING: true
+TITLE: The Brass Matchbox: One Last Door
+SCENE: garden
+TEXT: You climb beyond the place where “The Brass Matchbox” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_044]
+TEXT: The moment called “Sunset Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e14
+CHOICE: Enter the last tower -> medium_castle_choice_044_alt
+---
+
+[NODE medium_castle_choice_044_alt]
+ENDING: true
+TITLE: Sunset Garden: One Last Door
+SCENE: castle
+TEXT: You climb beyond the place where “Sunset Garden” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_045]
+TEXT: The moment called “Royal Librarian” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e15
+CHOICE: Enter the last tower -> medium_castle_choice_045_alt
+---
+
+[NODE medium_castle_choice_045_alt]
+ENDING: true
+TITLE: Royal Librarian: One Last Door
+SCENE: feast
+TEXT: You climb beyond the place where “Royal Librarian” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_choice_046]
+TEXT: The moment called “The Quiet Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.
+CHOICE: Help restore the keep -> medium_castle_e18
+CHOICE: Enter the last tower -> medium_castle_choice_046_alt
+---
+
+[NODE medium_castle_choice_046_alt]
+ENDING: true
+TITLE: The Quiet Bell: One Last Door
+SCENE: crown
+TEXT: You climb beyond the place where “The Quiet Bell” seemed to finish. The last tower holds a small room of letters from past helpers, and you add your own before returning through the glowing doorway.
+---
+
+[NODE medium_castle_d1_ra0_1]
+TEXT: You climb toward the tower and find a clockwork bell with one gear missing. A note says the gear was last seen near the royal library.
+CHOICE: Read the builders' book -> medium_castle_d2_ra0a0_2
+CHOICE: Search the royal library -> medium_castle_d2_ra0b1_9
+---
+
+[NODE medium_castle_d1_rb1_16]
+TEXT: You climb toward the tower and find a clockwork bell with one gear missing. A note says the gear was last seen near the royal library.
+CHOICE: Read the builders' book -> medium_castle_d2_rb1a0_17
+---
+
+[NODE medium_castle_d2_ra0a0_2]
+TEXT: You enter the great hall and discover that the kitchen fire has gone cold. Without it, the castle's evening feast cannot begin.
+CHOICE: Set the tower clock -> medium_castle_d3_ra0a0a0_3
+CHOICE: Help the kitchen -> medium_castle_d3_ra0a0b1_6
+CHOICE: Follow the servant’s candle -> medium_castle_d2_ra0a0_2_side
+---
+
+[NODE medium_castle_d2_ra0a0_2_side]
+TEXT: A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.
+CHOICE: The Keeper’s Pantry -> medium_castle_d2_ra0a0_2_side_a
+CHOICE: The Hidden Stair -> medium_castle_d2_ra0a0_2_side_b
+---
+
+[NODE medium_castle_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Keeper’s Pantry
+SCENE: feast
+TEXT: You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor.
+---
+
+[NODE medium_castle_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Hidden Stair
+SCENE: map
+TEXT: The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map.
+---
+
+[NODE medium_castle_d2_ra0b1_9]
+TEXT: In the royal library, a picture of the missing gear hangs beside a book about the castle's oldest builders.
+CHOICE: Help the kitchen -> medium_castle_d3_ra0b1a0_10
+CHOICE: Find the missing gear -> medium_castle_d3_ra0b1b1_13
+CHOICE: Follow the servant’s candle -> medium_castle_d2_ra0b1_9_side
+---
+
+[NODE medium_castle_d2_ra0b1_9_side]
+TEXT: A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.
+CHOICE: The Keeper’s Pantry -> medium_castle_d2_ra0b1_9_side_a
+CHOICE: The Hidden Stair -> medium_castle_d2_ra0b1_9_side_b
+---
+
+[NODE medium_castle_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: The Keeper’s Pantry
+SCENE: feast
+TEXT: You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor.
+---
+
+[NODE medium_castle_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: The Hidden Stair
+SCENE: map
+TEXT: The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map.
+---
+
+[NODE medium_castle_d2_rb1a0_17]
+TEXT: In the royal library, a picture of the missing gear hangs beside a book about the castle's oldest builders.
+CHOICE: Wake the kitchen fire -> medium_castle_choice_046
+CHOICE: Follow the servant’s candle -> medium_castle_d2_rb1a0_17_side
+---
+
+[NODE medium_castle_d2_rb1a0_17_side]
+TEXT: A candle moves along a side corridor even though nobody seems to be carrying it. You follow it to a forgotten part of the keep.
+CHOICE: The Keeper’s Pantry -> medium_castle_d2_rb1a0_17_side_a
+CHOICE: The Hidden Stair -> medium_castle_d2_rb1a0_17_side_b
+---
+
+[NODE medium_castle_d2_rb1a0_17_side_a]
+ENDING: true
+TITLE: The Keeper’s Pantry
+SCENE: feast
+TEXT: You discover shelves of supplies labelled for anyone who needs them. You help organise the pantry, and the castle steward thanks you for thinking about the next visitor.
+---
+
+[NODE medium_castle_d2_rb1a0_17_side_b]
+ENDING: true
+TITLE: The Hidden Stair
+SCENE: map
+TEXT: The candle stops beside a narrow stair that leads to a balcony above the courtyard. From there, you spot the safest route through the keep and record it on the castle map.
+---
+
+[NODE medium_castle_d3_ra0a0a0_3]
+TEXT: The builders' book explains that the gear was designed to fit only after the tower clock is set to sunset.
+CHOICE: Repair the bell -> medium_castle_choice_038
+CHOICE: Relight the fire -> medium_castle_choice_039
+---
+
+[NODE medium_castle_d3_ra0a0b1_6]
+TEXT: The kitchen keeper asks you to find a safe way to relight the fire without waking the sleeping dragon beneath the ovens.
+CHOICE: Help the steward -> medium_castle_choice_040
+CHOICE: Meet the dragon -> medium_castle_choice_041
+---
+
+[NODE medium_castle_d3_ra0b1a0_10]
+TEXT: The builders' book explains that the gear was designed to fit only after the tower clock is set to sunset.
+CHOICE: Repair the clock -> medium_castle_choice_042
+CHOICE: Open the garden -> medium_castle_choice_043
+---
+
+[NODE medium_castle_d3_ra0b1b1_13]
+TEXT: The kitchen keeper asks you to find a safe way to relight the fire without waking the sleeping dragon beneath the ovens.
+CHOICE: Save the feast -> medium_castle_choice_044
+CHOICE: Ring the quiet bell -> medium_castle_choice_045
+---
+
+[NODE medium_castle_e11]
+ENDING: true
+TITLE: Cat of the Tower
+SCENE: castle
+TEXT: The castle cat leads you up a spiral stair to a sunny tower room. From there, you can see every flag in the kingdom.
+---
+
+[NODE medium_castle_e12]
+ENDING: true
+TITLE: The Brass Matchbox
+SCENE: treasure
+TEXT: The matchbox contains one golden match that lights without flame. You leave it in the castle kitchen for the next careful helper.
+---
+
+[NODE medium_castle_e14]
+ENDING: true
+TITLE: Sunset Garden
+SCENE: garden
+TEXT: A hidden door opens beside the kitchen into a garden warmed by the last light of day. The cat settles among the lavender while you explore.
+---
+
+[NODE medium_castle_e15]
+ENDING: true
+TITLE: Royal Librarian
+SCENE: library_return
+TEXT: You return the builders' book to its shelf and discover a note thanking brave readers. The enchanted library adds your adventure to its growing collection.
+---
+
+[NODE medium_castle_e18]
+ENDING: true
+TITLE: The Quiet Bell
+SCENE: bridge
+TEXT: Instead of ringing the bell loudly, you repair it so it gives a soft chime. The sound guides the castle's travelers without disturbing anyone.
+---
+
+[NODE medium_castle_e4]
+ENDING: true
+TITLE: The Tower Rings
+SCENE: crown
+TEXT: You set the clock to sunset and fit the missing gear into place. The bell rings across the castle, and the queen thanks you from the tower balcony.
+---
+
+[NODE medium_castle_e5]
+ENDING: true
+TITLE: The Builder's Map
+SCENE: map
+TEXT: The old book reveals a map of the castle's hidden passages. You return it to the royal library so future readers can find their way safely.
+---
+
+[NODE medium_castle_e7]
+ENDING: true
+TITLE: A Feast Restored
+SCENE: feast
+TEXT: You help the kitchen keeper relight the fire without disturbing the dragon. Soon the hall fills with warm soup, bread, and grateful smiles.
+---
+
+[NODE medium_castle_e8]
+ENDING: true
+TITLE: The Sleeping Dragon
+SCENE: dragon_friend
+TEXT: The tiny dragon beneath the ovens wakes just long enough to sneeze a puff of harmless blue smoke. You become friends, then let it return to its cozy nap.
+---
+
+[NODE medium_forest_choice_029]
+TEXT: The moment called “The Songbird's Return” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e4
+CHOICE: Follow the new trail -> medium_forest_choice_029_alt
+---
+
+[NODE medium_forest_choice_029_alt]
+ENDING: true
+TITLE: The Songbird's Return: The Longer Trail
+SCENE: garden
+TEXT: You follow the new trail beyond the place where “The Songbird's Return” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_030]
+TEXT: The moment called “The Silver Bell” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e5
+CHOICE: Follow the new trail -> medium_forest_choice_030_alt
+---
+
+[NODE medium_forest_choice_030_alt]
+ENDING: true
+TITLE: The Silver Bell: The Longer Trail
+SCENE: map
+TEXT: You follow the new trail beyond the place where “The Silver Bell” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_031]
+TEXT: The moment called “Bridge of Ribbons” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e7
+CHOICE: Follow the new trail -> medium_forest_choice_031_alt
+---
+
+[NODE medium_forest_choice_031_alt]
+ENDING: true
+TITLE: Bridge of Ribbons: The Longer Trail
+SCENE: village
+TEXT: You follow the new trail beyond the place where “Bridge of Ribbons” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_032]
+TEXT: The moment called “The Listening Garden” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e8
+CHOICE: Follow the new trail -> medium_forest_choice_032_alt
+---
+
+[NODE medium_forest_choice_032_alt]
+ENDING: true
+TITLE: The Listening Garden: The Longer Trail
+SCENE: forest_home
+TEXT: You follow the new trail beyond the place where “The Listening Garden” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_033]
+TEXT: The moment called “Fox's Thank-You” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e11
+CHOICE: Follow the new trail -> medium_forest_choice_033_alt
+---
+
+[NODE medium_forest_choice_033_alt]
+ENDING: true
+TITLE: Fox's Thank-You: The Longer Trail
+SCENE: garden
+TEXT: You follow the new trail beyond the place where “Fox's Thank-You” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_034]
+TEXT: The moment called “The Lost Page” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e12
+CHOICE: Follow the new trail -> medium_forest_choice_034_alt
+---
+
+[NODE medium_forest_choice_034_alt]
+ENDING: true
+TITLE: The Lost Page: The Longer Trail
+SCENE: map
+TEXT: You follow the new trail beyond the place where “The Lost Page” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_035]
+TEXT: The moment called “Owl at Dusk” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e14
+CHOICE: Follow the new trail -> medium_forest_choice_035_alt
+---
+
+[NODE medium_forest_choice_035_alt]
+ENDING: true
+TITLE: Owl at Dusk: The Longer Trail
+SCENE: village
+TEXT: You follow the new trail beyond the place where “Owl at Dusk” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_036]
+TEXT: The moment called “The Acorn Archive” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e15
+CHOICE: Follow the new trail -> medium_forest_choice_036_alt
+---
+
+[NODE medium_forest_choice_036_alt]
+ENDING: true
+TITLE: The Acorn Archive: The Longer Trail
+SCENE: forest_home
+TEXT: You follow the new trail beyond the place where “The Acorn Archive” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_choice_037]
+TEXT: The moment called “A Song to Keep” feels like an ending, but the magic of the book leaves one small door open. A familiar rustle comes from the trees, as if the forest has one last secret to share.
+CHOICE: Return the discovery -> medium_forest_e18
+CHOICE: Follow the new trail -> medium_forest_choice_037_alt
+---
+
+[NODE medium_forest_choice_037_alt]
+ENDING: true
+TITLE: A Song to Keep: The Longer Trail
+SCENE: garden
+TEXT: You follow the new trail beyond the place where “A Song to Keep” began. It leads to a quiet clearing where the clues from your journey fit together, and you leave a fresh trail marker for the next reader.
+---
+
+[NODE medium_forest_d1_ra0_1]
+TEXT: The fox drops the ribbon at the foot of an oak. Tied to it is a note saying, 'Please return the songbird's lost music.'
+CHOICE: Search the oak -> medium_forest_d2_ra0a0_2
+CHOICE: Inspect the hollow tree -> medium_forest_d2_ra0b1_9
+---
+
+[NODE medium_forest_d1_rb1_16]
+TEXT: The fox drops the ribbon at the foot of an oak. Tied to it is a note saying, 'Please return the songbird's lost music.'
+CHOICE: Search the oak -> medium_forest_d2_rb1a0_17
+---
+
+[NODE medium_forest_d2_ra0a0_2]
+TEXT: The woodpecker points toward a hollow tree. Inside, you discover a tiny silver bell that rings whenever someone tells the truth.
+CHOICE: Follow the ribbon -> medium_forest_d3_ra0a0a0_3
+CHOICE: Read the silver bell -> medium_forest_d3_ra0a0b1_6
+CHOICE: Follow the fireflies -> medium_forest_d2_ra0a0_2_side
+---
+
+[NODE medium_forest_d2_ra0a0_2_side]
+TEXT: Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.
+CHOICE: The Firefly Grove -> medium_forest_d2_ra0a0_2_side_a
+CHOICE: The Night Guide -> medium_forest_d2_ra0a0_2_side_b
+---
+
+[NODE medium_forest_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Firefly Grove
+SCENE: garden
+TEXT: The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate.
+---
+
+[NODE medium_forest_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Night Guide
+SCENE: map
+TEXT: One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess.
+---
+
+[NODE medium_forest_d2_ra0b1_9]
+TEXT: Beyond the oak, you find a clearing where the songbird's music should be, but the usual blue flowers are silent.
+CHOICE: Follow the silver bell -> medium_forest_d3_ra0b1a0_10
+CHOICE: Search the stump -> medium_forest_d3_ra0b1b1_13
+CHOICE: Follow the fireflies -> medium_forest_d2_ra0b1_9_side
+---
+
+[NODE medium_forest_d2_ra0b1_9_side]
+TEXT: Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.
+CHOICE: The Firefly Grove -> medium_forest_d2_ra0b1_9_side_a
+CHOICE: The Night Guide -> medium_forest_d2_ra0b1_9_side_b
+---
+
+[NODE medium_forest_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: The Firefly Grove
+SCENE: garden
+TEXT: The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate.
+---
+
+[NODE medium_forest_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: The Night Guide
+SCENE: map
+TEXT: One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess.
+---
+
+[NODE medium_forest_d2_rb1a0_17]
+TEXT: Beyond the oak, you find a clearing where the songbird's music should be, but the usual blue flowers are silent.
+CHOICE: Hum the missing tune -> medium_forest_choice_037
+CHOICE: Follow the fireflies -> medium_forest_d2_rb1a0_17_side
+---
+
+[NODE medium_forest_d2_rb1a0_17_side]
+TEXT: Three fireflies rise from the grass and form an arrow toward a forgotten grove. Their light grows brighter whenever you move in the right direction.
+CHOICE: The Firefly Grove -> medium_forest_d2_rb1a0_17_side_a
+CHOICE: The Night Guide -> medium_forest_d2_rb1a0_17_side_b
+---
+
+[NODE medium_forest_d2_rb1a0_17_side_a]
+ENDING: true
+TITLE: The Firefly Grove
+SCENE: garden
+TEXT: The grove is home to young trees that have lost their way around the clearing. You place the fallen trail stones carefully, and the grove becomes easy for future readers to navigate.
+---
+
+[NODE medium_forest_d2_rb1a0_17_side_b]
+ENDING: true
+TITLE: The Night Guide
+SCENE: map
+TEXT: One firefly settles on your map and reveals a safer route through the woods. You carry the new map back so another explorer will not have to guess.
+---
+
+[NODE medium_forest_d3_ra0a0a0_3]
+TEXT: The ribbon leads you to a nest where the songbird is waiting. Its music book has been carried away by the wind.
+CHOICE: Return the song page -> medium_forest_choice_029
+CHOICE: Follow the fox -> medium_forest_choice_030
+---
+
+[NODE medium_forest_d3_ra0a0b1_6]
+TEXT: The bell rings beside a mossy stump. Under it is a folded page from the missing music book.
+CHOICE: Wake the flowers -> medium_forest_choice_031
+CHOICE: Find the missing page -> medium_forest_choice_032
+---
+
+[NODE medium_forest_d3_ra0b1a0_10]
+TEXT: The ribbon leads you to a nest where the songbird is waiting. Its music book has been carried away by the wind.
+CHOICE: Follow the songbird -> medium_forest_choice_033
+CHOICE: Mark the safe trail -> medium_forest_choice_034
+---
+
+[NODE medium_forest_d3_ra0b1b1_13]
+TEXT: The bell rings beside a mossy stump. Under it is a folded page from the missing music book.
+CHOICE: Share the recovered song -> medium_forest_choice_035
+CHOICE: Explore the clearing -> medium_forest_choice_036
+---
+
+[NODE medium_forest_e11]
+ENDING: true
+TITLE: Fox's Thank-You
+SCENE: feast
+TEXT: The fox gathers berries, apples, and nuts for a woodland picnic. The songbird sings while you share the feast with your new forest friends.
+---
+
+[NODE medium_forest_e12]
+ENDING: true
+TITLE: The Lost Page
+SCENE: library_return
+TEXT: You carry the recovered music page back to the enchanted library. It slips into its book perfectly, and the shelves hum the song together.
+---
+
+[NODE medium_forest_e14]
+ENDING: true
+TITLE: Owl at Dusk
+SCENE: moon
+TEXT: An owl guides you along the safest trail as evening arrives. From a hilltop, you hear the songbird singing its restored melody below.
+---
+
+[NODE medium_forest_e15]
+ENDING: true
+TITLE: The Acorn Archive
+SCENE: map
+TEXT: The silver bell reveals a hidden drawer full of old forest maps. You choose the newest one and leave it on the library's adventure table.
+---
+
+[NODE medium_forest_e18]
+ENDING: true
+TITLE: A Song to Keep
+SCENE: wizard
+TEXT: The songbird teaches you the melody, and the magical pages remember every note. A tiny painted wizard appears in the book margin to conduct the final chorus.
+---
+
+[NODE medium_forest_e4]
+ENDING: true
+TITLE: The Songbird's Return
+SCENE: forest_home
+TEXT: You follow the ribbon to the songbird and return the missing page. When the bird sings the tune again, the whole clearing joins in, from insects to trees.
+---
+
+[NODE medium_forest_e5]
+ENDING: true
+TITLE: The Silver Bell
+SCENE: treasure
+TEXT: You use the bell to find the final missing page hidden beneath a root. The bell gives one clear ring, and the complete song returns to the forest.
+---
+
+[NODE medium_forest_e7]
+ENDING: true
+TITLE: Bridge of Ribbons
+SCENE: bridge
+TEXT: The fox leads you to an old bridge decorated with ribbons left by earlier readers. You add the red ribbon and cross safely into a sunlit meadow.
+---
+
+[NODE medium_forest_e8]
+ENDING: true
+TITLE: The Listening Garden
+SCENE: garden
+TEXT: Your humming wakes the silent flowers. They open into a small listening garden where every visitor can hear a different gentle melody.
+---
+
+[NODE medium_sea_choice_047]
+TEXT: The moment called “The Harbor Signal” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e4
+CHOICE: Follow the turning tide -> medium_sea_choice_047_alt
+---
+
+[NODE medium_sea_choice_047_alt]
+ENDING: true
+TITLE: The Harbor Signal: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the turning tide beyond the place where “The Harbor Signal” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_048]
+TEXT: The moment called “Keeper's Journal” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e5
+CHOICE: Follow the turning tide -> medium_sea_choice_048_alt
+---
+
+[NODE medium_sea_choice_048_alt]
+ENDING: true
+TITLE: Keeper's Journal: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the turning tide beyond the place where “Keeper's Journal” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_049]
+TEXT: The moment called “The Seal's Secret” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e7
+CHOICE: Follow the turning tide -> medium_sea_choice_049_alt
+---
+
+[NODE medium_sea_choice_049_alt]
+ENDING: true
+TITLE: The Seal's Secret: Beyond the Harbor
+SCENE: village
+TEXT: You follow the turning tide beyond the place where “The Seal's Secret” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_050]
+TEXT: The moment called “Tide Pool Garden” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e8
+CHOICE: Follow the turning tide -> medium_sea_choice_050_alt
+---
+
+[NODE medium_sea_choice_050_alt]
+ENDING: true
+TITLE: Tide Pool Garden: Beyond the Harbor
+SCENE: moon
+TEXT: You follow the turning tide beyond the place where “Tide Pool Garden” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_051]
+TEXT: The moment called “The Signal Flags” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e11
+CHOICE: Follow the turning tide -> medium_sea_choice_051_alt
+---
+
+[NODE medium_sea_choice_051_alt]
+ENDING: true
+TITLE: The Signal Flags: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the turning tide beyond the place where “The Signal Flags” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_052]
+TEXT: The moment called “Moonlit Harbor” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e12
+CHOICE: Follow the turning tide -> medium_sea_choice_052_alt
+---
+
+[NODE medium_sea_choice_052_alt]
+ENDING: true
+TITLE: Moonlit Harbor: Beyond the Harbor
+SCENE: ocean_boat
+TEXT: You follow the turning tide beyond the place where “Moonlit Harbor” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_053]
+TEXT: The moment called “The Hidden Marker” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e14
+CHOICE: Follow the turning tide -> medium_sea_choice_053_alt
+---
+
+[NODE medium_sea_choice_053_alt]
+ENDING: true
+TITLE: The Hidden Marker: Beyond the Harbor
+SCENE: village
+TEXT: You follow the turning tide beyond the place where “The Hidden Marker” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_054]
+TEXT: The moment called “A Friendly Crew” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e15
+CHOICE: Follow the turning tide -> medium_sea_choice_054_alt
+---
+
+[NODE medium_sea_choice_054_alt]
+ENDING: true
+TITLE: A Friendly Crew: Beyond the Harbor
+SCENE: moon
+TEXT: You follow the turning tide beyond the place where “A Friendly Crew” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_choice_055]
+TEXT: The moment called “The Singing Shell” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.
+CHOICE: Signal the harbor -> medium_sea_e18
+CHOICE: Follow the turning tide -> medium_sea_choice_055_alt
+---
+
+[NODE medium_sea_choice_055_alt]
+ENDING: true
+TITLE: The Singing Shell: Beyond the Harbor
+SCENE: bridge
+TEXT: You follow the turning tide beyond the place where “The Singing Shell” seemed complete. A second cove appears, filled with old signal stones, and you arrange them so future sailors can find the safe way home.
+---
+
+[NODE medium_sea_d1_ra0_1]
+TEXT: The seal leads you to a floating crate marked with the lighthouse symbol. Something inside is knocking softly.
+CHOICE: Open the floating crate -> medium_sea_d2_ra0a0_2
+CHOICE: Follow the shell arrows -> medium_sea_d2_ra0b1_9
+---
+
+[NODE medium_sea_d1_rb1_16]
+TEXT: The seal leads you to a floating crate marked with the lighthouse symbol. Something inside is knocking softly.
+CHOICE: Open the floating crate -> medium_sea_d2_rb1a0_17
+---
+
+[NODE medium_sea_d2_ra0a0_2]
+TEXT: Near the lighthouse steps, you find three shells arranged like arrows toward the tide pools.
+CHOICE: Read the signal note -> medium_sea_d3_ra0a0a0_3
+CHOICE: Search the tide pool -> medium_sea_d3_ra0a0b1_6
+CHOICE: Follow the tide song -> medium_sea_d2_ra0a0_2_side
+---
+
+[NODE medium_sea_d2_ra0a0_2_side]
+TEXT: The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.
+CHOICE: The Tide Garden -> medium_sea_d2_ra0a0_2_side_a
+CHOICE: The Sailor’s Marker -> medium_sea_d2_ra0a0_2_side_b
+---
+
+[NODE medium_sea_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Tide Garden
+SCENE: garden
+TEXT: The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom.
+---
+
+[NODE medium_sea_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Sailor’s Marker
+SCENE: bridge
+TEXT: You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find.
+---
+
+[NODE medium_sea_d2_ra0b1_9]
+TEXT: The crate contains a bundle of old signal flags and a note: 'The harbor light has forgotten its colors.'
+CHOICE: Search the tide pool -> medium_sea_d3_ra0b1a0_10
+CHOICE: Read the keeper's journal -> medium_sea_d3_ra0b1b1_13
+CHOICE: Follow the tide song -> medium_sea_d2_ra0b1_9_side
+---
+
+[NODE medium_sea_d2_ra0b1_9_side]
+TEXT: The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.
+CHOICE: The Tide Garden -> medium_sea_d2_ra0b1_9_side_a
+CHOICE: The Sailor’s Marker -> medium_sea_d2_ra0b1_9_side_b
+---
+
+[NODE medium_sea_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: The Tide Garden
+SCENE: garden
+TEXT: The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom.
+---
+
+[NODE medium_sea_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: The Sailor’s Marker
+SCENE: bridge
+TEXT: You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find.
+---
+
+[NODE medium_sea_d2_rb1a0_17]
+TEXT: The crate contains a bundle of old signal flags and a note: 'The harbor light has forgotten its colors.'
+CHOICE: Check the old marker -> medium_sea_choice_055
+CHOICE: Follow the tide song -> medium_sea_d2_rb1a0_17_side
+---
+
+[NODE medium_sea_d2_rb1a0_17_side]
+TEXT: The waves begin to make a repeating rhythm against the rocks. When you listen closely, the rhythm sounds like a message pointing toward a hidden cove.
+CHOICE: The Tide Garden -> medium_sea_d2_rb1a0_17_side_a
+CHOICE: The Sailor’s Marker -> medium_sea_d2_rb1a0_17_side_b
+---
+
+[NODE medium_sea_d2_rb1a0_17_side_a]
+ENDING: true
+TITLE: The Tide Garden
+SCENE: garden
+TEXT: The cove is sheltered by tall rocks and filled with sea flowers. You clear a small channel so fresh water can reach them, and the garden begins to bloom.
+---
+
+[NODE medium_sea_d2_rb1a0_17_side_b]
+ENDING: true
+TITLE: The Sailor’s Marker
+SCENE: bridge
+TEXT: You find an old marker stone beneath the tide line. You raise it where passing boats can see it, making the safe channel easier to find.
+---
+
+[NODE medium_sea_d3_ra0a0a0_3]
+TEXT: The shell arrows lead to a tide pool where colored stones match the missing signal flags.
+CHOICE: Restore the signal -> medium_sea_choice_047
+CHOICE: Read the journal -> medium_sea_choice_048
+---
+
+[NODE medium_sea_d3_ra0a0b1_6]
+TEXT: The seal nudges a loose plank near the dock. Beneath it is the lighthouse keeper's weather journal.
+CHOICE: Follow the seal -> medium_sea_choice_049
+CHOICE: Build the harbor map -> medium_sea_choice_050
+---
+
+[NODE medium_sea_d3_ra0b1a0_10]
+TEXT: The shell arrows lead to a tide pool where colored stones match the missing signal flags.
+CHOICE: Light the harbor -> medium_sea_choice_051
+CHOICE: Cross the inlet -> medium_sea_choice_052
+---
+
+[NODE medium_sea_d3_ra0b1b1_13]
+TEXT: The seal nudges a loose plank near the dock. Beneath it is the lighthouse keeper's weather journal.
+CHOICE: Protect the garden -> medium_sea_choice_053
+CHOICE: Enter the sea cave -> medium_sea_choice_054
+---
+
+[NODE medium_sea_e11]
+ENDING: true
+TITLE: The Signal Flags
+SCENE: map
+TEXT: You arrange the old flags in the correct order and discover they form a map of the harbor. You tuck a copy into the enchanted book.
+---
+
+[NODE medium_sea_e12]
+ENDING: true
+TITLE: Moonlit Harbor
+SCENE: moon
+TEXT: By moonrise, the lighthouse beam sweeps across the calm water. The seal surfaces beside the boat as if to say the harbor is ready.
+---
+
+[NODE medium_sea_e14]
+ENDING: true
+TITLE: The Hidden Marker
+SCENE: bridge
+TEXT: You uncover the old marker stones and reconnect them with a short rope bridge. Travelers can now cross the rocky inlet safely.
+---
+
+[NODE medium_sea_e15]
+ENDING: true
+TITLE: A Friendly Crew
+SCENE: village
+TEXT: The lighthouse keeper invites you to the harbor village. Everyone helps carry the rescued supplies, and the evening ends with warm cocoa.
+---
+
+[NODE medium_sea_e18]
+ENDING: true
+TITLE: The Singing Shell
+SCENE: cave_light
+TEXT: One shell hums when the tide moves through it. You place it in a small sea cave where its gentle song echoes like a lighthouse bell.
+---
+
+[NODE medium_sea_e4]
+ENDING: true
+TITLE: The Harbor Signal
+SCENE: ocean_boat
+TEXT: You use the colored stones to rebuild the lighthouse signal. Boats in the distance turn toward the safe harbor as the light shines again.
+---
+
+[NODE medium_sea_e5]
+ENDING: true
+TITLE: Keeper's Journal
+SCENE: library_return
+TEXT: You return the weather journal to the lighthouse keeper. Its careful notes will help future sailors understand the changing tide.
+---
+
+[NODE medium_sea_e7]
+ENDING: true
+TITLE: The Seal's Secret
+SCENE: treasure
+TEXT: The seal leads you to a sheltered cove where smooth glass pieces have been polished by the sea. You choose one blue piece to remember the journey.
+---
+
+[NODE medium_sea_e8]
+ENDING: true
+TITLE: Tide Pool Garden
+SCENE: garden
+TEXT: The colored stones wake tiny sea flowers in the tide pool. You watch them open as the water rises, then leave them safely in place.
+---
+
+[NODE medium_stars_choice_056]
+TEXT: The moment called “Restore the Constellation” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e4
+CHOICE: Follow the new signal -> medium_stars_choice_056_alt
+---
+
+[NODE medium_stars_choice_056_alt]
+ENDING: true
+TITLE: Restore the Constellation: Beyond the Map
+SCENE: star_ship
+TEXT: You follow the new signal beyond the route recorded at “Restore the Constellation.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_057]
+TEXT: The moment called “The Star Key” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e5
+CHOICE: Follow the new signal -> medium_stars_choice_057_alt
+---
+
+[NODE medium_stars_choice_057_alt]
+ENDING: true
+TITLE: The Star Key: Beyond the Map
+SCENE: moon
+TEXT: You follow the new signal beyond the route recorded at “The Star Key.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_058]
+TEXT: The moment called “Moon Bridge Home” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e7
+CHOICE: Follow the new signal -> medium_stars_choice_058_alt
+---
+
+[NODE medium_stars_choice_058_alt]
+ENDING: true
+TITLE: Moon Bridge Home: Beyond the Map
+SCENE: sun
+TEXT: You follow the new signal beyond the route recorded at “Moon Bridge Home.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_059]
+TEXT: The moment called “The Observatory” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e8
+CHOICE: Follow the new signal -> medium_stars_choice_059_alt
+---
+
+[NODE medium_stars_choice_059_alt]
+ENDING: true
+TITLE: The Observatory: Beyond the Map
+SCENE: map
+TEXT: You follow the new signal beyond the route recorded at “The Observatory.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_060]
+TEXT: The moment called “Comet Garden” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e11
+CHOICE: Follow the new signal -> medium_stars_choice_060_alt
+---
+
+[NODE medium_stars_choice_060_alt]
+ENDING: true
+TITLE: Comet Garden: Beyond the Map
+SCENE: star_ship
+TEXT: You follow the new signal beyond the route recorded at “Comet Garden.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_061]
+TEXT: The moment called “A Safe Route” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e12
+CHOICE: Follow the new signal -> medium_stars_choice_061_alt
+---
+
+[NODE medium_stars_choice_061_alt]
+ENDING: true
+TITLE: A Safe Route: Beyond the Map
+SCENE: moon
+TEXT: You follow the new signal beyond the route recorded at “A Safe Route.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_062]
+TEXT: The moment called “The Night Watch” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e14
+CHOICE: Follow the new signal -> medium_stars_choice_062_alt
+---
+
+[NODE medium_stars_choice_062_alt]
+ENDING: true
+TITLE: The Night Watch: Beyond the Map
+SCENE: sun
+TEXT: You follow the new signal beyond the route recorded at “The Night Watch.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_063]
+TEXT: The moment called “Sunrise Orbit” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e15
+CHOICE: Follow the new signal -> medium_stars_choice_063_alt
+---
+
+[NODE medium_stars_choice_063_alt]
+ENDING: true
+TITLE: Sunrise Orbit: Beyond the Map
+SCENE: map
+TEXT: You follow the new signal beyond the route recorded at “Sunrise Orbit.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_choice_064]
+TEXT: The moment called “The Star Choir” feels like an ending, but the magic of the book leaves one small door open. A new point of light appears beside the path you have already travelled.
+CHOICE: Record the route -> medium_stars_e18
+CHOICE: Follow the new signal -> medium_stars_choice_064_alt
+---
+
+[NODE medium_stars_choice_064_alt]
+ENDING: true
+TITLE: The Star Choir: Beyond the Map
+SCENE: star_ship
+TEXT: You follow the new signal beyond the route recorded at “The Star Choir.” It leads to a quiet observatory where you can see the adventure from above, and you add the safest new route to the library map.
+---
+
+[NODE medium_stars_d1_ra0_1]
+TEXT: The pilot explains that the missing constellation is the ship's guide. Without it, the crew cannot find the library's return route.
+CHOICE: Repair the observatory -> medium_stars_d2_ra0a0_2
+CHOICE: Follow the comet dust -> medium_stars_d2_ra0b1_9
+---
+
+[NODE medium_stars_d1_rb1_16]
+TEXT: The pilot explains that the missing constellation is the ship's guide. Without it, the crew cannot find the library's return route.
+CHOICE: Repair the observatory -> medium_stars_d2_rb1a0_17
+---
+
+[NODE medium_stars_d2_ra0a0_2]
+TEXT: A moon bridge leads to a quiet observatory where an old telescope is pointed toward a patch of empty sky.
+CHOICE: Study the telescope -> medium_stars_d3_ra0a0a0_3
+CHOICE: Search the tiny moon -> medium_stars_d3_ra0a0b1_6
+CHOICE: Follow the blue signal -> medium_stars_d2_ra0a0_2_side
+---
+
+[NODE medium_stars_d2_ra0a0_2_side]
+TEXT: A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.
+CHOICE: The Signal Garden -> medium_stars_d2_ra0a0_2_side_a
+CHOICE: The Orbit Map -> medium_stars_d2_ra0a0_2_side_b
+---
+
+[NODE medium_stars_d2_ra0a0_2_side_a]
+ENDING: true
+TITLE: The Signal Garden
+SCENE: garden
+TEXT: The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message.
+---
+
+[NODE medium_stars_d2_ra0a0_2_side_b]
+ENDING: true
+TITLE: The Orbit Map
+SCENE: map
+TEXT: The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home.
+---
+
+[NODE medium_stars_d2_ra0b1_9]
+TEXT: A trail of comet dust leads to a tiny moon. Something there is reflecting the lost constellation's light.
+CHOICE: Search the tiny moon -> medium_stars_d3_ra0b1a0_10
+CHOICE: Guide the pilot -> medium_stars_d3_ra0b1b1_13
+CHOICE: Follow the blue signal -> medium_stars_d2_ra0b1_9_side
+---
+
+[NODE medium_stars_d2_ra0b1_9_side]
+TEXT: A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.
+CHOICE: The Signal Garden -> medium_stars_d2_ra0b1_9_side_a
+CHOICE: The Orbit Map -> medium_stars_d2_ra0b1_9_side_b
+---
+
+[NODE medium_stars_d2_ra0b1_9_side_a]
+ENDING: true
+TITLE: The Signal Garden
+SCENE: garden
+TEXT: The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message.
+---
+
+[NODE medium_stars_d2_ra0b1_9_side_b]
+ENDING: true
+TITLE: The Orbit Map
+SCENE: map
+TEXT: The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home.
+---
+
+[NODE medium_stars_d2_rb1a0_17]
+TEXT: A trail of comet dust leads to a tiny moon. Something there is reflecting the lost constellation's light.
+CHOICE: Search the observatory -> medium_stars_choice_064
+CHOICE: Follow the blue signal -> medium_stars_d2_rb1a0_17_side
+---
+
+[NODE medium_stars_d2_rb1a0_17_side]
+TEXT: A blue pulse flashes between two constellations. It repeats in a pattern that looks almost like a message from another reader.
+CHOICE: The Signal Garden -> medium_stars_d2_rb1a0_17_side_a
+CHOICE: The Orbit Map -> medium_stars_d2_rb1a0_17_side_b
+---
+
+[NODE medium_stars_d2_rb1a0_17_side_a]
+ENDING: true
+TITLE: The Signal Garden
+SCENE: garden
+TEXT: The signal leads to a quiet garden where star-flowers blink in patterns. You copy the pattern carefully and discover it is a welcome message.
+---
+
+[NODE medium_stars_d2_rb1a0_17_side_b]
+ENDING: true
+TITLE: The Orbit Map
+SCENE: map
+TEXT: The signal reveals a safe orbit around a small moon. You add the route to the library chart before guiding your way home.
+---
+
+[NODE medium_stars_d3_ra0a0a0_3]
+TEXT: Through the telescope, you spot a star-shaped key floating inside a cloud of violet dust.
+CHOICE: Restore the constellation -> medium_stars_choice_056
+CHOICE: Find the star key -> medium_stars_choice_057
+---
+
+[NODE medium_stars_d3_ra0a0b1_6]
+TEXT: On the tiny moon, you discover a mirror that can send light back toward the dark constellation.
+CHOICE: Open the moon route -> medium_stars_choice_058
+CHOICE: Grow the comet garden -> medium_stars_choice_059
+---
+
+[NODE medium_stars_d3_ra0b1a0_10]
+TEXT: Through the telescope, you spot a star-shaped key floating inside a cloud of violet dust.
+CHOICE: Chart the safe route -> medium_stars_choice_060
+CHOICE: Visit the moon castle -> medium_stars_choice_061
+---
+
+[NODE medium_stars_d3_ra0b1b1_13]
+TEXT: On the tiny moon, you discover a mirror that can send light back toward the dark constellation.
+CHOICE: Watch the sunrise -> medium_stars_choice_062
+CHOICE: Listen to the star choir -> medium_stars_choice_063
+---
+
+[NODE medium_stars_e11]
+ENDING: true
+TITLE: Comet Garden
+SCENE: garden
+TEXT: Comet dust falls on a patch of moon soil and grows luminous flowers. The pilot promises to visit the garden whenever the ship passes by.
+---
+
+[NODE medium_stars_e12]
+ENDING: true
+TITLE: A Safe Route
+SCENE: map
+TEXT: You combine the telescope view and the pilot's notes into a clear route home. The map becomes a permanent page in the enchanted book.
+---
+
+[NODE medium_stars_e14]
+ENDING: true
+TITLE: The Night Watch
+SCENE: castle
+TEXT: The restored constellation reveals a tiny castle floating beyond the moon. Its lantern keepers wave as your ship passes.
+---
+
+[NODE medium_stars_e15]
+ENDING: true
+TITLE: Sunrise Orbit
+SCENE: sun
+TEXT: You guide the ship into a gentle orbit until the first golden sunrise appears. The library door opens just as the sky turns bright.
+---
+
+[NODE medium_stars_e18]
+ENDING: true
+TITLE: The Star Choir
+SCENE: phoenix
+TEXT: The constellation begins to sing in soft notes, and a phoenix made of starlight joins the melody. The pilot smiles as the whole sky seems to listen.
+---
+
+[NODE medium_stars_e4]
+ENDING: true
+TITLE: Restore the Constellation
+SCENE: star_ship
+TEXT: You angle the mirror toward the dark sky. One star after another returns until the lost constellation shines brightly enough to guide the ship home.
+---
+
+[NODE medium_stars_e5]
+ENDING: true
+TITLE: The Star Key
+SCENE: treasure
+TEXT: The star-shaped key opens a small observatory drawer containing a new chart of the night sky. You carry the chart back to the enchanted library.
+---
+
+[NODE medium_stars_e7]
+ENDING: true
+TITLE: Moon Bridge Home
+SCENE: moon
+TEXT: You guide the pilot across the moon bridge and back toward the library. The bridge glows beneath the ship like a silver ribbon.
+---
+
+[NODE medium_stars_e8]
+ENDING: true
+TITLE: The Observatory
+SCENE: wizard
+TEXT: The telescope reveals a tiny wizard living among the pages of the sky atlas. He helps you label the missing constellation before returning to his starry study.
+---
+
+
+VALIDATION (auto)
+------------------------------------------------------------------------
+All choice targets resolve to existing nodes.
+Start nodes: 12
+Nodes never linked from a choice (may be starts or unused): 0

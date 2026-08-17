@@ -329,3 +329,88 @@ html[data-theme="playful"] .calendar-widget {
   .theme-switcher { margin-left: 0.15rem; }
   .theme-ball { width: 2rem; height: 2rem; }
 }
+
+
+/* Unified theme control (ball + Themes label) */
+.theme-switcher {
+  position: relative;
+  margin-left: 0.35rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  z-index: 130;
+}
+.theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.2rem 0.15rem 0.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.theme-ball {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  border: 2px solid var(--theme-ball-border);
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: var(--theme-ball-face);
+  box-shadow: var(--glow-pink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: theme-ball-pulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.theme-ball:hover,
+.theme-ball[aria-expanded="true"] {
+  transform: scale(1.08);
+  animation: none;
+}
+.theme-label-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.7rem 0.35rem 0.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+}
+.theme-label-btn:hover,
+.theme-label-btn[aria-expanded="true"] {
+  color: var(--accent-soft-pink, var(--accent-pink));
+}
+.theme-label-btn:focus-visible,
+.theme-ball:focus-visible {
+  outline: 2px solid var(--accent-electric, #22d3ee);
+  outline-offset: 2px;
+}
+.theme-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  min-width: 220px;
+  padding: 0.45rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  z-index: 140;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.theme-menu[hidden] { display: none !important; }

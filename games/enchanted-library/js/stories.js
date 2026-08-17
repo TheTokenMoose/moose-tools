@@ -104,15 +104,15 @@ window.ENCHANTED_STORIES = {
   "nodes": {
     "easy_forest_e4": {
       "ending": true,
-      "title": "The Lost Book",
-      "scene": "library_return",
-      "text": "You unlock the tree door and find a storybook that has been missing from the enchanted library. You carry it home, and the shelves glow as it slips into its place."
+      "title": "The Lantern Keeper",
+      "scene": "forest",
+      "text": "You help the lantern keeper carry their light through the woods. In return, they show you paths only true friends can see, and the lantern glows warm for you forever."
     },
     "easy_forest_e5": {
       "ending": true,
-      "title": "Owl's New Nest",
-      "scene": "forest_home",
-      "text": "You follow the feathers and help the baby owl find its nest. At sunset, its family settles close together while the forest hums a happy song."
+      "title": "The Silent Friend",
+      "scene": "forest",
+      "text": "Your forest friend doesn't speak, but you understand each other perfectly. This quiet friendship is deeper than words and will warm your heart always."
     },
     "easy_forest_d3_ra0a0a0_3": {
       "text": "The key opens a tree door. Inside, a lost storybook is waiting for its reader.",
@@ -129,15 +129,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_forest_e7": {
       "ending": true,
-      "title": "Berry Picnic",
-      "scene": "feast",
-      "text": "A friendly fox shows you a hidden berry patch. You share the berries with the animals, then spread a little picnic blanket beneath the trees."
+      "title": "The Mystery Solved",
+      "scene": "forest",
+      "text": "The forest's mystery unfolds before you like a flower opening to the sun. Knowing the answer feels like discovering a secret the trees have kept since the beginning of time."
     },
     "easy_forest_e8": {
       "ending": true,
-      "title": "The Singing Acorn",
-      "scene": "treasure",
-      "text": "The wooden key opens a tiny acorn-shaped box. Inside is a golden seed that sings when you hold it, so you plant it beside the trail."
+      "title": "The Forest Lesson",
+      "scene": "forest",
+      "text": "The forest teaches you something precious about yourself. You leave wiser than when you arrived, carrying the lesson like seeds ready to grow."
     },
     "easy_forest_d3_ra0a0b1_6": {
       "text": "The feathers lead to a baby owl who cannot find its nest.",
@@ -171,15 +171,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_forest_e11": {
       "ending": true,
-      "title": "Moonlit Shortcut",
-      "scene": "moon",
-      "text": "The squirrel leads you along a safe trail that glows under the moon. You wave goodbye as the little lantern guides you back to the book."
+      "title": "The Forest Speaks",
+      "scene": "forest",
+      "text": "The forest's wisdom speaks directly to your heart, and you understand in a way that goes beyond words. This knowledge is a gift you'll treasure forever."
     },
     "easy_forest_e12": {
       "ending": true,
-      "title": "Rainy Treehouse",
-      "scene": "forest_home",
-      "text": "Rain begins to fall, and you discover a dry treehouse filled with cushions and old picture books. You read until the rain stops."
+      "title": "The True Friend",
+      "scene": "forest",
+      "text": "Your friendship with this forest creature is true and pure. Though you return to the library, the bond remains unbroken across the book's pages."
     },
     "easy_forest_d3_ra0b1a0_10": {
       "text": "The key opens a tree door. Inside, a lost storybook is waiting for its reader.",
@@ -196,9 +196,9 @@ window.ENCHANTED_STORIES = {
     },
     "easy_forest_e14": {
       "ending": true,
-      "title": "Forest Map",
-      "scene": "map",
-      "text": "The owl gives you a leaf-map showing every safe trail in the woods. You tuck it into the enchanted book so the next reader can explore too."
+      "title": "The Forest's Gift",
+      "scene": "forest",
+      "text": "What you discovered in the forest becomes yours to keep—not as an object, but as a memory that glows and grows more beautiful each time you remember it."
     },
     "easy_forest_d3_ra0b1b1_13": {
       "text": "The feathers lead to a baby owl who cannot find its nest.",
@@ -240,7 +240,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "easy_forest_root": {
-      "text": "A tiny lantern hangs from a branch. It lights a trail between the trees. You hear a squirrel call. Follow it?",
+      "text": "A tiny lantern hangs from a branch and glows warm gold. It lights a trail between the trees. You hear a squirrel call from somewhere deep in the forest, almost like it's calling to you.",
       "choices": [
         {
           "text": "Follow the lantern",
@@ -251,14 +251,14 @@ window.ENCHANTED_STORIES = {
     "easy_castle_e4": {
       "ending": true,
       "title": "The Baker's Bell",
-      "scene": "feast",
-      "text": "You return the recipe to the baker. The bell rings, and everyone gathers for warm rolls and apple slices. The cat gets the first tiny piece."
+      "scene": "castle",
+      "text": "The baker thanks you with a warm smile and offers you the first fresh bread from the oven. Its warmth and sweetness stay with you when you return to the library, reminding you of kindness."
     },
     "easy_castle_e5": {
       "ending": true,
       "title": "The Tiny Crown",
-      "scene": "crown",
-      "text": "You rescue the little crown without climbing too high. The castle king thanks you for solving the problem safely and gives you a royal bow."
+      "scene": "feast",
+      "text": "The queen places a tiny crown on your head—not of gold, but of starlight. Everyone in the castle bows, and you know you've found a true friend in the castle's heart."
     },
     "easy_castle_d3_ra0a0a0_3": {
       "text": "You search the kitchen shelves and find the missing recipe tucked inside a flour tin.",
@@ -277,13 +277,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "Secret Garden",
       "scene": "garden",
-      "text": "The cat leads you through a hidden door behind the kitchen. You find a sunny garden where herbs, flowers, and tiny blue flags grow together."
+      "text": "You leave the garden exactly as it was, untouched and perfect. But the garden knows you were there, and it blooms a little brighter when you remember it."
     },
     "easy_castle_e8": {
       "ending": true,
       "title": "The Recipe Book",
-      "scene": "library_return",
-      "text": "The missing recipe belongs to an old storybook. You return it to the enchanted library, where its pages smell wonderfully like cinnamon."
+      "scene": "castle",
+      "text": "The baker's recipe book is now yours forever. You carry it home and promise to bake whenever you want to remember your castle friend."
     },
     "easy_castle_d3_ra0a0b1_6": {
       "text": "You help the cat pull a soft cushion beneath the shelf so you can reach the little crown.",
@@ -318,14 +318,14 @@ window.ENCHANTED_STORIES = {
     "easy_castle_e11": {
       "ending": true,
       "title": "Tower Star",
-      "scene": "star_ship",
-      "text": "The glittering hall reveals a window shaped like a star. Through it you see a tiny starship sailing past the castle moon."
+      "scene": "castle",
+      "text": "The brightest star from the tower comes home with you, shining softly on your shelf. When you look at it, you remember the castle and all its magic."
     },
     "easy_castle_e12": {
       "ending": true,
       "title": "Kind Knight",
       "scene": "castle",
-      "text": "A young knight thanks you for helping the castle instead of rushing ahead. The two of you polish the little crown until it shines."
+      "text": "The kind knight rides beside you to the library's edge, ensuring your safe return. True friendship, he teaches you, isn't measured by swords but by kindness."
     },
     "easy_castle_d3_ra0b1a0_10": {
       "text": "You search the kitchen shelves and find the missing recipe tucked inside a flour tin.",
@@ -344,7 +344,7 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "Castle Treasure",
       "scene": "treasure",
-      "text": "The baker gives you a small golden spoon as a thank-you. It is not a royal treasure, but it becomes your favorite souvenir from the castle."
+      "text": "The castle's greatest treasure turns out to be the friendships you made there. That treasure is priceless and will stay with you forever."
     },
     "easy_castle_d3_ra0b1b1_13": {
       "text": "You help the cat pull a soft cushion beneath the shelf so you can reach the little crown.",
@@ -386,7 +386,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "easy_castle_root": {
-      "text": "A round castle tower rises from the page. A bell rings once, and a little blue flag points inside. You step through the gate.",
+      "text": "A round castle tower rises from the page. A bell rings once, and a little blue flag points inside. You step through the gate and feel the cool stone beneath your feet.",
       "choices": [
         {
           "text": "Enter the castle",
@@ -396,15 +396,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_sea_e4": {
       "ending": true,
-      "title": "The Lighthouse Bell",
-      "scene": "village",
-      "text": "You find the missing bell beneath a pile of seaweed and return it to the lighthouse. Its bright ring tells every boat that the shore is safe."
+      "title": "The Sailor's Way",
+      "scene": "sea",
+      "text": "You learn the old sailor's way—how to read the water, the wind, and the stars. This knowledge becomes part of you, and the sea will always be your home."
     },
     "easy_sea_e5": {
       "ending": true,
-      "title": "Pearl Gate",
-      "scene": "treasure",
-      "text": "The pearl opens a small underwater gate filled with smooth stones that sparkle like stars. You take one little stone as a memory of the sea."
+      "title": "The Sea's Secret",
+      "scene": "sea",
+      "text": "You discover the sea's deepest secret, hidden for centuries beneath the waves. Knowing this secret makes you feel connected to the ocean's ancient magic forever."
     },
     "easy_sea_d3_ra0a0a0_3": {
       "text": "Inside the bottle is a picture of the lighthouse keeper's missing bell. You search the shore for it.",
@@ -421,15 +421,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_sea_e7": {
       "ending": true,
-      "title": "Dolphin Ride",
-      "scene": "ocean_boat",
-      "text": "The dolphin leads you around the island before bringing you safely back to shore. You wave as it disappears beneath a shining wave."
+      "title": "The Pearl of Wisdom",
+      "scene": "treasure",
+      "text": "The treasure you found is a pearl that glows with inner light. It contains the wisdom of all the seas that came before, and it is yours to keep."
     },
     "easy_sea_e8": {
       "ending": true,
-      "title": "Shell Message",
-      "scene": "map",
-      "text": "The message in the bottle turns into a map of safe places along the coast. You place it in the enchanted book for another explorer."
+      "title": "The Sea Friend",
+      "scene": "sea",
+      "text": "Your sea friend becomes your guide and companion. Though you must return to the library, this friendship transcends the boundaries of the written world."
     },
     "easy_sea_d3_ra0a0b1_6": {
       "text": "The crab drops the pearl into a rock pool. It opens a hidden gate beneath the water.",
@@ -463,15 +463,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_sea_e11": {
       "ending": true,
-      "title": "Lighthouse Garden",
-      "scene": "garden",
-      "text": "Behind the lighthouse you discover a garden watered by sea mist. Tiny flowers open when you ring the bell."
+      "title": "The Sea's Beauty",
+      "scene": "sea",
+      "text": "The sea's beauty is beyond describing—it can only be felt and remembered. You carry that beauty home, and it brightens every day of your life."
     },
     "easy_sea_e12": {
       "ending": true,
-      "title": "Crab's Treasure",
-      "scene": "cave_light",
-      "text": "The crab shows you a small sea cave where sunlight makes the walls glow. You thank your new guide and leave the pearl where it belongs."
+      "title": "The Magic Current",
+      "scene": "sea",
+      "text": "You learn to ride the sea's magical currents, and the sea responds to your presence. The two of you become partners in adventure, forever bound by trust."
     },
     "easy_sea_d3_ra0b1a0_10": {
       "text": "Inside the bottle is a picture of the lighthouse keeper's missing bell. You search the shore for it.",
@@ -488,9 +488,9 @@ window.ENCHANTED_STORIES = {
     },
     "easy_sea_e14": {
       "ending": true,
-      "title": "Moon Tide",
-      "scene": "moon",
-      "text": "The tide rises beneath a silver moon. You and the dolphin watch the water sparkle before the magical book carries you home."
+      "title": "The Ocean's Wisdom",
+      "scene": "sea",
+      "text": "The sea teaches you that all things flow and change, but the magic endures. This wisdom shapes how you see the world from that day forward."
     },
     "easy_sea_d3_ra0b1b1_13": {
       "text": "The crab drops the pearl into a rock pool. It opens a hidden gate beneath the water.",
@@ -532,7 +532,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "easy_sea_root": {
-      "text": "Blue waves ripple out from the page. A little boat waits beside a shell path. You climb aboard and hear a dolphin whistle.",
+      "text": "Blue waves ripple out from the page. A little boat waits beside a shell path, its sail catching an imaginary breeze. You climb aboard and hear a dolphin whistle in the distance.",
       "choices": [
         {
           "text": "Climb into the boat",
@@ -542,15 +542,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_stars_e4": {
       "ending": true,
-      "title": "The Comet Garden",
-      "scene": "garden",
-      "text": "You return the missing seed to the glowing garden. Every flower opens at once, making the tiny planet look like a lantern."
+      "title": "The Star's Light",
+      "scene": "sun",
+      "text": "The star you sought glows with a warm, gentle light that fills you with peace. You bring a piece of that light back home, and it never fades."
     },
     "easy_stars_e5": {
       "ending": true,
-      "title": "Star Pilot's Map",
-      "scene": "star_ship",
-      "text": "You find the map inside the whale-shaped cloud and return it to the pilot. The little starship gives a cheerful beep before sailing home."
+      "title": "The Star Friend",
+      "scene": "phoenix",
+      "text": "Your friendship with this star is written across the night sky itself. No distance can separate you, and every night you can look up and say hello."
     },
     "easy_stars_d3_ra0a0a0_3": {
       "text": "The comet leads you to the missing seed, hidden under a soft blue stone.",
@@ -567,15 +567,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_stars_e7": {
       "ending": true,
-      "title": "Moon Bridge",
-      "scene": "moon",
-      "text": "You cross the moon bridge with the friendly comet beside you. At the far end, a silver doorway opens back into the enchanted library."
+      "title": "The Cosmic Song",
+      "scene": "treasure",
+      "text": "The stars' song is forever yours to remember—a melody of creation itself. When you sing it quietly to yourself, the stars join in from their distant homes."
     },
     "easy_stars_e8": {
       "ending": true,
-      "title": "Pocket Constellation",
-      "scene": "treasure",
-      "text": "A tiny flower gives you one glowing petal. When you place it in the book, it becomes a new constellation drawn just for you."
+      "title": "The Star's Magic",
+      "scene": "wizard",
+      "text": "The stars share their magic with you, and you return to the library forever touched by cosmic wonder. Magic now flows through your life in unexpected ways."
     },
     "easy_stars_d3_ra0a0b1_6": {
       "text": "The star pilot shows you the last place the map was seen: a quiet cloud shaped like a whale.",
@@ -609,15 +609,15 @@ window.ENCHANTED_STORIES = {
     },
     "easy_stars_e11": {
       "ending": true,
-      "title": "Cloud Whale",
-      "scene": "sun",
-      "text": "The cloud whale carries you gently across the sky. When morning light reaches the page, it releases you beside the library ladder."
+      "title": "The Star Secret",
+      "scene": "garden",
+      "text": "The secret the stars entrust to you can never be told in words—it can only be understood in your heart. This makes it infinitely precious."
     },
     "easy_stars_e12": {
       "ending": true,
-      "title": "Little Planet",
-      "scene": "mountain",
-      "text": "You help the garden grow, and the planet's hill fills with glowing flowers. From the top, you can see the whole starry storybook."
+      "title": "The Star's Knowledge",
+      "scene": "map",
+      "text": "The stars teach you to read the night sky like a book written in light. This knowledge makes every evening an adventure of discovery."
     },
     "easy_stars_d3_ra0b1a0_10": {
       "text": "The comet leads you to the missing seed, hidden under a soft blue stone.",
@@ -634,9 +634,9 @@ window.ENCHANTED_STORIES = {
     },
     "easy_stars_e14": {
       "ending": true,
-      "title": "Book of Stars",
-      "scene": "library_return",
-      "text": "The star pilot gives you a blank star map. Back in the library, it fills itself with every place you visited."
+      "title": "The Starlight",
+      "scene": "garden",
+      "text": "You return to the library glowing with starlight that no one else can see—but everyone can feel. Your presence reminds them that magic is real and the sky is full of wonders."
     },
     "easy_stars_d3_ra0b1b1_13": {
       "text": "The star pilot shows you the last place the map was seen: a quiet cloud shaped like a whale.",
@@ -678,7 +678,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "easy_stars_root": {
-      "text": "A silver ladder rises from the library floor into a sky full of stars. One bright star blinks three times, as if it wants you to follow.",
+      "text": "A silver ladder rises from the library floor into a sky full of stars. One bright star blinks three times, as if it wants you to follow. The ladder feels cool and solid under your hands as you begin to climb.",
       "choices": [
         {
           "text": "Climb the silver ladder",
@@ -862,7 +862,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "medium_forest_root": {
-      "text": "Moss cushions your steps as you enter the Whispering Woods. Ahead, a fox carries a red ribbon, while a woodpecker taps a warning beside an old stone bridge.",
+      "text": "Moss cushions your steps as you enter the Whispering Woods, deadening all sound. Ahead, a fox carries a red ribbon in its mouth—a ribbon that seems to glow softly in the dimness. A woodpecker taps urgently beside an old stone bridge, as if warning you of something. The forest seems to hold its breath, waiting for your choice.",
       "choices": [
         {
           "text": "Follow the fox",
@@ -1050,7 +1050,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "medium_castle_root": {
-      "text": "Torchlight flickers across the castle walls. Somewhere above you, a bell should be ringing, but the tower is silent. The castle cat waits beside two stairways.",
+      "text": "Torchlight flickers across the castle walls, casting dancing shadows. Somewhere above you in the tower, a bell should be ringing—it always rings at this hour—but the tower is eerily silent. The castle cat sits beside two stairways, watching you with knowing eyes. She seems to be waiting for you to choose.",
       "choices": [
         {
           "text": "Climb the tower",
@@ -1238,7 +1238,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "medium_sea_root": {
-      "text": "The tide is rising around a little lighthouse island. A wooden boat waits at the dock, and a seal keeps circling one dark patch of water.",
+      "text": "The tide is rising around a little lighthouse island, growing higher by the minute. A wooden boat waits at the dock, painted in faded blues and greens, its oars ready. A seal keeps circling one dark patch of water, always returning to the same spot, as if protecting—or warning about—something below.",
       "choices": [
         {
           "text": "Follow the seal",
@@ -1426,14 +1426,14 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "medium_stars_root": {
-      "text": "The starway opens above the library like a silver road. A constellation has gone dark, and a small starship waits nearby with its engine humming.",
+      "text": "The starway opens above the library like a silver road stretching to infinity. A constellation has gone dark—simply vanished from its familiar place in the sky, leaving a void. A small starship waits nearby with its engine humming, the pilot watching you expectantly. The stars around the void seem to shimmer and pulse with sadness.",
       "choices": [
         {
-          "text": "Follow the starship",
+          "text": "Board the starship",
           "next": "medium_stars_d1_ra0_1"
         },
         {
-          "text": "Cross the moon bridge",
+          "text": "Walk the moon bridge alone",
           "next": "medium_stars_d1_rb1_16"
         }
       ]
@@ -1605,7 +1605,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "hard_forest_root": {
-      "text": "The Whispering Woods are unusually still. A trail of silver leaves leads beneath ancient oaks, where a fox waits beside a stone marked with a half-erased compass.",
+      "text": "The Whispering Woods are unusually still—no birds, no wind in the leaves. A trail of silver leaves leads beneath ancient oaks toward a stone marked with a half-erased compass. The leaves chill slightly when you touch them, as if they've been waiting just for you. A fox watches from the shadows.",
       "choices": [
         {
           "text": "Follow the silver leaves",
@@ -1780,7 +1780,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "hard_castle_root": {
-      "text": "The castle's clock has stopped at the same moment on every tower. Servants whisper that the keep is waiting for a missing page from its founding story, and the castle cat carries a ribbon toward the archives.",
+      "text": "The castle's clock has stopped at the same moment on every tower—midnight, or perhaps the very moment the magic began. Servants whisper nervously that the keep is waiting for a missing page from its founding story, and the castle cat carries a ribbon toward the archives as if she knows exactly where to look. The air tastes like old parchment and forgotten songs.",
       "choices": [
         {
           "text": "Follow the archive cat",
@@ -1955,7 +1955,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "hard_sea_root": {
-      "text": "A storm is building beyond the lighthouse, but the harbor itself remains strangely calm. An old chart has washed ashore, marked with a route that disappears beneath the tide.",
+      "text": "A storm is building far beyond the lighthouse, clouds roiling like something alive, but the harbor itself remains strangely calm—too calm. An old chart has washed ashore, marked with a route that disappears beneath the tide. The parchment hums softly when you hold it. You can sense the storm's hunger, watching and waiting.",
       "choices": [
         {
           "text": "Study the old chart",
@@ -2130,7 +2130,7 @@ window.ENCHANTED_STORIES = {
       ]
     },
     "hard_stars_root": {
-      "text": "Beyond the library's highest window, the stars have formed an unfamiliar pattern. A starship waits beside a moon bridge, its navigator convinced that one constellation has been deliberately hidden.",
+      "text": "Beyond the library's highest window, the stars have formed an unfamiliar pattern—one that shouldn't exist. A starship waits beside a moon bridge, its navigator convinced that one constellation has been deliberately hidden, erased from the sky like a secret. The ship's engine hums with a question that needs answering. Something important is missing.",
       "choices": [
         {
           "text": "Study the unfamiliar constellation",
@@ -2272,10 +2272,10 @@ window.ENCHANTED_STORIES = {
       "text": "You choose to explore a little longer. The trail leads to a peaceful place where the forest friends you met gather to say goodbye, and you return to the book carrying a new leaf-shaped bookmark."
     },
     "easy_castle_choice_008": {
-      "text": "The moment called “The Baker's Bell” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "You've helped the castle baker, and the magical moment called \"The Baker's Bell\" feels like an ending. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic of the book leaves one small door open.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Accept the thanks and return home",
           "next": "easy_castle_e4"
         },
         {
@@ -2288,13 +2288,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "The Baker's Bell: One Last Door",
       "scene": "castle",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a sunny room where the castle baker and all your friends are waiting. They show you a tiny window to the library, and you wave goodbye before the book closes gently on this perfect ending."
     },
     "easy_castle_choice_009": {
-      "text": "The moment called “The Tiny Crown” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "The moment called \"The Tiny Crown\" feels like an ending as the queen bows to you. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic of the book leaves one small door open for you.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Accept the queen's gratitude and leave",
           "next": "easy_castle_e5"
         },
         {
@@ -2307,13 +2307,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "The Tiny Crown: One Last Door",
       "scene": "feast",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a feast prepared in your honor. The queen and all the castle friends are there, celebrating you. They show you a tiny window to the library, and you wave as the golden light fades and the book closes."
     },
     "easy_castle_choice_010": {
-      "text": "The moment called “Secret Garden” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "You've discovered the secret garden, and the moment feels complete. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic of the book always leaves one small door open.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Leave the garden in peace",
           "next": "easy_castle_e7"
         },
         {
@@ -2326,13 +2326,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "Secret Garden: One Last Door",
       "scene": "crown",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes, keeping the secret garden safe within its pages forever."
     },
     "easy_castle_choice_011": {
-      "text": "The moment called “The Recipe Book” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "The castle baker's recipe book is now yours, and the moment called \"The Recipe Book\" feels like a perfect ending. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic leaves one more door open.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Keep the recipes close and return home",
           "next": "easy_castle_e8"
         },
         {
@@ -2345,13 +2345,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "The Recipe Book: One Last Door",
       "scene": "garden",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes, knowing you'll always have the recipes to remember them."
     },
     "easy_castle_choice_012": {
-      "text": "The moment called “Tower Star” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "You've found the tower's brightest star, and the moment called \"Tower Star\" feels like an ending. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic offers one last choice.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Descend peacefully with the star's memory",
           "next": "easy_castle_e11"
         },
         {
@@ -2364,13 +2364,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "Tower Star: One Last Door",
       "scene": "castle",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes, carrying the star's light with you always."
     },
     "easy_castle_choice_013": {
-      "text": "The moment called “Kind Knight” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "The kind knight bows to you, and the moment called \"Kind Knight\" feels like it should be an ending. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. The magic isn't quite finished.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Accept the knight's thanks and leave",
           "next": "easy_castle_e12"
         },
         {
@@ -2383,13 +2383,13 @@ window.ENCHANTED_STORIES = {
       "ending": true,
       "title": "Kind Knight: One Last Door",
       "scene": "feast",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "text": "You climb one last stair and find a sunny room where the kind knight and all your castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes on this moment of friendship."
     },
     "easy_castle_choice_014": {
-      "text": "The moment called “Castle Treasure” feels like an ending, but the magic of the book leaves one small door open. A quiet bell sounds somewhere above you, and a final stair glows in the castle wall.",
+      "text": "You've found the castle's greatest treasure, and the moment called \"Castle Treasure\" feels complete. But then a quiet bell sounds somewhere above you, and a final stair glows in the castle wall—golden and inviting. One last door remains open.",
       "choices": [
         {
-          "text": "Accept the thanks",
+          "text": "Hold the treasure close and head home",
           "next": "easy_castle_e14"
         },
         {
@@ -2401,8 +2401,8 @@ window.ENCHANTED_STORIES = {
     "easy_castle_choice_014_alt": {
       "ending": true,
       "title": "Castle Treasure: One Last Door",
-      "scene": "crown",
-      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes."
+      "scene": "treasure",
+      "text": "You climb one last stair and find a sunny room where the castle friends are waiting. They show you a tiny window to the library, and you wave before the book closes, knowing the treasure will live forever in your memories."
     },
     "easy_sea_choice_015": {
       "text": "The moment called “The Lighthouse Bell” feels like an ending, but the magic of the book leaves one small door open. Far across the water, a lantern flashes twice and then waits for your answer.",
@@ -4737,6 +4737,477 @@ window.ENCHANTED_STORIES = {
       "title": "The Unfinished Chart",
       "scene": "map",
       "text": "The signal reveals a map with three missing sections. You resist the urge to invent them, record what is known, and leave the blank spaces for future explorers."
+    },
+    "easy_castle_e1": {
+      "ending": true,
+      "title": "The Bell Ringer",
+      "scene": "castle",
+      "text": "You climb the tower stairs and ring the bell yourself. The whole castle rings with joy, and the bell's song echoes across the library pages. When you return home, the bell's music still rings in your heart."
+    },
+    "easy_castle_e2": {
+      "ending": true,
+      "title": "The Silent Door",
+      "scene": "castle",
+      "text": "Behind the silent door, you find a room full of the castle's secrets—old letters, forgotten portraits, and a thousand stories waiting to be told. You smile, close the door gently, and keep the secret safe forever."
+    },
+    "easy_castle_e3": {
+      "ending": true,
+      "title": "The Golden Key",
+      "scene": "treasure",
+      "text": "The golden key opens a box filled with the castle's oldest magic. You hold it carefully, knowing you've discovered something precious that only a true friend could find."
+    },
+    "easy_forest_choice_008": {
+      "text": "You've helped the forest friend, and the moment feels special. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Accept your thanks and go home",
+          "next": "easy_forest_e4"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_008_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_008_alt": {
+      "ending": true,
+      "title": "The Deeper Wood: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to the very heart of the Whispering Woods, where ancient trees dance and silver light pools on the moss. The forest friends wave goodbye as you slip back into the library, forever changed."
+    },
+    "easy_forest_choice_009": {
+      "text": "You've found the forest's secret friend, and the moment feels complete. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Leave in peaceful silence",
+          "next": "easy_forest_e5"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_009_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_009_alt": {
+      "ending": true,
+      "title": "The Secret Creature: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to a hidden glade where the forest's most magical creature lives in perfect peace. You see it clearly for just one moment before the magic fades, and you carry that memory forever."
+    },
+    "easy_forest_choice_010": {
+      "text": "You've solved the forest mystery, and the moment feels like an ending. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Return home with your answer",
+          "next": "easy_forest_e7"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_010_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_010_alt": {
+      "ending": true,
+      "title": "The Mystery Deepens: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you through layers of mystery, each one deeper and more wonderful than the last. When you finally return home, the forest's secrets shimmer in your memory like morning mist."
+    },
+    "easy_forest_choice_011": {
+      "text": "The forest has taught you something precious, and the moment feels complete. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Keep the lesson and go home",
+          "next": "easy_forest_e8"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_011_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_011_alt": {
+      "ending": true,
+      "title": "The Deeper Lesson: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to places where the forest teaches directly through experience. You learn things that words could never capture. When you return home, wisdom glows quietly in your heart."
+    },
+    "easy_forest_choice_012": {
+      "text": "You've heard the forest's wisdom, and the moment feels like an ending. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Accept the wisdom and return",
+          "next": "easy_forest_e11"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_012_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_012_alt": {
+      "ending": true,
+      "title": "The Heart of Wisdom: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to the very root of all forest wisdom, where time moves differently and answers bloom like flowers. You emerge changed, carrying understanding that will guide you always."
+    },
+    "easy_forest_choice_013": {
+      "text": "You've made a forest friend, and the moment feels warm and complete. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Say goodbye and go home",
+          "next": "easy_forest_e12"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_013_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_013_alt": {
+      "ending": true,
+      "title": "The Friend's Garden: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to where your forest friend was born—a magical place filled with flowers that sing and trees that remember everything. The friendship deepens in ways you never expected."
+    },
+    "easy_forest_choice_014": {
+      "text": "You've found something beautiful in the forest, and the moment feels complete. But then the lantern glows brighter, revealing a path deeper into the woods. One more adventure waits in the whispering forest.",
+      "choices": [
+        {
+          "text": "Treasure what you found and go home",
+          "next": "easy_forest_e14"
+        },
+        {
+          "text": "Follow the lantern deeper",
+          "next": "easy_forest_choice_014_alt"
+        }
+      ]
+    },
+    "easy_forest_choice_014_alt": {
+      "ending": true,
+      "title": "Beauty's Heart: Beyond the Path",
+      "scene": "forest",
+      "text": "The lantern leads you to the source of all forest beauty—a place where light and shadow dance in perfect harmony. The beauty you found was just a reflection of this deeper magic."
+    },
+    "easy_forest_e1": {
+      "ending": true,
+      "title": "The Wise Fox",
+      "scene": "forest",
+      "text": "The fox teaches you something the forest has been waiting to share. Its wisdom glows inside you like the lantern's light, and you carry it home forever."
+    },
+    "easy_forest_e2": {
+      "ending": true,
+      "title": "The Hidden Bridge",
+      "scene": "forest",
+      "text": "You cross the hidden bridge and discover that it connects all the forest's secret places. The bridge remembers you, and you will always find your way back to the forest."
+    },
+    "easy_forest_e3": {
+      "ending": true,
+      "title": "The Lost Creature",
+      "scene": "forest",
+      "text": "You find the lost creature, safe and happy in a clearing of silvery moss. Its gratitude is so pure that it becomes part of your heart forever."
+    },
+    "easy_sea_choice_008": {
+      "text": "You've helped the sea creature, and the moment feels perfect. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Return to the library shore",
+          "next": "easy_sea_e4"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_008_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_008_alt": {
+      "ending": true,
+      "title": "The Sailor's Heart: Beyond the Horizon",
+      "scene": "sea",
+      "text": "You sail to places where the sea meets the sky and they become one. When you finally return to the library, the horizon glows within your heart forever."
+    },
+    "easy_sea_choice_009": {
+      "text": "You've solved a sea mystery, and the moment feels complete. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Return with your discovery",
+          "next": "easy_sea_e5"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_009_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_009_alt": {
+      "ending": true,
+      "title": "The Deep Mystery: Beyond the Horizon",
+      "scene": "sea",
+      "text": "You sail into the deep, where light dances strangely and magic pools in the trenches. Each discovery is more wonderful than the last, and you return transformed."
+    },
+    "easy_sea_choice_010": {
+      "text": "You've found a sea treasure, and the moment feels magical. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Hold your treasure close and go home",
+          "next": "easy_sea_e7"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_010_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_010_alt": {
+      "ending": true,
+      "title": "The True Treasure: Beyond the Horizon",
+      "scene": "sea",
+      "text": "You sail deeper and discover that the treasure you found was just a hint of the sea's true riches. The greatest treasure is the magic itself, and it's all around you."
+    },
+    "easy_sea_choice_011": {
+      "text": "You've helped a sea friend, and the moment feels warm. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Return and rest in the boat",
+          "next": "easy_sea_e8"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_011_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_011_alt": {
+      "ending": true,
+      "title": "The Friend's Home: Beyond the Horizon",
+      "scene": "sea",
+      "text": "Your sea friend leads you to the most magical place in all the oceans—their home. You're welcomed as family, and when you finally sail home, you carry their warmth in your heart."
+    },
+    "easy_sea_choice_012": {
+      "text": "You've seen the sea's beauty, and the moment feels complete. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Return to shore peacefully",
+          "next": "easy_sea_e11"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_012_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_012_alt": {
+      "ending": true,
+      "title": "Beauty Eternal: Beyond the Horizon",
+      "scene": "sea",
+      "text": "You sail to a place where the sea's beauty is so overwhelming it takes your breath away. The colors, the light, the life—all of it seems infinite. This vision stays with you forever."
+    },
+    "easy_sea_choice_013": {
+      "text": "You've felt the sea's magic, and the moment feels right. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Trust the sea and sail on",
+          "next": "easy_sea_e12"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_013_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_013_alt": {
+      "ending": true,
+      "title": "The Sea's Heart: Beyond the Horizon",
+      "scene": "sea",
+      "text": "The sea shows you its deepest heart—where all its magic originates and where time flows differently. You emerge understanding that you are part of something far greater than yourself."
+    },
+    "easy_sea_choice_014": {
+      "text": "You've learned something from the sea, and the moment feels complete. But then the dolphin whistle sounds again, calling from deeper waters. One more adventure waits beyond the horizon.",
+      "choices": [
+        {
+          "text": "Learn the lesson and go home",
+          "next": "easy_sea_e14"
+        },
+        {
+          "text": "Sail deeper into the mystery",
+          "next": "easy_sea_choice_014_alt"
+        }
+      ]
+    },
+    "easy_sea_choice_014_alt": {
+      "ending": true,
+      "title": "The Sea's Teaching: Beyond the Horizon",
+      "scene": "sea",
+      "text": "The sea teaches you layer after layer of wisdom, each lesson deeper and more profound. You return to the library infinitely richer for what you've learned, carrying the sea's song in your soul."
+    },
+    "easy_sea_e1": {
+      "ending": true,
+      "title": "The Dolphin's Gift",
+      "scene": "sea",
+      "text": "The dolphin gives you something precious—a song that only you can hear, that fills your heart with joy. You carry that song home with you forever."
+    },
+    "easy_sea_e2": {
+      "ending": true,
+      "title": "The Safe Harbor",
+      "scene": "sea",
+      "text": "You find a harbor where the waters are calm and welcoming, where everything is safe and perfect. This place becomes your refuge whenever you need it."
+    },
+    "easy_sea_e3": {
+      "ending": true,
+      "title": "The Hidden Lagoon",
+      "scene": "sea",
+      "text": "You discover a lagoon hidden from the rest of the world, where water is so clear you can see magic itself flowing. The lagoon shares its secret only with those pure of heart."
+    },
+    "easy_stars_choice_008": {
+      "text": "You've reached the star you sought, and the moment feels magical. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Descend safely to the library",
+          "next": "easy_stars_e4"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_008_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_008_alt": {
+      "ending": true,
+      "title": "The Star's Peak: Higher Still",
+      "scene": "star_ship",
+      "text": "You climb higher still, reaching a place where stars are born and old stars dance with new ones. The view is so magnificent that your heart expands to hold it all."
+    },
+    "easy_stars_choice_009": {
+      "text": "You've made a star friend, and the moment feels precious. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Wave and descend home",
+          "next": "easy_stars_e5"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_009_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_009_alt": {
+      "ending": true,
+      "title": "The Star's Kingdom: Higher Still",
+      "scene": "castle",
+      "text": "You climb with your star friend to their home in the highest reaches of the night sky. The star kingdom welcomes you as a guest of honor, and you experience wonders beyond imagination."
+    },
+    "easy_stars_choice_010": {
+      "text": "You've heard the stars sing, and the moment feels complete. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Listen and descend home",
+          "next": "easy_stars_e7"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_010_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_010_alt": {
+      "ending": true,
+      "title": "The Cosmic Song: Higher Still",
+      "scene": "phoenix",
+      "text": "You climb higher to the very source of the stars' singing. The song is so beautiful and pure that it becomes part of your soul forever, and you understand the universe's secret joy."
+    },
+    "easy_stars_choice_011": {
+      "text": "You've felt the stars' magic, and the moment feels right. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Trust the magic and descend",
+          "next": "easy_stars_e8"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_011_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_011_alt": {
+      "ending": true,
+      "title": "The Magic Source: Higher Still",
+      "scene": "wizard",
+      "text": "You climb to the very heart of starlight magic, where the first stars were born. There, you're given a gift of cosmic power that will shine within you always."
+    },
+    "easy_stars_choice_012": {
+      "text": "You've discovered a star secret, and the moment feels magical. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Keep the secret and descend",
+          "next": "easy_stars_e11"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_012_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_012_alt": {
+      "ending": true,
+      "title": "The Deepest Secret: Higher Still",
+      "scene": "treasure",
+      "text": "You climb to discover that the star secret you found was only the beginning. The deeper you climb, the more layers of cosmic mystery unfold before you, each more beautiful than the last."
+    },
+    "easy_stars_choice_013": {
+      "text": "You've seen the stars clearly, and the moment feels complete. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Descend with the stars' knowledge",
+          "next": "easy_stars_e12"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_013_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_013_alt": {
+      "ending": true,
+      "title": "The Star's Truth: Higher Still",
+      "scene": "moon",
+      "text": "You climb to where the true nature of stars is revealed—places where light thinks and stars dream. This understanding transforms your view of the entire cosmos forever."
+    },
+    "easy_stars_choice_014": {
+      "text": "You've touched the stars' light, and the moment feels golden. But then the ladder glows brighter, stretching upward into deeper sky. One more adventure awaits in the stars above.",
+      "choices": [
+        {
+          "text": "Return to the library radiant",
+          "next": "easy_stars_e14"
+        },
+        {
+          "text": "Climb higher into the cosmic night",
+          "next": "easy_stars_choice_014_alt"
+        }
+      ]
+    },
+    "easy_stars_choice_014_alt": {
+      "ending": true,
+      "title": "The Light Eternal: Higher Still",
+      "scene": "sun",
+      "text": "You climb so high that you touch the very essence of light itself. The experience is transcendent—you become one with the starlight and understand that you always were."
+    },
+    "easy_stars_e1": {
+      "ending": true,
+      "title": "The Bright Star",
+      "scene": "castle",
+      "text": "The brightest star in all the sky comes to you, shining with all its joy and warmth. It stays with you always, glowing softly in your heart even when you're back in the library."
+    },
+    "easy_stars_e2": {
+      "ending": true,
+      "title": "The Star Guide",
+      "scene": "star_ship",
+      "text": "A wise star guides you safely home, showing you paths through the cosmic night that only guardians know. You are forever grateful for its wisdom and kindness."
+    },
+    "easy_stars_e3": {
+      "ending": true,
+      "title": "The Starlight Bridge",
+      "scene": "moon",
+      "text": "A bridge of pure starlight appears before you, connecting the library to the distant stars. You walk across it, knowing it will always be there when you wish to visit the sky."
     }
   }
 };
