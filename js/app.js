@@ -34,17 +34,19 @@ function createCard(project) {
   card.dataset.type = project.type;
 
   card.innerHTML = `
-    <div class="card-image-wrap">
-      <img 
-        src="${project.screenshot}" 
-        alt="Screenshot placeholder for ${project.title}" 
-        class="card-image"
-        loading="lazy"
-        width="400"
-        height="225"
-      >
-      <span class="card-badge ${project.type}">${typeLabel}</span>
-    </div>
+    <a href="${project.playUrl}" class="card-image-link" aria-label="${actionAria}">
+      <div class="card-image-wrap">
+        <img 
+          src="${project.screenshot}" 
+          alt=""
+          class="card-image"
+          loading="lazy"
+          width="400"
+          height="225"
+        >
+        <span class="card-badge ${project.type}">${typeLabel}</span>
+      </div>
+    </a>
     <div class="card-body">
       <h3 class="card-title">${escapeHtml(project.title)}</h3>
       <p class="card-category">${escapeHtml(project.subject || project.category)}${project.type === "game" && project.category ? ` · ${escapeHtml(project.category)}` : ""}</p>

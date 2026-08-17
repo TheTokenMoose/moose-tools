@@ -7,6 +7,25 @@
   <title>Placeholder Tool — The Token Moose</title>
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
+<style id="library-back-btn">
+.library-back { position: relative; z-index: 20; margin: 12px 16px 0; }
+.library-back .btn-back {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 1rem; border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(15, 18, 40, 0.75); color: #fff !important;
+  font: inherit; font-weight: 800; font-size: 0.9rem;
+  text-decoration: none !important; cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.library-back .btn-back:hover {
+  transform: translateY(-1px);
+  background: rgba(30, 36, 70, 0.95); color: #fff !important;
+}
+.library-back .btn-back:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
+</style>
 </head>
 <body>
   <div class="placeholder-page">

@@ -1161,3 +1161,15 @@ a:focus:not(:focus-visible) {
   color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
 }
+
+
+/* Whole thumbnail is a play/launch hit target */
+a.card-image-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+a.card-image-link:focus-visible .card-image-wrap {
+  outline: 2px solid var(--accent-electric, #22d3ee);
+  outline-offset: 2px;
+}

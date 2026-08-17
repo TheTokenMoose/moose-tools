@@ -560,6 +560,4 @@ footer hr {
     }
 }
 /* Token Moose library link */
-.library-back { margin: 0 0 16px; }
-.library-back a { color: #2563eb; font-weight: 600; text-decoration: none; }
-.library-back a:hover { text-decoration: underline; }
+/* library-back styles moved to btn-back in index.html */

@@ -177,7 +177,34 @@ body {
   position: relative;
   margin-left: 0.35rem;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
+.theme-label-btn {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.theme-label-btn:hover,
+.theme-label-btn[aria-expanded="true"] {
+  border-color: var(--border-glow);
+  background: var(--fill-accent-soft, rgba(127,127,127,0.12));
+  transform: translateY(-1px);
+}
+.theme-label-btn:focus-visible {
+  outline: 2px solid var(--accent-electric, #22d3ee);
+  outline-offset: 2px;
+}
+
 
 .theme-ball {
   width: 2.25rem;

@@ -14,6 +14,13 @@
     return "night";
   }
 
+  function triggers() {
+    return [
+      document.getElementById("theme-ball"),
+      document.getElementById("theme-label-btn"),
+    ].filter(Boolean);
+  }
+
   function applyTheme(id) {
     if (!THEMES[id]) id = "night";
     document.documentElement.setAttribute("data-theme", id);
@@ -27,30 +34,39 @@
     });
     const ball = document.getElementById("theme-ball");
     if (ball) ball.setAttribute("aria-label", "Theme: " + THEMES[id].label + ". Change theme");
+    const label = document.getElementById("theme-label-btn");
+    if (label) label.setAttribute("aria-label", "Theme: " + THEMES[id].label + ". Change theme");
+  }
+
+  function setExpanded(open) {
+    triggers().forEach((el) => el.setAttribute("aria-expanded", open ? "true" : "false"));
   }
 
   function closeMenu() {
     const menu = document.getElementById("theme-menu");
-    const ball = document.getElementById("theme-ball");
     if (menu) menu.hidden = true;
-    if (ball) ball.setAttribute("aria-expanded", "false");
+    setExpanded(false);
   }
 
   function toggleMenu() {
     const menu = document.getElementById("theme-menu");
-    const ball = document.getElementById("theme-ball");
-    if (!menu || !ball) return;
+    if (!menu) return;
     const open = menu.hidden;
     menu.hidden = !open;
-    ball.setAttribute("aria-expanded", open ? "true" : "false");
+    setExpanded(open);
   }
 
   function init() {
     applyTheme(getTheme());
-    const ball = document.getElementById("theme-ball");
     const menu = document.getElementById("theme-menu");
-    if (!ball || !menu) return;
-    ball.addEventListener("click", (e) => { e.stopPropagation(); toggleMenu(); });
+    const balls = triggers();
+    if (!menu || !balls.length) return;
+    balls.forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
+    });
     menu.querySelectorAll(".theme-option").forEach((btn) => {
       btn.addEventListener("click", () => {
         applyTheme(btn.getAttribute("data-theme"));
@@ -58,7 +74,10 @@
       });
     });
     document.addEventListener("click", (e) => {
-      if (!menu.hidden && !menu.contains(e.target) && e.target !== ball) closeMenu();
+      if (menu.hidden) return;
+      if (menu.contains(e.target)) return;
+      if (balls.some((b) => b === e.target || b.contains(e.target))) return;
+      closeMenu();
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMenu();
