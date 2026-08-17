@@ -420,7 +420,7 @@ class AlphabetHuntGame {
       for (const [key, r] of Object.entries(ui)) {
         if (pointIn(lx, ly, r)) {
           this.sound.click();
-          else if (key === "menu") this.gotoMenu();
+          if (key === "menu") this.gotoMenu();
           else if (key === "restart") this.startGame(this.mode);
           else if (key === "fullscreen") this.toggleFullscreen();
           else if (key === "mute") {
@@ -440,7 +440,6 @@ class AlphabetHuntGame {
           this.sound.click();
           if (key === "restart") this.startGame(this.mode);
           else if (key === "menu") this.gotoMenu();
-          
           return;
         }
       }
@@ -899,7 +898,7 @@ class AlphabetHuntGame {
     for (const [key, r] of Object.entries(this.getMenuRects())) {
       const hover = pointIn(mx, my, r);
       let fill;
-      else if (key === "adventure" || key === "quick" || key === "challenge") fill = hover ? CORNFLOWER : STEEL_BLUE;
+      if (key === "adventure" || key === "quick" || key === "challenge") fill = hover ? CORNFLOWER : STEEL_BLUE;
       else fill = hover ? "#5DADE2" : "#2E86C1";
       this.fillRect(r[0], r[1], r[2], r[3], fill);
       this.strokeRect(r[0], r[1], r[2], r[3], WHITE, 3);
@@ -1233,7 +1232,7 @@ class AlphabetHuntGame {
     for (const [key, r] of Object.entries(this.getVictoryRects())) {
       const hover = pointIn(mx, my, r);
       let fill;
-      else fill = hover ? CORNFLOWER : STEEL_BLUE;
+      fill = hover ? CORNFLOWER : STEEL_BLUE;
       this.fillRect(r[0], r[1], r[2], r[3], fill);
       this.strokeRect(r[0], r[1], r[2], r[3], WHITE, 3);
       this.text((r[0] + r[2]) / 2, (r[1] + r[3]) / 2, labels[key], 22, WHITE);

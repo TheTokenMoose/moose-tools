@@ -739,11 +739,3 @@ document.addEventListener("DOMContentLoaded", () => {
   new ReadingRally();
 });
 
-(function () {
-  function mount() {
-    const slot = document.getElementById("tm-voice-slot");
-    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("reading-rally").mountPicker(slot);
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
-  else mount();
-})();
