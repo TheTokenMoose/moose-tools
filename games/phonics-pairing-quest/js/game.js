@@ -6,7 +6,7 @@
 const W = 1120;
 const H = 760;
 
-const BG = "#10203A";
+const BG = "rgba(10, 21, 40, 0.55)";
 const PANEL = "#172B4D";
 const CARD = "#213A63";
 const CARD_HOVER = "#2C4C7D";
@@ -290,8 +290,6 @@ class PhonicsPairingQuest {
         this.state = "title";
       } else if (key === "again") {
         this.startGame(this.levelName);
-      } else if (key === "quit") {
-        window.location.href = "../../index.html";
       }
       return;
     }
@@ -540,12 +538,9 @@ class PhonicsPairingQuest {
       this.text(x + cardW / 2, y + 160, "PLAY", 16, WHITE);
     });
 
-    this.text(W / 2, H - 50, "Keys 1–7 select answers · Esc = menu · X area via EXIT", 12, MUTED, "center", false);
+    this.text(W / 2, H - 50, "Keys 1–7 select answers · Esc = menu", 12, MUTED, "center", false);
 
-    const quitR = [W - 120, H - 48, W - 24, H - 16];
-    this.hitRects.quit = quitR;
-    this.roundRect(quitR[0], quitR[1], 96, 32, 6, CARD);
-    this.text((quitR[0] + quitR[2]) / 2, (quitR[1] + quitR[3]) / 2, "EXIT", 13, WHITE);
+    
   }
 
   drawPlay() {
@@ -650,9 +645,8 @@ class PhonicsPairingQuest {
     this.text(W / 2, 480, this.starRating(accuracy, this.won), 28, GOLD);
 
     const btns = [
-      ["again", "PLAY AGAIN", BLUE, 280],
-      ["menu", "CHOOSE LEVEL", CARD, 500],
-      ["quit", "EXIT", CARD, 720],
+      ["again", "PLAY AGAIN", BLUE, 350],
+      ["menu", "CHOOSE LEVEL", CARD, 560],
     ];
     btns.forEach(([key, label, fill, x]) => {
       const r = [x, 540, x + 180, 600];

@@ -353,7 +353,7 @@ class AlphabetHuntGame {
     const cx = LOGICAL_W / 2;
     let y = 340;
     const bw = 560, bh = 70, gap = 12;
-    const keys = ["adventure", "quick", "challenge", "fullscreen", "mute", "exit"];
+    const keys = ["adventure", "quick", "challenge", "fullscreen", "mute"];
     const rects = {};
     for (const k of keys) {
       rects[k] = [cx - bw / 2, y, cx + bw / 2, y + bh];
@@ -383,7 +383,6 @@ class AlphabetHuntGame {
       rects[key] = [x, y1, x + bw, y2];
       x += bw + gap;
     }
-    rects.exit = [LOGICAL_W - 20 - bw, y1, LOGICAL_W - 20, y2];
     return rects;
   }
 
@@ -394,7 +393,6 @@ class AlphabetHuntGame {
     return {
       restart: [cx - bw - 16, btnY, cx - 16, btnY + bh],
       menu: [cx + 16, btnY, cx + bw + 16, btnY + bh],
-      exit: [cx - bw / 2, btnY + bh + 20, cx + bw / 2, btnY + 2 * bh + 20],
     };
   }
 
@@ -413,8 +411,6 @@ class AlphabetHuntGame {
           else if (key === "mute") {
             this.soundMuted = !this.soundMuted;
             this.sound.setMuted(this.soundMuted);
-          } else if (key === "exit") {
-            window.location.href = "../../index.html";
           }
           return;
         }
@@ -424,7 +420,6 @@ class AlphabetHuntGame {
       for (const [key, r] of Object.entries(ui)) {
         if (pointIn(lx, ly, r)) {
           this.sound.click();
-          if (key === "exit") window.location.href = "../../index.html";
           else if (key === "menu") this.gotoMenu();
           else if (key === "restart") this.startGame(this.mode);
           else if (key === "fullscreen") this.toggleFullscreen();
@@ -445,7 +440,7 @@ class AlphabetHuntGame {
           this.sound.click();
           if (key === "restart") this.startGame(this.mode);
           else if (key === "menu") this.gotoMenu();
-          else if (key === "exit") window.location.href = "../../index.html";
+          
           return;
         }
       }
@@ -900,12 +895,10 @@ class AlphabetHuntGame {
       challenge: "CHALLENGE — Word Only",
       fullscreen: this.isFullscreen || document.fullscreenElement ? "EXIT FULLSCREEN" : "FULLSCREEN",
       mute: this.soundMuted ? "SOUND: OFF" : "SOUND: ON",
-      exit: "EXIT",
     };
     for (const [key, r] of Object.entries(this.getMenuRects())) {
       const hover = pointIn(mx, my, r);
       let fill;
-      if (key === "exit") fill = hover ? RED : DARK_RED;
       else if (key === "adventure" || key === "quick" || key === "challenge") fill = hover ? CORNFLOWER : STEEL_BLUE;
       else fill = hover ? "#5DADE2" : "#2E86C1";
       this.fillRect(r[0], r[1], r[2], r[3], fill);
@@ -1157,7 +1150,6 @@ class AlphabetHuntGame {
       fullscreen: "FULL",
       mute: this.soundMuted ? "SOUND" : "MUTE",
       hint: "HINT",
-      exit: "EXIT",
     };
     const base = {
       menu: STEEL_BLUE,
@@ -1165,7 +1157,6 @@ class AlphabetHuntGame {
       fullscreen: STEEL_BLUE,
       mute: STEEL_BLUE,
       hint: PURPLE,
-      exit: DARK_RED,
     };
     const hoverC = {
       menu: CORNFLOWER,
@@ -1173,7 +1164,6 @@ class AlphabetHuntGame {
       fullscreen: CORNFLOWER,
       mute: CORNFLOWER,
       hint: PINK,
-      exit: RED,
     };
     for (const [key, r] of Object.entries(ui)) {
       const fill = pointIn(mx, my, r) ? hoverC[key] : base[key];
@@ -1239,11 +1229,10 @@ class AlphabetHuntGame {
 
     const mx = this.pointerLogical[0];
     const my = this.pointerLogical[1];
-    const labels = { restart: "Play Again", menu: "Main Menu", exit: "Quit" };
+    const labels = { restart: "Play Again", menu: "Main Menu" };
     for (const [key, r] of Object.entries(this.getVictoryRects())) {
       const hover = pointIn(mx, my, r);
       let fill;
-      if (key === "exit") fill = hover ? RED : DARK_RED;
       else fill = hover ? CORNFLOWER : STEEL_BLUE;
       this.fillRect(r[0], r[1], r[2], r[3], fill);
       this.strokeRect(r[0], r[1], r[2], r[3], WHITE, 3);

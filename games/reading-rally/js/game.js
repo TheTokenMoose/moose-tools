@@ -305,23 +305,103 @@ class ReadingRally {
     el.style.borderColor = p.color;
   }
 
-  // Path points around an oval
+  // Winding trail (rounded rectangular loop with soft side curves — not a plain circle)
   _computePath() {
     const W = 900;
     const H = 520;
-    const cx = W / 2;
-    const cy = H / 2 + 10;
-    const rx = 340;
-    const ry = 180;
-    this.path = [];
-    for (let i = 0; i < this.spaces; i++) {
-      // Start at bottom of oval, go clockwise
-      const t = -Math.PI / 2 + (i / this.spaces) * Math.PI * 2;
-      this.path.push({
-        x: cx + Math.cos(t) * rx,
-        y: cy + Math.sin(t) * ry,
+    const marginX = 70;
+    const marginY = 55;
+    const left = marginX;
+    const right = W - marginX;
+    const top = marginY;
+    const bottom = H - marginY - 10;
+    const midY = (top + bottom) / 2;
+    // Build a loop: top edge → right curve → bottom → left curve
+    const corners = [
+      // top left → top right
+      ...this._edgePoints(left + 40, top, right - 40, top, 6),
+      // top-right bend down
+      ...this._arcPoints(right - 40, top, right, midY, 5),
+      // right side
+      ...this._edgePoints(right, midY, right, bottom - 30, 3),
+      // bottom-right bend
+      ...this._arcPoints(right, bottom - 30, right - 40, bottom, 4),
+      // bottom right → bottom left
+      ...this._edgePoints(right - 40, bottom, left + 40, bottom, 6),
+      // bottom-left bend up
+      ...this._arcPoints(left + 40, bottom, left, midY, 4),
+      // left side
+      ...this._edgePoints(left, midY, left, top + 30, 3),
+      // top-left bend
+      ...this._arcPoints(left, top + 30, left + 40, top, 4),
+    ];
+    // Resample to exactly this.spaces points along the polyline
+    this.path = this._resample(corners, this.spaces);
+  }
+
+  _edgePoints(x1, y1, x2, y2, n) {
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / n;
+      out.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t });
+    }
+    return out;
+  }
+
+  _arcPoints(x1, y1, x2, y2, n) {
+    // Simple quadratic-ish bend through a control point outside the segment
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    // perpendicular push
+    const cx = mx + dy * 0.15;
+    const cy = my - dx * 0.15;
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / n;
+      const u = 1 - t;
+      out.push({
+        x: u * u * x1 + 2 * u * t * cx + t * t * x2,
+        y: u * u * y1 + 2 * u * t * cy + t * t * y2,
       });
     }
+    return out;
+  }
+
+  _resample(pts, n) {
+    if (!pts.length) return [];
+    // cumulative lengths
+    const seg = [0];
+    let total = 0;
+    for (let i = 1; i < pts.length; i++) {
+      const d = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+      total += d;
+      seg.push(total);
+    }
+    // close loop distance
+    total += Math.hypot(pts[0].x - pts[pts.length - 1].x, pts[0].y - pts[pts.length - 1].y);
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const target = (i / n) * total;
+      // walk
+      let acc = 0;
+      let found = false;
+      for (let j = 0; j < pts.length; j++) {
+        const a = pts[j];
+        const b = pts[(j + 1) % pts.length];
+        const d = Math.hypot(b.x - a.x, b.y - a.y);
+        if (acc + d >= target) {
+          const t = d < 0.001 ? 0 : (target - acc) / d;
+          out.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+          found = true;
+          break;
+        }
+        acc += d;
+      }
+      if (!found) out.push({ ...pts[0] });
+    }
+    return out;
   }
 
   drawBoard() {
@@ -330,36 +410,55 @@ class ReadingRally {
     const H = this.canvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    // Grass / map background
+    // Sky → meadow map
     const bg = ctx.createLinearGradient(0, 0, 0, H);
-    bg.addColorStop(0, "#2d6a4f");
+    bg.addColorStop(0, "#87ceeb");
+    bg.addColorStop(0.35, "#b8e0d2");
+    bg.addColorStop(0.55, "#52b788");
     bg.addColorStop(1, "#1b4332");
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    // Soft hills
-    ctx.fillStyle = "rgba(64, 145, 108, 0.5)";
+    // Clouds
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    [[120,70,50],[200,60,40],[720,80,55],[800,55,35]].forEach(([x,y,r]) => {
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.arc(x + r * 0.7, y + 6, r * 0.7, 0, Math.PI * 2);
+      ctx.arc(x - r * 0.6, y + 8, r * 0.65, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Hills
+    ctx.fillStyle = "rgba(45, 106, 79, 0.55)";
     ctx.beginPath();
-    ctx.ellipse(200, 120, 140, 50, 0, 0, Math.PI * 2);
-    ctx.ellipse(700, 100, 120, 45, 0, 0, Math.PI * 2);
+    ctx.ellipse(160, H - 40, 200, 70, 0, 0, Math.PI * 2);
+    ctx.ellipse(750, H - 30, 220, 65, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(64, 145, 108, 0.4)";
+    ctx.beginPath();
+    ctx.ellipse(450, H - 20, 260, 50, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // Path ribbon
-    ctx.strokeStyle = "#d4a373";
-    ctx.lineWidth = 36;
-    ctx.lineJoin = "round";
-    ctx.beginPath();
-    this.path.forEach((p, i) => {
-      if (i === 0) ctx.moveTo(p.x, p.y);
-      else ctx.lineTo(p.x, p.y);
-    });
-    ctx.closePath();
-    ctx.stroke();
-    ctx.strokeStyle = "#faedcd";
-    ctx.lineWidth = 4;
-    ctx.setLineDash([12, 10]);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    // Path ribbon (outer + inner stripe)
+    if (this.path.length) {
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "#6b3f1d";
+      ctx.lineWidth = 44;
+      ctx.beginPath();
+      this.path.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+      ctx.closePath();
+      ctx.stroke();
+      ctx.strokeStyle = "#d4a373";
+      ctx.lineWidth = 34;
+      ctx.stroke();
+      ctx.strokeStyle = "#faedcd";
+      ctx.lineWidth = 5;
+      ctx.setLineDash([14, 12]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
 
     // Spaces
     const typeColor = {

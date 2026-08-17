@@ -445,9 +445,7 @@ class IBLittleExplorers {
     for (const [key, r] of Object.entries(this.hitRects)) {
       if (!pointIn(lx, ly, r)) continue;
       this.sound.play("click");
-      if (key === "quit") {
-        window.location.href = "../../index.html";
-      } else if (key === "fs") {
+      if (key === "fs") {
         this.toggleFs();
       } else if (key === "mute") {
         this.muted = !this.muted;
@@ -738,7 +736,6 @@ class IBLittleExplorers {
 
     let x = LOGICAL_W - 40;
     const controls = [
-      ["quit", "EXIT", 110],
       ["fs", "FULL", 110],
       ["mute", this.muted ? "SOUND" : "MUTE", 120],
       ["speech", this.speechOn ? "VOICE" : "VOICE OFF", 150],
@@ -906,13 +903,12 @@ class IBLittleExplorers {
     this.text(LOGICAL_W / 2, 680, "⭐ ".repeat(stars).trim(), 36, GOLD);
 
     for (const [key, label, x] of [
-      ["again", "PLAY AGAIN", 620],
-      ["menu", "MAIN MENU", 1000],
-      ["quit", "EXIT", 1380],
+      ["again", "PLAY AGAIN", 720],
+      ["menu", "MAIN MENU", 1100],
     ]) {
       const r = [x, 760, x + 280, 860];
       this.hitRects[key] = r;
-      const fill = key === "again" ? GREEN : key === "quit" ? RED : CARD;
+      const fill = key === "again" ? GREEN : CARD;
       this.fillRect(r[0], r[1], r[2], r[3], fill);
       this.strokeRect(r[0], r[1], r[2], r[3], WHITE, 3);
       this.text((r[0] + r[2]) / 2, (r[1] + r[3]) / 2, label, 22, WHITE);

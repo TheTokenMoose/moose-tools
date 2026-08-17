@@ -1,14 +1,51 @@
 /**
- * Shared top chrome for every game/tool:
- *  - Top-left: Back to library
- *  - Top-right: Favorite heart (same localStorage key as the library)
- *
- * Usage: set <body data-app-id="candy-math" data-app-title="Candy Math Trail">
- *        and <script src="../../js/app-chrome.js"></script>
+ * Shared top chrome: Back (left) · Voice slot (center) · Favorite (right)
+ * Colors follow site theme (token-moose-theme / data-theme).
  */
 (function () {
   const FAVORITES_KEY = "token-moose-favorites";
+  const THEME_KEY = "token-moose-theme";
   const HOME = "../../index.html";
+
+  const THEME_PALETTES = {
+    night: {
+      barBg: "rgba(12, 14, 28, 0.88)",
+      border: "rgba(168, 85, 247, 0.45)",
+      text: "#f1f5f9",
+      accent: "#f9a8d4",
+      favOnBg: "rgba(120, 30, 70, 0.9)",
+      favOnBorder: "rgba(249, 168, 212, 0.7)",
+      glow: "0 0 16px rgba(168, 85, 247, 0.25)",
+    },
+    day: {
+      barBg: "rgba(255, 255, 255, 0.92)",
+      border: "rgba(14, 165, 233, 0.4)",
+      text: "#0f172a",
+      accent: "#0284c7",
+      favOnBg: "rgba(14, 165, 233, 0.18)",
+      favOnBorder: "rgba(2, 132, 199, 0.55)",
+      glow: "0 0 14px rgba(14, 165, 233, 0.2)",
+    },
+    playful: {
+      barBg: "rgba(255, 247, 237, 0.94)",
+      border: "rgba(249, 115, 22, 0.45)",
+      text: "#7c2d12",
+      accent: "#ea580c",
+      favOnBg: "rgba(244, 63, 94, 0.2)",
+      favOnBorder: "rgba(244, 63, 94, 0.55)",
+      glow: "0 0 14px rgba(249, 115, 22, 0.25)",
+    },
+  };
+
+  function getThemeId() {
+    try {
+      const t = localStorage.getItem(THEME_KEY);
+      if (t && THEME_PALETTES[t]) return t;
+    } catch (_) {}
+    const attr = document.documentElement.getAttribute("data-theme");
+    if (attr && THEME_PALETTES[attr]) return attr;
+    return "night";
+  }
 
   function getFavorites() {
     try {
@@ -41,23 +78,30 @@
   }
 
   function injectStyles() {
-    if (document.getElementById("tm-app-chrome-style")) return;
-    const style = document.createElement("style");
-    style.id = "tm-app-chrome-style";
+    const p = THEME_PALETTES[getThemeId()];
+    let style = document.getElementById("tm-app-chrome-style");
+    if (!style) {
+      style = document.createElement("style");
+      style.id = "tm-app-chrome-style";
+      document.head.appendChild(style);
+    }
     style.textContent = `
       .tm-app-chrome {
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 10050;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
+        gap: 0.5rem;
         padding: 0.65rem 0.85rem;
         pointer-events: none;
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       }
       .tm-app-chrome > * { pointer-events: auto; }
+      .tm-app-chrome .tm-chrome-left { justify-self: start; }
+      .tm-app-chrome .tm-chrome-center { justify-self: center; }
+      .tm-app-chrome .tm-chrome-right { justify-self: end; }
       .tm-app-chrome .tm-back,
       .tm-app-chrome .tm-fav {
         display: inline-flex;
@@ -67,9 +111,9 @@
         min-height: 2.4rem;
         padding: 0.45rem 0.95rem;
         border-radius: 999px;
-        border: 2px solid rgba(255,255,255,0.28);
-        background: rgba(12, 14, 28, 0.82);
-        color: #fff !important;
+        border: 2px solid ${p.border};
+        background: ${p.barBg};
+        color: ${p.text} !important;
         font: inherit;
         font-weight: 800;
         font-size: 0.88rem;
@@ -78,18 +122,18 @@
         cursor: pointer;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-        transition: transform 0.15s ease, background 0.15s ease;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2), ${p.glow};
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
       }
       .tm-app-chrome .tm-back:hover,
       .tm-app-chrome .tm-fav:hover {
         transform: translateY(-1px);
-        background: rgba(28, 32, 60, 0.95);
-        color: #fff !important;
+        border-color: ${p.accent};
+        color: ${p.text} !important;
       }
       .tm-app-chrome .tm-back:focus-visible,
       .tm-app-chrome .tm-fav:focus-visible {
-        outline: 2px solid #22d3ee;
+        outline: 2px solid ${p.accent};
         outline-offset: 2px;
       }
       .tm-app-chrome .tm-fav {
@@ -98,25 +142,36 @@
         font-size: 1.15rem;
       }
       .tm-app-chrome .tm-fav.is-favorite {
-        border-color: rgba(249, 168, 212, 0.65);
-        background: rgba(120, 30, 70, 0.85);
-        color: #fda4af !important;
+        border-color: ${p.favOnBorder};
+        background: ${p.favOnBg};
+        color: ${p.accent} !important;
       }
       .tm-app-chrome .tm-fav .tm-fav-label {
         font-size: 0.78rem;
         font-weight: 800;
         letter-spacing: 0.02em;
       }
-      /* Keep page content from sitting under the fixed chrome */
+      #tm-voice-slot {
+        min-height: 2.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #tm-voice-slot .tm-voice-picker { z-index: 10060; }
+      #tm-voice-slot .tm-voice-btn {
+        border: 2px solid ${p.border} !important;
+        background: ${p.barBg} !important;
+        color: ${p.text} !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15), ${p.glow};
+      }
       body.tm-has-app-chrome { padding-top: 3.4rem !important; }
-      /* Hide legacy library-back rows so we don't double up */
       body.tm-has-app-chrome .library-back { display: none !important; }
+      body.tm-has-app-chrome .tm-voice-float { display: none !important; }
       @media print {
         .tm-app-chrome { display: none !important; }
         body.tm-has-app-chrome { padding-top: 0 !important; }
       }
     `;
-    document.head.appendChild(style);
   }
 
   function mount() {
@@ -133,8 +188,6 @@
 
     injectStyles();
     body.classList.add("tm-has-app-chrome");
-
-    // Remove prior chrome if hot-reloaded
     document.querySelectorAll(".tm-app-chrome").forEach((n) => n.remove());
 
     const bar = document.createElement("div");
@@ -142,15 +195,25 @@
     bar.setAttribute("role", "navigation");
     bar.setAttribute("aria-label", "App navigation");
 
+    const left = document.createElement("div");
+    left.className = "tm-chrome-left";
     const back = document.createElement("a");
     back.className = "tm-back";
     back.href = HOME;
     back.textContent = "← Back to The Token Moose";
+    left.appendChild(back);
 
+    const center = document.createElement("div");
+    center.className = "tm-chrome-center";
+    const voiceSlot = document.createElement("div");
+    voiceSlot.id = "tm-voice-slot";
+    center.appendChild(voiceSlot);
+
+    const right = document.createElement("div");
+    right.className = "tm-chrome-right";
     const fav = document.createElement("button");
     fav.type = "button";
     fav.className = "tm-fav";
-    fav.setAttribute("data-app-id", appId);
 
     function paintFav() {
       const on = appId && isFavorite(appId);
@@ -171,13 +234,19 @@
         toggleFavorite(appId);
         paintFav();
       });
-    } else {
-      fav.hidden = true;
+      right.appendChild(fav);
     }
 
-    bar.appendChild(back);
-    bar.appendChild(fav);
+    bar.appendChild(left);
+    bar.appendChild(center);
+    bar.appendChild(right);
     body.insertBefore(bar, body.firstChild);
+
+    // Theme change observer (shell pages may set data-theme later)
+    try {
+      const obs = new MutationObserver(() => injectStyles());
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    } catch (_) {}
   }
 
   if (document.readyState === "loading") {

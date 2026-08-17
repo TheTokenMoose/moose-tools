@@ -298,7 +298,7 @@
     // Warm voices list
     ensureVoicesLoaded(() => {});
 
-    return {
+    const api = {
       appId: id,
       speak,
       stop,
@@ -311,6 +311,28 @@
       listVoices,
       ensureVoicesLoaded,
     };
+
+    // Uniform placement: top-center chrome voice slot when present
+    function tryMountChrome() {
+      const slot = document.getElementById("tm-voice-slot");
+      if (slot && !slot.querySelector(".tm-voice-picker")) {
+        mountPicker(slot);
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => setTimeout(tryMountChrome, 0));
+    } else {
+      setTimeout(tryMountChrome, 0);
+    }
+    // Retry a few times in case app-chrome mounts slightly later
+    let tries = 0;
+    const iv = setInterval(() => {
+      tries += 1;
+      tryMountChrome();
+      if (tries > 20 || document.querySelector("#tm-voice-slot .tm-voice-picker")) clearInterval(iv);
+    }, 100);
+
+    return api;
   }
 
   function escapeHtml(s) {
