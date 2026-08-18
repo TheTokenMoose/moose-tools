@@ -154,17 +154,17 @@
   try { injectImportMap(); } catch (_) {}
 
   async function loadPiper() {
-    if (piperFailed) throw new Error("Piper unavailable");
     if (piperMod) return piperMod;
     injectImportMap();
     installFetchShim();
     try {
       const url = absUrl("assets/tts/runtime/piper-tts-web.js");
       piperMod = await import(/* webpackIgnore: true */ url);
+      piperFailed = false;
       return piperMod;
     } catch (e) {
-      piperFailed = true;
       console.warn("[MooseTTS] Piper module failed to load", e);
+      // Allow retry later (transient network / race with import map)
       throw e;
     }
   }
@@ -282,37 +282,50 @@
 
   async function piperSpeak(text, voiceId, rate) {
     const mod = await loadPiper();
-    // Create session WITH local wasm paths (library singleton)
+    // Ensure model files are in OPFS (library reads HF-style URLs; fetch shim rewrites to local)
+    if (!(await isPrepared(voiceId))) {
+      const ok = await prepareVoice(voiceId, { quiet: true });
+      if (!ok) throw new Error("Voice not prepared: " + voiceId);
+    }
+    // Reset singleton if voice changed so config reloads
+    try {
+      if (mod.TtsSession && mod.TtsSession._instance && mod.TtsSession._instance.voiceId !== voiceId) {
+        mod.TtsSession._instance = null;
+      }
+    } catch (_) {}
     const session = await mod.TtsSession.create({
       voiceId: voiceId,
       wasmPaths: wasmPaths(),
+      logger: function (m) { try { console.debug("[Piper]", m); } catch (_) {} },
     });
     const blob = await session.predict(text);
     if (!(blob instanceof Blob)) throw new Error("No audio blob from Piper");
-    stop();
+    // Don't call full stop() — it bumps seq and can cancel this utterance
+    try {
+      if (global.speechSynthesis) global.speechSynthesis.cancel();
+    } catch (_) {}
+    if (audioEl) {
+      try { audioEl.pause(); } catch (_) {}
+    }
     const url = URL.createObjectURL(blob);
     const a = new Audio(url);
     audioEl = a;
     a.playbackRate = Math.max(0.5, Math.min(2, rate || 1));
     speaking = true;
-    await new Promise(function (resolve) {
+    await new Promise(function (resolve, reject) {
       a.onended = function () {
         speaking = false;
-        try {
-          URL.revokeObjectURL(url);
-        } catch (_) {}
+        try { URL.revokeObjectURL(url); } catch (_) {}
         resolve();
       };
       a.onerror = function () {
         speaking = false;
-        try {
-          URL.revokeObjectURL(url);
-        } catch (_) {}
-        resolve();
+        try { URL.revokeObjectURL(url); } catch (_) {}
+        reject(new Error("Audio element failed"));
       };
-      a.play().catch(function () {
+      a.play().catch(function (err) {
         speaking = false;
-        resolve();
+        reject(err || new Error("play() failed"));
       });
     });
   }

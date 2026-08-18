@@ -7,48 +7,11 @@ class SFX {
   constructor() {
     this.ctx = null;
     this.enabled = true;
-    this._voice = window.TokenMooseVoice ? TokenMooseVoice.create("i-spy-spelling") : null;
     this.musicOn = true;
     this._musicNodes = [];
     this._musicTimer = null;
-    this._voice = null;
-    this._voicesReady = false;
-    this._loadVoices();
-  }
-
-  _loadVoices() {
-    if (!window.speechSynthesis) return;
-    const pick = () => {
-      const voices = speechSynthesis.getVoices() || [];
-      if (!voices.length) return;
-      // Prefer calm, natural English voices; avoid harsh defaults when possible
-      const prefer = [
-        /samantha/i,
-        /karen/i,
-        /moira/i,
-        /fiona/i,
-        /google uk english female/i,
-        /google us english/i,
-        /microsoft zira/i,
-        /microsoft aria/i,
-        /natural/i,
-        /female/i,
-        /en-gb/i,
-        /en-us/i,
-        /^en/i,
-      ];
-      let chosen = null;
-      for (const re of prefer) {
-        chosen = voices.find((v) => re.test(v.name) || re.test(v.lang));
-        if (chosen) break;
-      }
-      this._voice = chosen || voices[0] || null;
-      this._voicesReady = true;
-    };
-    pick();
-    if (typeof speechSynthesis !== "undefined") {
-      speechSynthesis.onvoiceschanged = pick;
-    }
+    // Shared Token Moose voice (Piper via MooseTTS, browser fallback)
+    this._tmVoice = window.TokenMooseVoice ? TokenMooseVoice.create("i-spy-spelling") : null;
   }
 
   ensure() {
@@ -63,11 +26,12 @@ class SFX {
 
   setEnabled(on) {
     this.enabled = !!on;
-    if (this._voice) this._voice.setEnabled(this.enabled);
+    if (this._tmVoice) this._tmVoice.setEnabled(this.enabled);
     if (!this.enabled) {
-      if (this._voice) this._voice.stop();
+      if (this._tmVoice) this._tmVoice.stop();
       this.stopMusic();
       try {
+        if (window.MooseTTS) MooseTTS.stop();
         speechSynthesis.cancel();
       } catch (_) {}
     } else if (this.musicOn) {
@@ -109,16 +73,26 @@ class SFX {
     this.tone(660, 0.12, "sine", 0.1, 0.08);
   }
 
-  /** Soft, slower classroom-friendly voice */
+  /** Clue / feedback speech via shared MooseTTS pipeline */
   speak(text) {
     if (!this.enabled) return;
-    if (this._voice) { this._voice.speak(text); return; }
+    const t = String(text || "").trim();
+    if (!t) return;
+    if (this._tmVoice) {
+      this._tmVoice.speak(t, { rate: 0.92 });
+      return;
+    }
+    if (window.MooseTTS) {
+      MooseTTS.speak(t, { rate: 0.92 });
+      return;
+    }
     if (!window.speechSynthesis) return;
     try {
       speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
+      const u = new SpeechSynthesisUtterance(t);
+      u.rate = 0.92;
       speechSynthesis.speak(u);
-    } catch (e) {}
+    } catch (_) {}
   }
 
   /** Gentle looping ambient music (procedural, free) */
@@ -531,11 +505,3 @@ document.addEventListener("DOMContentLoaded", () => {
   new ISpySpelling();
 });
 
-(function () {
-  function mount() {
-    const slot = document.getElementById("tm-voice-slot");
-    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("i-spy-spelling").mountPicker(slot);
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
-  else mount();
-})();
