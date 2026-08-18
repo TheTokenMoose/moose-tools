@@ -1,0 +1,14 @@
+{
+  "name": "CVC Word Rush",
+  "short_name": "CVC Rush",
+  "description": "Kindergarten CVC and Silent-e word building races.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff8e7",
+  "theme_color": "#f472b6",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

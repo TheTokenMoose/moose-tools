@@ -273,6 +273,19 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "cvc-word-rush",
+    title: "CVC Word Rush",
+    type: "game",
+    description: "Bright kindergarten word-building: CVC and Silent-e tiers. Time Rush and Dash modes, vowel/consonant banks, real-word check with big miss feedback, local high scores.",
+    category: "Literacy",
+    subject: "Literacy",
+    skills: ["CVC", "silent e", "phonics", "encoding", "fluency"],
+    screenshot: "assets/screenshots/cvc-word-rush.jpg",
+    playUrl: "games/cvc-word-rush/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "simple-machines",
     title: "Simple Machines Lab",
     type: "game",

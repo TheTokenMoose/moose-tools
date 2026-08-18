@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f472b6">
+  <meta name="description" content="CVC Word Rush — kindergarten CVC and Silent-e word building with Time Rush and Dash modes.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>CVC Word Rush — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="cvc-word-rush" data-app-title="CVC Word Rush">
+  <div id="app">
+    <!-- HOME -->
+    <section id="screen-home">
+      <h1>CVC Word Rush</h1>
+      <p class="tag">Build real words · vowels pink · consonants blue</p>
+      <div class="panel">
+        <p class="rules" style="text-align:center;margin-top:0">
+          Choose a tier, then a mode. Real word = <strong>+100</strong>. Not real = <strong>−30</strong> (score never below 0).
+        </p>
+        <div class="tier-toggle">
+          <button type="button" id="tier-cvc" class="is-on">CVC<br><small>cat · pin · hop</small></button>
+          <button type="button" id="tier-cvce">Silent e<br><small>cake · bike · hope</small></button>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-big" id="mode-rush">⏱️ Time Rush</button>
+          <button type="button" class="btn btn-big alt" id="mode-dash">🏁 Dash</button>
+        </div>
+      </div>
+      <div class="panel rules">
+        <strong>Time Rush:</strong> pick a time limit — highest score wins.<br>
+        <strong>Dash:</strong> reach 20, 50, or 100 real words as fast as you can — best time wins.<br>
+        Duplicate words don’t score again. Tap a letter box to clear it.
+      </div>
+    </section>
+
+    <!-- SETUP -->
+    <section id="screen-setup" hidden>
+      <h1 id="setup-title">Setup</h1>
+      <div class="panel" id="setup-rush">
+        <p class="rules"><strong>Time limit</strong></p>
+        <div class="setup-options">
+          <label><input type="radio" name="rush-time" value="30"> 30 seconds</label>
+          <label><input type="radio" name="rush-time" value="60" checked> 60 seconds</label>
+          <label><input type="radio" name="rush-time" value="90"> 90 seconds</label>
+          <label><input type="radio" name="rush-time" value="120"> 2 minutes</label>
+        </div>
+      </div>
+      <div class="panel" id="setup-dash" hidden>
+        <p class="rules"><strong>Word target</strong></p>
+        <div class="setup-options">
+          <label><input type="radio" name="dash-target" value="20" checked> 20 words</label>
+          <label><input type="radio" name="dash-target" value="50"> 50 words</label>
+          <label><input type="radio" name="dash-target" value="100"> 100 words</label>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-back-home">Back</button>
+        <button type="button" class="btn btn-big" id="btn-start">Start!</button>
+      </div>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" hidden>
+      <div class="hud panel">
+        <div>
+          <div id="play-title" style="font-weight:900"></div>
+          <span class="pattern-tag" id="pattern-tag">C V C</span>
+        </div>
+        <div>Score <b id="hud-score">0</b></div>
+        <div>Words <b id="hud-words">0</b></div>
+        <div>Time <b id="hud-timer">0s</b></div>
+        <div id="hud-target-wrap" hidden>Goal <b id="hud-target">0 / 20</b></div>
+      </div>
+      <div class="panel">
+        <div class="slot-row" id="slot-row"></div>
+        <p class="feedback" id="feedback"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost" id="btn-clear">Clear</button>
+          <button type="button" class="btn btn-danger" id="btn-quit">End</button>
+        </div>
+      </div>
+      <div class="panel banks">
+        <h3 class="v">Vowels</h3>
+        <div class="letter-grid" id="bank-vowels"></div>
+        <h3 class="c">Consonants</h3>
+        <div class="letter-grid" id="bank-consonants"></div>
+      </div>
+      <div class="panel word-log-wrap">
+        <h3>Words you made</h3>
+        <ul class="word-log" id="word-log"></ul>
+      </div>
+    </section>
+
+    <!-- END -->
+    <section id="screen-end" hidden>
+      <h1>Nice work!</h1>
+      <div class="panel">
+        <div class="end-stats">
+          <div><b id="end-score">0</b>Score</div>
+          <div><b id="end-words">0</b>Real words</div>
+          <div><b id="end-fails">0</b>Misses</div>
+          <div><b id="end-time">0s</b>Time</div>
+        </div>
+        <p id="end-record" class="rules" style="text-align:center;font-weight:800"></p>
+        <h3 style="margin:0.5rem 0 0.25rem">Your words</h3>
+        <ul class="word-log" id="end-list"></ul>
+        <div class="btn-row" style="margin-top:1rem">
+          <button type="button" class="btn btn-big" id="btn-again">Play again</button>
+          <button type="button" class="btn btn-ghost" id="btn-home">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="big-x" hidden aria-hidden="true">✗</div>
+
+  <script src="js/words.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
