@@ -27,6 +27,10 @@
   let startAt = 0;
   let timerId = null;
   let wordLog = [];
+  let audioCtx = null;
+  let urgencyTimer = null;
+  let lastTickAt = 0;
+
 
   const $ = (id) => document.getElementById(id);
   const wordSet = () =>
@@ -57,6 +61,78 @@
       return true;
     }
     return false;
+  }
+
+
+  function getAudio() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /** Time Rush urgency: faster + louder ticks as time runs out */
+  function scheduleUrgency() {
+    clearTimeout(urgencyTimer);
+    if (!running || mode !== "rush") return;
+    const leftMs = Math.max(0, endAt - Date.now());
+    const left = leftMs / 1000;
+    // interval: calm → frantic (1200ms → 180ms)
+    let interval = 1200;
+    if (left <= 5) interval = 180;
+    else if (left <= 10) interval = 280;
+    else if (left <= 20) interval = 450;
+    else if (left <= 30) interval = 700;
+    else interval = 1100;
+
+    urgencyTimer = setTimeout(function () {
+      if (!running || mode !== "rush") return;
+      playUrgencyTick(left);
+      scheduleUrgency();
+    }, interval);
+  }
+
+  function playUrgencyTick(leftSec) {
+    const ctx = getAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    // pitch and volume rise as time runs out
+    const urgency = Math.max(0, Math.min(1, 1 - leftSec / Math.max(1, timeLimit)));
+    o.type = leftSec <= 5 ? "square" : "triangle";
+    o.frequency.value = 420 + urgency * 480;
+    const vol = 0.03 + urgency * 0.09;
+    g.gain.setValueAtTime(vol, now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + 0.08 + urgency * 0.06);
+    o.connect(g);
+    g.connect(ctx.destination);
+    o.start(now);
+    o.stop(now + 0.12 + urgency * 0.05);
+
+    // final seconds: extra high beep layer
+    if (leftSec <= 3) {
+      const o2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      o2.type = "sine";
+      o2.frequency.value = 880 + (3 - leftSec) * 120;
+      g2.gain.setValueAtTime(0.06, now);
+      g2.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+      o2.connect(g2);
+      g2.connect(ctx.destination);
+      o2.start(now);
+      o2.stop(now + 0.16);
+    }
+  }
+
+  function stopUrgency() {
+    clearTimeout(urgencyTimer);
+    urgencyTimer = null;
+    const hud = document.querySelector(".hud");
+    if (hud) hud.classList.remove("urgent");
   }
 
   function show(screen) {
@@ -236,8 +312,13 @@
   function tick() {
     if (!running) return;
     updateHUD();
-    if (mode === "rush" && Date.now() >= endAt) {
-      endGame(false);
+    if (mode === "rush") {
+      const left = Math.max(0, (endAt - Date.now()) / 1000);
+      const hud = document.querySelector(".hud");
+      if (hud) hud.classList.toggle("urgent", left <= 10);
+      if (Date.now() >= endAt) {
+        endGame(false);
+      }
     }
   }
 
@@ -266,11 +347,17 @@
 
     clearInterval(timerId);
     timerId = setInterval(tick, 200);
+    stopUrgency();
+    if (mode === "rush") {
+      getAudio();
+      scheduleUrgency();
+    }
   }
 
   function endGame(dashWin) {
     running = false;
     clearInterval(timerId);
+    stopUrgency();
     const elapsed = Math.floor((Date.now() - startAt) / 1000);
 
     let recordMsg = "";
