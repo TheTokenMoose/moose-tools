@@ -10,39 +10,42 @@
  */
 
 // Voice .onnx models: same-origin assets; copied to OPFS on first use — not SW precache.
-const CACHE_NAME = "token-moose-v57";
+const CACHE_NAME = "token-moose-v58";
 
 const PRECACHE_URLS = [
-  "./js/voice.js",
-  "./voice-settings.html",
-  "./css/tts-settings.css",
-  "./css/tts-settings.css",
-  "./js/tts/tts-settings.js",
-  "./js/tts/moose-tts.js",
-  "./js/tts/voice-catalog.js",
-  "./assets/tts/runtime/voices_static-D_OtJDHM.js",
-  "./assets/tts/runtime/piper-o91UDS6e.js",
-  "./assets/tts/runtime/piper-tts-web.js",
-
-
   "./",
   "./index.html",
   "./games.html",
   "./tools.html",
   "./favorites.html",
   "./about.html",
+  "./voice-settings.html",
+  "./manifest.webmanifest",
   "./css/main.css",
   "./css/components.css",
   "./css/responsive.css",
+  "./css/themes.css",
+  "./css/tts-settings.css",
   "./js/projects.js",
   "./js/favorites.js",
   "./js/install.js",
   "./js/app.js",
+  "./js/app-chrome.js",
   "./js/sw-register.js",
-  "./manifest.webmanifest",
+  "./js/theme.js",
+  "./js/calendar.js",
+  "./js/todo.js",
+  "./js/voice.js",
+  "./js/tts/moose-tts.js",
+  "./js/tts/voice-catalog.js",
+  "./js/tts/tts-settings.js",
+  "./assets/tts/runtime/piper-tts-web.js",
+  "./assets/tts/runtime/piper-o91UDS6e.js",
+  "./assets/tts/runtime/voices_static-D_OtJDHM.js",
+  "./assets/tts/runtime/ort.wasm.min.mjs",
   "./assets/icons/favicon-192.png",
   "./assets/icons/favicon-512.png",
-  "./assets/icons/logo-avatar.png",
+  "./assets/icons/favicon.ico",
 ];
 
 function isSameOrigin(url) {

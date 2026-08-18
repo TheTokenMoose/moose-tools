@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="story-sequence-v4";
-const ASSETS=["./index.html","./css/game.css","./js/game.js","./js/stories.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png"];
+const CACHE="story-sequence-v5";
+const ASSETS=["./index.html","./css/game.css","./js/game.js","./js/stories.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

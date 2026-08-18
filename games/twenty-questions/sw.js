@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="twenty-questions-v4";
-const ASSETS=["./index.html","./css/game.css","./js/game.js","./js/knowledge.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png"];
+const CACHE="twenty-questions-v5";
+const ASSETS=["./index.html","./css/game.css","./js/game.js","./js/knowledge.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

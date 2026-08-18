@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="china-expat-salary-planner-v2";
-const ASSETS=[ "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", ./pwa-install.js, ./pwa-install.css, "./vendor/jspdf.umd.min.js", "./vendor/jspdf.plugin.autotable.min.js", "./sw.js", "./icons/icon-192.png", "./icons/icon-512.png" ];
+const CACHE="china-expat-salary-planner-v3";
+const ASSETS=["./index.html","./style.css","./app.js","./manifest.webmanifest","./vendor/jspdf.umd.min.js","./vendor/jspdf.plugin.autotable.min.js","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

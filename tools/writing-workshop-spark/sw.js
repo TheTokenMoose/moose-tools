@@ -1,16 +1,5 @@
-const CACHE = "writing-workshop-spark-v1";
-const ASSETS = [
-  "./",
-  "./index.html",
-  "./css/app.css",
-  "./js/data.js",
-  "./js/app.js",
-  "./manifest.webmanifest",
-  "./pwa-install.js",
-  "./pwa-install.css",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
-];
+const CACHE = "writing-workshop-spark-v2";
+const ASSETS=["./","./index.html","./css/app.css","./js/data.js","./js/app.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS).catch(() => {})).then(() => self.skipWaiting()));
 });

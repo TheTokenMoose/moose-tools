@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="ib-little-explorers-v2";
-const ASSETS=[ "./index.html", "./css/game.css", "./js/game.js", "./manifest.webmanifest", ./pwa-install.js, ./pwa-install.css, "./sw.js", "./icons/icon-192.png", "./icons/icon-512.png" ];
+const CACHE="ib-little-explorers-v3";
+const ASSETS=["./index.html","./css/game.css","./js/game.js","./manifest.webmanifest","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js","../../js/voice.js","../../js/tts/moose-tts.js","../../js/tts/voice-catalog.js","../../assets/tts/runtime/piper-tts-web.js","../../assets/tts/runtime/piper-o91UDS6e.js","../../assets/tts/runtime/voices_static-D_OtJDHM.js","../../assets/tts/runtime/ort.wasm.min.mjs"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

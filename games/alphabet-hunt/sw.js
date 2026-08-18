@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="alphabet-hunt-v2";
-const ASSETS=[ "./index.html", "./css/game.css", "./js/game.js", "./manifest.webmanifest", ./pwa-install.js, ./pwa-install.css, "./sw.js", "./icons/icon-192.png", "./icons/icon-512.png" ];
+const CACHE="alphabet-hunt-v3";
+const ASSETS=["./index.html","./css/game.css","./js/game.js","./manifest.webmanifest","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

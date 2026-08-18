@@ -31,7 +31,7 @@ const insurancePresets = {
 // ==============================
 function toggleMode() {
     const mode = document.querySelector('input[name="calcMode"]:checked').value;
-    const advanced = document.querySelectorAll("#fullOnly, #fullOnlySection");
+    const advanced = document.querySelectorAll("#fullOnly, [id^=\"fullOnlySection\"]");
 
     advanced.forEach(section => {
         if (mode === "quick") {
