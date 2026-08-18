@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Simple Machines Lab — explore lever, wheel & axle, pulley, inclined plane, wedge, and screw in a touch-friendly physics sandbox. IB inquiry science.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Simple Machines Lab — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="simple-machines" data-app-title="Simple Machines Lab">
+  <div id="app">
+    <header class="lab-header">
+      <div>
+        <h1>Simple Machines Lab</h1>
+        <p>Build · touch · test · inquire · IB science</p>
+      </div>
+      <div class="chip-row" aria-label="Focus">
+        <span class="chip">Forces</span>
+        <span class="chip">Design</span>
+        <span class="chip">Inquiry</span>
+      </div>
+    </header>
+
+    <section id="hub" class="hub" aria-label="Choose a simple machine">
+      <div class="hub-grid" id="hub-grid"></div>
+      <p class="hint">
+        Pick a machine. Drag objects with finger or mouse. Change a control, then reset to test a new idea.
+        Ask: <em>Where is the force applied? What becomes easier? What trade-off appears?</em>
+      </p>
+    </section>
+
+    <section id="lab-stage" class="lab-stage" aria-label="Physics sandbox">
+      <div class="stage-bar">
+        <button type="button" class="btn btn-back-lab" id="btn-back-hub">← Machines</button>
+        <span id="stage-title" style="font-weight:800"></span>
+        <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
+        <div class="goal-banner" id="goal-banner"></div>
+      </div>
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="world" width="800" height="440"></canvas>
+      </div>
+      <div class="controls">
+        <div class="control-card ctrl" data-for="plane">
+          <label for="ctrl-plane-angle">Ramp steepness</label>
+          <input type="range" id="ctrl-plane-angle" min="0.15" max="0.55" step="0.01" value="0.35" />
+          <div class="val"><span id="val-plane-angle">0.35</span> rad</div>
+        </div>
+        <div class="control-card ctrl" data-for="wheel">
+          <label>Wheel spin</label>
+          <button type="button" class="btn btn-primary" id="btn-spin-wheel" style="width:100%">Spin wheel ⟳</button>
+        </div>
+        <div class="control-card ctrl" data-for="screw">
+          <label>Turn the screw</label>
+          <div style="display:flex;gap:0.4rem">
+            <button type="button" class="btn btn-primary" id="btn-screw-ccw" style="flex:1">↺ Lower</button>
+            <button type="button" class="btn btn-primary" id="btn-screw-cw" style="flex:1">Raise ↻</button>
+          </div>
+        </div>
+        <div class="control-card ctrl" data-for="all">
+          <label>Tip</label>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.35">Drag bodies directly. Large touch targets. Reset after big changes.</div>
+        </div>
+      </div>
+      <p class="hint" id="hint"></p>
+    </section>
+  </div>
+  <div id="toast" class="toast" hidden role="status"></div>
+
+  <script src="vendor/matter.min.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

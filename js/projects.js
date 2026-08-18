@@ -273,6 +273,19 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "simple-machines",
+    title: "Simple Machines Lab",
+    type: "game",
+    description: "IB-friendly physics sandbox for the six simple machines. Students drag, adjust, and test levers, wheels, pulleys, ramps, wedges, and screws on touch screens.",
+    category: "Science",
+    subject: "Science",
+    skills: ["simple machines", "forces", "inquiry", "design thinking", "IB PYP"],
+    screenshot: "assets/screenshots/simple-machines.jpg",
+    playUrl: "games/simple-machines/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "story-workshop",
     title: "Story Workshop",
     type: "tool",
