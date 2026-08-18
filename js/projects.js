@@ -273,6 +273,19 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "story-workshop",
+    title: "Story Workshop",
+    type: "tool",
+    description: "Build class choose-your-own-adventure paths that appear inside The Enchanted Library. Block-by-block pages, choices, local save, JSON backup.",
+    category: "Literacy",
+    subject: "Literacy",
+    skills: ["story writing", "branching narrative", "author craft"],
+    screenshot: "assets/screenshots/story-workshop.jpg",
+    playUrl: "tools/story-workshop/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "exit-ticket-maker",
     title: "Exit Ticket Maker",
     type: "tool",

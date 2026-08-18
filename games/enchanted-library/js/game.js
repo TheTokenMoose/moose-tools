@@ -4,7 +4,85 @@
  * Click choices · multiple reading levels · TTS "Hear the page"
  */
 (function () {
-  const DATA = () => window.ENCHANTED_STORIES;
+  const USER_STORIES_KEY = "token-moose-enchanted-user-stories";
+
+  /** Deep-clone default stories and merge class packs from Story Workshop */
+  function getMergedStories() {
+    const base = window.ENCHANTED_STORIES;
+    if (!base || typeof base !== "object") return base;
+
+    let packs = [];
+    try {
+      const raw = localStorage.getItem(USER_STORIES_KEY);
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (data && Array.isArray(data.packs)) packs = data.packs;
+      }
+    } catch (_) {}
+
+    if (!packs.length) return base;
+
+    // Shallow structural clone so we never mutate the bundled default object
+    const merged = {
+      title: base.title,
+      subtitle: base.subtitle,
+      hubs: base.hubs,
+      levels: {},
+      nodes: Object.assign({}, base.nodes),
+    };
+
+    Object.keys(base.levels || {}).forEach((lid) => {
+      const L = base.levels[lid];
+      merged.levels[lid] = {
+        id: L.id,
+        label: L.label,
+        blurb: L.blurb,
+        worlds: (L.worlds || []).slice(),
+      };
+    });
+
+    packs.forEach((pack) => {
+      if (!pack || !pack.nodes || !pack.start) return;
+      const level = pack.level || "easy";
+      if (!merged.levels[level]) {
+        merged.levels[level] = {
+          id: level,
+          label: level,
+          blurb: "Class stories",
+          worlds: [],
+        };
+      }
+      // Ensure start node exists in pack.nodes
+      if (!pack.nodes[pack.start]) return;
+
+      Object.keys(pack.nodes).forEach((nid) => {
+        merged.nodes[nid] = pack.nodes[nid];
+      });
+
+      const endings = Object.keys(pack.nodes).filter(
+        (k) => pack.nodes[k] && pack.nodes[k].ending === true
+      ).length;
+
+      const world = {
+        id: pack.worldId || pack.id || "user_story",
+        title: (pack.title || pack.worldTitle || "Class story") + " ★",
+        start: pack.start,
+        endings: endings,
+        userCreated: true,
+      };
+
+      // Avoid duplicate world ids if re-opening
+      const worlds = merged.levels[level].worlds;
+      const filtered = worlds.filter((w) => w.id !== world.id);
+      filtered.push(world);
+      merged.levels[level].worlds = filtered;
+    });
+
+    return merged;
+  }
+
+  const DATA = () => getMergedStories();
+
 
   const SCENE_EMOJI = {
     treasure: "🗝️",
@@ -474,14 +552,15 @@
       console.error("[Enchanted Library] Stories not loaded (window.ENCHANTED_STORIES missing)");
       return;
     }
-    const errs = validateStories(window.ENCHANTED_STORIES);
+    const errs = validateStories(getMergedStories() || window.ENCHANTED_STORIES);
     if (errs.length) {
       console.error("[Enchanted Library] Story validation failed:");
       errs.forEach((e) => console.error("  ·", e));
     } else {
-      const n = Object.keys(window.ENCHANTED_STORIES.nodes).length;
-      const ends = Object.keys(window.ENCHANTED_STORIES.nodes).filter(
-        (k) => window.ENCHANTED_STORIES.nodes[k].ending === true
+      const _merged = getMergedStories() || window.ENCHANTED_STORIES;
+      const n = Object.keys(_merged.nodes).length;
+      const ends = Object.keys(_merged.nodes).filter(
+        (k) => _merged.nodes[k].ending === true
       ).length;
       console.info(
         `[Enchanted Library] Story graph OK · ${n} nodes · ${ends} endings`

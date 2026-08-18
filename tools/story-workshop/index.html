@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3e2723">
+  <meta name="description" content="Story Workshop — build class choose-your-own-adventure paths that appear in The Enchanted Library.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Story Workshop — The Token Moose</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Nunito:wght@600;800&display=swap');
+  </style>
+</head>
+<body data-app-id="story-workshop" data-app-title="Story Workshop">
+  <main class="sw-app">
+    <header class="sw-header">
+      <h1>Story Workshop</h1>
+      <p class="tag">Write branching paths for <strong>The Enchanted Library</strong></p>
+      <p class="hint">
+        Stories save on this device only. Open Enchanted Library → pick the same reading level → your class story appears as an extra world.
+        Use Export for a JSON backup you can restore later or move to another computer.
+      </p>
+    </header>
+
+    <div class="sw-toolbar">
+      <button type="button" class="btn btn-primary" id="btn-new">New story</button>
+      <button type="button" class="btn btn-secondary" id="btn-export">Export backup</button>
+      <button type="button" class="btn btn-secondary" id="btn-import">Restore backup</button>
+      <input type="file" id="import-file" accept="application/json,.json" class="sr-only" />
+      <button type="button" class="btn btn-danger" id="btn-delete">Delete story</button>
+      <span class="status-bar" id="status" role="status"></span>
+    </div>
+
+    <div class="sw-layout">
+      <aside class="panel" aria-label="Story packs">
+        <h2>Your stories</h2>
+        <div id="pack-list" class="pack-list"></div>
+      </aside>
+
+      <section class="panel" aria-label="Story pages">
+        <h2>Pages <small style="font-weight:600;color:#5c4033">(drag to reorder)</small></h2>
+        <div id="node-board" class="node-board"></div>
+      </section>
+
+      <aside class="panel" aria-label="Editor">
+        <h2>Edit</h2>
+        <div id="editor"></div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
