@@ -1,48 +1,65 @@
+/**
+ * Voices settings page — default voice, test, disable, remove from device cache
+ */
 (function () {
+  function el(tag, attrs, kids) {
+    const n = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) {
+        if (k === "className") n.className = attrs[k];
+        else if (k === "text") n.textContent = attrs[k];
+        else if (k === "html") n.innerHTML = attrs[k];
+        else n.setAttribute(k, attrs[k]);
+      });
+    }
+    (kids || []).forEach(function (c) {
+      if (c == null) return;
+      n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+
   async function render(root) {
-    if (!window.MooseTTS) {
-      root.innerHTML = "<p>Loading voices…</p>";
+    if (!window.MooseTTS || !window.MooseTTSCatalog) {
+      root.innerHTML = "<p class='moose-tts-lead'>Loading voice system…</p>";
+      setTimeout(function () { render(root); }, 200);
       return;
     }
-    const voices = MooseTTS.getVoices();
+
     const prefs = MooseTTS.getPrefs();
-    const sel = MooseTTS.getSelectedVoice();
+    const selected = MooseTTS.getSelectedVoice();
+    const voices = MooseTTS.getVoices();
     root.innerHTML = "";
     root.className = "moose-tts-panel";
 
-    const h = document.createElement("h2");
-    h.textContent = "Voices";
-    root.appendChild(h);
-    const lead = document.createElement("p");
-    lead.className = "moose-tts-lead";
-    lead.textContent =
-      "UK English Piper voices are built into Moose Tools. They prepare automatically — you only need this page to pick a favourite or change speed.";
-    root.appendChild(lead);
+    root.appendChild(el("h2", { text: "Voices" }));
+    root.appendChild(
+      el("p", {
+        className: "moose-tts-lead",
+        text:
+          "Choose a default classroom voice. Games use this automatically. You can still pick another voice inside a game — but disabled voices stay hidden everywhere.",
+      })
+    );
 
-    // mute
-    const muteLab = document.createElement("label");
-    muteLab.className = "moose-tts-row";
-    const muteCb = document.createElement("input");
-    muteCb.type = "checkbox";
+    // Global mute
+    const muteRow = el("label", { className: "moose-tts-row" });
+    const muteCb = el("input", { type: "checkbox" });
     muteCb.checked = MooseTTS.isMuted();
-    muteCb.addEventListener("change", () => (muteCb.checked ? MooseTTS.mute() : MooseTTS.unmute()));
-    muteLab.appendChild(muteCb);
-    muteLab.appendChild(document.createTextNode(" Mute all speech"));
-    root.appendChild(muteLab);
+    muteCb.addEventListener("change", function () {
+      if (muteCb.checked) MooseTTS.mute();
+      else MooseTTS.unmute();
+    });
+    muteRow.appendChild(muteCb);
+    muteRow.appendChild(document.createTextNode(" Mute all speech (all games)"));
+    root.appendChild(muteRow);
 
-    // rate
-    const rateLab = document.createElement("label");
-    rateLab.className = "moose-tts-field";
-    rateLab.textContent = "Speech rate ";
-    const rate = document.createElement("input");
-    rate.type = "range";
-    rate.min = "0.7";
-    rate.max = "1.3";
-    rate.step = "0.05";
+    // Rate
+    const rateLab = el("label", { className: "moose-tts-field" });
+    rateLab.appendChild(document.createTextNode("Speech rate "));
+    const rate = el("input", { type: "range", min: "0.7", max: "1.3", step: "0.05" });
     rate.value = String(prefs.rate || 1);
-    const rateVal = document.createElement("span");
-    rateVal.textContent = Number(rate.value).toFixed(2) + "×";
-    rate.addEventListener("input", () => {
+    const rateVal = el("span", { className: "moose-tts-val", text: Number(rate.value).toFixed(2) + "×" });
+    rate.addEventListener("input", function () {
       rateVal.textContent = Number(rate.value).toFixed(2) + "×";
       MooseTTS.setPrefs({ rate: Number(rate.value) });
     });
@@ -50,47 +67,106 @@
     rateLab.appendChild(rateVal);
     root.appendChild(rateLab);
 
-    const list = document.createElement("div");
-    list.className = "moose-tts-voice-list";
-    for (const v of voices) {
-      const card = document.createElement("div");
-      card.className = "moose-tts-voice-card" + (v.id === sel ? " is-selected" : "");
-      const ready = await MooseTTS.isPrepared(v.id);
-      card.innerHTML =
-        "<div class='moose-tts-voice-title'></div>" +
-        "<div class='moose-tts-voice-meta'></div>" +
-        "<div class='moose-tts-voice-status'></div>" +
-        "<div class='moose-tts-voice-actions'></div>";
-      card.querySelector(".moose-tts-voice-title").textContent = v.label || v.name;
-      card.querySelector(".moose-tts-voice-meta").textContent =
-        v.locale + " · " + (v.gender || "") + " · " + (v.quality || "");
-      const st = card.querySelector(".moose-tts-voice-status");
-      st.textContent = ready ? "✓ Ready on this device" : "Will prepare when selected";
-      if (ready) st.classList.add("is-ready");
-      const actions = card.querySelector(".moose-tts-voice-actions");
-      const use = document.createElement("button");
-      use.type = "button";
-      use.className = "btn btn-primary";
-      use.textContent = "Use";
-      use.addEventListener("click", async () => {
+    root.appendChild(el("h3", { text: "Piper voices (UK English)" }));
+    root.appendChild(
+      el("p", {
+        className: "moose-tts-note",
+        text: "Test a voice, save it as your default, disable it (hides it in games), or remove its offline cache from this device.",
+      })
+    );
+
+    const list = el("div", { className: "moose-tts-voice-list" });
+
+    for (let i = 0; i < voices.length; i++) {
+      const v = voices[i];
+      const disabled = MooseTTS.isDisabled(v.id);
+      let ready = false;
+      try {
+        ready = await MooseTTS.isPrepared(v.id);
+      } catch (_) {}
+
+      const card = el("div", {
+        className: "moose-tts-voice-card" + (v.id === selected ? " is-selected" : "") + (disabled ? " is-disabled" : ""),
+      });
+
+      card.appendChild(el("div", { className: "moose-tts-voice-title", text: v.label || v.name }));
+      card.appendChild(
+        el("div", {
+          className: "moose-tts-voice-meta",
+          text: (v.locale || "en-GB") + " · " + (v.gender || "") + " · " + (v.quality || "") + " · " + (v.license || "MIT"),
+        })
+      );
+
+      const status = el("div", { className: "moose-tts-voice-status" });
+      if (disabled) {
+        status.textContent = "Disabled — hidden in games";
+      } else if (v.id === selected) {
+        status.textContent = ready ? "✓ Default · ready on this device" : "✓ Default · preparing when needed";
+        status.classList.add("is-ready");
+      } else if (ready) {
+        status.textContent = "✓ Ready on this device";
+        status.classList.add("is-ready");
+      } else {
+        status.textContent = "Available — prepares on first use";
+      }
+      card.appendChild(status);
+
+      const actions = el("div", { className: "moose-tts-voice-actions" });
+
+      const testBtn = el("button", { type: "button", className: "btn btn-secondary", text: "Test" });
+      testBtn.disabled = disabled;
+      testBtn.addEventListener("click", function () {
+        MooseTTS.previewVoice(v.id);
+      });
+
+      const useBtn = el("button", { type: "button", className: "btn btn-primary", text: "Save as default" });
+      useBtn.disabled = disabled;
+      useBtn.addEventListener("click", function () {
+        MooseTTS.setDisabled(v.id, false);
         MooseTTS.setVoice(v.id);
-        await MooseTTS.prepareVoice(v.id);
         render(root);
       });
-      const prev = document.createElement("button");
-      prev.type = "button";
-      prev.className = "btn btn-secondary";
-      prev.textContent = "Preview";
-      prev.addEventListener("click", () => MooseTTS.previewVoice(v.id));
-      actions.appendChild(use);
-      actions.appendChild(prev);
+
+      const disBtn = el("button", {
+        type: "button",
+        className: "btn btn-ghost",
+        text: disabled ? "Enable" : "Disable",
+      });
+      disBtn.addEventListener("click", function () {
+        MooseTTS.setDisabled(v.id, !disabled);
+        render(root);
+      });
+
+      const remBtn = el("button", { type: "button", className: "btn btn-ghost", text: "Remove cache" });
+      remBtn.title = "Delete offline copy of this voice on this device";
+      remBtn.addEventListener("click", async function () {
+        remBtn.disabled = true;
+        remBtn.textContent = "Removing…";
+        try {
+          await MooseTTS.removeVoice(v.id);
+        } catch (_) {}
+        render(root);
+      });
+
+      actions.appendChild(testBtn);
+      actions.appendChild(useBtn);
+      actions.appendChild(disBtn);
+      actions.appendChild(remBtn);
+      card.appendChild(actions);
       list.appendChild(card);
     }
+
     root.appendChild(list);
+    root.appendChild(
+      el("p", {
+        className: "moose-tts-note",
+        text: "Browser system voices still appear in the in-game voice menu. Disable only affects Piper neural voices listed above.",
+      })
+    );
   }
 
   window.MooseTTSSettings = {
-    mount(sel) {
+    mount: function (sel) {
       const root = typeof sel === "string" ? document.querySelector(sel) : sel;
       if (root) render(root);
     },

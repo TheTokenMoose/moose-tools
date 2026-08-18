@@ -10,6 +10,7 @@
   }
 
   let prefs = loadPrefs();
+  if (!Array.isArray(prefs.disabledVoices)) prefs.disabledVoices = [];
   let piperMod = null;
   let piperFailed = false;
   let sessionReady = null;
@@ -67,11 +68,23 @@
   function loadPrefs() {
     try {
       return Object.assign(
-        { voiceId: null, rate: 1, muted: false, engine: "auto" },
+        {
+          voiceId: null,
+          rate: 1,
+          muted: false,
+          engine: "auto",
+          disabledVoices: [],
+        },
         JSON.parse(localStorage.getItem(PREFS_KEY) || "{}")
       );
     } catch (_) {
-      return { voiceId: null, rate: 1, muted: false, engine: "auto" };
+      return {
+        voiceId: null,
+        rate: 1,
+        muted: false,
+        engine: "auto",
+        disabledVoices: [],
+      };
     }
   }
   function savePrefs() {
@@ -191,7 +204,37 @@
   }
 
   function selectedId() {
-    return prefs.voiceId || defaultId();
+    const id = prefs.voiceId || defaultId();
+    if (isDisabled(id)) {
+      const enabled = getEnabledVoiceIds();
+      return enabled[0] || defaultId();
+    }
+    return id;
+  }
+
+  function isDisabled(id) {
+    return (prefs.disabledVoices || []).indexOf(id) !== -1;
+  }
+
+  function getEnabledVoiceIds() {
+    const all = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+    return all.map(function (v) { return v.id; }).filter(function (id) {
+      return !isDisabled(id);
+    });
+  }
+
+  function setDisabled(id, disabled) {
+    const list = (prefs.disabledVoices || []).slice();
+    const i = list.indexOf(id);
+    if (disabled && i === -1) list.push(id);
+    if (!disabled && i !== -1) list.splice(i, 1);
+    prefs.disabledVoices = list;
+    // If default was disabled, pick another
+    if (disabled && prefs.voiceId === id) {
+      const enabled = getEnabledVoiceIds();
+      prefs.voiceId = enabled[0] || defaultId();
+    }
+    savePrefs();
   }
 
   async function isPrepared(id) {
@@ -371,7 +414,11 @@
     const rate = options.rate != null ? options.rate : prefs.rate || 1;
     const forceBrowser = options.engine === "browser" || prefs.engine === "browser";
     const voiceURI = options.browserVoiceURI || null;
-    const voiceId = options.voiceId || selectedId();
+    let voiceId = options.voiceId || selectedId();
+    if (isDisabled(voiceId)) {
+      const enabled = getEnabledVoiceIds();
+      voiceId = enabled[0] || defaultId();
+    }
 
     if (!forceBrowser && !piperFailed) {
       try {
@@ -444,6 +491,26 @@
         voiceId: id || selectedId(),
         force: true,
       });
+    },
+    isDisabled: isDisabled,
+    setDisabled: setDisabled,
+    getEnabledVoices: function () {
+      const all = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+      return all.filter(function (v) { return !isDisabled(v.id); });
+    },
+    getDisabledVoices: function () {
+      return (prefs.disabledVoices || []).slice();
+    },
+    removeVoice: async function (id) {
+      try {
+        const mod = await loadPiper();
+        if (mod.remove) await mod.remove(id);
+        readySet.delete(id);
+        saveReady();
+      } catch (e) {
+        console.warn("[MooseTTS] remove failed", e);
+        throw e;
+      }
     },
   };
 })(typeof window !== "undefined" ? window : globalThis);

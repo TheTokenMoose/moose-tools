@@ -10,3 +10,11 @@
 .moose-tts-voice-status{margin:.45rem 0;font-size:.88rem;font-weight:700;color:var(--text-muted)}
 .moose-tts-voice-status.is-ready{color:var(--accent-electric,#22d3ee)}
 .moose-tts-voice-actions{display:flex;flex-wrap:wrap;gap:.4rem}
+
+.moose-tts-voice-card.is-disabled {
+  opacity: 0.72;
+  border-style: dashed;
+}
+.moose-tts-val { min-width: 3rem; font-variant-numeric: tabular-nums; color: var(--text-muted); }
+.moose-tts-note { color: var(--text-muted); font-size: 0.9rem; line-height: 1.45; margin: 0.5rem 0 1rem; }
+.moose-tts-panel h3 { margin: 1.25rem 0 0.35rem; }

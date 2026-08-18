@@ -297,7 +297,10 @@
         menu.appendChild(autoBtn);
 
         // Piper UK voices (if catalog loaded)
-        const piperList = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+        let piperList = (global.MooseTTSCatalog && global.MooseTTSCatalog.list()) || [];
+        if (global.MooseTTS && typeof global.MooseTTS.isDisabled === "function") {
+          piperList = piperList.filter((pv) => !global.MooseTTS.isDisabled(pv.id));
+        }
         piperList.forEach((pv) => {
           const key = "piper:" + pv.id;
           const b = document.createElement("button");
