@@ -1,38 +1,14 @@
 {
-  "name": "The Token Moose",
-  "short_name": "Token Moose",
-  "description": "Games, experiments, and little tools made while learning, teaching, and messing with technology.",
+  "name": "Simple Machines Lab",
+  "short_name": "Simple Machines",
+  "description": "Touch-friendly physics sandbox for the six simple machines.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "any",
-  "background_color": "#0a0b1a",
-  "theme_color": "#0a0b1a",
-  "lang": "en",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
   "icons": [
-    {
-      "src": "assets/icons/favicon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/favicon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/favicon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "assets/icons/favicon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }
