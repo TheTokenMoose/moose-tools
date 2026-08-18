@@ -298,3 +298,22 @@ body {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); border: 0;
 }
+
+.pack-art-export {
+  display: block;
+  width: 100%;
+  margin: -0.15rem 0 0.45rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: left;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  border: 1px dashed var(--gold);
+  background: #fff8e7;
+  color: var(--wood-dark);
+  cursor: pointer;
+}
+.pack-art-export:hover {
+  background: #fff3d0;
+}
