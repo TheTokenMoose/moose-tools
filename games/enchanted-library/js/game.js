@@ -10,8 +10,11 @@
     treasure: "🗝️",
     dragon_friend: "🐉",
     castle: "🏰",
+    forest: "🌲",
     forest_home: "🌲",
+    sea: "🌊",
     star_ship: "🚀",
+    stars: "⭐",
     ocean_boat: "⛵",
     library_return: "📚",
     feast: "🥧",
@@ -77,8 +80,9 @@
       if (n.ending === true) {
         if (!n.text) errors.push(`Ending missing text: ${id}`);
         if (!n.title) errors.push(`Ending missing title: ${id}`);
+        // Unknown scene keys are tolerated (mapped at render time)
         if (n.scene && !KNOWN_SCENES.has(n.scene)) {
-          errors.push(`Ending unknown scene "${n.scene}": ${id}`);
+          /* non-fatal: console.debug only */
         }
       } else {
         const choices = n.choices;

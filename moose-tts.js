@@ -23,21 +23,7 @@
   let fetchShimInstalled = false;
 
   function siteBase() {
-    // Must return an absolute path e.g. "/moose-tools/" — never "../../"
-    const path = location.pathname || "/";
-
-    // Project pages: /moose-tools/games/... or /moose-tools/tools/...
-    let m = path.match(/^(.*?\/)(?:games|tools)\//);
-    if (m) return m[1];
-
-    // Shell page: /moose-tools/index.html or /moose-tools/about.html
-    m = path.match(/^(.*?\/)[^/]+\.html?$/i);
-    if (m) return m[1];
-
-    // Directory URL: /moose-tools/
-    if (path.endsWith("/")) return path;
-
-    // From script src, resolved against the page URL
+    // Always return an absolute path like "/moose-tools/" (never "../../")
     const scripts = document.querySelectorAll(
       "script[src*='moose-tts'],script[src*='voice-catalog'],script[src*='voice.js'],script[src*='app-chrome']"
     );
@@ -50,18 +36,21 @@
         if (idx >= 0) return abs.pathname.slice(0, idx + 1);
       } catch (_) {}
     }
-
-    return path.replace(/\/[^/]*$/, "/") || "/";
+    const path = location.pathname || "/";
+    if (path.indexOf("/games/") !== -1 || path.indexOf("/tools/") !== -1) {
+      return path.replace(/\/(games|tools)\/.*/, "/");
+    }
+    if (/\.html?$/i.test(path)) {
+      return path.replace(/\/[^/]*$/, "/");
+    }
+    return path.endsWith("/") ? path : path.replace(/\/[^/]*$/, "/") || "/";
   }
 
   function absUrl(rel) {
     if (/^https?:/i.test(rel)) return rel;
-    let basePath = siteBase();
-    if (!basePath.startsWith("/")) basePath = "/" + basePath;
-    if (!basePath.endsWith("/")) basePath += "/";
-    // Guard against accidental ".."
-    basePath = basePath.replace(/\/\.\.\//g, "/");
-    return new URL(String(rel).replace(/^\//, ""), location.origin + basePath).href;
+    const basePath = siteBase(); // absolute path, e.g. /moose-tools/
+    const base = location.origin + (basePath.endsWith("/") ? basePath : basePath + "/");
+    return new URL(String(rel).replace(/^\//, ""), base).href;
   }
 
   function loadPrefs() {
