@@ -193,8 +193,8 @@
       const artRow = document.createElement("button");
       artRow.type = "button";
       artRow.className = "pack-art-export";
-      artRow.textContent = "Export art prompts";
-      artRow.title = "Download illustration prompts for every page of this story";
+      artRow.textContent = "Export image jobs";
+      artRow.title = "Download paste-ready GENERATE IMAGES jobs for this story";
       artRow.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -748,144 +748,109 @@
       setStatus("Select a story first");
       return;
     }
-    const levelLabel =
-      ({ easy: "Picture Path (ages ~5–7)", medium: "Story Path (ages ~7–9)", hard: "Chapter Path (ages ~9–11)" })[
-        pack.level
-      ] || pack.level || "easy";
+
+    const level = pack.level || "easy";
+    const ageBand =
+      level === "hard"
+        ? "ages 9–11"
+        : level === "medium"
+          ? "ages 7–9"
+          : "ages 5–7";
+
+    // Grade-level visual language baked into every image prompt
+    const gradeStyle =
+      level === "hard"
+        ? "slightly richer detail, expressive faces, layered backgrounds, still child-friendly, soft light"
+        : level === "medium"
+          ? "clear storybook scenes, friendly characters, moderate detail, warm colors"
+          : "very simple shapes, big friendly characters, bold easy-to-read shapes, soft pastel storybook look for young children";
 
     const order = orderNodes(pack);
     const pages = [];
     order.forEach(function (id, index) {
       const n = pack.nodes[id];
       if (!n) return;
-      const short = shortName(pack, id);
-      const isStart = id === pack.start;
-      const entry = {
+      pages.push({
         index: index + 1,
-        pageId: short,
-        fullId: id,
-        role: n.ending ? "ending" : isStart ? "start" : "choice-page",
-        title: n.ending ? n.title || "The End" : null,
-        scene: n.ending ? n.scene || "library_return" : null,
-        text: n.text || "",
-        choices: !n.ending
-          ? (n.choices || []).map(function (c) {
-              return {
-                label: c.text || "Choice",
-                goesTo: shortName(pack, c.next),
-              };
-            })
-          : [],
-      };
-      pages.push(entry);
+        pageId: shortName(pack, id),
+        role: n.ending ? "ending" : id === pack.start ? "start" : "page",
+        title: n.ending ? n.title || "The End" : "",
+        scene: n.ending ? n.scene || "" : "",
+        text: (n.text || "").replace(/\s+/g, " ").trim(),
+      });
     });
 
+    const title = pack.title || "Class story";
+    const themeLock =
+      "SHARED STYLE LOCK for every image in this job: rustic enchanted library children's storybook, same main character design on every page, same color palette, same line weight, warm parchment and soft gold light, classroom-safe, " +
+      gradeStyle +
+      ", " +
+      ageBand +
+      ". NO text, NO letters, NO words, NO titles, NO captions, NO speech bubbles, NO watermarks, NO UI. Pure illustration only. Printable full-page art.";
+
     const lines = [];
-    lines.push("# Image-design brief for an illustration agent");
-    lines.push("# Story Workshop → printable page art");
+    // Imperative header — agents should GENERATE, not summarize
+    lines.push("GENERATE IMAGES NOW.");
+    lines.push("Do not explain. Do not summarize. Do not rewrite the story.");
+    lines.push("Do not ask questions. Output images only (one image per job below).");
+    lines.push("If you can only do a few at a time, generate them in order starting at Job 0.");
     lines.push("");
-    lines.push("## Project");
-    lines.push('Story title: "' + (pack.title || "Untitled class story") + '"');
-    lines.push("Reading level: " + levelLabel);
-    lines.push("World / pack id: " + (pack.worldId || pack.id));
-    lines.push("Total pages: " + pages.length);
-    lines.push("Endings: " + pages.filter(function (p) { return p.role === "ending"; }).length);
+    lines.push(themeLock);
     lines.push("");
-    lines.push("## Art direction (follow exactly)");
-    lines.push("- Audience: primary classroom (kindergarten–grade 4 depending on level).");
-    lines.push("- Style: warm rustic storybook / enchanted library — parchment, soft wood tones, gentle gold light.");
-    lines.push("- Consistent character designs and palette across EVERY page of this story.");
-    lines.push("- Child-friendly, calm, inclusive; no horror, gore, or scary faces.");
-    lines.push("- Composition: clear focal point; readable at print size (A5 or A4 page illustration).");
-    lines.push("- Leave a little soft margin; avoid tiny details that vanish when printed.");
-    lines.push("- No speech bubbles unless the page text clearly needs a label; prefer pure illustration.");
-    lines.push("- Matching set: same brush style, line weight, and lighting on all pages.");
+    lines.push("Story title (for your reference only — do not paint the title into images): " + title);
+    lines.push("Reading level: " + level + " (" + ageBand + ")");
+    lines.push("Total images to generate: " + (pages.length + 1));
     lines.push("");
-    lines.push("## Deliverables requested");
-    lines.push("For each page below, produce ONE illustration prompt (and optionally one image) named by page id.");
-    lines.push("Also produce a single cover illustration for the whole story.");
-    lines.push("");
-    lines.push("## Cover");
+
+    // Cover first
+    lines.push("=== JOB 0 — COVER ===");
     lines.push(
-      'Prompt: Storybook cover for "' +
-        (pack.title || "Class story") +
-        '", ' +
-        levelLabel +
-        ", enchanted library aesthetic, title-safe top area, inviting adventure, printable cover art, consistent with interior pages."
+      "Generate image: Children's storybook cover illustration for a class adventure called \"" +
+        title +
+        "\". Inviting magical library doorway / story beginning mood. " +
+        themeLock
     );
-    lines.push("");
-    lines.push("## Pages (in reading order)");
+    lines.push("Filename hint: cover.png");
     lines.push("");
 
     pages.forEach(function (pg) {
-      lines.push("---");
-      lines.push("### Page " + pg.index + " — `" + pg.pageId + "` (" + pg.role + ")");
-      if (pg.title) lines.push("Ending title: " + pg.title);
-      if (pg.scene) lines.push("Scene key (mood hint): " + pg.scene);
-      lines.push("Story text on this page:");
-      lines.push('"""');
-      lines.push(pg.text);
-      lines.push('"""');
-      if (pg.choices && pg.choices.length) {
-        lines.push("Choices leaving this page:");
-        pg.choices.forEach(function (c, i) {
-          lines.push("  " + (i + 1) + '. "' + c.label + '" → page `' + c.goesTo + "`");
-        });
-      }
-      lines.push("");
-      lines.push("Illustration agent prompt:");
+      lines.push("=== JOB " + pg.index + " — PAGE `" + pg.pageId + "` (" + pg.role + ") ===");
+      let scene = "Illustrate this exact story moment: " + (pg.text || "a gentle classroom adventure scene");
       if (pg.role === "ending") {
-        lines.push(
-          'Create a full-page storybook illustration for the ending "' +
-            (pg.title || "The End") +
-            '". Mood/scene: ' +
-            (pg.scene || "warm library glow") +
-            ". Depict: " +
-            (pg.text || "a gentle resolution").slice(0, 280) +
-            " Style: rustic enchanted storybook, printable, consistent cast and palette with the rest of this story, no text in the image."
-        );
-      } else {
-        const choiceHint =
-          pg.choices && pg.choices.length
-            ? " The scene should feel open to what happens next (choices: " +
-              pg.choices
-                .map(function (c) {
-                  return c.label;
-                })
-                .join(" / ") +
-              ")."
-            : "";
-        lines.push(
-          "Create a full-page storybook illustration for this story moment: " +
-            (pg.text || "a quiet scene in the adventure").slice(0, 320) +
-            choiceHint +
-            " Style: rustic enchanted storybook, printable, consistent cast and palette with the rest of this story, no text in the image."
-        );
+        scene =
+          "Illustrate this story ending moment" +
+          (pg.title ? ' ("' + pg.title + '")' : "") +
+          (pg.scene ? " with mood/setting feel of: " + pg.scene : "") +
+          ": " +
+          (pg.text || "a warm, complete ending");
       }
+      // Keep prompt action-first and visual
+      lines.push(
+        "Generate image: " +
+          scene +
+          " " +
+          themeLock
+      );
+      lines.push("Filename hint: page-" + String(pg.index).padStart(2, "0") + "-" + pg.pageId + ".png");
       lines.push("");
     });
 
-    lines.push("---");
-    lines.push("## Consistency checklist for the agent");
-    lines.push("- Same main character appearance on every page where they appear.");
-    lines.push("- Same color palette and line style throughout.");
-    lines.push("- Ending pages feel conclusive; mid pages feel open.");
-    lines.push("- Safe for classroom print and display.");
-    lines.push("");
+    lines.push("END OF JOB LIST.");
+    lines.push("Begin generating Job 0 immediately.");
 
     const body = lines.join("\n");
     const blob = new Blob([body], { type: "text/plain;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    const safe = String(pack.title || "story")
+    const safe = String(title)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "")
       .slice(0, 40);
-    a.download = "art-prompts-" + (safe || "story") + ".txt";
+    a.download = "generate-images-" + (safe || "story") + ".txt";
     a.click();
     URL.revokeObjectURL(a.href);
-    setStatus("Art prompts exported for “" + (pack.title || "story") + "”");
+    setStatus("Image jobs exported — paste into an AI to generate art");
   }
 
   function exportArtPrompts() {

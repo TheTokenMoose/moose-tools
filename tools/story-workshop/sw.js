@@ -1,4 +1,4 @@
-const CACHE = "story-workshop-v3";
+const CACHE = "story-workshop-v4";
 const ASSETS = [
   "./index.html",
   "./css/app.css",
