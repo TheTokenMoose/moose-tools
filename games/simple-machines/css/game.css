@@ -229,3 +229,21 @@ html, body {
   .hub-grid { grid-template-columns: repeat(2, 1fr); }
   .machine-card { min-height: 120px; padding: 0.75rem 0.5rem; }
 }
+.mini {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin: 0.25rem 0;
+  color: var(--text);
+  cursor: pointer;
+}
+.radio input { width: 1.1rem; height: 1.1rem; accent-color: var(--accent); }

@@ -1,4 +1,4 @@
-const CACHE = "simple-machines-v1";
+const CACHE = "simple-machines-v2";
 const ASSETS = [
   "./index.html",
   "./css/game.css",

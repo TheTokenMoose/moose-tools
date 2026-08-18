@@ -29,8 +29,8 @@
     <section id="hub" class="hub" aria-label="Choose a simple machine">
       <div class="hub-grid" id="hub-grid"></div>
       <p class="hint">
-        Pick a machine. Drag objects with finger or mouse. Change a control, then reset to test a new idea.
-        Ask: <em>Where is the force applied? What becomes easier? What trade-off appears?</em>
+        Pick a machine. Drag with finger or mouse. Use the big buttons and sliders, then <strong>Reset</strong> to try a new setup.
+        Ask: <em>Where is the force? What gets easier? What is the trade-off?</em>
       </p>
     </section>
 
@@ -45,25 +45,65 @@
         <canvas id="world" width="800" height="440"></canvas>
       </div>
       <div class="controls">
-        <div class="control-card ctrl" data-for="plane">
-          <label for="ctrl-plane-angle">Ramp steepness</label>
-          <input type="range" id="ctrl-plane-angle" min="0.15" max="0.55" step="0.01" value="0.35" />
-          <div class="val"><span id="val-plane-angle">0.35</span> rad</div>
+        <!-- Lever -->
+        <div class="control-card ctrl" data-for="lever" hidden>
+          <label for="ctrl-fulcrum">Fulcrum position (left ← → right)</label>
+          <input type="range" id="ctrl-fulcrum" min="0.28" max="0.62" step="0.01" value="0.45" />
+          <div class="val">at <span id="val-fulcrum">45%</span> of the board</div>
+          <p class="mini">Drag the <strong>left</strong> end of the plank down to lift the red crate. Change fulcrum, then Reset.</p>
         </div>
-        <div class="control-card ctrl" data-for="wheel">
-          <label>Wheel spin</label>
-          <button type="button" class="btn btn-primary" id="btn-spin-wheel" style="width:100%">Spin wheel ⟳</button>
+
+        <!-- Wheel -->
+        <div class="control-card ctrl" data-for="wheel" hidden>
+          <label>Hold to spin the big wheel</label>
+          <button type="button" class="btn btn-primary" id="btn-spin-wheel" style="width:100%">Hold · Spin ⟳</button>
+          <p class="mini">Keep holding — the rope winds and the crate rises into the green zone.</p>
         </div>
-        <div class="control-card ctrl" data-for="screw">
+
+        <!-- Pulley -->
+        <div class="control-card ctrl" data-for="pulley" hidden>
+          <label>How to play</label>
+          <p class="mini">Drag the <strong>gold handle downward</strong>. The red crate should rise. Pull more to reach the green zone.</p>
+        </div>
+
+        <!-- Inclined plane -->
+        <div class="control-card ctrl" data-for="plane" hidden>
+          <label for="ctrl-plane-angle">Ramp angle</label>
+          <input type="range" id="ctrl-plane-angle" min="0.12" max="0.55" step="0.01" value="0.32" />
+          <div class="val"><span id="val-plane-angle">18°</span></div>
+        </div>
+        <div class="control-card ctrl" data-for="plane" hidden>
+          <label for="ctrl-plane-friction">Friction</label>
+          <input type="range" id="ctrl-plane-friction" min="0.02" max="0.55" step="0.01" value="0.15" />
+          <div class="val"><span id="val-plane-friction">0.15</span></div>
+        </div>
+        <div class="control-card ctrl" data-for="plane" hidden>
+          <label>Mode</label>
+          <label class="radio"><input type="radio" name="plane-mode" value="ball-down" checked /> Ball rolls down</label>
+          <label class="radio"><input type="radio" name="plane-mode" value="crate-up" /> Push crate up</label>
+          <p class="mini">Change angle/friction/mode, then the lab reloads. Drag the crate in “up” mode.</p>
+        </div>
+
+        <!-- Wedge -->
+        <div class="control-card ctrl" data-for="wedge" hidden>
+          <label>Drive the wedge</label>
+          <button type="button" class="btn btn-primary" id="btn-drive-wedge" style="width:100%">Drive wedge →</button>
+          <p class="mini">Or drag the gold wedge under the grey block until it lifts into the green zone.</p>
+        </div>
+
+        <!-- Screw -->
+        <div class="control-card ctrl" data-for="screw" hidden>
           <label>Turn the screw</label>
           <div style="display:flex;gap:0.4rem">
             <button type="button" class="btn btn-primary" id="btn-screw-ccw" style="flex:1">↺ Lower</button>
             <button type="button" class="btn btn-primary" id="btn-screw-cw" style="flex:1">Raise ↻</button>
           </div>
+          <p class="mini">Each Raise is one turn up the spiral. Get the platform into the green zone.</p>
         </div>
+
         <div class="control-card ctrl" data-for="all">
-          <label>Tip</label>
-          <div style="font-size:0.85rem;color:var(--muted);line-height:1.35">Drag bodies directly. Large touch targets. Reset after big changes.</div>
+          <label>Lab tip</label>
+          <div class="mini">Bodies are speed-limited so they cannot fling off-screen. Use <strong>Reset</strong> after big changes.</div>
         </div>
       </div>
       <p class="hint" id="hint"></p>
