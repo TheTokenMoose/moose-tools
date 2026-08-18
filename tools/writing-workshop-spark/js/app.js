@@ -2,25 +2,27 @@
   const GRADE_KEY = "token-moose-wws-grade";
   let grade = "k3";
 
+  const K3_UNITS = ["fantasy", "howto", "persuasive"];
+  const K2_UNITS = ["howtodraw", "showtell", "fantasy"];
+
+  // OpenMoji (CC BY-SA 4.0) — free educational color SVG clipart
+  const OPENMOJI_BASE =
+    "https://cdn.jsdelivr.net/npm/openmoji@14.0.0/color/svg/";
+
   function DATA() {
     return window.WWS_DATA;
   }
   function gradeData() {
     return DATA()[grade] || DATA().k3;
   }
-
   function $(sel, root) {
     return (root || document).querySelector(sel);
   }
   function $all(sel, root) {
     return Array.from((root || document).querySelectorAll(sel));
   }
-
-  function pick(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
   function pickN(arr, n) {
-    const copy = arr.slice();
+    const copy = (arr || []).slice();
     const out = [];
     while (out.length < n && copy.length) {
       const i = Math.floor(Math.random() * copy.length);
@@ -34,6 +36,49 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  /** Convert emoji to OpenMoji SVG filename (hex codepoints joined by -) */
+  function emojiToOpenMojiFile(emoji) {
+    if (!emoji) return null;
+    const cps = [];
+    for (const ch of emoji) {
+      const cp = ch.codePointAt(0);
+      if (cp === 0xfe0f) continue; // variation selector
+      if (cp === 0x200d) {
+        cps.push("200D");
+        continue;
+      }
+      cps.push(cp.toString(16).toUpperCase());
+    }
+    if (!cps.length) return null;
+    return cps.join("-") + ".svg";
+  }
+
+  function cardImageHtml(card) {
+    const emoji = card.emoji || "💡";
+    const file = emojiToOpenMojiFile(emoji);
+    const alt = escapeHtml(card.title || "idea");
+    if (!file) {
+      return (
+        '<div class="card-art" aria-hidden="true"><span class="card-emoji">' +
+        emoji +
+        "</span></div>"
+      );
+    }
+    const src = OPENMOJI_BASE + file;
+    return (
+      '<div class="card-art">' +
+      '<img class="card-clip" src="' +
+      src +
+      '" alt="" data-emoji="' +
+      escapeHtml(emoji) +
+      '" loading="lazy" width="88" height="88" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">' +
+      '<span class="card-emoji fallback" style="display:none" aria-hidden="true">' +
+      emoji +
+      "</span>" +
+      "</div>"
+    );
   }
 
   function applyGrade(g) {
@@ -50,82 +95,57 @@
       b.classList.toggle("is-active", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
-
     $all(".grade-shell").forEach((el) => {
       el.hidden = el.dataset.gradeShell !== grade;
     });
-
     const note = $("#grade-blurb");
-    if (note) note.textContent = gradeData().blurb || "";
-
+    if (note) note.textContent = (gradeData().blurb) || "";
     const tag = $(".tagline");
     if (tag) {
       tag.textContent =
         grade === "k2"
-          ? "K2 · Drawing first · Launching · Show & Tell · Fantasy · How to Draw"
-          : "K3 · Narrative · How-To · Opinion";
+          ? "K2 · How to Draw · Show & Tell · Fantasy"
+          : "K3 · Fantasy · How-To · Opinion";
     }
-
-    // Reset tabs to first unit for grade
-    if (grade === "k2") showK2Unit("launching");
-    else showK3Genre("fantasy");
+    if (grade === "k2") showUnit("k2", K2_UNITS[0]);
+    else showUnit("k3", K3_UNITS[0]);
   }
 
-  function showK3Genre(id) {
-    $all('#shell-k3 .tab').forEach((t) => {
-      const on = t.dataset.genre === id;
-      t.classList.toggle("is-active", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    ["fantasy", "howto", "persuasive"].forEach((g) => {
-      const panel = document.getElementById("panel-" + g);
-      if (!panel) return;
-      const on = g === id;
-      panel.hidden = !on;
-      panel.classList.toggle("is-visible", on);
-    });
-  }
-
-  function showK2Unit(id) {
-    $all("#shell-k2 .tab").forEach((t) => {
+  function showUnit(g, id) {
+    const shell = document.getElementById("shell-" + g);
+    if (!shell) return;
+    $all(".tab", shell).forEach((t) => {
       const on = t.dataset.unit === id;
       t.classList.toggle("is-active", on);
       t.setAttribute("aria-selected", on ? "true" : "false");
     });
-    ["launching", "showtell", "fantasy", "howtodraw"].forEach((u) => {
-      const panel = document.getElementById("panel-k2-" + u);
+    const units = g === "k2" ? K2_UNITS : K3_UNITS;
+    units.forEach((u) => {
+      const panel = document.getElementById("panel-" + g + "-" + u);
       if (!panel) return;
       panel.hidden = u !== id;
     });
   }
 
-  function renderList(el, items) {
-    if (!el) return;
-    el.innerHTML = "";
-    (items || []).forEach((item) => {
-      const li = document.createElement("li");
-      li.innerHTML =
-        '<span class="vis" aria-hidden="true">' +
-        (item.vis || "") +
-        "</span>" +
-        escapeHtml(item.text);
-      el.appendChild(li);
-    });
-  }
-
-  function renderK2Cards(unitId, containerId, count) {
-    const unit = gradeData().units && gradeData().units[unitId];
-    const box = document.getElementById(containerId);
-    if (!unit || !box) return;
-    const cards = pickN(unit.cards, count || 3);
+  function renderCards(g, unitId, count) {
+    const gd = DATA()[g];
+    if (!gd || !gd.units || !gd.units[unitId]) return;
+    const unit = gd.units[unitId];
+    const box = document.getElementById(g + "-cards-" + unitId);
+    if (!box) return;
+    const n = count || (unitId === "howtodraw" ? 2 : 3);
+    const cards = pickN(unit.cards, n);
     box.innerHTML = "";
-    cards.forEach((card, i) => {
+    cards.forEach((card) => {
       const art = document.createElement("article");
       art.className = "idea-card";
-      let html =
-        "<h3>🌟 " +
+      let html = cardImageHtml(card);
+      html +=
+        "<h3>" +
         escapeHtml(card.title) +
-        "</h3><p class='draw'><strong>Draw:</strong> " +
+        "</h3><p class='draw'><strong>" +
+        (g === "k2" ? "Draw:" : "Spark:") +
+        "</strong> " +
         escapeHtml(card.draw) +
         "</p>";
       if (card.steps && card.steps.length) {
@@ -142,105 +162,28 @@
         });
         html += "</ul>";
       }
-      html += "<p class='cheer'>" + escapeHtml(card.cheer || "You are a real author and illustrator!") + "</p>";
+      html +=
+        "<p class='cheer'>" +
+        escapeHtml(card.cheer || "You are a real writer!") +
+        "</p>";
       art.innerHTML = html;
       box.appendChild(art);
     });
   }
 
-  function initK3() {
-    const root = DATA().k3;
-    if (!root) return;
-    renderList($("#list-who"), root.fantasy.who);
-    renderList($("#list-what"), root.fantasy.what);
-    renderList($("#list-where"), root.fantasy.where);
-
-    const spinF = $("#btn-fantasy-spin");
-    if (spinF) {
-      spinF.addEventListener("click", () => {
-        const d = DATA().k3.fantasy;
-        const who = pick(d.who);
-        const what = pick(d.what);
-        const where = pick(d.where);
-        $("#res-who").textContent = who.vis + " " + who.text;
-        $("#res-what").textContent = what.vis + " " + what.text;
-        $("#res-where").textContent = where.vis + " " + where.text;
-        const box = $("#fantasy-result");
-        box.hidden = false;
-        box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  function initGrade() {
+    ["k2", "k3"].forEach((g) => {
+      const units = g === "k2" ? K2_UNITS : K3_UNITS;
+      units.forEach((u) => {
+        const intro = document.getElementById(g + "-intro-" + u);
+        const unit = DATA()[g] && DATA()[g].units[u];
+        if (intro && unit) intro.textContent = unit.intro;
+        const btn = document.getElementById("btn-" + g + "-spark-" + u);
+        if (btn) {
+          btn.addEventListener("click", () => renderCards(g, u));
+        }
+        renderCards(g, u);
       });
-    }
-    const clearF = $("#btn-fantasy-clear");
-    if (clearF) clearF.addEventListener("click", () => { $("#fantasy-result").hidden = true; });
-
-    const howto = root.howto;
-    if (howto) {
-      renderList($("#list-howto-topics"), howto.topics);
-      const frames = $("#list-howto-frames");
-      if (frames && howto.frames) {
-        frames.innerHTML = howto.frames.map((f) => "<li>" + escapeHtml(f) + "</li>").join("");
-      }
-      const btnT = $("#btn-howto-topic");
-      if (btnT) {
-        btnT.addEventListener("click", () => {
-          const t = pick(howto.topics);
-          $("#howto-topic-text").textContent = t.vis + " " + t.text;
-          $("#howto-topic").hidden = false;
-        });
-      }
-      const btnS = $("#btn-howto-steps");
-      if (btnS && frames) {
-        btnS.addEventListener("click", () => {
-          frames.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        });
-      }
-    }
-
-    const pers = root.persuasive;
-    if (pers) {
-      renderList($("#list-claims"), pers.claims);
-      renderList($("#list-audience"), pers.audience);
-      renderList($("#list-reasons"), pers.reasons);
-      renderList($("#list-evidence"), pers.evidence);
-      const spinP = $("#btn-persuasive-spin");
-      if (spinP) {
-        spinP.addEventListener("click", () => {
-          const claim = pick(pers.claims);
-          const audience = pick(pers.audience);
-          const reasons = pickN(pers.reasons, 3);
-          const evidence = pickN(pers.evidence, 3);
-          $("#res-claim").textContent = claim.vis + " " + claim.text;
-          $("#res-audience").textContent = audience.vis + " " + audience.text;
-          $("#res-reasons").innerHTML = reasons
-            .map((r) => "<li>" + escapeHtml(r.vis + " " + r.text) + "</li>")
-            .join("");
-          $("#res-evidence").innerHTML = evidence
-            .map((r) => "<li>" + escapeHtml(r.vis + " " + r.text) + "</li>")
-            .join("");
-          const box = $("#persuasive-result");
-          box.hidden = false;
-          box.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        });
-      }
-      const clearP = $("#btn-persuasive-clear");
-      if (clearP) clearP.addEventListener("click", () => { $("#persuasive-result").hidden = true; });
-    }
-  }
-
-  function initK2() {
-    const units = ["launching", "showtell", "fantasy", "howtodraw"];
-    units.forEach((u) => {
-      const btn = document.getElementById("btn-k2-spark-" + u);
-      if (btn) {
-        btn.addEventListener("click", () => {
-          renderK2Cards(u, "k2-cards-" + u, u === "howtodraw" ? 2 : 3);
-        });
-      }
-      // initial cards
-      renderK2Cards(u, "k2-cards-" + u, u === "howtodraw" ? 2 : 3);
-      const intro = document.getElementById("k2-intro-" + u);
-      const unit = DATA().k2.units[u];
-      if (intro && unit) intro.textContent = unit.intro;
     });
   }
 
@@ -254,14 +197,13 @@
       b.addEventListener("click", () => applyGrade(b.dataset.grade));
     });
     $all("#shell-k3 .tab").forEach((tab) => {
-      tab.addEventListener("click", () => showK3Genre(tab.dataset.genre));
+      tab.addEventListener("click", () => showUnit("k3", tab.dataset.unit));
     });
     $all("#shell-k2 .tab").forEach((tab) => {
-      tab.addEventListener("click", () => showK2Unit(tab.dataset.unit));
+      tab.addEventListener("click", () => showUnit("k2", tab.dataset.unit));
     });
 
-    initK3();
-    initK2();
+    initGrade();
     applyGrade(grade);
   });
 })();

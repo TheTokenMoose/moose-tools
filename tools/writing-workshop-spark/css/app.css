@@ -448,3 +448,39 @@ body[data-grade="k3"] .idea-card h3 { color: #9d174d; }
 body[data-grade="k3"] .idea-card .cheer { color: #9d174d; }
 
 .grade-shell[hidden] { display: none !important; }
+
+/* Clipart / illustration on idea cards */
+.card-art {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 96px;
+  margin: 0 0 0.55rem;
+  padding: 0.35rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.65);
+}
+.card-clip {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+}
+.card-emoji {
+  font-size: 3.25rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.card-emoji.fallback {
+  font-size: 3.25rem;
+}
+body[data-grade="k2"] .card-art {
+  background: rgba(207, 250, 254, 0.7);
+}
+body[data-grade="k3"] .card-art {
+  background: rgba(252, 231, 243, 0.75);
+}
+.idea-card h3 {
+  text-align: center;
+}

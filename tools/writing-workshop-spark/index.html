@@ -35,7 +35,7 @@
     </div>
     <p class="teacher-note">
       Built to sit beside a Lucy Calkins / Teachers College Reading and Writing Project workshop:
-      mini-lesson → independent writing → conferring → share. Use cards as mentor cues, turn-and-talk prompts, or independent idea banks.
+      mini-lesson → independent writing → conferring → share. Use cards as mentor cues, turn-and-talk prompts, or independent idea banks. Card pictures use free <a href="https://openmoji.org/" target="_blank" rel="noopener">OpenMoji</a> clipart (CC BY-SA) when online; emoji still shows offline.
     </p>
   </header>
 
@@ -47,179 +47,63 @@
     <p class="grade-blurb" id="grade-blurb"></p>
   </div>
 
-  <div id="shell-k3" class="grade-shell" data-grade-shell="k3">
-  <nav class="genre-tabs" role="tablist" aria-label="Writing genre">
-    <button type="button" class="tab is-active" role="tab" aria-selected="true" data-genre="fantasy">✨ Fantasy story</button>
-    <button type="button" class="tab" role="tab" aria-selected="false" data-genre="howto">🛠️ How-to</button>
-    <button type="button" class="tab" role="tab" aria-selected="false" data-genre="persuasive">💬 Opinion / Persuasive</button>
-  </nav>
+    <div id="shell-k3" class="grade-shell" data-grade-shell="k3">
+    <nav class="genre-tabs" role="tablist" aria-label="K3 writing unit">
+      <button type="button" class="tab is-active" role="tab" aria-selected="true" data-unit="fantasy">✨ Fantasy story</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-unit="howto">🛠️ How-to</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-unit="persuasive">💬 Opinion / Persuasive</button>
+    </nav>
 
-  <!-- FANTASY -->
-  <section id="panel-fantasy" class="panel is-visible" role="tabpanel">
-    <div class="panel-intro">
-      <h2>Fantasy narrative · Who · What · Where</h2>
-      <p>
-        In workshop narrative units, writers invent a character (who), a problem or adventure (what),
-        and a place (where). Spin or pick a card from each column to seed a story, then draft with a beginning, middle, and end.
-      </p>
-    </div>
-    <div class="spark-actions">
-      <button type="button" class="btn primary" id="btn-fantasy-spin">🎲 Spark a story trio</button>
-      <button type="button" class="btn ghost" id="btn-fantasy-clear">Clear</button>
-    </div>
-    <div class="trio-result" id="fantasy-result" hidden>
-      <div class="result-card who"><span class="label">Who</span><p id="res-who"></p></div>
-      <div class="result-card what"><span class="label">What</span><p id="res-what"></p></div>
-      <div class="result-card where"><span class="label">Where</span><p id="res-where"></p></div>
-    </div>
-    <div class="columns three">
-      <div class="col">
-        <h3><span class="pill who">Who</span> Character</h3>
-        <ul class="card-list" id="list-who"></ul>
+    <section id="panel-k3-fantasy" class="panel">
+      <div class="panel-intro">
+        <h2>Fantasy story · Narrative sparks</h2>
+        <p id="k3-intro-fantasy"></p>
       </div>
-      <div class="col">
-        <h3><span class="pill what">What</span> Adventure / problem</h3>
-        <ul class="card-list" id="list-what"></ul>
+      <div class="spark-actions">
+        <button type="button" class="btn primary" id="btn-k3-spark-fantasy">🎲 New idea cards</button>
       </div>
-      <div class="col">
-        <h3><span class="pill where">Where</span> Setting</h3>
-        <ul class="card-list" id="list-where"></ul>
-      </div>
-    </div>
-    <div class="cue-box">
-      <h4>Writer’s craft cues</h4>
-      <ul>
-        <li>Show the character wanting something at the start.</li>
-        <li>Let the problem get a little worse before it gets better.</li>
-        <li>Use the setting to create mood (foggy, glowing, noisy, quiet).</li>
-        <li>End with a small change in the character or the place.</li>
-      </ul>
-    </div>
-  </section>
+      <div class="idea-grid" id="k3-cards-fantasy"></div>
+    </section>
 
-  <!-- HOW-TO -->
-  <section id="panel-howto" class="panel" role="tabpanel" hidden>
-    <div class="panel-intro">
-      <h2>How-to · Procedural writing</h2>
-      <p>
-        Information / procedural units teach writers to explain a process clearly for a reader who has never done it.
-        Choose a topic, then build ordered steps with materials, warnings, and a “done when…” ending.
-      </p>
-    </div>
-    <div class="spark-actions">
-      <button type="button" class="btn primary" id="btn-howto-topic">🎲 Spark a how-to topic</button>
-      <button type="button" class="btn ghost" id="btn-howto-steps">＋ Suggest step frames</button>
-    </div>
-    <div class="howto-topic" id="howto-topic" hidden>
-      <span class="label">Topic</span>
-      <p id="howto-topic-text"></p>
-    </div>
-    <div class="columns two">
-      <div class="col">
-        <h3>Topic bank</h3>
-        <ul class="card-list" id="list-howto-topics"></ul>
+    <section id="panel-k3-howto" class="panel" hidden>
+      <div class="panel-intro">
+        <h2>How-to · Procedural writing</h2>
+        <p id="k3-intro-howto"></p>
       </div>
-      <div class="col">
-        <h3>Step frames (sequence words)</h3>
-        <ol class="step-frames" id="list-howto-frames"></ol>
+      <div class="spark-actions">
+        <button type="button" class="btn primary" id="btn-k3-spark-howto">🎲 New idea cards</button>
       </div>
-    </div>
-    <div class="cue-box">
-      <h4>Writer’s craft cues</h4>
-      <ul>
-        <li>Start with who this is for and what they will be able to do.</li>
-        <li>List materials before the steps.</li>
-        <li>Use sequence words: first, next, then, after that, finally.</li>
-        <li>Add a tip or warning where a reader might get stuck.</li>
-        <li>End with how the reader will know they finished successfully.</li>
-      </ul>
-    </div>
-  </section>
+      <div class="idea-grid" id="k3-cards-howto"></div>
+    </section>
 
-  <!-- PERSUASIVE -->
-  <section id="panel-persuasive" class="panel" role="tabpanel" hidden>
-    <div class="panel-intro">
-      <h2>Opinion / persuasive writing</h2>
-      <p>
-        Opinion units ask writers to take a clear position for a real audience, support it with reasons,
-        and back reasons with examples. Use the boards below to choose a claim, audience, reasons, and evidence starters.
-      </p>
-    </div>
-    <div class="spark-actions">
-      <button type="button" class="btn primary" id="btn-persuasive-spin">🎲 Spark a full stance</button>
-      <button type="button" class="btn ghost" id="btn-persuasive-clear">Clear</button>
-    </div>
-    <div class="persuasive-result" id="persuasive-result" hidden>
-      <div class="result-card claim"><span class="label">Claim</span><p id="res-claim"></p></div>
-      <div class="result-card audience"><span class="label">Audience</span><p id="res-audience"></p></div>
-      <div class="result-card reasons"><span class="label">Reasons</span><ul id="res-reasons"></ul></div>
-      <div class="result-card evidence"><span class="label">Evidence starters</span><ul id="res-evidence"></ul></div>
-    </div>
-    <div class="columns two">
-      <div class="col">
-        <h3>Claim sparks</h3>
-        <ul class="card-list" id="list-claims"></ul>
+    <section id="panel-k3-persuasive" class="panel" hidden>
+      <div class="panel-intro">
+        <h2>Opinion · Persuasive writing</h2>
+        <p id="k3-intro-persuasive"></p>
       </div>
-      <div class="col">
-        <h3>Audience</h3>
-        <ul class="card-list" id="list-audience"></ul>
+      <div class="spark-actions">
+        <button type="button" class="btn primary" id="btn-k3-spark-persuasive">🎲 New idea cards</button>
       </div>
-    </div>
-    <div class="columns two">
-      <div class="col">
-        <h3>Reason banks</h3>
-        <ul class="card-list" id="list-reasons"></ul>
-      </div>
-      <div class="col">
-        <h3>Evidence &amp; elaboration stems</h3>
-        <ul class="card-list" id="list-evidence"></ul>
-      </div>
-    </div>
-    <div class="cue-box">
-      <h4>Writer’s craft cues</h4>
-      <ul>
-        <li>State the opinion in one clear sentence near the start.</li>
-        <li>Give at least two or three distinct reasons.</li>
-        <li>For each reason, add an example, fact, or small story.</li>
-        <li>Name the audience and choose words that respect them.</li>
-        <li>Close by restating the opinion and a call to action or hope.</li>
-      </ul>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <p>Writing Workshop Spark · aligned in spirit with Teachers College Reading and Writing Project workshop structures (mini-lesson, independent writing, share). Not affiliated with Teachers College or Lucy Calkins.</p>
-  </footer>
-
-  <div id="pwa-install-bar" hidden>
-    <div class="pwa-install-text">
-      <strong>Install Writing Workshop Spark</strong>
-      <span>Add this tool for offline classroom use.</span>
-    </div>
-    <button type="button" id="pwa-install-btn">Install</button>
-    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
-  </div>
-
-  
+      <div class="idea-grid" id="k3-cards-persuasive"></div>
+    </section>
   </div><!-- /shell-k3 -->
 
   <div id="shell-k2" class="grade-shell" data-grade-shell="k2" hidden>
     <nav class="genre-tabs" role="tablist" aria-label="K2 writing unit">
-      <button type="button" class="tab is-active" role="tab" aria-selected="true" data-unit="launching">🌟 From My Life</button>
+      <button type="button" class="tab is-active" role="tab" aria-selected="true" data-unit="howtodraw">✏️ How to Draw</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-unit="showtell">🧸 Show &amp; Tell</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-unit="fantasy">✨ Fantasy</button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-unit="howtodraw">✏️ How to Draw</button>
     </nav>
 
-    <section id="panel-k2-launching" class="panel">
+    <section id="panel-k2-howtodraw" class="panel">
       <div class="panel-intro">
-        <h2>From My Life · Launching</h2>
-        <p id="k2-intro-launching"></p>
+        <h2>How to Draw · Tiny steps</h2>
+        <p id="k2-intro-howtodraw"></p>
       </div>
       <div class="spark-actions">
-        <button type="button" class="btn primary" id="btn-k2-spark-launching">🎲 New idea cards</button>
+        <button type="button" class="btn primary" id="btn-k2-spark-howtodraw">🎲 New draw cards</button>
       </div>
-      <div class="idea-grid" id="k2-cards-launching"></div>
+      <div class="idea-grid" id="k2-cards-howtodraw"></div>
     </section>
 
     <section id="panel-k2-showtell" class="panel" hidden>
@@ -242,17 +126,6 @@
         <button type="button" class="btn primary" id="btn-k2-spark-fantasy">🎲 New idea cards</button>
       </div>
       <div class="idea-grid" id="k2-cards-fantasy"></div>
-    </section>
-
-    <section id="panel-k2-howtodraw" class="panel" hidden>
-      <div class="panel-intro">
-        <h2>How to Draw · Tiny steps</h2>
-        <p id="k2-intro-howtodraw"></p>
-      </div>
-      <div class="spark-actions">
-        <button type="button" class="btn primary" id="btn-k2-spark-howtodraw">🎲 New draw cards</button>
-      </div>
-      <div class="idea-grid" id="k2-cards-howtodraw"></div>
     </section>
   </div><!-- /shell-k2 -->
 
