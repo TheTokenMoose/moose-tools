@@ -27,6 +27,66 @@
     );
   }
 
+  /** Short label shown in UI (without pack prefix) */
+  function shortName(pack, id) {
+    if (!id) return "";
+    const pref = pack.id + "_";
+    return id.indexOf(pref) === 0 ? id.slice(pref.length) : id;
+  }
+
+  /** Sanitize user page name → safe id fragment */
+  function sanitizePageName(raw) {
+    let s = String(raw || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .replace(/_+/g, "_");
+    if (!s) s = "page";
+    if (/^[0-9]/.test(s)) s = "p_" + s;
+    return s.slice(0, 48);
+  }
+
+  /**
+   * Rename a page id and rewrite all links / start / order.
+   * Returns the new full id, or null if unchanged/failed.
+   */
+  function renameNode(pack, oldId, desiredShort) {
+    if (!pack || !oldId || !pack.nodes[oldId]) return null;
+    let short = sanitizePageName(desiredShort);
+    let newId = pack.id + "_" + short;
+    if (newId === oldId) return oldId;
+
+    // Ensure unique
+    if (pack.nodes[newId]) {
+      let n = 2;
+      while (pack.nodes[pack.id + "_" + short + "_" + n]) n++;
+      short = short + "_" + n;
+      newId = pack.id + "_" + short;
+    }
+
+    pack.nodes[newId] = pack.nodes[oldId];
+    delete pack.nodes[oldId];
+
+    if (pack.start === oldId) pack.start = newId;
+
+    Object.keys(pack.nodes).forEach(function (nid) {
+      const node = pack.nodes[nid];
+      if (!node || !Array.isArray(node.choices)) return;
+      node.choices.forEach(function (c) {
+        if (c.next === oldId) c.next = newId;
+      });
+    });
+
+    if (Array.isArray(pack.nodeOrder)) {
+      pack.nodeOrder = pack.nodeOrder.map(function (id) {
+        return id === oldId ? newId : id;
+      });
+    }
+
+    return newId;
+  }
+
   function loadStore() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -158,7 +218,7 @@
 
       const idEl = document.createElement("div");
       idEl.className = "node-id";
-      idEl.textContent = id.replace(pack.id + "_", "");
+      idEl.textContent = shortName(pack, id);
       card.appendChild(idEl);
 
       const prev = document.createElement("p");
@@ -321,7 +381,7 @@
       const o = document.createElement("option");
       o.value = id;
       const n = pack.nodes[id];
-      const short = id.replace(pack.id + "_", "");
+      const short = shortName(pack, id);
       o.textContent =
         (id === pack.start ? "★ " : "") +
         short +
@@ -337,6 +397,36 @@
     });
     nodeRow.appendChild(nodeSel);
     editor.appendChild(nodeRow);
+
+    // Editable page name (renames node id used in links)
+    const nameRow = document.createElement("div");
+    nameRow.className = "form-row";
+    nameRow.innerHTML = '<label for="page-name">Page name <span style="font-weight:600;opacity:0.75">(used in links)</span></label>';
+    const nameIn = document.createElement("input");
+    nameIn.id = "page-name";
+    nameIn.type = "text";
+    nameIn.value = shortName(pack, selectedNodeId);
+    nameIn.placeholder = "e.g. forest_crossroads";
+    nameIn.autocomplete = "off";
+    nameIn.addEventListener("change", function () {
+      const newId = renameNode(pack, selectedNodeId, nameIn.value);
+      if (!newId) {
+        nameIn.value = shortName(pack, selectedNodeId);
+        return;
+      }
+      selectedNodeId = newId;
+      pack.updatedAt = new Date().toISOString();
+      saveStore();
+      setStatus("Page renamed to " + shortName(pack, newId));
+      render();
+    });
+    nameRow.appendChild(nameIn);
+    const nameHint = document.createElement("p");
+    nameHint.className = "empty-state";
+    nameHint.style.margin = "0.25rem 0 0";
+    nameHint.textContent = "Letters, numbers, spaces OK — saved as a clean link id. All choices update automatically.";
+    nameRow.appendChild(nameHint);
+    editor.appendChild(nameRow);
 
     // Ending toggle
     const typeRow = document.createElement("div");
@@ -462,7 +552,7 @@
           if (id === selectedNodeId) return; // discourage trivial self-loop unless intentional via other nodes
           const o = document.createElement("option");
           o.value = id;
-          const short = id.replace(pack.id + "_", "");
+          const short = shortName(pack, id);
           o.textContent =
             short + (pack.nodes[id].ending ? " (ending)" : "");
           if (id === ch.next) o.selected = true;
