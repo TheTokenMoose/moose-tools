@@ -229,6 +229,32 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "writing-prompt-generator",
+    title: "Writing Prompt Generator",
+    type: "tool",
+    description: "Teacher tool: pick genre (narrative, informational, opinion, how-to, descriptive), level (K–3+), and topic. Generates a full activity — main prompt, sentence starters, vocabulary, challenge, and drawing idea. Regenerate sections independently. Favourites, copy, and print. ESL-friendly language.",
+    category: "Writing",
+    subject: "Writing / ESL",
+    skills: ["writing prompts", "scaffolds", "vocabulary", "sentence starters", "differentiation"],
+    screenshot: "assets/screenshots/writing-prompt-generator.jpg",
+    playUrl: "tools/writing-prompt-generator/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "team-maker",
+    title: "Team Maker",
+    type: "tool",
+    description: "Paste a comma-separated class list and form random teams by number of teams or students per group. Animal team names (Foxes, Wolves, Pandas…), optional custom names, quick shuffle animation, mix history to reduce repeat pairings, copy and print results. List saved on device.",
+    category: "Classroom",
+    subject: "Classroom management",
+    skills: ["grouping", "teams", "randomise", "print"],
+    screenshot: "assets/screenshots/team-maker.jpg",
+    playUrl: "tools/team-maker/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "classroom-seating-planner",
     title: "Classroom Seating Planner",
     type: "tool",
@@ -282,6 +308,19 @@ const PROJECTS = [
     category: "Classroom",
     screenshot: "assets/screenshots/ib-pyp-guide.jpg",
     playUrl: "tools/ib-pyp-guide/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "shape-builder",
+    title: "Shape Builder",
+    type: "game",
+    description: "Geometry lab for early primary: identify 2D/3D shapes, match pairs, rotate to match, count sides and corners (accurate — spheres have no corners), build picture challenges (house, rocket, tree), and free-build sandbox. Drag pieces, TTS, stars.",
+    category: "Maths",
+    subject: "Maths / Geometry",
+    skills: ["2D shapes", "3D shapes", "sides", "corners", "spatial reasoning", "construction"],
+    screenshot: "assets/screenshots/shape-builder.jpg",
+    playUrl: "games/shape-builder/",
     installable: true,
     featured: true
   },

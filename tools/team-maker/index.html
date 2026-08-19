@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d4ed8">
+  <meta name="description" content="Team Maker — random classroom teams from a name list. Fast, fair, printable.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Team Maker — The Token Moose</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="team-maker" data-app-title="Team Maker">
+  <div id="app">
+    <header class="head">
+      <h1>Team Maker</h1>
+      <p class="tag">Random teams · Stronger together</p>
+    </header>
+
+    <section class="setup no-print">
+      <label class="full">
+        Student names <span class="muted">(comma-separated)</span>
+        <textarea id="name-list" rows="3" placeholder="Jayden, Harry, John B, Sarah, Emma"></textarea>
+      </label>
+      <p class="count" id="count-label">0 students</p>
+
+      <div class="mode-row">
+        <label class="radio"><input type="radio" name="mode" value="teams" checked /> Number of teams</label>
+        <label class="radio"><input type="radio" name="mode" value="size" /> Students per team</label>
+      </div>
+
+      <div id="ctrl-teams" class="slider-row">
+        <label>Teams: <strong id="team-count-val">4</strong></label>
+        <input type="range" id="team-count" min="2" max="12" value="4" />
+      </div>
+      <div id="ctrl-size" class="slider-row" hidden>
+        <label>Group size: <strong id="group-size-val">3</strong></label>
+        <input type="range" id="group-size" min="2" max="10" value="3" />
+      </div>
+
+      <label class="full muted-label">
+        Optional custom team names (comma-separated)
+        <input type="text" id="custom-names" placeholder="Red Team, Blue Team…" />
+      </label>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-make">Make teams</button>
+        <button type="button" class="btn btn-ghost" id="btn-reroll">Reroll</button>
+        <button type="button" class="btn btn-ghost" id="btn-skip-anim">Skip animation</button>
+        <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
+      </div>
+    </section>
+
+    <section class="results">
+      <div id="team-board"><p class="empty">Paste names and press Make teams</p></div>
+      <div class="btn-row result-actions no-print" id="result-actions" hidden>
+        <button type="button" class="btn btn-primary" id="btn-copy">Copy results</button>
+        <button type="button" class="btn btn-ghost" id="btn-print">Print</button>
+        <button type="button" class="btn btn-ghost" id="btn-clear-history">Clear mix history</button>
+        <span id="copy-status" class="status"></span>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
