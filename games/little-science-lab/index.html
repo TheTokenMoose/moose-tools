@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta name="description" content="Little Science Lab — sink/float, magnets, shadows, states of matter, plants, and sound for early learners.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Little Science Lab — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="little-science-lab" data-app-title="Little Science Lab">
+  <div id="chrome-top">
+    <div id="voice-slot" class="voice-slot"></div>
+    <button type="button" class="chrome-btn" id="btn-hear" title="Hear">🔊</button>
+  </div>
+
+  <div id="app">
+    <section id="view-hub">
+      <h1>Little Science Lab</h1>
+      <p class="tag">Try an experiment · see what happens</p>
+      <p class="stars" id="hub-stars">⭐ 0 · 0/6 labs</p>
+      <div class="lab-grid" id="lab-grid"></div>
+    </section>
+
+    <section id="view-lab" hidden>
+      <div class="lab-bar">
+        <button type="button" class="btn btn-ghost" id="btn-back">← Lab</button>
+        <h2 id="lab-title"></h2>
+        <span class="badge" id="badge-done" hidden>✓ Done</span>
+        <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
+      </div>
+      <div class="stage" id="stage"></div>
+      <p class="explain" id="explain"></p>
+    </section>
+  </div>
+
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

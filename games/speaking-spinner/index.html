@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Speaking Spinner — projector-friendly ESL speaking prompts for the classroom.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Speaking Spinner — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="speaking-spinner" data-app-title="Speaking Spinner">
+  <div id="chrome-top">
+    <div id="voice-slot" class="voice-slot"></div>
+  </div>
+
+  <div id="app">
+    <header class="top">
+      <h1>Speaking Spinner</h1>
+      <p class="tag">Spin it · Speak it · Share it</p>
+    </header>
+
+    <div class="layout">
+      <div class="wheel-wrap">
+        <div class="pointer">▼</div>
+        <div class="wheel" id="wheel"></div>
+        <button type="button" class="btn btn-spin" id="btn-spin">SPIN</button>
+      </div>
+
+      <div class="prompt-panel">
+        <div class="prompt-cat" id="prompt-cat"></div>
+        <p class="prompt-text" id="prompt-text">Spin for a prompt!</p>
+        <div class="ctrl-row">
+          <button type="button" class="btn btn-primary" id="btn-next">Next prompt</button>
+          <button type="button" class="btn btn-ghost" id="btn-repeat">🔊 Repeat</button>
+          <button type="button" class="btn btn-ghost" id="btn-clear-recent">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <details class="settings">
+      <summary>Settings · category · difficulty · names · custom</summary>
+      <div class="settings-grid">
+        <label>
+          Category
+          <select id="sel-cat"></select>
+        </label>
+        <label>
+          Difficulty
+          <select id="sel-diff">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="all">All levels</option>
+          </select>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="toggle-tts" checked />
+          Read prompt aloud
+        </label>
+        <label class="check">
+          <input type="checkbox" id="toggle-name" />
+          Pick a student name with prompt
+        </label>
+        <label class="full">
+          Student names (comma-separated)
+          <input type="text" id="name-input" placeholder="Jayden, Harry, Sarah" />
+        </label>
+        <button type="button" class="btn btn-ghost" id="btn-save-names">Save names</button>
+        <span id="name-status" class="status"></span>
+        <label class="full">
+          Add custom prompt
+          <input type="text" id="custom-input" placeholder="Your question…" />
+        </label>
+        <button type="button" class="btn btn-primary" id="btn-add-custom">Add prompt</button>
+        <div id="custom-list" class="custom-list full"></div>
+      </div>
+      <p class="hint">Space / Enter = spin · N = next prompt</p>
+    </details>
+  </div>
+
+  <script src="js/prompts.js"></script>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

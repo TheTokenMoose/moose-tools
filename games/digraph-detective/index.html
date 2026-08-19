@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#f59e0b">
+  <meta name="description" content="Digraph Detective — SH, CH, TH, WH phonics: hear, find, match, build, and read.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Digraph Detective — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="digraph-detective" data-app-title="Digraph Detective">
+  <div id="chrome-top">
+    <div id="voice-slot" class="voice-slot"></div>
+    <button type="button" class="chrome-btn" id="btn-hear" title="Hear">🔊</button>
+  </div>
+
+  <div id="app">
+    <section id="screen-home">
+      <h1>🔍 Digraph Detective</h1>
+      <p class="tag">Find SH · CH · TH · WH</p>
+      <p class="stars" id="home-stars">⭐ 0 total</p>
+      <div class="mode-grid" id="mode-grid"></div>
+      <p class="foot">Tap a case. Listen, look, build — then close the case!</p>
+    </section>
+
+    <section id="screen-play" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn btn-ghost" id="btn-back-home">← HQ</button>
+        <span id="play-name" class="play-name"></span>
+        <span class="badge" id="badge-digraph">SH</span>
+        <span id="play-level"></span>
+        <span id="play-stars"></span>
+      </div>
+      <p class="prompt" id="play-prompt"></p>
+      <div class="play-stage" id="play-stage"></div>
+    </section>
+
+    <section id="screen-feedback" hidden>
+      <div class="panel fb">
+        <div class="fb-icon" id="fb-icon">🏅</div>
+        <h2 id="fb-title">Case closed!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-fb-next">Next clue</button>
+          <button type="button" class="btn btn-ghost" id="btn-fb-retry">Try again</button>
+          <button type="button" class="btn btn-ghost" id="btn-fb-home">HQ</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/words.js"></script>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

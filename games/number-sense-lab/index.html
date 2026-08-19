@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#fbbf24">
+  <meta name="description" content="Number Sense Lab — ten frames, number bonds, number line, compare, and place value for kindergarten and early primary.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Number Sense Lab — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="number-sense-lab" data-app-title="Number Sense Lab">
+  <div id="chrome-top">
+    <div id="voice-slot" class="voice-slot"></div>
+    <button type="button" class="chrome-btn" id="btn-hear" title="Hear prompt">🔊</button>
+  </div>
+
+  <div id="app">
+    <section id="screen-home">
+      <h1>Number Sense Lab</h1>
+      <p class="tag">See it · build it · feel the number</p>
+      <p class="stars" id="home-stars">⭐ 0 total</p>
+      <div class="act-grid" id="act-grid"></div>
+    </section>
+
+    <section id="screen-play" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn btn-ghost" id="btn-back-home">← Lab</button>
+        <span id="play-name" class="play-name"></span>
+        <span id="play-level"></span>
+        <span id="play-stars"></span>
+      </div>
+      <p class="prompt" id="play-prompt"></p>
+      <div class="play-stage" id="play-stage"></div>
+    </section>
+
+    <section id="screen-feedback" hidden>
+      <div class="panel fb">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Great job!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-fb-next">Next</button>
+          <button type="button" class="btn btn-ghost" id="btn-fb-retry">Try again</button>
+          <button type="button" class="btn btn-ghost" id="btn-fb-home">Lab</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

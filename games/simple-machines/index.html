@@ -13,12 +13,6 @@
   <link rel="stylesheet" href="pwa-install.css">
 </head>
 <body data-app-id="simple-machines" data-app-title="Simple Machines Lab">
-  <div id="chrome-top">
-    <button type="button" class="chrome-btn" id="btn-lab" hidden>← Lab</button>
-    <div id="voice-slot" class="voice-slot"></div>
-    <button type="button" class="chrome-btn hear" id="btn-hear" hidden title="Hear tip">🔊</button>
-  </div>
-
   <div id="app">
     <section id="view-lab" class="view">
       <header class="lab-head">
@@ -31,7 +25,9 @@
 
     <section id="view-sandbox" class="view" hidden>
       <div class="sandbox-bar">
+        <button type="button" class="btn btn-ghost" id="btn-lab">← Lab</button>
         <h2 id="sb-title"></h2>
+        <button type="button" class="btn btn-ghost" id="btn-hear" title="Hear tip">🔊 Tip</button>
         <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
       </div>
       <p class="challenge-line" id="sb-tip"></p>

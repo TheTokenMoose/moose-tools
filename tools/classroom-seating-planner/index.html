@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Classroom Seating Planner — drag seats, keep-apart rules, randomise, save and print.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Classroom Seating Planner — The Token Moose</title>
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="classroom-seating-planner" data-app-title="Classroom Seating Planner">
+  <div id="app" class="no-print-controls">
+    <header class="tool-head">
+      <h1>Classroom Seating Planner</h1>
+      <p class="sub">Paste names · choose layout · drag to fix · keep apart · print</p>
+    </header>
+
+    <div class="workspace">
+      <aside class="side panel">
+        <label class="field">
+          <span>Class name</span>
+          <input type="text" id="class-name" placeholder="My Class" value="My Class" />
+        </label>
+        <label class="field">
+          <span>Student names (comma-separated)</span>
+          <textarea id="name-input" rows="4" placeholder="Jayden, Harry, John B, Sarah, Emma"></textarea>
+        </label>
+        <button type="button" class="btn btn-primary" id="btn-load">Load names</button>
+
+        <h3>Layout</h3>
+        <div class="layout-btns">
+          <button type="button" class="btn btn-chip is-on" data-layout="rows">Rows</button>
+          <button type="button" class="btn btn-chip" data-layout="pairs">Pairs</button>
+          <button type="button" class="btn btn-chip" data-layout="groups3">Groups of 3</button>
+          <button type="button" class="btn btn-chip" data-layout="groups4">Groups of 4</button>
+          <button type="button" class="btn btn-chip" data-layout="carpet">Carpet</button>
+          <button type="button" class="btn btn-chip" data-layout="custom">Custom grid</button>
+        </div>
+        <label class="field inline">
+          <span>Custom columns</span>
+          <input type="number" id="custom-cols" min="2" max="10" value="5" />
+        </label>
+        <button type="button" class="btn btn-ghost" id="btn-rebuild">Rebuild seats</button>
+
+        <h3>Keep apart</h3>
+        <div class="keep-add">
+          <select id="keep-a"></select>
+          <select id="keep-b"></select>
+          <button type="button" class="btn btn-ghost" id="btn-keep-add">Add</button>
+        </div>
+        <div id="keep-list" class="keep-list"></div>
+
+        <h3>Actions</h3>
+        <div class="action-row">
+          <button type="button" class="btn btn-primary" id="btn-random">Randomise</button>
+          <button type="button" class="btn btn-ghost" id="btn-reset">Reset order</button>
+          <button type="button" class="btn btn-ghost" id="btn-save">Save</button>
+          <button type="button" class="btn btn-ghost" id="btn-print">Print</button>
+        </div>
+        <p class="status" id="status"></p>
+
+        <h3>Roster</h3>
+        <div id="roster" class="roster"></div>
+      </aside>
+
+      <main class="main">
+        <div class="room-meta">
+          <h2 id="class-title">Classroom</h2>
+          <span class="meta-pill" id="layout-label">rows</span>
+        </div>
+        <div id="room" class="room"></div>
+        <p class="hint">Drag a student onto a seat to place or swap. Red outline = keep-apart conflict.</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

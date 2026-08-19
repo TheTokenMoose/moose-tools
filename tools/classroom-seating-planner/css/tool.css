@@ -1,0 +1,251 @@
+:root {
+  --bg: #0b1220;
+  --panel: rgba(20, 32, 54, 0.95);
+  --stroke: rgba(120, 180, 255, 0.3);
+  --text: #e8f1ff;
+  --muted: #9bb0d0;
+  --accent: #5ec8ff;
+  --gold: #ffc857;
+  --danger: #ff6b7a;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, #1a3358, var(--bg));
+  color: var(--text);
+}
+#app { max-width: 1280px; margin: 0 auto; padding: 0.75rem 1rem 2rem; }
+.tool-head h1 { margin: 0; font-size: 1.45rem; }
+.sub { margin: 0.25rem 0 0.75rem; color: var(--muted); font-size: 0.9rem; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .workspace { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 0.85rem;
+}
+.field { display: block; margin-bottom: 0.65rem; }
+.field span { display: block; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 0.25rem; }
+.field.inline { display: flex; align-items: center; gap: 0.5rem; }
+.field.inline span { margin: 0; }
+input[type="text"], input[type="number"], textarea, select {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--stroke);
+  background: #0e1a2e;
+  color: var(--text);
+}
+textarea { resize: vertical; min-height: 80px; }
+h3 { margin: 0.85rem 0 0.4rem; font-size: 0.95rem; color: var(--accent); }
+
+.btn {
+  font: inherit;
+  font-weight: 800;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  min-height: 40px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #3db8ff, #2a7fd4);
+  color: #041018;
+  width: 100%;
+  margin-bottom: 0.35rem;
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-color: var(--stroke);
+}
+.btn-chip {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-color: var(--stroke);
+  font-size: 0.8rem;
+  min-height: 36px;
+  padding: 0.3rem 0.65rem;
+}
+.btn-chip.is-on {
+  border-color: var(--accent);
+  background: rgba(94, 200, 255, 0.15);
+  color: var(--accent);
+}
+.layout-btns, .action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.action-row .btn { flex: 1 1 auto; }
+.status {
+  min-height: 1.3em;
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0.4rem 0 0;
+}
+
+.keep-add { display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.35rem; margin-bottom: 0.35rem; }
+.keep-list { font-size: 0.85rem; }
+.keep-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.keep-row button {
+  font: inherit;
+  font-size: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--stroke);
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.roster { display: flex; flex-wrap: wrap; gap: 0.35rem; max-height: 180px; overflow: auto; }
+.roster-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 999px;
+  border: 2px solid;
+  background: rgba(0,0,0,0.25);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: grab;
+}
+.roster-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+.icon-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0 0.15rem;
+}
+
+.room-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.room-meta h2 { margin: 0; font-size: 1.15rem; }
+.meta-pill {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(94,200,255,0.15);
+  color: var(--accent);
+}
+.room {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 0.75rem;
+  min-height: 360px;
+}
+.room-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+.board {
+  width: 70%;
+  max-width: 420px;
+  text-align: center;
+  padding: 0.5rem;
+  background: #1a3a2a;
+  border: 2px solid #3dd68c;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #bbf7d0;
+}
+.teacher-desk {
+  padding: 0.35rem 1rem;
+  background: #2a3f5f;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.seat-grid {
+  display: grid;
+  gap: 0.45rem;
+  justify-content: center;
+}
+.seat {
+  min-height: 52px;
+  border-radius: 10px;
+  border: 2px dashed var(--stroke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: rgba(0,0,0,0.2);
+}
+.seat.filled { border-style: solid; border-color: rgba(94,200,255,0.35); }
+.seat.drag-over { border-color: var(--gold); background: rgba(255,200,87,0.12); }
+.seat-label { font-size: 0.7rem; color: var(--muted); }
+.student-card {
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem 0.3rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--c) 35%, #0e1a2e);
+  border: 2px solid var(--c);
+  font-weight: 800;
+  font-size: 0.78rem;
+  cursor: grab;
+  line-height: 1.2;
+  word-break: break-word;
+}
+.student-card.conflict {
+  box-shadow: 0 0 0 2px var(--danger);
+  border-color: var(--danger);
+}
+.door {
+  margin-top: 0.6rem;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.hint { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+
+@media print {
+  body { background: #fff; color: #000; }
+  .side, .hint, .library-back, .pwa-install, #chrome-top { display: none !important; }
+  .workspace { display: block; }
+  .room {
+    border: 1px solid #333;
+    background: #fff;
+    color: #000;
+  }
+  .board { background: #eee; color: #000; border-color: #333; }
+  .student-card {
+    background: #f5f5f5 !important;
+    border-color: #333 !important;
+    color: #000;
+    box-shadow: none !important;
+  }
+  .teacher-desk { background: #ddd; color: #000; }
+  .tool-head .sub { display: none; }
+}

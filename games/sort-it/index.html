@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#38bdf8">
+  <meta name="description" content="Sort It! — drag or tap objects into science, maths, vocabulary, and phonics categories.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Sort It! — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="sort-it" data-app-title="Sort It!">
+  <div id="chrome-top">
+    <div id="voice-slot" class="voice-slot"></div>
+    <button type="button" class="chrome-btn" id="btn-hear" title="Hear">🔊</button>
+  </div>
+
+  <div id="app">
+    <section id="screen-home">
+      <h1>Sort It!</h1>
+      <p class="tag">Sort · Match · Learn</p>
+      <p class="stars" id="home-stars">⭐ 0 total</p>
+      <div id="pack-grid"></div>
+    </section>
+
+    <section id="screen-play" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn btn-ghost" id="btn-home">← Packs</button>
+        <div class="play-meta">
+          <strong id="play-title"></strong>
+          <span id="play-subject"></span>
+        </div>
+        <span id="play-left"></span>
+        <span id="play-stars"></span>
+        <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
+      </div>
+      <p class="hint">Drag into a bin — or tap an item, then tap a bin.</p>
+      <div id="bins" class="bins"></div>
+      <div id="tray" class="tray"></div>
+    </section>
+
+    <section id="screen-done" hidden>
+      <div class="panel done">
+        <div class="big">🎉</div>
+        <h2>All sorted!</h2>
+        <p id="done-msg"></p>
+        <p id="done-stars" class="stars"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-done-again">Sort again</button>
+          <button type="button" class="btn btn-ghost" id="btn-done-home">More packs</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/packs.js"></script>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

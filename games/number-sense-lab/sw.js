@@ -1,10 +1,9 @@
-const CACHE = "simple-machines-v6";
+const CACHE = "number-sense-lab-v1";
 const ASSETS = [
   "./",
   "./index.html",
   "./css/game.css",
-  "./js/game.js",
-  "./vendor/matter.min.js",
+  "./js/app.js",
   "./manifest.webmanifest",
   "./pwa-install.js",
   "./pwa-install.css",
