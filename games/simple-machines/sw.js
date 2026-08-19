@@ -1,15 +1,17 @@
-const CACHE = "simple-machines-v4";
+const CACHE = "simple-machines-v5";
 const ASSETS = [
   "./",
   "./index.html",
   "./css/game.css",
   "./js/game.js",
+  "./vendor/matter.min.js",
   "./manifest.webmanifest",
   "./pwa-install.js",
   "./pwa-install.css",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "../../js/app-chrome.js"
+  "../../js/app-chrome.js",
+  "../../js/voice.js"
 ];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS).catch(() => {})).then(() => self.skipWaiting()));
