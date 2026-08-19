@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="theme-color" content="#0b1220">
-  <meta name="description" content="Simple Machines Lab — explore lever, wheel & axle, pulley, inclined plane, wedge, and screw in a touch-friendly physics sandbox. IB inquiry science.">
+  <meta name="description" content="Simple Machines Lab — six clear experiments for young learners. Lever, pulley, ramp, wheel, wedge, screw.">
   <meta name="mobile-web-app-capable" content="yes">
   <title>Simple Machines Lab — The Token Moose</title>
   <link rel="stylesheet" href="css/game.css">
@@ -14,104 +14,58 @@
 </head>
 <body data-app-id="simple-machines" data-app-title="Simple Machines Lab">
   <div id="app">
-    <header class="lab-header">
-      <div>
+    <!-- LAB -->
+    <section id="view-lab" class="view">
+      <header class="lab-head">
         <h1>Simple Machines Lab</h1>
-        <p>Build · touch · test · inquire · IB science</p>
-      </div>
-      <div class="chip-row" aria-label="Focus">
-        <span class="chip">Forces</span>
-        <span class="chip">Design</span>
-        <span class="chip">Inquiry</span>
-      </div>
-    </header>
-
-    <section id="hub" class="hub" aria-label="Choose a simple machine">
-      <div class="hub-grid" id="hub-grid"></div>
-      <p class="hint">
-        Pick a machine. Drag with finger or mouse. Use the big buttons and sliders, then <strong>Reset</strong> to try a new setup.
-        Ask: <em>Where is the force? What gets easier? What is the trade-off?</em>
-      </p>
+        <p class="tag">Tap a machine. Do the challenge. See what happens!</p>
+        <p class="progress" id="lab-progress">0 / 6 machines complete</p>
+        <button type="button" class="btn btn-ghost" id="btn-expert" hidden>🌟 Expert badge</button>
+      </header>
+      <div class="station-grid" id="station-grid"></div>
     </section>
 
-    <section id="lab-stage" class="lab-stage" aria-label="Physics sandbox">
-      <div class="stage-bar">
-        <button type="button" class="btn btn-back-lab" id="btn-back-hub">← Machines</button>
-        <span id="stage-title" style="font-weight:800"></span>
+    <!-- PLAY -->
+    <section id="view-play" class="view" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn btn-ghost" id="btn-back">← Lab</button>
         <button type="button" class="btn btn-ghost" id="btn-reset">Reset</button>
-        <div class="goal-banner" id="goal-banner"></div>
       </div>
-      <div class="canvas-wrap" id="canvas-wrap">
-        <canvas id="world" width="800" height="440"></canvas>
+      <div class="play-head">
+        <span class="play-icon" id="play-icon"></span>
+        <h2 id="play-name"></h2>
       </div>
-      <div class="controls">
-        <!-- Lever -->
-        <div class="control-card ctrl" data-for="lever" hidden>
-          <label for="ctrl-fulcrum">Fulcrum position (left ← → right)</label>
-          <input type="range" id="ctrl-fulcrum" min="0.28" max="0.62" step="0.01" value="0.45" />
-          <div class="val">at <span id="val-fulcrum">45%</span> of the board</div>
-          <p class="mini">Drag the <strong>left</strong> end of the plank down to lift the red crate. Change fulcrum, then Reset.</p>
-        </div>
+      <p class="intro-line" id="play-intro"></p>
+      <p class="challenge-line" id="play-challenge"></p>
+      <div class="play-stage" id="play-stage"></div>
+    </section>
 
-        <!-- Wheel -->
-        <div class="control-card ctrl" data-for="wheel" hidden>
-          <label>Hold to spin the big wheel</label>
-          <button type="button" class="btn btn-primary" id="btn-spin-wheel" style="width:100%">Hold · Spin ⟳</button>
-          <p class="mini">Keep holding — the rope winds and the crate rises into the green zone.</p>
-        </div>
-
-        <!-- Pulley -->
-        <div class="control-card ctrl" data-for="pulley" hidden>
-          <label>How to play</label>
-          <p class="mini">Drag the <strong>gold handle downward</strong>. The red crate should rise. Pull more to reach the green zone.</p>
-        </div>
-
-        <!-- Inclined plane -->
-        <div class="control-card ctrl" data-for="plane" hidden>
-          <label for="ctrl-plane-angle">Ramp angle</label>
-          <input type="range" id="ctrl-plane-angle" min="0.12" max="0.55" step="0.01" value="0.32" />
-          <div class="val"><span id="val-plane-angle">18°</span></div>
-        </div>
-        <div class="control-card ctrl" data-for="plane" hidden>
-          <label for="ctrl-plane-friction">Friction</label>
-          <input type="range" id="ctrl-plane-friction" min="0.02" max="0.55" step="0.01" value="0.15" />
-          <div class="val"><span id="val-plane-friction">0.15</span></div>
-        </div>
-        <div class="control-card ctrl" data-for="plane" hidden>
-          <label>Mode</label>
-          <label class="radio"><input type="radio" name="plane-mode" value="ball-down" checked /> Ball rolls down</label>
-          <label class="radio"><input type="radio" name="plane-mode" value="crate-up" /> Push crate up</label>
-          <p class="mini">Change angle/friction/mode, then the lab reloads. Drag the crate in “up” mode.</p>
-        </div>
-
-        <!-- Wedge -->
-        <div class="control-card ctrl" data-for="wedge" hidden>
-          <label>Drive the wedge</label>
-          <button type="button" class="btn btn-primary" id="btn-drive-wedge" style="width:100%">Drive wedge →</button>
-          <p class="mini">Or drag the gold wedge under the grey block until it lifts into the green zone.</p>
-        </div>
-
-        <!-- Screw -->
-        <div class="control-card ctrl" data-for="screw" hidden>
-          <label>Turn the screw</label>
-          <div style="display:flex;gap:0.4rem">
-            <button type="button" class="btn btn-primary" id="btn-screw-ccw" style="flex:1">↺ Lower</button>
-            <button type="button" class="btn btn-primary" id="btn-screw-cw" style="flex:1">Raise ↻</button>
-          </div>
-          <p class="mini">Each Raise is one turn up the spiral. Get the platform into the green zone.</p>
-        </div>
-
-        <div class="control-card ctrl" data-for="all">
-          <label>Lab tip</label>
-          <div class="mini">Bodies are speed-limited so they cannot fling off-screen. Use <strong>Reset</strong> after big changes.</div>
+    <!-- SUCCESS -->
+    <section id="view-success" class="view" hidden>
+      <div class="card">
+        <div class="success-icon" id="success-icon">⭐</div>
+        <h2 id="success-title">Great job!</h2>
+        <p class="success-msg" id="success-msg"></p>
+        <p class="progress" id="success-progress"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="btn-again">Try again</button>
+          <button type="button" class="btn btn-primary" id="btn-next">Next machine</button>
+          <button type="button" class="btn btn-ghost" id="btn-to-lab">Back to Lab</button>
         </div>
       </div>
-      <p class="hint" id="hint"></p>
+    </section>
+
+    <!-- EXPERT -->
+    <section id="view-expert" class="view" hidden>
+      <div class="card">
+        <h2>🌟 Simple Machines Expert!</h2>
+        <p class="success-msg">You tried all six machines.</p>
+        <ul id="expert-list" class="expert-list"></ul>
+        <button type="button" class="btn btn-primary" id="btn-expert-lab">Back to Lab</button>
+      </div>
     </section>
   </div>
-  <div id="toast" class="toast" hidden role="status"></div>
 
-  <script src="vendor/matter.min.js"></script>
   <script src="../../js/app-chrome.js"></script>
   <script src="js/game.js"></script>
   <script src="pwa-install.js"></script>
