@@ -3,26 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="About The Token Moose and David Templeton — teacher, learner, and maker of small games and tools.">
+  <meta name="description" content="About Moose Tools — a teacher-maker workshop of games, tools, and experiments by The Token Moose.">
   <meta name="theme-color" content="#0a0b1a">
-  <title>About — The Token Moose</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>About — Moose Tools</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
   <link rel="apple-touch-icon" href="assets/icons/favicon-180.png">
-<link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/themes.css">
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
-      if (t === "day" || t === "playful" || t === "night") {
-        document.documentElement.setAttribute("data-theme", t);
-      }
+      if (t === "day" || t === "playful" || t === "night") document.documentElement.setAttribute("data-theme", t);
     } catch (e) {}
   </script>
+  <style>
+    .about-hero {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+    .about-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .about-hero .lede {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .about-panel {
+      max-width: 720px;
+      margin: 0 auto 1.5rem;
+      padding: 1.5rem 1.35rem;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--surface, #15182b) 92%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent, #7c9cff) 25%, transparent);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    }
+    .about-panel h2 {
+      margin: 0 0 1rem;
+      font-size: 1.35rem;
+      color: var(--accent, #7c9cff);
+    }
+    .about-panel p {
+      margin: 0 0 0.9rem;
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+    .about-panel p:last-child { margin-bottom: 0; }
+    .about-signoff {
+      margin-top: 1.25rem !important;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    .about-feedback {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      padding: 1.5rem 1.35rem;
+      border-radius: 18px;
+      background: linear-gradient(145deg, color-mix(in srgb, var(--accent, #7c9cff) 18%, transparent), transparent 60%),
+        color-mix(in srgb, var(--surface, #15182b) 95%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent, #7c9cff) 35%, transparent);
+    }
+    .about-feedback h2 { margin: 0 0 0.35rem; font-size: 1.25rem; }
+    .about-feedback .hint { margin: 0 0 1rem; opacity: 0.8; font-size: 0.95rem; }
+    .fb-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.85rem; }
+    .fb-field label { font-weight: 700; font-size: 0.9rem; }
+    .fb-field input, .fb-field textarea {
+      font: inherit;
+      padding: 0.65rem 0.75rem;
+      border-radius: 10px;
+      border: 2px solid color-mix(in srgb, var(--accent, #7c9cff) 30%, #333);
+      background: color-mix(in srgb, var(--bg, #0a0b1a) 80%, #fff 5%);
+      color: inherit;
+      min-height: 44px;
+    }
+    .fb-field textarea { min-height: 120px; resize: vertical; }
+    .fb-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .fb-actions .btn-primary {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.35rem;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent, #7c9cff), #5b7cfa);
+      color: #0a0b1a;
+    }
+    .fb-status { font-size: 0.9rem; font-weight: 700; opacity: 0.85; }
+    .fb-status.err { color: #f87171; }
+    .fb-status.ok { color: #4ade80; }
+  </style>
 </head>
 <body data-page="about">
   <header class="site-header">
@@ -31,9 +110,7 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <span>THE TOKEN MOOSE</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
-        <span></span>
-      </button>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
       <nav id="main-nav" class="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
         <a href="games.html">Games</a>
@@ -42,60 +119,104 @@
         <a href="voice-settings.html">Voices</a>
         <a href="about.html" aria-current="page">About</a>
       </nav>
-          <div class="theme-switcher">
-        <button type="button" class="theme-ball" id="theme-ball" aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu" title="Change theme" aria-label="Themes"></button>
-        <button type="button" class="theme-label-btn" id="theme-label-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu">Themes</button>
-        <div class="theme-menu" id="theme-menu" role="listbox" aria-label="Site theme" hidden>
-          <button type="button" class="theme-option" role="option" data-theme="night" aria-checked="false">
-            <span class="theme-swatch night" aria-hidden="true"></span>
-            <span class="theme-option-text">Night City<small>Soft neon · default</small></span>
-          </button>
-          <button type="button" class="theme-option" role="option" data-theme="day" aria-checked="false">
-            <span class="theme-swatch day" aria-hidden="true"></span>
-            <span class="theme-option-text">Daylight<small>Bright · airy · calm</small></span>
-          </button>
-          <button type="button" class="theme-option" role="option" data-theme="playful" aria-checked="false">
-            <span class="theme-swatch playful" aria-hidden="true"></span>
-            <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
-          </button>
-        </div>
-      </div>
-</div>
+      <div class="theme-switcher"></div>
+    </div>
   </header>
 
-  <main class="site-main">
-    <div class="about-content">
-      <section class="about-section" aria-labelledby="about-moose">
-        <h2 id="about-moose">About The Token Moose</h2>
-        <p>The Token Moose is a small collection of games, experiments, and teacher tools made by a teacher who likes building things.</p>
-        <p>I enjoy finding new ways to make learning more fun, interactive, and engaging, while also giving myself an excuse to keep learning. These projects are where those interests overlap — a mixture of educational games, little classroom tools, experiments with code, AI-assisted development, and whatever interesting idea I happen to be playing with next.</p>
-        <p>Some of these projects were made to solve a problem I encountered in my own classroom. Others started as a "could I make this?" idea. Some are simply experiments that turned out to be fun.</p>
-        <p>I'm collecting them here so they're easy to play, use, share, and explore.</p>
-        <p>Everything here is made with the hope that someone else might find it useful, entertaining, or inspiring. The projects are open source, so you're welcome to look at how they work, learn from them, modify them, or take them in an entirely different direction.</p>
-        <p>Have fun. Break things. Make things. Keep learning.</p>
-      </section>
-
-      <section class="about-section" aria-labelledby="about-me">
-        <h2 id="about-me">About Me</h2>
-        <p>Hi, I'm David Templeton, although around the internet you'll usually find me as The Token Moose.</p>
-        <p>I'm a teacher, lifelong learner, and technology enthusiast. I've spent years working in education, particularly with young learners and English language learners, and I'm always interested in finding better ways to make learning active, memorable, and enjoyable.</p>
-        <p>I'm also the sort of person who looks at a repetitive classroom task and thinks, "I wonder if I could just make a little program to do this?"</p>
-        <p>That habit has led me down some interesting rabbit holes.</p>
-        <p>I enjoy experimenting with Python, web development, AI tools, game design, 3D printing, and whatever new technology happens to catch my attention. I'm not a professional game developer or software engineer — I'm a teacher who enjoys learning by building things.</p>
-        <p>That's really what The Token Moose is about.</p>
-        <p>These projects give me somewhere to experiment, practice coding, explore AI-assisted development, solve problems I encounter in teaching, and occasionally make something just because it sounds fun.</p>
-        <p>Some projects will be polished. Some will be weird. Some will probably be both.</p>
-        <p>They're all part of the learning process.</p>
-        <p class="signature">— David Templeton / The Token Moose</p>
-      </section>
+  <main class="site-main about-main">
+    <div class="about-hero">
+      <h1>About Moose Tools</h1>
+      <p class="lede">A workshop on the internet — games, tools, and experiments built to make things.</p>
     </div>
-</main>
+
+    <article class="about-panel">
+      <h2>The workshop</h2>
+      <p>Moose Tools is my little workshop on the internet — a growing collection of games, experiments, creative projects, and useful tools built around one simple idea: <strong>make things</strong>.</p>
+      <p>I'm a teacher, but I'm also a maker. I like taking an idea from “I wonder if I could…” to something that actually exists.</p>
+      <p>Sometimes that means building a classroom game. Sometimes it's a tool to make a teacher's job easier. Sometimes it's a website, a Python program, a 3D-printed object, a digital experiment, or an idea that has absolutely no practical purpose other than being fun to make.</p>
+      <p>A lot of the projects here grow out of real problems and opportunities I've encountered in education. If something could make a lesson more engaging, give students another way to practise something, save a teacher ten minutes, or simply make a classroom a little more interesting, I'm probably going to try building it.</p>
+      <p>Moose Tools is also a place for experimentation. I use code, web technologies, AI-assisted development, game design, 3D modelling, 3D printing, and whatever else I happen to be learning to turn ideas into things I can actually use.</p>
+      <p>Some projects are polished. Some are experiments. Some are works in progress.</p>
+      <p><strong>That's intentional.</strong></p>
+      <p>This isn't a software company or a commercial product catalogue. It's a workshop — a place to build, learn, test ideas, break things, fix them, and share the results.</p>
+      <p>The projects are open source because I believe that making things is even more useful when other people can take them apart, learn from them, improve them, or build something completely different from them.</p>
+      <p><em>Make something. Try something. Break something. Learn something. Then make something better.</em></p>
+    </article>
+
+    <article class="about-panel">
+      <h2>About me</h2>
+      <p>I'm <strong>David Templeton</strong> — a teacher, maker, tinkerer, and lifelong learner. Online, you'll usually find me as <strong>The Token Moose</strong>.</p>
+      <p>Teaching is a huge part of who I am, but making things has always been a big part of how I learn.</p>
+      <p>I like figuring things out by actually building them. I'll learn some Python because I have an idea for a program. I'll learn web development because I want to put an idea online. I'll design a 3D model because I can't find quite the right object. I'll experiment with AI because I want to see what it can help me create.</p>
+      <p>Then I'll inevitably end up going down a completely unrelated rabbit hole because I wondered “Could I make that too?”</p>
+      <p>That's how I ended up exploring things like game development, web design, programming, AI-assisted development, 3D modelling, 3D printing, digital tools, educational technology, and creative design.</p>
+      <p>What makes it particularly interesting to me is being able to bring those skills back into education.</p>
+      <p>Being a teacher means I'm constantly seeing opportunities to improve the experience of learning. A game can turn practice into play. A simple tool can remove a frustrating repetitive task. A visual resource can help an idea click. A little bit of technology can sometimes give a student another way to understand something.</p>
+      <p>And being a learner means I'm still figuring things out myself.</p>
+      <p>I don't consider myself a professional software engineer, game developer, industrial designer, or any of the other hats I occasionally wear while making these projects. I'm a teacher who enjoys learning new skills by using them to make things.</p>
+      <p>Moose Tools is where all of those interests collide.</p>
+      <p>It's my workshop, playground, laboratory, and occasionally a place where I can finally finish the project that started with “This should only take an afternoon.”</p>
+      <p>If something here helps a teacher, gives a student a more enjoyable way to learn, inspires someone to make something themselves, or simply makes someone smile, then it's done its job.</p>
+      <p class="about-signoff">— David Templeton / The Token Moose</p>
+    </article>
+
+    <section class="about-feedback" aria-labelledby="fb-heading">
+      <h2 id="fb-heading">Send feedback</h2>
+      <p class="hint">Ideas, bugs, or kind words — I read them. Please include an email so I can reply if needed.</p>
+      <form id="feedback-form" novalidate>
+        <div class="fb-field">
+          <label for="fb-email">Your email <span aria-hidden="true">*</span></label>
+          <input type="email" id="fb-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <div class="fb-field">
+          <label for="fb-msg">Message <span aria-hidden="true">*</span></label>
+          <textarea id="fb-msg" name="message" required placeholder="What worked? What didn’t? What should exist next?"></textarea>
+        </div>
+        <div class="fb-actions">
+          <button type="submit" class="btn-primary">Open email to send</button>
+          <span class="fb-status" id="fb-status" role="status"></span>
+        </div>
+      </form>
+    </section>
+  </main>
 
   <footer class="site-footer">
-    <p>The Token Moose · Open source · Made for learning and play</p>
+    <p>Moose Tools · Open source · Made for learning and play</p>
   </footer>
 
   <script src="js/theme.js"></script>
-  <script src="js/sw-register.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("feedback-form");
+      var status = document.getElementById("fb-status");
+      // Obfuscated destination — not shown in page text or visible mailto until submit
+      var dest = ["tokenza", String.fromCharCode(64), "foxmail", ".", "com"].join("");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("fb-email").value.trim();
+        var msg = document.getElementById("fb-msg").value.trim();
+        status.className = "fb-status";
+        status.textContent = "";
+        if (!email || email.indexOf("@") < 1) {
+          status.className = "fb-status err";
+          status.textContent = "Please enter your email so I can reply.";
+          return;
+        }
+        if (!msg) {
+          status.className = "fb-status err";
+          status.textContent = "Please write a short message.";
+          return;
+        }
+        var subject = encodeURIComponent("Moose Tools feedback");
+        var body = encodeURIComponent(
+          "From: " + email + "\n\n" + msg + "\n\n— sent via Moose Tools About page"
+        );
+        status.className = "fb-status ok";
+        status.textContent = "Opening your email app…";
+        window.location.href = "mailto:" + dest + "?subject=" + subject + "&body=" + body;
+      });
+    })();
+  </script>
 </body>
 </html>

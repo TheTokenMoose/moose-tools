@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The Token Moose — Games, experiments, and little tools made while learning, teaching, and messing with technology.">
+  <meta name="description" content="Moose Tools — games, experiments, and teacher tools by The Token Moose.">
   <meta name="theme-color" content="#0a0b1a">
-  <title>The Token Moose — Games &amp; Teacher Tools</title>
+  <title>Moose Tools — Games &amp; Teacher Tools</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
@@ -66,7 +66,8 @@
 
   <main class="site-main">
     <section class="hero">
-      <h1>THE TOKEN MOOSE</h1>
+      <h1>Moose Tools</h1>
+      <p class="hero-sub">Games &amp; teacher tools by The Token Moose</p>
       <p class="tagline">
         Games, experiments, and little tools made while learning, teaching, and messing with technology.
       </p>
@@ -82,13 +83,14 @@
           <div class="search-wrap">
             <span class="search-icon" aria-hidden="true">⌕</span>
             <label for="search-input" class="sr-only">Search projects</label>
-            <input type="search" id="search-input" placeholder="Search by title, description, category…" autocomplete="off">
+            <input type="search" id="search-input" placeholder="Search by title, subject, tags…" autocomplete="off">
           </div>
           <div class="filter-group" role="group" aria-label="Filter projects">
             <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
             <button type="button" class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
             <button type="button" class="filter-btn" data-filter="tools" aria-pressed="false">Tools</button>
             <button type="button" class="filter-btn" data-filter="favorites" aria-pressed="false">Favorites</button>
+              <button type="button" class="filter-btn" data-tags-toggle aria-pressed="true" title="Show or hide skill tags on cards">Tags on</button>
           </div>
         </div>
 
@@ -150,7 +152,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>The Token Moose · Open source · Made for learning and play</p>
+    <p>Moose Tools · Open source · Made for learning and play</p>
   </footer>
 
   <script src="js/calendar.js"></script>

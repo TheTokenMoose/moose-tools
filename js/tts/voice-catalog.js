@@ -7,7 +7,7 @@
   {
     "id": "en_GB-alan-low",
     "name": "Alan",
-    "label": "Alan \u2014 Soft",
+    "label": "Alan",
     "locale": "en-GB",
     "region": "UK",
     "gender": "male",
@@ -22,8 +22,8 @@
   },
   {
     "id": "en_GB-alan-medium",
-    "name": "Alan",
-    "label": "Alan \u2014 Clear",
+    "name": "John",
+    "label": "John",
     "locale": "en-GB",
     "region": "UK",
     "gender": "male",
@@ -39,7 +39,7 @@
   {
     "id": "en_GB-alba-medium",
     "name": "Alba",
-    "label": "Alba \u2014 Clear",
+    "label": "Alba",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -55,7 +55,7 @@
   {
     "id": "en_GB-aru-medium",
     "name": "Aru",
-    "label": "Aru \u2014 Clear",
+    "label": "Aru",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -71,7 +71,7 @@
   {
     "id": "en_GB-cori-medium",
     "name": "Cori",
-    "label": "Cori \u2014 Clear",
+    "label": "Cori",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -87,7 +87,7 @@
   {
     "id": "en_GB-jenny_dioco-medium",
     "name": "Jenny",
-    "label": "Jenny \u2014 Clear",
+    "label": "Jenny",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -102,8 +102,8 @@
   },
   {
     "id": "en_GB-northern_english_male-medium",
-    "name": "Northern English Male",
-    "label": "Northern English Male \u2014 Clear",
+    "name": "Oliver",
+    "label": "Oliver",
     "locale": "en-GB",
     "region": "UK",
     "gender": "male",
@@ -118,8 +118,8 @@
   },
   {
     "id": "en_GB-semaine-medium",
-    "name": "Semaine",
-    "label": "Semaine \u2014 Clear",
+    "name": "Sophie",
+    "label": "Sophie",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -134,8 +134,8 @@
   },
   {
     "id": "en_GB-southern_english_female-low",
-    "name": "Southern English Female",
-    "label": "Southern English Female \u2014 Soft",
+    "name": "Emily",
+    "label": "Emily",
     "locale": "en-GB",
     "region": "UK",
     "gender": "female",
@@ -150,8 +150,8 @@
   },
   {
     "id": "en_GB-vctk-medium",
-    "name": "VCTK",
-    "label": "VCTK \u2014 Clear",
+    "name": "Jordan",
+    "label": "Jordan",
     "locale": "en-GB",
     "region": "UK",
     "gender": "neutral",

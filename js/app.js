@@ -339,6 +339,35 @@ function initPage() {
 }
 
 if (document.readyState === "loading") {
+  
+  // Skill tags visibility (library cards)
+  const TAGS_KEY = "token-moose-show-tags";
+  function applyTagsVisibility() {
+    let show = true;
+    try {
+      const v = localStorage.getItem(TAGS_KEY);
+      if (v === "0") show = false;
+    } catch (_) {}
+    document.body.classList.toggle("hide-card-skills", !show);
+    document.querySelectorAll("[data-tags-toggle]").forEach((btn) => {
+      btn.setAttribute("aria-pressed", show ? "true" : "false");
+      btn.classList.toggle("is-active", show);
+      btn.textContent = show ? "Tags on" : "Tags off";
+    });
+  }
+  function setupTagsToggle() {
+    applyTagsVisibility();
+    document.querySelectorAll("[data-tags-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const show = document.body.classList.contains("hide-card-skills");
+        try {
+          localStorage.setItem(TAGS_KEY, show ? "1" : "0");
+        } catch (_) {}
+        applyTagsVisibility();
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", initPage);
 } else {
   initPage();

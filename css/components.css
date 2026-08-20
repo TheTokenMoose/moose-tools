@@ -57,3 +57,22 @@
   color: white;
   box-shadow: var(--glow-pink);
 }
+
+/* Library skill tags toggle */
+body.hide-card-skills .card-skills {
+  display: none !important;
+}
+.filter-btn[data-tags-toggle] {
+  margin-left: 0.25rem;
+}
+.filter-btn[data-tags-toggle].is-active {
+  outline: 2px solid color-mix(in srgb, var(--accent, #7c9cff) 50%, transparent);
+}
+
+.hero-sub {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  opacity: 0.8;
+  text-align: center;
+}

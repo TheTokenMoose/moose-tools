@@ -12,11 +12,18 @@
     if (!base || typeof base !== "object") return base;
 
     let packs = [];
+    // Built-in class stories (shipped with the game)
+    try {
+      if (window.ENCHANTED_CLASS_DEFAULTS && Array.isArray(window.ENCHANTED_CLASS_DEFAULTS.packs)) {
+        packs = packs.concat(window.ENCHANTED_CLASS_DEFAULTS.packs);
+      }
+    } catch (_) {}
+    // Teacher / Story Workshop packs from this device
     try {
       const raw = localStorage.getItem(USER_STORIES_KEY);
       if (raw) {
         const data = JSON.parse(raw);
-        if (data && Array.isArray(data.packs)) packs = data.packs;
+        if (data && Array.isArray(data.packs)) packs = packs.concat(data.packs);
       }
     } catch (_) {}
 
