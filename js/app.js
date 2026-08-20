@@ -50,7 +50,7 @@ function createCard(project) {
     <div class="card-body">
       <h3 class="card-title">${escapeHtml(project.title)}</h3>
       <p class="card-category">${escapeHtml(project.subject || project.category)}${project.type === "game" && project.category ? ` · ${escapeHtml(project.category)}` : ""}</p>
-      <p class="card-desc">${escapeHtml(project.description)}</p>
+      <p class="card-desc" title="${escapeHtml(project.description)}" data-full-desc="${escapeHtml(project.description)}">${escapeHtml(project.description)}</p>
       ${Array.isArray(project.skills) && project.skills.length
         ? `<ul class="card-skills">${project.skills.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ul>`
         : ""}
@@ -339,14 +339,20 @@ function initPage() {
 }
 
 if (document.readyState === "loading") {
-  
-  // Skill tags visibility (library cards)
+  document.addEventListener("DOMContentLoaded", initPage);
+} else {
+  initPage();
+}
+
+
+/* ---- Skill tags visibility + description tooltips ---- */
+(function setupLibraryCardChrome() {
   const TAGS_KEY = "token-moose-show-tags";
+
   function applyTagsVisibility() {
     let show = true;
     try {
-      const v = localStorage.getItem(TAGS_KEY);
-      if (v === "0") show = false;
+      if (localStorage.getItem(TAGS_KEY) === "0") show = false;
     } catch (_) {}
     document.body.classList.toggle("hide-card-skills", !show);
     document.querySelectorAll("[data-tags-toggle]").forEach((btn) => {
@@ -355,20 +361,96 @@ if (document.readyState === "loading") {
       btn.textContent = show ? "Tags on" : "Tags off";
     });
   }
-  function setupTagsToggle() {
+
+  function onTagsClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentlyHidden = document.body.classList.contains("hide-card-skills");
+    // if hidden -> show (1); if shown -> hide (0)
+    try {
+      localStorage.setItem(TAGS_KEY, currentlyHidden ? "1" : "0");
+    } catch (_) {}
     applyTagsVisibility();
+  }
+
+  function bindTagsButtons() {
     document.querySelectorAll("[data-tags-toggle]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const show = document.body.classList.contains("hide-card-skills");
-        try {
-          localStorage.setItem(TAGS_KEY, show ? "1" : "0");
-        } catch (_) {}
-        applyTagsVisibility();
+      btn.removeEventListener("click", onTagsClick);
+      btn.addEventListener("click", onTagsClick);
+    });
+    applyTagsVisibility();
+  }
+
+  // Full description popup on hover (when text is clamped)
+  let tipEl = null;
+  function ensureTip() {
+    if (tipEl) return tipEl;
+    tipEl = document.createElement("div");
+    tipEl.className = "card-desc-tooltip";
+    tipEl.setAttribute("role", "tooltip");
+    tipEl.hidden = true;
+    document.body.appendChild(tipEl);
+    return tipEl;
+  }
+
+  function bindDescTooltips(root) {
+    const scope = root || document;
+    scope.querySelectorAll(".card-desc[data-full-desc]").forEach((el) => {
+      if (el.dataset.tipBound) return;
+      el.dataset.tipBound = "1";
+      el.addEventListener("mouseenter", () => {
+        // only show if overflowed / clamped
+        const overflow =
+          el.scrollHeight > el.clientHeight + 2 || el.scrollWidth > el.clientWidth + 2;
+        if (!overflow && el.textContent === el.getAttribute("data-full-desc")) {
+          // still show if title is long enough to benefit
+          if ((el.getAttribute("data-full-desc") || "").length < 120) return;
+        }
+        const tip = ensureTip();
+        tip.textContent = el.getAttribute("data-full-desc") || el.textContent;
+        tip.hidden = false;
+        const r = el.getBoundingClientRect();
+        const tw = Math.min(360, window.innerWidth - 24);
+        tip.style.width = tw + "px";
+        let left = r.left + window.scrollX;
+        let top = r.bottom + window.scrollY + 6;
+        if (left + tw > window.scrollX + window.innerWidth - 12) {
+          left = window.scrollX + window.innerWidth - tw - 12;
+        }
+        tip.style.left = left + "px";
+        tip.style.top = top + "px";
+      });
+      el.addEventListener("mouseleave", () => {
+        if (tipEl) tipEl.hidden = true;
+      });
+      el.addEventListener("focus", () => el.dispatchEvent(new Event("mouseenter")));
+      el.addEventListener("blur", () => {
+        if (tipEl) tipEl.hidden = true;
       });
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initPage);
-} else {
-  initPage();
-}
+  // Re-bind after grid renders
+  const origRender =
+    typeof window.renderProjects === "function" ? window.renderProjects : null;
+
+  function boot() {
+    bindTagsButtons();
+    bindDescTooltips(document);
+    // observe library grid mutations
+    const grid = document.getElementById("projects-grid") || document.querySelector(".projects-grid");
+    if (grid && typeof MutationObserver !== "undefined") {
+      const mo = new MutationObserver(() => bindDescTooltips(grid));
+      mo.observe(grid, { childList: true, subtree: true });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+  // also after short delay in case initPage renders late
+  setTimeout(boot, 50);
+  setTimeout(boot, 300);
+})();
