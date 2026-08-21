@@ -93,12 +93,23 @@
       'deg)" data-id="' +
       s.id +
       '">';
-    if (s.id === "circle" || s.id === "sphere") {
+    if (s.id === "circle") {
       return (
         wrap +
         '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="' +
         c +
         '" stroke="#fff" stroke-width="4"/></svg></div>'
+      );
+    }
+    if (s.id === "sphere") {
+      return (
+        wrap +
+        '<svg viewBox="0 0 100 100">' +
+        '<defs><radialGradient id="sph" cx="35%" cy="30%"><stop offset="0%" stop-color="#fff"/><stop offset="55%" stop-color="' +
+        c +
+        '"/><stop offset="100%" stop-color="#333"/></radialGradient></defs>' +
+        '<circle cx="50" cy="50" r="42" fill="url(#sph)" stroke="#fff" stroke-width="3"/>' +
+        "</svg></div>"
       );
     }
     if (s.id === "oval") {
@@ -109,12 +120,23 @@
         '" stroke="#fff" stroke-width="4"/></svg></div>'
       );
     }
-    if (s.id === "square" || s.id === "cube") {
+    if (s.id === "square") {
       return (
         wrap +
         '<svg viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" rx="4" fill="' +
         c +
         '" stroke="#fff" stroke-width="4"/></svg></div>'
+      );
+    }
+    if (s.id === "cube") {
+      // Isometric cube — clearly 3D vs flat square
+      return (
+        wrap +
+        '<svg viewBox="0 0 100 100">' +
+        '<polygon points="28,38 50,26 72,38 50,50" fill="' + c + '" stroke="#fff" stroke-width="3"/>' +
+        '<polygon points="28,38 50,50 50,78 28,66" fill="' + c + '" opacity="0.85" stroke="#fff" stroke-width="3"/>' +
+        '<polygon points="50,50 72,38 72,66 50,78" fill="' + c + '" opacity="0.65" stroke="#fff" stroke-width="3"/>' +
+        "</svg></div>"
       );
     }
     if (s.id === "rectangle" || s.id === "cuboid") {
@@ -223,7 +245,7 @@
       '<p class="prompt">Match the same shapes</p>' +
       '<div class="match-grid" id="match-a"></div>' +
       '<div class="match-grid" id="match-b"></div>';
-    speak("Match the shapes");
+    // press Hear
     const a = $("match-a");
     const b = $("match-b");
     shuffle(pool).forEach((s) => a.appendChild(matchCard(s, "a")));
@@ -565,7 +587,6 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("shape-builder");
-      const slot = $("voice-slot");
       if (slot) voice.mountPicker(slot);
     }
 

@@ -115,7 +115,7 @@
       '<p class="obj">Drag or tap an object into the tank. Does it sink or float?</p>' +
       '<div class="tank"><div class="water"></div><div class="tank-items" id="tank-items"></div></div>' +
       '<div class="item-row" id="item-row"></div>';
-    speak("Drop objects in the water. Some sink. Some float.");
+    // press Hear
     const row = $("item-row");
     items.forEach((it) => {
       const b = document.createElement("button");
@@ -182,7 +182,7 @@
       '<div class="mag-area">' +
       '<div class="magnet" id="magnet" draggable="true">🧲</div>' +
       '<div class="mag-grid" id="mag-grid"></div></div>';
-    speak("Move the magnet. Metal iron things stick.");
+    // press Hear
     const grid = $("mag-grid");
     objs.forEach((o) => {
       const cell = document.createElement("div");
@@ -258,7 +258,7 @@
       '<div class="shadow-blob" id="shadow-blob"></div>' +
       '<div class="ground"></div></div>' +
       '<p class="shadow-readout" id="shadow-readout"></p>';
-    speak("Move the light. The shadow moves and changes size.");
+    // press Hear
     const stageEl = $("shadow-stage");
     const light = $("light");
     const toy = $("toy");
@@ -318,7 +318,7 @@
       '<div class="btn-row">' +
       '<button type="button" class="btn btn-primary" id="btn-cool">❄️ Cool</button>' +
       '<button type="button" class="btn btn-primary" id="btn-heat">🔥 Heat</button></div>';
-    speak("Cool water to make ice. Heat water to make steam.");
+    // press Hear
     const paint = () => {
       const c = $("matter-content");
       const lab = $("temp-label");
@@ -365,7 +365,7 @@
       '<div class="btn-row">' +
       '<button type="button" class="btn btn-primary" id="btn-water">💧 Water</button>' +
       '<button type="button" class="btn btn-primary" id="btn-sun">☀️ Sunshine</button></div>';
-    speak("Plants need water and light to grow.");
+    // press Hear
     function paint() {
       $("m-water").textContent = plantState.water;
       $("m-light").textContent = plantState.light;
@@ -501,8 +501,7 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("little-science-lab");
-      const slot = $("voice-slot");
-      if (slot) voice.mountPicker(slot);
+    // Voice picker via app-chrome only
     }
 
     $("btn-back").addEventListener("click", () => {

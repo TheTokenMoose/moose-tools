@@ -521,8 +521,7 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("number-sense-lab");
-      const slot = $("voice-slot");
-      if (slot) voice.mountPicker(slot);
+    // Voice picker via app-chrome only
     }
 
     $("btn-hear").addEventListener("click", () => {

@@ -18,6 +18,42 @@
   let className = "My Class";
   let dragId = null;
 
+  let objects = []; // {id, label, x, y}
+  let freePos = {}; // seatId -> {x,y}
+
+  function enableFreeDrag(el, onMove) {
+    let ox = 0, oy = 0, dragging = false;
+    const down = (e) => {
+      dragging = true;
+      const pt = e.touches ? e.touches[0] : e;
+      const r = el.getBoundingClientRect();
+      const parent = el.offsetParent.getBoundingClientRect();
+      ox = pt.clientX - r.left;
+      oy = pt.clientY - r.top;
+      e.preventDefault();
+    };
+    const move = (e) => {
+      if (!dragging) return;
+      const pt = e.touches ? e.touches[0] : e;
+      const parent = el.offsetParent.getBoundingClientRect();
+      let x = pt.clientX - parent.left - ox;
+      let y = pt.clientY - parent.top - oy;
+      x = Math.max(0, Math.min(x, parent.width - el.offsetWidth));
+      y = Math.max(0, Math.min(y, parent.height - el.offsetHeight));
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+      if (onMove) onMove(x, y);
+    };
+    const up = () => { dragging = false; saveState(); };
+    el.addEventListener("mousedown", down);
+    el.addEventListener("touchstart", down, { passive: false });
+    window.addEventListener("mousemove", move);
+    window.addEventListener("touchmove", move, { passive: false });
+    window.addEventListener("mouseup", up);
+    window.addEventListener("touchend", up);
+  }
+
+
   const $ = (id) => document.getElementById(id);
 
   function uid() {
@@ -40,6 +76,8 @@
       if (data.seats) seats = data.seats;
       if (data.keepApart) keepApart = data.keepApart;
       if (data.layoutType) layoutType = data.layoutType;
+      if (data.freePos) freePos = data.freePos;
+      if (data.objects) objects = data.objects;
       if (data.className) className = data.className;
     } catch (_) {}
   }
@@ -48,7 +86,7 @@
     try {
       localStorage.setItem(
         STORE_KEY,
-        JSON.stringify({ students, seats, keepApart, layoutType, className })
+        JSON.stringify({ students, seats, keepApart, layoutType, className, freePos, objects })
       );
       setStatus("Saved on this device");
     } catch (_) {
@@ -63,6 +101,8 @@
 
   function buildLayout(type) {
     layoutType = type;
+    const tools = document.getElementById("freeform-tools");
+    if (tools) tools.hidden = type !== "freeform";
     const n = students.length;
     seats = [];
     let rows, cols;
@@ -387,6 +427,44 @@
     door.className = "door";
     door.textContent = "Door";
     room.appendChild(door);
+    if (layoutType === "freeform") {
+      room.classList.add("freeform-room");
+      const grid = room.querySelector(".seat-grid");
+      if (grid) {
+        grid.style.display = "block";
+        grid.style.position = "relative";
+        grid.style.minHeight = "420px";
+        grid.style.gridTemplateColumns = "none";
+        Array.from(grid.children).forEach((cell, i) => {
+          cell.style.position = "absolute";
+          const sid = cell.dataset.seatId || ("s" + i);
+          const pos = freePos[sid] || {
+            x: 20 + (i % 6) * 90,
+            y: 20 + Math.floor(i / 6) * 90,
+          };
+          cell.style.left = pos.x + "px";
+          cell.style.top = pos.y + "px";
+          cell.style.width = "80px";
+          enableFreeDrag(cell, (x, y) => {
+            freePos[sid] = { x, y };
+          });
+        });
+      }
+      objects.forEach((obj) => {
+        const el = document.createElement("div");
+        el.className = "room-object";
+        el.textContent = obj.label;
+        el.style.left = obj.x + "px";
+        el.style.top = obj.y + "px";
+        el.title = "Double-click to rename";
+        el.addEventListener("dblclick", () => {
+          const n = prompt("Object name", obj.label);
+          if (n) { obj.label = n.trim() || obj.label; el.textContent = obj.label; saveState(); }
+        });
+        room.appendChild(el);
+        enableFreeDrag(el, (x, y) => { obj.x = x; obj.y = y; });
+      });
+    }
 
     // conflict highlight
     const bad = pairsConflict(seats);
@@ -429,6 +507,23 @@
     window.print();
   }
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const addObj = document.getElementById("btn-add-object");
+    if (addObj) {
+      addObj.addEventListener("click", () => {
+        const label = prompt("Object name (e.g. Carpet, Sink, Door 2)", "Object");
+        if (!label) return;
+        objects.push({
+          id: "obj_" + Date.now(),
+          label: label.trim(),
+          x: 40 + objects.length * 20,
+          y: 40 + objects.length * 20,
+        });
+        buildLayout("freeform");
+        saveState();
+      });
+    }
+  });
   document.addEventListener("DOMContentLoaded", () => {
     loadStore();
     if (students.length) {

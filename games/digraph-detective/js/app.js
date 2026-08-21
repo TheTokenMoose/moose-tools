@@ -453,8 +453,7 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("digraph-detective");
-      const slot = $("voice-slot");
-      if (slot) voice.mountPicker(slot);
+    // Voice picker via app-chrome only
     }
 
     $("btn-hear").addEventListener("click", () => {

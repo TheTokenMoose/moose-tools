@@ -557,8 +557,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 (function () {
   function mount() {
-    const slot = document.getElementById("tm-voice-slot");
-    if (slot && window.TokenMooseVoice) TokenMooseVoice.create("sentence-forge").mountPicker(slot);
+    // Voice picker: app-chrome only
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
   else mount();

@@ -1,3 +1,16 @@
+
+  function playTone(freq, dur, type, vol) {
+    try {
+      const C = playTone.ctx || (playTone.ctx = new (window.AudioContext || window.webkitAudioContext)());
+      const o = C.createOscillator(), g = C.createGain();
+      o.type = type || "sine"; o.frequency.value = freq;
+      g.gain.value = vol || 0.09; o.connect(g); g.connect(C.destination);
+      o.start(); g.gain.exponentialRampToValueAtTime(0.001, C.currentTime + dur);
+      o.stop(C.currentTime + dur + 0.02);
+    } catch (_) {}
+  }
+  function sfxOk(){ playTone(600,0.08,"triangle"); setTimeout(()=>playTone(900,0.12,"triangle"),60); }
+  function sfxBad(){ playTone(180,0.15,"square",0.06); setTimeout(()=>playTone(120,0.2,"square",0.05),80); }
 const PARTS = ["ground", "base", "mid", "head", "eyes", "nose", "arms", "hat", "scarf"];
 // Map wrong count to parts revealed (build up the snowman = running out of guesses)
 const PART_ORDER = ["ground", "base", "mid", "head", "eyes", "nose", "arms", "hat", "scarf"];
@@ -180,10 +193,12 @@ class SnowmanGame {
   }
 
   guess(letter) {
-    letter = letter.toUpperCase();
-    if (this.guessed.has(letter) || this.els.play.hidden) return;
+    if (this.ended || this.guessed.has(letter)) return;
     this.guessed.add(letter);
+    const keyBtn = document.querySelector(`[data-letter="${letter}"]`);
     if (this.word.includes(letter)) {
+      sfxOk();
+      if (keyBtn) { keyBtn.classList.add("pop"); setTimeout(() => keyBtn.classList.remove("pop"), 400); }
       this.updateStatus(`Nice! “${letter}” is in the word`);
       this.renderSlots();
       this.renderKeys();
@@ -191,6 +206,8 @@ class SnowmanGame {
         this.end(true);
       }
     } else {
+      sfxBad();
+      if (keyBtn) { keyBtn.classList.add("pop", "wrong"); setTimeout(() => keyBtn.classList.remove("pop"), 400); }
       this.wrong += 1;
       this.updateStatus(`No “${letter}” — snowman grows`);
       this.renderKeys();

@@ -243,8 +243,7 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("sort-it");
-      const slot = $("voice-slot");
-      if (slot) voice.mountPicker(slot);
+    // Voice picker via app-chrome only
     }
 
     $("btn-home").addEventListener("click", () => {

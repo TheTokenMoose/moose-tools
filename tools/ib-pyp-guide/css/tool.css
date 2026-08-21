@@ -1,3 +1,19 @@
+/* Theme bridge — follow site Night / Day / Playful */
+html, body {
+  background: var(--bg-deep, #0a0b1a) !important;
+  color: var(--text-primary, #f1f5f9) !important;
+}
+.card, .panel, .ticket, .section, .guide-card, main section, .box {
+  background: var(--bg-card, rgba(22,26,55,0.75)) !important;
+  color: var(--text-primary, #f1f5f9) !important;
+  border-color: var(--border-subtle, rgba(127,127,127,0.25)) !important;
+}
+h1, h2, h3 { color: var(--text-primary, #f1f5f9) !important; }
+a, .link { color: var(--accent-electric, #7c9cff) !important; }
+input, textarea, select, button {
+  color: inherit;
+}
+
 *,
 *::before,
 *::after { box-sizing: border-box; }

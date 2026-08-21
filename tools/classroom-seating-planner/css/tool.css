@@ -249,3 +249,12 @@ h3 { margin: 0.85rem 0 0.4rem; font-size: 0.95rem; color: var(--accent); }
   .teacher-desk { background: #ddd; color: #000; }
   .tool-head .sub { display: none; }
 }
+
+.room.freeform-room { position: relative; min-height: 480px; }
+.room.freeform-room .seat-grid > * { z-index: 2; cursor: grab; }
+.room-object {
+  position: absolute; z-index: 3; padding: 0.5rem 0.75rem;
+  background: #fef3c7; border: 2px dashed #d97706; border-radius: 10px;
+  font-weight: 800; cursor: grab; min-width: 70px; text-align: center;
+}
+.freeform-tools { margin: 0.75rem 0; display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }

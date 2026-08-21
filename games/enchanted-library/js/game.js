@@ -224,10 +224,7 @@
       this.renderLevels();
       this.show("menu");
       if (this.voice) {
-        const slot = document.getElementById("tm-voice-slot");
-        const slotEnd = document.getElementById("tm-voice-slot-end");
-        if (slot) this.voice.mountPicker(slot);
-        if (slotEnd) this.voice.mountPicker(slotEnd);
+        // Voice picker lives in shared app-chrome top center only
       }
     }
 

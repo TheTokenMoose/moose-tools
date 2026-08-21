@@ -42,6 +42,14 @@
       background-attachment: fixed;
     }
   </style>
+  <link rel="stylesheet" href="../../css/themes.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night")
+        document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
 </head>
 <body data-app-id="exit-ticket-maker" data-app-title="Exit Ticket Maker">
   <p class="library-back"><a class="btn-back" href="../../index.html">← Back to The Token Moose</a></p>

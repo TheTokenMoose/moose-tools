@@ -237,6 +237,7 @@
     }
     teams = makeTeams(students);
     applyCustomNames();
+    scores = {};
     renderTeams(animate);
     recordHistory();
   }
@@ -262,6 +263,90 @@
       ta.remove();
       $("copy-status").textContent = "Copied!";
     }
+  }
+
+  
+  let scores = {}; // team index -> points
+
+  function openScoreKeeper() {
+    if (!teams.length) {
+      $("copy-status").textContent = "Make teams first";
+      return;
+    }
+    teams.forEach((_, i) => {
+      if (scores[i] == null) scores[i] = 0;
+    });
+    $("score-screen").hidden = false;
+    document.querySelector(".setup").hidden = true;
+    document.querySelector(".results").hidden = true;
+    renderScores();
+  }
+
+  function closeScoreKeeper() {
+    $("score-screen").hidden = true;
+    document.querySelector(".setup").hidden = false;
+    document.querySelector(".results").hidden = false;
+  }
+
+  function renderScores() {
+    const controls = $("score-controls");
+    const board = $("score-leaderboard");
+    controls.innerHTML = "<h3>Adjust points</h3>";
+    board.innerHTML = "<h3>Leaderboard</h3>";
+    teams.forEach((tm, i) => {
+      const row = document.createElement("div");
+      row.className = "score-row";
+      row.style.setProperty("--tc", tm.color);
+      row.innerHTML =
+        '<span class="name">' +
+        escapeHtml(tm.emoji + " " + tm.name) +
+        '</span><button type="button" class="minus" data-i="' +
+        i +
+        '">−</button><span class="pts">' +
+        (scores[i] || 0) +
+        '</span><button type="button" class="plus" data-i="' +
+        i +
+        '">+</button>';
+      controls.appendChild(row);
+    });
+    controls.querySelectorAll(".plus").forEach((b) => {
+      b.onclick = () => {
+        scores[Number(b.dataset.i)] = (scores[Number(b.dataset.i)] || 0) + 1;
+        renderScores();
+      };
+    });
+    controls.querySelectorAll(".minus").forEach((b) => {
+      b.onclick = () => {
+        scores[Number(b.dataset.i)] = (scores[Number(b.dataset.i)] || 0) - 1;
+        renderScores();
+      };
+    });
+    // leaderboard sorted
+    const ranked = teams
+      .map((tm, i) => ({ tm, i, pts: scores[i] || 0 }))
+      .sort((a, b) => b.pts - a.pts || a.tm.name.localeCompare(b.tm.name));
+    let rank = 0;
+    let lastPts = null;
+    ranked.forEach((r, idx) => {
+      if (r.pts !== lastPts) {
+        rank = idx + 1;
+        lastPts = r.pts;
+      }
+      const tied = ranked.filter((x) => x.pts === r.pts).length > 1;
+      const card = document.createElement("div");
+      card.className = "lead-card" + (tied ? " tied" : "");
+      card.style.setProperty("--tc", r.tm.color);
+      card.innerHTML =
+        '<div class="lead-rank">#' +
+        rank +
+        (tied ? " (tie)" : "") +
+        '</div><div class="lead-name">' +
+        escapeHtml(r.tm.emoji + " " + r.tm.name) +
+        '</div><div class="lead-pts">' +
+        r.pts +
+        " pts</div>";
+      board.appendChild(card);
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -300,6 +385,13 @@
     });
     $("btn-copy").addEventListener("click", copyResults);
     $("btn-print").addEventListener("click", () => window.print());
+    $("btn-score").addEventListener("click", openScoreKeeper);
+    $("btn-back-teams").addEventListener("click", closeScoreKeeper);
+    $("btn-reset-scores").addEventListener("click", () => {
+      scores = {};
+      teams.forEach((_, i) => (scores[i] = 0));
+      renderScores();
+    });
     $("btn-clear-history").addEventListener("click", () => {
       history = [];
       saveHistory();

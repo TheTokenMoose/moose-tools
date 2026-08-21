@@ -291,4 +291,27 @@ window.WPG = {
       ["Mood board collage."]
     );
   });
+
+  // Extra prompt density — more variety for regenerate
+  ["animals","space","school","ocean","weather","friendship"].forEach(function (topic) {
+    ["narrative","opinion","informational","howto","descriptive"].forEach(function (genre) {
+      ["k","g1","g2","g3"].forEach(function (level) {
+        try {
+          var arr = WPG.prompts[genre][topic][level];
+          if (!arr) return;
+          var base = arr[0] || ("Write about " + topic + ".");
+          arr.push(
+            "New idea: " + base.replace(/\.$/, "") + " — add one surprise detail.",
+            "Write three sentences about " + topic + " for this " + genre + " task.",
+            "Use the word because in a sentence about " + topic + "."
+          );
+          var st = WPG.starters[genre][topic][level];
+          if (st && st.length < 8) {
+            st.push("Also…", "In the end…", "For example…");
+          }
+        } catch (e) {}
+      });
+    });
+  });
+
 })();

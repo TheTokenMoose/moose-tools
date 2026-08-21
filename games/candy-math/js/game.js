@@ -2,6 +2,32 @@
  * Candy Math Trail — 10 difficulties, candyland UI, local high scores
  */
 (function () {
+
+  // Lightweight SFX (no external files)
+  function playTone(freq, dur, type, vol) {
+    try {
+      const ctx = playTone._ctx || (playTone._ctx = new (window.AudioContext || window.webkitAudioContext)());
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = type || "sine";
+      o.frequency.value = freq;
+      g.gain.value = vol == null ? 0.08 : vol;
+      o.connect(g);
+      g.connect(ctx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+      o.stop(ctx.currentTime + dur + 0.02);
+    } catch (_) {}
+  }
+  function sfxCorrect() {
+    playTone(523, 0.08, "triangle", 0.09);
+    setTimeout(() => playTone(659, 0.1, "triangle", 0.09), 70);
+    setTimeout(() => playTone(784, 0.14, "triangle", 0.08), 140);
+  }
+  function sfxWrong() {
+    playTone(200, 0.12, "square", 0.06);
+    setTimeout(() => playTone(150, 0.18, "square", 0.05), 90);
+  }
   const HS_KEY = "token-moose-candy-math-scores";
   const NAME_KEY = "token-moose-candy-math-name";
   const MAX_SCORES = 15;
@@ -288,6 +314,7 @@
         let pts = 10 * this.diff;
         if (this.streak >= 5) pts = Math.floor(pts * 1.5);
         if (this.streak >= 10) pts = Math.floor(pts * 2);
+        sfxCorrect();
         this.score += pts;
         this.els.feedback.textContent = this.streak >= 5 ? `Yay! +${pts} · streak 🔥` : `Correct! +${pts}`;
         this.els.feedback.className = "feedback ok";

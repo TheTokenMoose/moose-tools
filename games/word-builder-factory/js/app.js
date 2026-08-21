@@ -122,7 +122,7 @@
     $("pic-hint").textContent = level.blurb;
     show("screen-play");
     render();
-    speak(entry.word);
+    // press Hear word — no auto-speak
   }
 
   function render() {
@@ -246,8 +246,7 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("word-builder-factory");
-      const slot = $("voice-slot");
-      if (slot) voice.mountPicker(slot);
+    // Voice picker via app-chrome only
     }
 
     $("btn-home").addEventListener("click", () => {
