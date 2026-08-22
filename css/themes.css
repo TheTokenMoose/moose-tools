@@ -280,7 +280,7 @@ html[data-projector="on"] .theme-label-btn {
   position: absolute;
   top: calc(100% + 0.5rem);
   right: 0;
-  min-width: 210px;
+  min-width: 220px;
   padding: 0.45rem;
   border-radius: 12px;
   border: 1px solid var(--border-subtle);
@@ -292,6 +292,9 @@ html[data-projector="on"] .theme-label-btn {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  /* Fixed type scale — never inherit projector html font-size */
+  font-size: 16px;
+  line-height: 1.3;
 }
 .theme-menu[hidden] { display: none !important; }
 
@@ -305,20 +308,38 @@ html[data-projector="on"] .theme-label-btn {
   border-radius: 10px;
   padding: 0.55rem 0.65rem;
   background: transparent;
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.88rem !important;
+  line-height: 1.25;
   cursor: pointer;
+  font-family: inherit;
 }
 .theme-option:hover,
 .theme-option:focus-visible {
   background: var(--fill-accent-soft);
   outline: none;
+  color: var(--text-primary) !important;
 }
 .theme-option.is-active {
   background: var(--fill-filter-active);
   box-shadow: inset 0 0 0 1px var(--border-subtle);
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
+}
+
+/* Projector must not restyle the theme dropdown */
+html[data-projector="on"] .theme-menu {
+  font-size: 16px !important;
+  color: var(--text-primary) !important;
+}
+html[data-projector="on"] .theme-menu .theme-option,
+html[data-projector="on"] .theme-menu button {
+  font-size: 0.88rem !important;
+  color: var(--text-primary) !important;
+}
+html[data-projector="on"] .theme-menu .theme-option small {
+  font-size: 0.72rem !important;
+  color: var(--text-muted) !important;
 }
 
 .theme-swatch {
@@ -380,8 +401,7 @@ html[data-projector="on"] .header-inner {
 }
 html[data-projector="on"] .nav-link,
 html[data-projector="on"] .filter-btn,
-html[data-projector="on"] .btn,
-html[data-projector="on"] button,
+html[data-projector="on"] .btn:not(.theme-option):not(.theme-label-btn):not(.theme-ball),
 html[data-projector="on"] .project-card .card-title {
   font-size: 1.05em;
 }

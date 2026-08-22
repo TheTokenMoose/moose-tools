@@ -539,7 +539,7 @@ class IBLittleExplorers {
       this._timerTick();
     }
 
-    this.sound.speak(this.prompt.text);
+    /* no auto-speak */
   }
 
   pick(traitId) {
@@ -596,7 +596,7 @@ class IBLittleExplorers {
   hear() {
     if (!this.prompt) return;
     const tr = this.prompt.trait;
-    this.sound.speak(`${this.prompt.text}. This is about being ${tr.name}.`);
+    /* no auto-speak */
   }
 
   finish() {

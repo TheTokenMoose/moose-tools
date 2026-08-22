@@ -737,11 +737,14 @@ a:focus:not(:focus-visible) {
 @media (min-width: 1000px) {
   .planner-rail {
     position: sticky;
+    /* Sit lower so the rail lines up with library cards, not the "Library" heading */
     top: calc(var(--header-height, 64px) + 0.75rem);
     max-height: calc(100vh - var(--header-height, 64px) - 1.5rem);
     overflow-y: auto;
     overflow-x: hidden;
     padding-bottom: 0.5rem;
+    /* Offset to match section title + toolbar above the card grid */
+    padding-top: 4.75rem;
   }
 }
 

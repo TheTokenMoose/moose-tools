@@ -243,7 +243,7 @@ class ISpySpelling {
     document.getElementById("btn-clear").addEventListener("click", () => this.clearSpell());
     document.getElementById("btn-check").addEventListener("click", () => this.checkSpell());
     document.getElementById("btn-speak").addEventListener("click", () => {
-      this.sfx.speak(this.els.clue.textContent.replace(/\s+/g, " ").trim());
+      /* no auto-speak — use Hear */
     });
     this.els.mute.addEventListener("click", () => {
       this.sfx.setEnabled(!this.sfx.enabled);
@@ -356,7 +356,7 @@ class ISpySpelling {
     this.renderScene();
     // Small delay so music context is up and voices load
     setTimeout(() => {
-      this.sfx.speak(this.els.clue.textContent.replace(/\s+/g, " ").trim());
+      /* no auto-speak — use Hear */
     }, 200);
   }
 

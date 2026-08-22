@@ -190,7 +190,7 @@
     };
     challenge = gens[activity]();
     renderChallenge();
-    speak(challenge.prompt);
+    /* press Hear to listen */
   }
 
   /* ---------- RENDER ---------- */
@@ -525,7 +525,7 @@
     }
 
     $("btn-hear").addEventListener("click", () => {
-      if (challenge) speak(challenge.prompt);
+      if (challenge) /* press Hear to listen */
     });
     $("btn-back-home").addEventListener("click", () => {
       show("screen-home");

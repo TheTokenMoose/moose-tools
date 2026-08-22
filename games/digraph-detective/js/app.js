@@ -239,7 +239,7 @@
       })
     );
     // auto-play once after short delay
-    setTimeout(() => speak(challenge.entry.word), 400);
+    /* no auto-speak */
   }
 
   function renderFind(stage) {
@@ -458,10 +458,7 @@
 
     $("btn-hear").addEventListener("click", () => {
       if (!challenge) return;
-      if (challenge.type === "hear") speak(challenge.entry.word);
-      else if (challenge.type === "read") speak(challenge.text);
-      else if (challenge.entry) speak(challenge.entry.word);
-      else speak(challenge.prompt);
+      /* no auto-speak — use Hear controls */
     });
     $("btn-back-home").addEventListener("click", () => {
       show("screen-home");

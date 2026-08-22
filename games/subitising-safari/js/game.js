@@ -108,7 +108,6 @@
     els.choices.innerHTML = "";
     els.btnFlash.hidden = false;
     els.prompt.textContent = "Tap Show animals, then watch carefully!";
-    speak("Get ready.");
   }
 
   function flash() {
@@ -129,7 +128,6 @@
     setTimeout(() => {
       els.stage.innerHTML = "";
       els.prompt.textContent = "How many did you see?";
-      speak("How many?");
       const opts = choiceOptions(answer, cfg.max);
       els.choices.innerHTML = "";
       opts.forEach((n) => {

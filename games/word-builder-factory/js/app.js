@@ -256,7 +256,7 @@
     $("btn-check").addEventListener("click", check);
     $("btn-clear").addEventListener("click", clearBuilt);
     $("btn-hear-word").addEventListener("click", () => {
-      if (entry) speak(entry.word);
+      /* no auto-speak */
     });
     $("btn-fb-next").addEventListener("click", () => {
       if ($("fb-title").textContent === "Word built!") nextRound();

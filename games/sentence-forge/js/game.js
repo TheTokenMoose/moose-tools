@@ -257,7 +257,7 @@ class SentenceForge {
     document.getElementById("btn-clear").addEventListener("click", () => this.clearBuilt());
     document.getElementById("btn-hint").addEventListener("click", () => this.hint());
     document.getElementById("btn-listen").addEventListener("click", () => {
-      if (this.current) this.audio.speak(this.current.words.join(" "));
+      /* no auto-speak */
     });
     document.getElementById("btn-fluency-go").addEventListener("click", () => this.runFluency());
     document.getElementById("btn-fluency-done").addEventListener("click", () => this.finishFluency());
@@ -493,7 +493,7 @@ class SentenceForge {
     let i = 0;
 
     // Speak full sentence at start
-    this.audio.speak(this.current.words.join(" "));
+    /* no auto-speak — use Hear */
 
     const step = () => {
       if (i > 0) spans[i - 1].classList.remove("active"), spans[i - 1].classList.add("done");

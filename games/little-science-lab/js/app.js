@@ -413,7 +413,7 @@
       '<div class="btn-row">' +
       '<button type="button" class="btn btn-ghost" id="btn-soft">Soft</button>' +
       '<button type="button" class="btn btn-primary" id="btn-loud">Loud</button></div>';
-    speak("Tap the drum. Sound travels in waves.");
+    /* no auto-speak */
     let hits = 0;
     let amp = 1;
     const canvas = $("wave");

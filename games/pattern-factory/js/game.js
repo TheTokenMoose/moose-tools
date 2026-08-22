@@ -134,7 +134,6 @@
 
     els.prompt.textContent = "What comes next?";
     els.score.textContent = "⭐ " + stars + " · " + kind;
-    speak("What comes next?");
   }
 
   function pick(sym, btn) {

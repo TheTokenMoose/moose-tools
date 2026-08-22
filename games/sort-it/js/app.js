@@ -72,7 +72,7 @@
     $("play-subject").textContent = p.subject;
     show("screen-play");
     render();
-    speak("Sort the " + p.title);
+    /* no auto-speak */
   }
 
   function tryPlace(itemId, catId) {
@@ -257,7 +257,7 @@
       buildHome();
     });
     $("btn-hear").addEventListener("click", () => {
-      if (pack) speak("Sort the " + pack.title);
+      /* no auto-speak */
     });
   });
 })();

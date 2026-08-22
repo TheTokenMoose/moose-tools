@@ -348,7 +348,7 @@ class PhonicsPairingQuest {
     this.choiceSounds = shuffle([...choices]);
 
     if (this.roundNo === 1) {
-      this.sound.speak(this.currentItem[2]);
+      /* no auto-speak */
       if (this.mode === "timed") this.tickTimer();
     }
   }
@@ -416,7 +416,7 @@ class PhonicsPairingQuest {
 
   hearCurrent() {
     if (!this.currentItem) return;
-    this.sound.speak(`${this.currentItem[2]}. ${this.currentItem[3]}`);
+    /* no auto-speak */
   }
 
   finishGame(won, timeout = false) {

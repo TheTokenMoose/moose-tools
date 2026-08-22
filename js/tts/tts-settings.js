@@ -137,6 +137,23 @@
         render(root);
       });
 
+      const dlBtn = el("button", { type: "button", className: "btn btn-secondary", text: ready ? "Downloaded" : "Download" });
+      dlBtn.title = "Download / prepare this voice for offline use on this device";
+      dlBtn.disabled = disabled || ready;
+      dlBtn.addEventListener("click", async function () {
+        dlBtn.disabled = true;
+        dlBtn.textContent = "Downloading…";
+        try {
+          const ok = await MooseTTS.prepareVoice(v.id, { quiet: false });
+          dlBtn.textContent = ok ? "Downloaded" : "Retry download";
+          if (!ok) dlBtn.disabled = false;
+          else render(root);
+        } catch (_) {
+          dlBtn.textContent = "Retry download";
+          dlBtn.disabled = false;
+        }
+      });
+
       const remBtn = el("button", { type: "button", className: "btn btn-ghost", text: "Remove cache" });
       remBtn.title = "Delete offline copy of this voice on this device";
       remBtn.addEventListener("click", async function () {
@@ -150,6 +167,7 @@
 
       actions.appendChild(testBtn);
       actions.appendChild(useBtn);
+      actions.appendChild(dlBtn);
       actions.appendChild(disBtn);
       actions.appendChild(remBtn);
       card.appendChild(actions);

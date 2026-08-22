@@ -212,7 +212,7 @@
       shapeSvg(identifyTarget, 140, 0) +
       "</div>" +
       '<div class="choices" id="choices"></div>';
-    speak("What shape is this?");
+    /* no auto-speak */
     const options = shuffleUnique(
       [identifyTarget].concat(
         shuffle(ALL_SHAPES.filter((s) => s.id !== identifyTarget.id)).slice(0, 3)
@@ -309,7 +309,7 @@
       '<div id="rot-shape">' +
       shapeSvg(rotateTarget, 100, rotateAngle) +
       "</div></div>";
-    speak("Turn the shape to match");
+    /* no auto-speak */
     const tb = $("toolbar");
     tb.innerHTML =
       '<button type="button" class="btn btn-primary" id="btn-rot-left">↺ 90°</button>' +
@@ -353,7 +353,7 @@
       "</p>" +
       '<div class="build-canvas" id="build-canvas"></div>' +
       '<div class="palette" id="palette"></div>';
-    speak(challenge.text);
+    /* no auto-speak */
     const palette = $("palette");
     SHAPES_2D.forEach((s) => {
       const b = document.createElement("button");
@@ -506,7 +506,7 @@
       '<div class="choices">' +
       '<button type="button" class="choice" id="btn-2d">2D · flat</button>' +
       '<button type="button" class="choice" id="btn-3d">3D · solid</button></div>';
-    speak("Is a " + dimTarget.name + " two D or three D?");
+    /* no auto-speak */
     $("btn-2d").onclick = () => gradeDim("2D");
     $("btn-3d").onclick = () => gradeDim("3D");
   }
@@ -533,7 +533,7 @@
       '<p class="prompt">Free build — drag shapes. Double-tap a piece to remove.</p>' +
       '<div class="build-canvas free" id="build-canvas"></div>' +
       '<div class="palette" id="palette"></div>';
-    speak("Build anything you like");
+    /* no auto-speak */
     const palette = $("palette");
     ALL_SHAPES.forEach((s) => {
       const b = document.createElement("button");
