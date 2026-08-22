@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0b1a" />
+  <title>Something went wrong · Moose Tools</title>
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("token-moose-theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+        var p = localStorage.getItem("token-moose-projector");
+        document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/themes.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-deep, #0a0b1a);
+      color: var(--text-primary, #f1f5f9);
+    }
+    .card {
+      max-width: 480px;
+      width: 100%;
+      padding: 1.75rem 1.5rem;
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle, rgba(139,92,246,0.3));
+      background: var(--bg-card, rgba(22,26,55,0.9));
+      box-shadow: var(--shadow-card, 0 12px 40px rgba(0,0,0,0.35));
+      text-align: center;
+    }
+    .emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h1 { margin: 0 0 0.5rem; font-size: 1.45rem; }
+    p { margin: 0 0 1rem; color: var(--text-secondary, #cbd5e1); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    button, a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.6rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 2px solid var(--border-subtle);
+      background: var(--btn-primary-grad, linear-gradient(135deg, #ff4d9e, #a855f7));
+      color: #fff !important;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none !important;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button.secondary, a.btn.secondary {
+      background: transparent;
+      color: var(--text-primary) !important;
+    }
+    #details {
+      margin-top: 1rem;
+      text-align: left;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-navy, #0f1229);
+      border-radius: 10px;
+      padding: 0.75rem;
+      max-height: 8rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      display: none;
+    }
+    #details.show { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji" aria-hidden="true">🛠️</div>
+    <h1>Oops! Something went wrong</h1>
+    <p>The page hit a snag. You can try again, or head back to the library.</p>
+    <div class="actions">
+      <button type="button" id="btn-reload">Try again</button>
+      <a class="btn secondary" href="index.html">Back to Moose Tools</a>
+      <button type="button" class="secondary" id="btn-copy">Copy technical details</button>
+    </div>
+    <div id="details" aria-live="polite"></div>
+  </div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var msg = params.get("msg") || "No extra details were recorded.";
+      var details = document.getElementById("details");
+      details.textContent = msg;
+      document.getElementById("btn-reload").onclick = function () {
+        if (document.referrer) location.href = document.referrer;
+        else location.reload();
+      };
+      document.getElementById("btn-copy").onclick = function () {
+        details.classList.add("show");
+        var text = msg;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).catch(function () {});
+        }
+      };
+    })();
+  </script>
+</body>
+</html>

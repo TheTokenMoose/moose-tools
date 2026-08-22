@@ -302,3 +302,80 @@ html[data-theme="playful"] .calendar-widget {
   .theme-switcher { margin-left: 0.15rem; }
   .theme-ball { width: 2rem; height: 2rem; }
 }
+
+/* ── Projector Mode (modifier on top of any theme) ─────────────────── */
+html[data-projector="on"] {
+  --projector-scale: 1.12;
+  font-size: 112.5%;
+}
+html[data-projector="on"] body {
+  line-height: 1.45;
+}
+html[data-projector="on"] .site-header,
+html[data-projector="on"] .header-inner {
+  min-height: 4.25rem;
+}
+html[data-projector="on"] .nav-link,
+html[data-projector="on"] .filter-btn,
+html[data-projector="on"] .btn,
+html[data-projector="on"] button,
+html[data-projector="on"] .project-card .card-title {
+  font-size: 1.05em;
+}
+html[data-projector="on"] .project-card .card-desc,
+html[data-projector="on"] .text-muted,
+html[data-projector="on"] .skill-chip {
+  font-size: 0.98em;
+}
+html[data-projector="on"] .project-card {
+  border-width: 2px;
+}
+html[data-projector="on"] .btn,
+html[data-projector="on"] .filter-btn,
+html[data-projector="on"] .nav-link {
+  min-height: 2.75rem;
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+}
+html[data-projector="on"] .todo-widget,
+html[data-projector="on"] .calendar-widget {
+  font-size: 1.05em;
+}
+/* Hide denser secondary chrome when projecting */
+html[data-projector="on"] .site-footer .footer-meta,
+html[data-projector="on"] .install-hint-detail {
+  display: none !important;
+}
+html[data-projector="on"] {
+  --text-primary: var(--text-primary);
+  --text-secondary: var(--text-primary);
+}
+/* Stronger contrast: mute less */
+html[data-projector="on"][data-theme="night"],
+html[data-projector="on"]:not([data-theme]) {
+  --text-muted: #cbd5e1;
+  --text-secondary: #e2e8f0;
+}
+html[data-projector="on"][data-theme="day"] {
+  --text-muted: #475569;
+  --text-secondary: #1e293b;
+}
+html[data-projector="on"][data-theme="playful"] {
+  --text-muted: #9a3412;
+  --text-secondary: #7c2d12;
+}
+
+/* Projector toggle row inside theme menu */
+.theme-option.projector-toggle {
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--border-subtle);
+  border-radius: 0 0 10px 10px;
+  padding-top: 0.7rem;
+}
+.theme-option.projector-toggle .theme-swatch.projector {
+  background: linear-gradient(135deg, #f8fafc, #0ea5e9 55%, #111827);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+.theme-option.projector-toggle.is-active {
+  background: var(--fill-accent-strong);
+}

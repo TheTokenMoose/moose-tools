@@ -22,6 +22,8 @@
       if (t === "day" || t === "playful" || t === "night") {
         document.documentElement.setAttribute("data-theme", t);
       }
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
     } catch (e) {}
   </script>
 </head>

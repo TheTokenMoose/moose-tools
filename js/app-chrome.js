@@ -1,6 +1,7 @@
 /**
  * Shared top chrome: Back (left) · Voice slot (center) · Favorite (right)
  * Colors follow site theme (token-moose-theme / data-theme).
+ * Scales up under Projector Mode (data-projector="on").
  */
 (function () {
   const FAVORITES_KEY = "token-moose-favorites";
@@ -47,6 +48,13 @@
     return "night";
   }
 
+  function isProjector() {
+    try {
+      if (localStorage.getItem("token-moose-projector") === "on") return true;
+    } catch (_) {}
+    return document.documentElement.getAttribute("data-projector") === "on";
+  }
+
   function getFavorites() {
     try {
       const raw = localStorage.getItem(FAVORITES_KEY);
@@ -77,8 +85,21 @@
     return cur.includes(id);
   }
 
+  function goHome() {
+    try {
+      window.location.assign(HOME);
+    } catch (_) {
+      window.location.href = HOME;
+    }
+  }
+
   function injectStyles() {
     const p = THEME_PALETTES[getThemeId()];
+    const proj = isProjector();
+    const minH = proj ? "2.85rem" : "2.4rem";
+    const fontSz = proj ? "1rem" : "0.88rem";
+    const padY = proj ? "0.55rem" : "0.45rem";
+    const padX = proj ? "1.15rem" : "0.95rem";
     let style = document.getElementById("tm-app-chrome-style");
     if (!style) {
       style = document.createElement("style");
@@ -94,7 +115,7 @@
         grid-template-columns: 1fr auto 1fr;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.65rem 0.85rem;
+        padding: ${proj ? "0.8rem" : "0.65rem"} 0.85rem;
         pointer-events: none;
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       }
@@ -108,15 +129,15 @@
         align-items: center;
         justify-content: center;
         gap: 0.35rem;
-        min-height: 2.4rem;
-        padding: 0.45rem 0.95rem;
+        min-height: ${minH};
+        padding: ${padY} ${padX};
         border-radius: 999px;
         border: 2px solid ${p.border};
         background: ${p.barBg};
         color: ${p.text} !important;
         font: inherit;
         font-weight: 800;
-        font-size: 0.88rem;
+        font-size: ${fontSz};
         line-height: 1;
         text-decoration: none !important;
         cursor: pointer;
@@ -137,9 +158,9 @@
         outline-offset: 2px;
       }
       .tm-app-chrome .tm-fav {
-        min-width: 2.6rem;
-        padding: 0.45rem 0.75rem;
-        font-size: 1.15rem;
+        min-width: ${proj ? "3rem" : "2.6rem"};
+        padding: ${padY} 0.75rem;
+        font-size: ${proj ? "1.25rem" : "1.15rem"};
       }
       .tm-app-chrome .tm-fav.is-favorite {
         border-color: ${p.favOnBorder};
@@ -147,12 +168,12 @@
         color: ${p.accent} !important;
       }
       .tm-app-chrome .tm-fav .tm-fav-label {
-        font-size: 0.78rem;
+        font-size: ${proj ? "0.85rem" : "0.78rem"};
         font-weight: 800;
         letter-spacing: 0.02em;
       }
       #tm-voice-slot {
-        min-height: 2.4rem;
+        min-height: ${minH};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -163,10 +184,17 @@
         background: ${p.barBg} !important;
         color: ${p.text} !important;
         box-shadow: 0 4px 16px rgba(0,0,0,0.15), ${p.glow};
+        min-height: ${minH} !important;
+        font-size: ${fontSz} !important;
       }
-      body.tm-has-app-chrome { padding-top: 3.4rem !important; }
+      body.tm-has-app-chrome { padding-top: ${proj ? "3.9rem" : "3.4rem"} !important; }
       body.tm-has-app-chrome .library-back { display: none !important; }
       body.tm-has-app-chrome .tm-voice-float { display: none !important; }
+      body.tm-has-app-chrome #voice-slot:not(#tm-voice-slot),
+      body.tm-has-app-chrome .local-voice-slot,
+      body.tm-has-app-chrome .extra-voice-btn {
+        display: none !important;
+      }
       @media print {
         .tm-app-chrome { display: none !important; }
         body.tm-has-app-chrome { padding-top: 0 !important; }
@@ -186,6 +214,14 @@
       document.title.replace(/\s*[—|-]\s*The Token Moose.*$/i, "").trim() ||
       "this app";
 
+    // Apply theme + projector early for apps that don't load theme.js
+    try {
+      const t = localStorage.getItem(THEME_KEY);
+      if (t) document.documentElement.setAttribute("data-theme", t);
+      const pr = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", pr === "on" ? "on" : "off");
+    } catch (_) {}
+
     injectStyles();
     body.classList.add("tm-has-app-chrome");
     document.querySelectorAll(".tm-app-chrome").forEach((n) => n.remove());
@@ -197,10 +233,11 @@
 
     const left = document.createElement("div");
     left.className = "tm-chrome-left";
-    const back = document.createElement("a");
+    const back = document.createElement("button");
+    back.type = "button";
     back.className = "tm-back";
-    back.href = HOME;
     back.textContent = "← Back to The Token Moose";
+    back.addEventListener("click", goHome);
     left.appendChild(back);
 
     const center = document.createElement("div");
@@ -242,10 +279,12 @@
     bar.appendChild(right);
     body.insertBefore(bar, body.firstChild);
 
-    // Theme change observer (shell pages may set data-theme later)
     try {
       const obs = new MutationObserver(() => injectStyles());
-      obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      obs.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme", "data-projector"],
+      });
     } catch (_) {}
   }
 

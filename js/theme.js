@@ -1,9 +1,11 @@
 /**
  * Theme switcher — self-contained control (ball + "Themes" label + menu).
  * Builds consistent markup so appearance matches across browsers.
+ * Includes Projector Mode toggle (modifier on top of the active theme).
  */
 (function () {
   const KEY = "token-moose-theme";
+  const PROJECTOR_KEY = "token-moose-projector";
   const THEMES = {
     night: { label: "Night City", blurb: "Soft neon · default", meta: "#0a0b1a" },
     day: { label: "Daylight", blurb: "Bright · airy · calm", meta: "#e8eef8" },
@@ -18,14 +20,38 @@
     return "night";
   }
 
+  function getProjector() {
+    try {
+      return localStorage.getItem(PROJECTOR_KEY) === "on";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function applyProjector(on) {
+    document.documentElement.setAttribute("data-projector", on ? "on" : "off");
+    try {
+      localStorage.setItem(PROJECTOR_KEY, on ? "on" : "off");
+    } catch (_) {}
+    const btn = document.getElementById("projector-toggle");
+    if (btn) {
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+      const small = btn.querySelector("small");
+      if (small) small.textContent = on ? "On · larger text & contrast" : "Off · normal classroom view";
+    }
+  }
+
   function applyTheme(id) {
     if (!THEMES[id]) id = "night";
     document.documentElement.setAttribute("data-theme", id);
-    try { localStorage.setItem(KEY, id); } catch (_) {}
+    try {
+      localStorage.setItem(KEY, id);
+    } catch (_) {}
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", THEMES[id].meta);
 
-    document.querySelectorAll(".theme-option").forEach((btn) => {
+    document.querySelectorAll(".theme-option[data-theme]").forEach((btn) => {
       const active = btn.getAttribute("data-theme") === id;
       btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-checked", active ? "true" : "false");
@@ -62,7 +88,6 @@
   function ensureMarkup() {
     let root = document.querySelector(".theme-switcher");
     if (!root) {
-      // Try to place in header nav area
       const host =
         document.querySelector(".site-header .header-inner") ||
         document.querySelector(".site-header") ||
@@ -73,7 +98,6 @@
       host.appendChild(root);
     }
 
-    // Normalize structure so ball + label + menu always exist together
     root.innerHTML = `
       <div class="theme-trigger" role="group" aria-label="Theme">
         <button type="button" class="theme-ball" id="theme-ball"
@@ -95,6 +119,11 @@
           <span class="theme-swatch playful" aria-hidden="true"></span>
           <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
         </button>
+        <button type="button" class="theme-option projector-toggle" id="projector-toggle"
+          role="option" aria-checked="false">
+          <span class="theme-swatch projector" aria-hidden="true"></span>
+          <span class="theme-option-text">Projector Mode<small>Off · normal classroom view</small></span>
+        </button>
       </div>
     `;
     return root;
@@ -105,6 +134,7 @@
     if (!root) return;
 
     applyTheme(getTheme());
+    applyProjector(getProjector());
 
     const ball = document.getElementById("theme-ball");
     const labelBtn = document.getElementById("theme-label-btn");
@@ -115,13 +145,22 @@
       el.addEventListener("click", toggleMenu);
     });
 
-    menu.querySelectorAll(".theme-option").forEach((btn) => {
+    menu.querySelectorAll(".theme-option[data-theme]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         applyTheme(btn.getAttribute("data-theme"));
         closeMenu();
       });
     });
+
+    const proj = document.getElementById("projector-toggle");
+    if (proj) {
+      proj.addEventListener("click", (e) => {
+        e.stopPropagation();
+        applyProjector(!getProjector());
+        // keep menu open so teacher can see the toggle state
+      });
+    }
 
     document.addEventListener("click", (e) => {
       if (!menu || menu.hidden) return;
@@ -135,6 +174,7 @@
 
   try {
     document.documentElement.setAttribute("data-theme", getTheme());
+    document.documentElement.setAttribute("data-projector", getProjector() ? "on" : "off");
   } catch (_) {}
 
   if (document.readyState === "loading") {

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0b1a" />
+  <title>404 — Oops! The Moose Got Lost · Moose Tools</title>
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("token-moose-theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+        var p = localStorage.getItem("token-moose-projector");
+        document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/themes.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-deep, #0a0b1a);
+      color: var(--text-primary, #f1f5f9);
+      text-align: center;
+    }
+    .wrap {
+      max-width: 640px;
+      width: 100%;
+    }
+    .art {
+      width: min(100%, 520px);
+      height: auto;
+      border-radius: 18px;
+      box-shadow: var(--shadow-card, 0 12px 40px rgba(0,0,0,0.35));
+      border: 2px solid var(--border-subtle, rgba(139,92,246,0.3));
+      background: var(--bg-card, #161a37);
+    }
+    h1 {
+      margin: 1.25rem 0 0.4rem;
+      font-size: clamp(1.4rem, 4vw, 1.85rem);
+      background: var(--hero-title-grad, linear-gradient(135deg, #f9a8d4, #a855f7, #22d3ee));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    p {
+      margin: 0.35rem 0 1.25rem;
+      color: var(--text-secondary, #cbd5e1);
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      border: 2px solid var(--border-subtle, rgba(139,92,246,0.35));
+      background: var(--btn-primary-grad, linear-gradient(135deg, #ff4d9e, #a855f7));
+      color: #fff !important;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none !important;
+      cursor: pointer;
+      box-shadow: var(--glow-purple, 0 0 18px rgba(168,85,247,0.3));
+    }
+    .btn.secondary {
+      background: var(--bg-card, rgba(22,26,55,0.85));
+      color: var(--text-primary, #f1f5f9) !important;
+    }
+    .btn:hover { filter: brightness(1.06); }
+    .btn:focus-visible {
+      outline: 2px solid var(--accent-electric, #22d3ee);
+      outline-offset: 3px;
+    }
+    .hint {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted, #94a3b8);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img
+      class="art"
+      src="assets/images/moose-404.jpg"
+      width="1024"
+      height="576"
+      alt="Cartoon moose park ranger looking confused at a map beside a big 404 sign that says Oops! The Moose Got Lost."
+    />
+    <h1>Oops! The Moose Got Lost</h1>
+    <p>Uh… this isn’t the right page. The trail went cold — or the link wandered off into the woods.</p>
+    <div class="actions">
+      <a class="btn" href="index.html">Back to Moose Tools</a>
+      <a class="btn secondary" href="games.html">Browse games</a>
+      <a class="btn secondary" href="tools.html">Browse tools</a>
+    </div>
+    <p class="hint">Error 404 · page not found</p>
+  </div>
+</body>
+</html>

@@ -10,7 +10,7 @@
  */
 
 // Voice .onnx models: same-origin assets; copied to OPFS on first use — not SW precache.
-const CACHE_NAME = "token-moose-v59";
+const CACHE_NAME = "token-moose-v60";
 
 const PRECACHE_URLS = [
   "./",
@@ -20,6 +20,10 @@ const PRECACHE_URLS = [
   "./favorites.html",
   "./about.html",
   "./voice-settings.html",
+  "./404.html",
+  "./error.html",
+  "./css/theme-app.css",
+  "./assets/images/moose-404.jpg",
   "./manifest.webmanifest",
   "./css/main.css",
   "./css/components.css",
