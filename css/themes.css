@@ -177,6 +177,14 @@ body {
   position: relative;
   margin-left: 0.35rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .theme-ball {
@@ -193,12 +201,62 @@ body {
   transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.35s ease, border-color 0.35s ease;
   /* slow subtle pulse so newcomers notice it */
   animation: theme-ball-pulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
 }
 .theme-ball:hover,
 .theme-ball[aria-expanded="true"] {
   transform: scale(1.1);
   animation: none;
   box-shadow: var(--glow-purple), 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* "Themes" text pill next to the ball */
+.theme-label-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 2px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12), var(--glow-purple);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+}
+.theme-label-btn:hover,
+.theme-label-btn[aria-expanded="true"] {
+  transform: translateY(-1px);
+  border-color: var(--accent-soft-pink);
+  background: var(--fill-accent-soft);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16), var(--glow-pink);
+  color: var(--text-primary);
+}
+.theme-label-btn:focus-visible {
+  outline: 2px solid var(--accent-electric);
+  outline-offset: 2px;
+}
+html[data-theme="day"] .theme-label-btn:hover,
+html[data-theme="day"] .theme-label-btn[aria-expanded="true"] {
+  border-color: var(--accent-pink);
+}
+html[data-theme="playful"] .theme-label-btn:hover,
+html[data-theme="playful"] .theme-label-btn[aria-expanded="true"] {
+  border-color: var(--accent-pink);
+}
+html[data-projector="on"] .theme-label-btn {
+  min-height: 2.5rem;
+  font-size: 0.92rem;
+  padding: 0.4rem 1rem;
 }
 
 @keyframes theme-ball-pulse {
@@ -301,6 +359,11 @@ html[data-theme="playful"] .calendar-widget {
 @media (max-width: 768px) {
   .theme-switcher { margin-left: 0.15rem; }
   .theme-ball { width: 2rem; height: 2rem; }
+  .theme-label-btn {
+    min-height: 2rem;
+    font-size: 0.78rem;
+    padding: 0.3rem 0.7rem;
+  }
 }
 
 /* ── Projector Mode (modifier on top of any theme) ─────────────────── */
