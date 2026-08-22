@@ -109,6 +109,7 @@
         answer: document.getElementById("answer"),
         feedback: document.getElementById("feedback"),
         choices: document.getElementById("choices"),
+        numpad: document.getElementById("numpad"),
         hudScore: document.getElementById("hud-score"),
         hudStreak: document.getElementById("hud-streak"),
         hudTimer: document.getElementById("hud-timer"),
@@ -149,6 +150,25 @@
       });
       this.els.answer.addEventListener("keydown", (e) => {
         if (e.key === "Enter") this.submit();
+      });
+      if (this.els.numpad) {
+        this.els.numpad.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-key]");
+          if (btn) this.padKey(btn.getAttribute("data-key"));
+        });
+      }
+      window.addEventListener("keydown", (e) => {
+        if (!this.els.play || this.els.play.hidden || this.diff <= 4 || this.locked) return;
+        if (e.key >= "0" && e.key <= "9") {
+          e.preventDefault();
+          this.padKey(e.key);
+        } else if (e.key === "Backspace") {
+          e.preventDefault();
+          this.padKey("back");
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          this.submit();
+        }
       });
       this.els.name.addEventListener("change", () => {
         try {
@@ -267,16 +287,37 @@
       this.els.answer.value = "";
       this.els.answer.hidden = false;
       document.getElementById("btn-submit").hidden = false;
-      // Multiple choice for early levels (easier for young kids)
+      const usePad = this.diff > 4;
+      this.els.answer.readOnly = usePad;
+      this.els.answer.setAttribute("inputmode", usePad ? "none" : "numeric");
       if (this.diff <= 4) {
         this.els.choices.hidden = false;
         this.renderChoices();
+        if (this.els.numpad) this.els.numpad.hidden = true;
       } else {
         this.els.choices.hidden = true;
         this.els.choices.innerHTML = "";
+        if (this.els.numpad) this.els.numpad.hidden = false;
       }
-      this.els.answer.focus();
+      if (!this.els.answer.readOnly) this.els.answer.focus();
       this.updateHud();
+    }
+
+    padKey(key) {
+      if (this.locked || this.els.play.hidden) return;
+      if (key === "go") {
+        this.submit();
+        return;
+      }
+      if (key === "back") {
+        this.els.answer.value = String(this.els.answer.value || "").slice(0, -1);
+        return;
+      }
+      if (/^\d$/.test(key)) {
+        const cur = String(this.els.answer.value || "");
+        if (cur.length >= 6) return;
+        this.els.answer.value = cur + key;
+      }
     }
 
     renderChoices() {
@@ -321,6 +362,7 @@
         burst();
       } else {
         this.streak = 0;
+        sfxWrong();
         this.els.feedback.textContent = `Oops — answer was ${this.current.answer}`;
         this.els.feedback.className = "feedback bad";
       }

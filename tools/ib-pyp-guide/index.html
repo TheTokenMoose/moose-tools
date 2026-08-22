@@ -41,19 +41,21 @@
   outline-offset: 2px;
 }
 
-    /* Cover art page background */
-    body {
-      background-color: #0a0b1a;
-      background-image:
-        linear-gradient(180deg, rgba(8, 10, 24, 0.82) 0%, rgba(8, 10, 24, 0.9) 45%, rgba(8, 10, 24, 0.95) 100%),
-        url("../../assets/screenshots/ib-pyp-guide.jpg");
+    /* Cover art is faded; site theme wash is applied by theme-app.css */
+    body.theme-bridged::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: url("../../assets/screenshots/ib-pyp-guide.jpg");
       background-size: cover;
       background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
     }
   </style>
   <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
@@ -62,7 +64,7 @@
     } catch (e) {}
   </script>
 </head>
-<body data-app-id="ib-pyp-guide" data-app-title="IB PYP Pocket Guide">
+<body class="theme-bridged" data-app-id="ib-pyp-guide" data-app-title="IB PYP Pocket Guide">
   <p class="library-back"><a class="btn-back" href="../../index.html">← Back to The Token Moose</a></p>
 
   <header class="hero">

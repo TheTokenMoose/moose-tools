@@ -122,6 +122,40 @@ h1{margin:4px 0;font-size:clamp(1.8rem,5vw,2.5rem);
 }
 .choice:hover{border-color:#ff6bcb;background:#fff0f8}
 .feedback{min-height:1.4em;margin:12px 0 0;font-weight:900;font-size:1.1rem}
+
+/* Touch number pad (levels 5–10) */
+.numpad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  max-width:320px;
+  margin:16px auto 0;
+  touch-action:manipulation;
+}
+.numpad[hidden]{display:none!important}
+.numpad button{
+  min-height:64px;
+  border:3px solid #fff;
+  border-radius:16px;
+  background:linear-gradient(180deg,#fff,#ffe6f4);
+  color:#4a1942;
+  font-size:1.7rem;
+  font-weight:900;
+  font-family:inherit;
+  cursor:pointer;
+  box-shadow:0 4px 0 rgba(255,107,203,.28);
+  -webkit-tap-highlight-color:transparent;
+}
+.numpad button:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(255,107,203,.28)}
+.numpad .pad-util{background:linear-gradient(180deg,#fff,#e8f7ff);font-size:1.45rem}
+.numpad .pad-go{
+  background:linear-gradient(135deg,#ff6bcb,#7c4dff);
+  color:#fff;
+  font-size:1.25rem;
+}
+@media (max-width:420px){
+  .numpad button{min-height:56px;font-size:1.5rem}
+}
 .feedback.ok{color:#00897b}
 .feedback.bad{color:#d81b60}
 

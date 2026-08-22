@@ -1,0 +1,165 @@
+/**
+ * Theme form/control bridge for teacher tools that follow the site theme.
+ * Load AFTER css/themes.css. Scope: body.theme-bridged
+ */
+body.theme-bridged {
+  background: var(--bg-deep) !important;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 20% -10%, var(--theme-wash-1), transparent 50%),
+    radial-gradient(ellipse 100% 60% at 90% 10%, var(--theme-wash-2), transparent 45%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, var(--theme-wash-3), transparent 40%),
+    linear-gradient(180deg, var(--bg-navy) 0%, var(--bg-deep) 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--text-primary) !important;
+}
+
+body.theme-bridged .hero h1,
+body.theme-bridged h1,
+body.theme-bridged h2,
+body.theme-bridged h3 {
+  color: var(--text-primary) !important;
+  background: none !important;
+  -webkit-text-fill-color: unset !important;
+}
+body.theme-bridged .hero h1 {
+  background: var(--hero-title-grad) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body.theme-bridged .tagline,
+body.theme-bridged .hint,
+body.theme-bridged .note,
+body.theme-bridged .note p,
+body.theme-bridged .card-sub,
+body.theme-bridged .section-label {
+  color: var(--text-muted) !important;
+}
+
+body.theme-bridged .panel,
+body.theme-bridged .card,
+body.theme-bridged .howto,
+body.theme-bridged .box,
+body.theme-bridged .guide-card,
+body.theme-bridged .search-wrap,
+body.theme-bridged .content .card {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+  box-shadow: var(--shadow-card);
+}
+
+body.theme-bridged .card-body,
+body.theme-bridged .card p,
+body.theme-bridged .card li,
+body.theme-bridged .status {
+  color: var(--text-secondary) !important;
+}
+
+body.theme-bridged .card-title,
+body.theme-bridged .card-head,
+body.theme-bridged .field,
+body.theme-bridged .check,
+body.theme-bridged .howto summary,
+body.theme-bridged .howto ol,
+body.theme-bridged .howto li {
+  color: var(--text-primary) !important;
+}
+
+body.theme-bridged .card-head {
+  background: transparent !important;
+}
+
+/* Form controls — the main readability fix */
+body.theme-bridged input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+body.theme-bridged textarea,
+body.theme-bridged select {
+  background: var(--bg-navy) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  caret-color: var(--accent-electric) !important;
+  box-shadow: none !important;
+}
+body.theme-bridged input::placeholder,
+body.theme-bridged textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+body.theme-bridged input:focus,
+body.theme-bridged textarea:focus,
+body.theme-bridged select:focus {
+  outline: none !important;
+  border-color: var(--accent-electric) !important;
+  box-shadow: 0 0 0 3px var(--fill-accent-soft) !important;
+}
+body.theme-bridged option,
+body.theme-bridged optgroup {
+  background: var(--bg-navy);
+  color: var(--text-primary);
+}
+
+body.theme-bridged .search-wrap input {
+  background: var(--bg-card-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+body.theme-bridged .tab,
+body.theme-bridged .tpl-btn,
+body.theme-bridged .btn-secondary {
+  background: var(--fill-accent-soft) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+body.theme-bridged .tab:hover,
+body.theme-bridged .tpl-btn:hover,
+body.theme-bridged .btn-secondary:hover {
+  border-color: var(--accent-electric) !important;
+  color: var(--text-primary) !important;
+}
+body.theme-bridged .tab.is-active,
+body.theme-bridged .tpl-btn.is-active {
+  background: var(--fill-filter-active) !important;
+  border-color: var(--accent-pink) !important;
+  color: var(--text-primary) !important;
+}
+
+body.theme-bridged .badge {
+  background: var(--fill-accent-mid) !important;
+  color: var(--text-primary) !important;
+}
+
+body.theme-bridged .btn-primary {
+  background: var(--btn-primary-grad) !important;
+  color: #fff !important;
+  border: none !important;
+}
+body.theme-bridged .btn-accent {
+  background: var(--btn-primary-grad) !important;
+  color: #fff !important;
+}
+
+body.theme-bridged a:not(.btn-back):not(.tm-back) {
+  color: var(--accent-electric) !important;
+}
+
+body.theme-bridged .library-back a.btn-back {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* Keep printed / preview tickets as paper */
+body.theme-bridged .ticket-preview,
+body.theme-bridged .ticket-preview * {
+  background: #fff !important;
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important;
+}
+
+/* Live projector board still high-contrast, but follows text token for day */
+body.theme-bridged .live {
+  background: var(--bg-deep) !important;
+  color: var(--text-primary) !important;
+}

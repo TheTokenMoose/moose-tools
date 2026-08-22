@@ -30,19 +30,10 @@
 }
 .library-back .btn-back:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
 
-    /* Cover art page background */
-    body {
-      background-color: #0a0b1a;
-      background-image:
-        linear-gradient(180deg, rgba(8, 10, 24, 0.55) 0%, rgba(8, 10, 24, 0.78) 45%, rgba(8, 10, 24, 0.92) 100%),
-        url("../../assets/screenshots/exit-ticket-maker.jpg");
-      background-size: cover;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
+    /* Site theme provides the page background (no cover overlay) */
   </style>
   <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
@@ -51,7 +42,7 @@
     } catch (e) {}
   </script>
 </head>
-<body data-app-id="exit-ticket-maker" data-app-title="Exit Ticket Maker">
+<body class="theme-bridged" data-app-id="exit-ticket-maker" data-app-title="Exit Ticket Maker">
   <p class="library-back"><a class="btn-back" href="../../index.html">← Back to The Token Moose</a></p>
 
   <div id="app" class="no-print">
