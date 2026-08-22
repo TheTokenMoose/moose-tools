@@ -505,6 +505,45 @@ const PROJECTS = [
     playUrl: "tools/visual-schedule-builder/",
     installable: true,
     featured: true
+  },
+  {
+    id: "classroom-randomizer",
+    title: "Classroom Randomizer",
+    type: "tool",
+    description: "Fair random picks: student names (with remove-after so everyone gets a turn), number ranges, letters A–Z, Yes/No, or a custom comma-separated list. Large result display for projector use.",
+    category: "Classroom",
+    subject: "Classroom management",
+    skills: ["Randomise", "Names", "Fair turns", "Projector", "Classroom"],
+    screenshot: "assets/screenshots/classroom-randomizer.jpg",
+    playUrl: "tools/classroom-randomizer/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "bingo-maker",
+    title: "Bingo Maker",
+    type: "tool",
+    description: "Paste words or prompts, generate unique 5×5 bingo boards with optional FREE centre, print for the class, and run Caller mode to draw items one by one.",
+    category: "Classroom",
+    subject: "Classroom management",
+    skills: ["Bingo", "Print", "Vocabulary", "Listening", "Games"],
+    screenshot: "assets/screenshots/bingo-maker.jpg",
+    playUrl: "tools/bingo-maker/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "number-bonds-bakery",
+    title: "Number Bonds Bakery",
+    type: "game",
+    description: "Bakery-themed number bonds: tap two cookie numbers that add up to the tray total. Trays for 5, 10, and 20. Stars, clear/retry, press-to-hear. Kindergarten number sense.",
+    category: "Math",
+    subject: "Math",
+    skills: ["number bonds", "addition", "number sense", "part–whole", "ESL"],
+    screenshot: "assets/screenshots/number-bonds-bakery.jpg",
+    playUrl: "games/number-bonds-bakery/",
+    installable: true,
+    featured: true
   }
 ];
 

@@ -228,7 +228,30 @@ window.COMET_PACKS = [
 (function () {
   const mix = window.COMET_PACKS.find((p) => p.id === "mix");
   if (!mix) return;
-  const pool = [];
+  const pool = [,
+  {
+    id: "extra-k-boost",
+    title: "Kindergarten Boost",
+    blurb: "Extra early-years review questions",
+    emoji: "🌟",
+    color: "#fbbf24",
+    grades: ["K", "1-2"],
+    items: [
+      { q: "Which animal says meow?", choices: ["cat", "dog", "cow", "bird"], a: "cat", difficulty: "K" },
+      { q: "5 − 1 = ?", choices: ["4", "6", "3", "1"], a: "4", difficulty: "K" },
+      { q: "We write with a…", choices: ["pencil", "plate", "shoe", "window"], a: "pencil", difficulty: "K" },
+      { q: "Which is cold?", choices: ["ice", "fire", "sun", "oven"], a: "ice", difficulty: "K" },
+      { q: "How many legs does a bird usually have?", choices: ["2", "4", "6", "8"], a: "2", difficulty: "K" },
+      { q: "Which shape is round?", choices: ["circle", "square", "triangle", "rectangle"], a: "circle", difficulty: "K" },
+      { q: "Opposite of up?", choices: ["down", "left", "fast", "open"], a: "down", difficulty: "K" },
+      { q: "We drink…", choices: ["water", "rocks", "paper", "sand"], a: "water", difficulty: "K" },
+      { q: "3 + 2 = ?", choices: ["5", "4", "6", "1"], a: "5", difficulty: "K" },
+      { q: "Which comes first in the alphabet?", choices: ["A", "M", "Z", "B"], a: "A", difficulty: "K" },
+      { q: "A baby dog is a…", choices: ["puppy", "kitten", "cub", "calf"], a: "puppy", difficulty: "K" },
+      { q: "Which do we use to see?", choices: ["eyes", "ears", "nose", "feet"], a: "eyes", difficulty: "K" },
+    ],
+  }
+];
   window.COMET_PACKS.forEach((p) => {
     if (p.id === "mix") return;
     p.items.forEach((it) => pool.push({ ...it }));

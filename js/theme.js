@@ -10,6 +10,7 @@
     night: { label: "Night City", blurb: "Soft neon · default", meta: "#0a0b1a" },
     day: { label: "Daylight", blurb: "Bright · airy · calm", meta: "#e8eef8" },
     playful: { label: "Preschool Playful", blurb: "Warm · candy · energetic", meta: "#ffedd5" },
+    forest: { label: "Forest Grove", blurb: "Moss · canopy · calm green", meta: "#0c1f14" },
   };
 
   function getTheme() {
@@ -118,6 +119,10 @@
         <button type="button" class="theme-option" role="option" data-theme="playful" aria-checked="false">
           <span class="theme-swatch playful" aria-hidden="true"></span>
           <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="forest" aria-checked="false">
+          <span class="theme-swatch forest" aria-hidden="true"></span>
+          <span class="theme-option-text">Forest Grove<small>Moss · canopy · calm green</small></span>
         </button>
         <button type="button" class="theme-option projector-toggle" id="projector-toggle"
           role="option" aria-checked="false">

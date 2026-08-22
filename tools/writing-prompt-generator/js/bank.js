@@ -314,4 +314,38 @@ window.WPG = {
     });
   });
 
+
+  // Extra prompts — polish pass
+  set("narrative", "animals", "k",
+    (WPG.prompts.narrative?.animals?.k || []).concat([
+      "A tiny ant finds a big cookie. What happens?",
+      "Your pet can talk for one day. What does it say?",
+      "A penguin visits your classroom. Write the story.",
+    ]),
+    WPG.starters.narrative?.animals?.k || ["First…", "Then…", "I saw…"],
+    WPG.vocab.narrative?.animals?.k || ["pet", "happy", "run", "friend"],
+    "Add one feeling word.",
+    "Draw the animal."
+  );
+  set("opinion", "school", "k",
+    (WPG.prompts.opinion?.school?.k || []).concat([
+      "What is the best part of school? Why?",
+      "Should we have more outdoor time? Tell why.",
+    ]),
+    WPG.starters.opinion?.school?.k || ["I think…", "Because…", "My favourite…"],
+    WPG.vocab.opinion?.school?.k || ["best", "fun", "learn", "friend"],
+    "Give two reasons.",
+    "Draw your idea."
+  );
+  set("howto", "friendship", "g1",
+    (WPG.prompts.howto?.friendship?.g1 || []).concat([
+      "How do you make a new friend at school?",
+      "How can you help a friend who is sad?",
+    ]),
+    WPG.starters.howto?.friendship?.g1 || ["First…", "Next…", "Finally…"],
+    WPG.vocab.howto?.friendship?.g1 || ["share", "listen", "kind", "help"],
+    "Use three steps.",
+    "Draw one step."
+  );
+
 })();

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e3a5f">
+  <meta name="description" content="Classroom Randomizer — pick a student, team, number, letter, or custom prompt at random.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Classroom Randomizer — The Token Moose</title>
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
+</head>
+<body class="theme-bridged" data-app-id="classroom-randomizer" data-app-title="Classroom Randomizer">
+  <div id="app">
+    <header class="head">
+      <h1>Classroom Randomizer</h1>
+      <p class="sub">Fair picks for names, numbers, letters, and quick prompts</p>
+    </header>
+
+    <div class="modes" role="tablist">
+      <button type="button" class="mode is-active" data-mode="names">Names</button>
+      <button type="button" class="mode" data-mode="number">Number</button>
+      <button type="button" class="mode" data-mode="letter">Letter</button>
+      <button type="button" class="mode" data-mode="coin">Yes / No</button>
+      <button type="button" class="mode" data-mode="custom">Custom list</button>
+    </div>
+
+    <section class="panel" id="panel-names">
+      <label for="name-list">Student names (comma-separated)</label>
+      <textarea id="name-list" rows="4" placeholder="Jayden, Harry, John B, Sarah, Emma"></textarea>
+      <label class="check"><input type="checkbox" id="remove-after" checked> Remove after pick (so everyone gets a turn)</label>
+    </section>
+
+    <section class="panel" id="panel-number" hidden>
+      <label for="num-min">From</label>
+      <input type="number" id="num-min" value="1" min="0" max="9999">
+      <label for="num-max">To</label>
+      <input type="number" id="num-max" value="20" min="1" max="9999">
+    </section>
+
+    <section class="panel" id="panel-letter" hidden>
+      <p class="hint">Picks a random letter A–Z (great for alphabet games).</p>
+    </section>
+
+    <section class="panel" id="panel-coin" hidden>
+      <p class="hint">Fair coin flip: Yes or No.</p>
+    </section>
+
+    <section class="panel" id="panel-custom" hidden>
+      <label for="custom-list">Items (comma-separated)</label>
+      <textarea id="custom-list" rows="4" placeholder="Read page 4, Draw a map, Ask a partner…"></textarea>
+    </section>
+
+    <div class="actions">
+      <button type="button" class="btn primary big" id="btn-go">Randomize</button>
+      <button type="button" class="btn" id="btn-reset">Reset list</button>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">
+      <span class="result-label">Result</span>
+      <div class="result-value" id="result-value">—</div>
+    </div>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

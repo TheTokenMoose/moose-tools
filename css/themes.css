@@ -156,6 +156,57 @@ html[data-theme="playful"] {
   --theme-ball-border: rgba(234, 88, 12, 0.5);
 }
 
+/* ── Forest Grove — deep greens, moss, soft light ──────────────────── */
+html[data-theme="forest"] {
+  --bg-deep: #0c1f14;
+  --bg-navy: #143d28;
+  --bg-card: rgba(20, 50, 32, 0.92);
+  --bg-card-hover: rgba(28, 64, 42, 0.96);
+  --bg-glass: rgba(15, 40, 26, 0.8);
+
+  --accent-pink: #4ade80;
+  --accent-hot-pink: #22c55e;
+  --accent-purple: #86efac;
+  --accent-violet: #16a34a;
+  --accent-blue: #2dd4bf;
+  --accent-electric: #a3e635;
+  --accent-soft-pink: #bbf7d0;
+
+  --text-primary: #ecfdf5;
+  --text-secondary: #bbf7d0;
+  --text-muted: #86efac;
+
+  --border-subtle: rgba(74, 222, 128, 0.28);
+  --border-glow: rgba(34, 197, 94, 0.4);
+  --glow-pink: 0 0 18px rgba(74, 222, 128, 0.28);
+  --glow-purple: 0 0 16px rgba(134, 239, 172, 0.2);
+  --glow-blue: 0 0 14px rgba(45, 212, 191, 0.2);
+
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 22px rgba(74, 222, 128, 0.15);
+
+  --header-bg: rgba(12, 31, 20, 0.9);
+  --theme-wash-1: rgba(34, 197, 94, 0.14);
+  --theme-wash-2: rgba(45, 212, 191, 0.08);
+  --theme-wash-3: rgba(163, 230, 53, 0.06);
+  --theme-color-meta: #0c1f14;
+
+  --fill-accent-soft: rgba(74, 222, 128, 0.12);
+  --fill-accent-mid: rgba(34, 197, 94, 0.15);
+  --fill-accent-strong: rgba(74, 222, 128, 0.22);
+  --fill-nav-hover: rgba(34, 197, 94, 0.14);
+  --fill-nav-active: rgba(74, 222, 128, 0.14);
+  --fill-filter-active: linear-gradient(135deg, rgba(74, 222, 128, 0.22), rgba(45, 212, 191, 0.18));
+  --thumb-fallback: linear-gradient(135deg, #14532d, #0c1f14);
+  --btn-primary-grad: linear-gradient(135deg, #22c55e, #15803d);
+  --hero-title-grad: linear-gradient(135deg, #86efac, #4ade80, #2dd4bf);
+
+  --theme-ball-face: conic-gradient(from 200deg, #166534, #4ade80, #a3e635, #2dd4bf, #166534);
+  --theme-ball-glow: 0 0 0 0 rgba(74, 222, 128, 0.55);
+  --theme-ball-glow-mid: 0 0 0 8px rgba(34, 197, 94, 0);
+  --theme-ball-border: rgba(187, 247, 208, 0.4);
+}
+
 /* Body wash driven by theme tokens */
 body {
   background: var(--bg-deep);
@@ -353,6 +404,7 @@ html[data-projector="on"] .theme-menu .theme-option small {
 .theme-swatch.night { background: conic-gradient(from 200deg, #ff4d9e, #a855f7, #22d3ee, #ff4d9e); }
 .theme-swatch.day { background: conic-gradient(from 200deg, #38bdf8, #a7f3d0, #fde68a, #38bdf8); }
 .theme-swatch.playful { background: conic-gradient(from 200deg, #fb7185, #fbbf24, #34d399, #60a5fa, #fb7185); }
+.theme-swatch.forest { background: conic-gradient(from 200deg, #166534, #4ade80, #a3e635, #2dd4bf, #166534); }
 
 .theme-option small {
   display: block;
@@ -446,6 +498,10 @@ html[data-projector="on"][data-theme="day"] {
 html[data-projector="on"][data-theme="playful"] {
   --text-muted: #9a3412;
   --text-secondary: #7c2d12;
+}
+html[data-projector="on"][data-theme="forest"] {
+  --text-muted: #bbf7d0;
+  --text-secondary: #ecfdf5;
 }
 
 /* Projector toggle row inside theme menu */

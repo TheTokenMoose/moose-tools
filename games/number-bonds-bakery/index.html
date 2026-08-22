@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#b45309">
+  <meta name="description" content="Number Bonds Bakery — make the cookie total with two parts. Kindergarten number bonds.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Number Bonds Bakery — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="number-bonds-bakery" data-app-title="Number Bonds Bakery">
+  <div id="app">
+    <section id="home">
+      <div class="hero">
+        <div class="emoji">🍪</div>
+        <h1>Number Bonds Bakery</h1>
+        <p class="tag">Two parts · one yummy total</p>
+        <p class="stars" id="stars">⭐ 0</p>
+      </div>
+      <p class="goal">Tap two cookies that add up to the number on the tray.</p>
+      <div class="levels">
+        <button type="button" class="lvl" data-max="5">Tray 5</button>
+        <button type="button" class="lvl" data-max="10">Tray 10</button>
+        <button type="button" class="lvl" data-max="20">Tray 20</button>
+      </div>
+    </section>
+
+    <section id="play" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score">⭐ 0</span>
+        <button type="button" class="btn ghost" id="btn-hear">🔊</button>
+      </div>
+      <p class="prompt" id="prompt">Make <strong id="target">10</strong></p>
+      <div class="tray" id="tray" aria-label="Selected parts">
+        <div class="slot" id="slot-a">?</div>
+        <span class="plus">+</span>
+        <div class="slot" id="slot-b">?</div>
+        <span class="eq">=</span>
+        <div class="slot target-slot" id="slot-t">10</div>
+      </div>
+      <div class="cookies" id="cookies"></div>
+      <button type="button" class="btn ghost" id="btn-clear">Clear picks</button>
+    </section>
+
+    <section id="fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">🍪</div>
+        <h2 id="fb-title">Yum!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
