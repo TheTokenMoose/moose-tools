@@ -466,6 +466,45 @@ const PROJECTS = [
     playUrl: "tools/exit-ticket-maker/",
     installable: true,
     featured: true
+  },
+  {
+    id: "subitising-safari",
+    title: "Subitising Safari",
+    type: "game",
+    description: "Animals flash on screen for a moment — students tap how many they saw. Builds subitising (seeing quantities without counting one-by-one). Easy/medium/hard flash speeds, stars, press-to-hear.",
+    category: "Math",
+    subject: "Math",
+    skills: ["subitising", "number sense", "counting", "attention", "ESL"],
+    screenshot: "assets/screenshots/subitising-safari.jpg",
+    playUrl: "games/subitising-safari/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "pattern-factory",
+    title: "Pattern Factory",
+    type: "game",
+    description: "Complete the pattern: AB, AAB, ABB, ABC, or mixed. Visual sequences with clear choices, gentle feedback, stars, and optional TTS. Early years maths for kindergarten and Grade 1.",
+    category: "Math",
+    subject: "Math",
+    skills: ["patterns", "sequencing", "algebraic thinking", "visual discrimination", "ESL"],
+    screenshot: "assets/screenshots/pattern-factory.jpg",
+    playUrl: "games/pattern-factory/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "visual-schedule-builder",
+    title: "Visual Schedule Builder",
+    type: "tool",
+    description: "Build a visual daily schedule from ready-made routine blocks (or custom labels). Drag to reorder, save on this device, and present full-screen for the class. Ideal for kindergarten routines.",
+    category: "Classroom",
+    subject: "Classroom management",
+    skills: ["visual schedule", "routines", "classroom", "projector", "kindergarten"],
+    screenshot: "assets/screenshots/visual-schedule-builder.jpg",
+    playUrl: "tools/visual-schedule-builder/",
+    installable: true,
+    featured: true
   }
 ];
 

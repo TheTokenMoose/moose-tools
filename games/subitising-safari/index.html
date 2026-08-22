@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Subitising Safari — flash groups of animals and choose how many. Kindergarten number sense.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Subitising Safari — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="subitising-safari" data-app-title="Subitising Safari">
+  <div id="app">
+    <section id="screen-home">
+      <div class="hero">
+        <div class="hero-emoji" aria-hidden="true">🦁</div>
+        <h1>Subitising Safari</h1>
+        <p class="tag">See the group · don’t count one-by-one</p>
+        <p class="stars" id="home-stars">⭐ 0</p>
+      </div>
+      <p class="goal">Animals flash on screen. Tap how many you saw!</p>
+      <div class="mode-grid">
+        <button type="button" class="mode-card" data-mode="easy">
+          <span class="m-emoji">🦋</span>
+          <strong>Easy</strong>
+          <small>1–5 · slow flash</small>
+        </button>
+        <button type="button" class="mode-card" data-mode="medium">
+          <span class="m-emoji">🦓</span>
+          <strong>Medium</strong>
+          <small>1–8 · quicker</small>
+        </button>
+        <button type="button" class="mode-card" data-mode="hard">
+          <span class="m-emoji">🐆</span>
+          <strong>Hard</strong>
+          <small>1–10 · fast flash</small>
+        </button>
+      </div>
+    </section>
+
+    <section id="screen-play" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score-line">⭐ 0 · Round 1</span>
+        <button type="button" class="btn ghost" id="btn-hear" title="Hear">🔊</button>
+      </div>
+      <p class="prompt" id="prompt">Get ready…</p>
+      <div class="stage" id="stage" aria-live="polite"></div>
+      <div class="choices" id="choices" hidden></div>
+      <button type="button" class="btn primary wide" id="btn-flash" hidden>Show animals</button>
+    </section>
+
+    <section id="screen-fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Great!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

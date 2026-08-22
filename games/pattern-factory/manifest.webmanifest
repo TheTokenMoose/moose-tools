@@ -1,0 +1,14 @@
+{
+  "name": "Pattern Factory",
+  "short_name": "Patterns",
+  "description": "Complete AB, AAB, ABB, and ABC patterns for early maths.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1e1b4b",
+  "theme_color": "#7c3aed",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

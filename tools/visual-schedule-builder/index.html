@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0369a1">
+  <meta name="description" content="Visual Schedule Builder — drag today’s routine blocks and show full-screen for the class.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Visual Schedule Builder — The Token Moose</title>
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night") document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
+</head>
+<body class="theme-bridged" data-app-id="visual-schedule-builder" data-app-title="Visual Schedule Builder">
+  <div id="app">
+    <header class="tool-head">
+      <h1>Visual Schedule Builder</h1>
+      <p class="sub">Build today’s plan · show it full screen for the class</p>
+    </header>
+
+    <div class="layout">
+      <aside class="palette">
+        <h2>Blocks</h2>
+        <p class="hint">Tap to add · drag to reorder</p>
+        <div id="palette-list" class="palette-list"></div>
+        <div class="custom-row">
+          <input type="text" id="custom-label" maxlength="40" placeholder="Custom block name" />
+          <button type="button" class="btn" id="btn-add-custom">Add</button>
+        </div>
+      </aside>
+
+      <main class="board-wrap">
+        <div class="board-toolbar">
+          <input type="text" id="day-title" maxlength="60" value="Today's Schedule" aria-label="Schedule title" />
+          <div class="toolbar-actions">
+            <button type="button" class="btn" id="btn-clear">Clear</button>
+            <button type="button" class="btn primary" id="btn-present">Present ▶</button>
+          </div>
+        </div>
+        <ol id="schedule-list" class="schedule-list" aria-label="Schedule blocks"></ol>
+        <p class="empty-hint" id="empty-hint">Add blocks from the left to build the day.</p>
+      </main>
+    </div>
+  </div>
+
+  <div id="present-overlay" hidden>
+    <div class="present-bar">
+      <span id="present-title">Today's Schedule</span>
+      <button type="button" class="btn" id="btn-exit-present">Exit</button>
+    </div>
+    <ol id="present-list" class="present-list"></ol>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

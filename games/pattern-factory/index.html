@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#7c3aed">
+  <meta name="description" content="Pattern Factory — complete AB, AAB, ABB, ABC patterns for kindergarten maths.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Pattern Factory — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="pattern-factory" data-app-title="Pattern Factory">
+  <div id="app">
+    <section id="screen-home">
+      <div class="hero">
+        <div class="hero-emoji">🏭</div>
+        <h1>Pattern Factory</h1>
+        <p class="tag">What comes next?</p>
+        <p class="stars" id="home-stars">⭐ 0</p>
+      </div>
+      <div class="mode-grid">
+        <button type="button" class="mode-card" data-level="ab"><strong>AB</strong><small>🔴🔵🔴🔵 ?</small></button>
+        <button type="button" class="mode-card" data-level="aab"><strong>AAB</strong><small>🟨🟨🟩 ?</small></button>
+        <button type="button" class="mode-card" data-level="abb"><strong>ABB</strong><small>🟪🟧🟧 ?</small></button>
+        <button type="button" class="mode-card" data-level="abc"><strong>ABC</strong><small>⭐🌙☀️ ?</small></button>
+        <button type="button" class="mode-card" data-level="mix"><strong>Mix</strong><small>All patterns</small></button>
+      </div>
+    </section>
+
+    <section id="screen-play" hidden>
+      <div class="play-bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score-line">⭐ 0</span>
+        <button type="button" class="btn ghost" id="btn-hear">🔊</button>
+      </div>
+      <p class="prompt" id="prompt">What comes next?</p>
+      <div class="belt" id="belt" aria-label="Pattern"></div>
+      <div class="choices" id="choices"></div>
+    </section>
+
+    <section id="screen-fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Nice!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>
