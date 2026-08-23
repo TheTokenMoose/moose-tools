@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e3a5f">
+  <meta name="description" content="Word Wall Maker — build a classroom word wall, display full screen, print.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Word Wall Maker — The Token Moose</title>
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
+</head>
+<body class="theme-bridged" data-app-id="word-wall-maker" data-app-title="Word Wall Maker">
+  <div id="app">
+    <header class="head">
+      <h1>Word Wall Maker</h1>
+      <p class="sub">Paste words · arrange · present or print</p>
+    </header>
+
+    <section class="panel">
+      <label for="title">Wall title</label>
+      <input type="text" id="title" maxlength="60" value="Our Word Wall">
+      <label for="words">Words (comma-separated)</label>
+      <textarea id="words" rows="4" placeholder="the, and, said, because, friend…"></textarea>
+      <div class="row">
+        <label for="cols">Columns</label>
+        <input type="number" id="cols" min="2" max="8" value="4">
+        <label class="check"><input type="checkbox" id="alpha" checked> Sort A–Z</label>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="btn-build">Build wall</button>
+        <button type="button" class="btn" id="btn-present">Present</button>
+        <button type="button" class="btn" id="btn-print">Print</button>
+        <button type="button" class="btn" id="btn-clear">Clear</button>
+      </div>
+    </section>
+
+    <div id="wall" class="wall" aria-live="polite"></div>
+  </div>
+
+  <div id="present" class="present" hidden>
+    <div class="present-bar">
+      <strong id="present-title">Our Word Wall</strong>
+      <button type="button" class="btn" id="btn-exit">Exit</button>
+    </div>
+    <div id="present-wall" class="wall present-grid"></div>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

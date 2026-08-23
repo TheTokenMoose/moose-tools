@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#166534">
+  <meta name="description" content="Sound Safari — hear a beginning sound and pick the matching picture or letter.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Sound Safari — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="sound-safari" data-app-title="Sound Safari">
+  <div id="app">
+    <section id="home">
+      <div class="hero">
+        <div class="emoji">🦁</div>
+        <h1>Sound Safari</h1>
+        <p class="tag">Hear the sound · find the match</p>
+        <p class="stars" id="stars">⭐ 0</p>
+      </div>
+      <div class="modes">
+        <button type="button" class="mode" data-mode="picture">Sound → picture</button>
+        <button type="button" class="mode" data-mode="letter">Sound → letter</button>
+      </div>
+    </section>
+    <section id="play" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score">⭐ 0</span>
+        <button type="button" class="btn ghost" id="btn-hear">🔊 Hear</button>
+      </div>
+      <p class="prompt" id="prompt">What starts with this sound?</p>
+      <div class="choices" id="choices"></div>
+    </section>
+    <section id="fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Yes!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

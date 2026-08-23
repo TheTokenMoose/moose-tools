@@ -1,0 +1,75 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-deep, #1e1b4b);
+  color: var(--text-primary, #eef2ff);
+}
+#app { max-width: 720px; margin: 0 auto; padding: 0.75rem 1rem 2rem; }
+.head { text-align: center; }
+.head h1 { margin: 0; font-size: clamp(1.35rem, 3.5vw, 1.75rem); }
+.sub { color: var(--text-muted, #c4b5fd); margin: 0.25rem 0 0.85rem; }
+.panel {
+  background: var(--bg-card, rgba(49,46,129,0.9));
+  border: 1px solid var(--border-subtle, rgba(167,139,250,0.3));
+  border-radius: 16px; padding: 1rem;
+}
+label { font-weight: 700; display: block; margin-bottom: 0.3rem; }
+textarea {
+  width: 100%; border-radius: 10px; border: 1px solid var(--border-subtle, rgba(167,139,250,0.35));
+  padding: 0.55rem 0.7rem; font: inherit; min-height: 10rem;
+  background: var(--bg-navy, #312e81); color: var(--text-primary, #eef2ff);
+}
+.actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem; }
+.btn {
+  min-height: 2.5rem; padding: 0.4rem 0.95rem; border-radius: 999px;
+  border: 2px solid var(--border-subtle, rgba(167,139,250,0.4));
+  background: transparent; color: var(--text-primary, #eef2ff);
+  font-weight: 800; cursor: pointer; font-family: inherit;
+}
+.btn.primary {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  border-color: transparent; color: #fff;
+}
+
+.practice {
+  position: fixed; inset: 0; z-index: 20000;
+  background: var(--bg-deep, #1e1b4b); color: var(--text-primary, #eef2ff);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 1rem; gap: 1rem;
+}
+.practice[hidden] { display: none !important; }
+.prac-bar {
+  width: 100%; max-width: 480px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.flip-card {
+  width: min(100%, 420px); min-height: 240px;
+  border-radius: 20px; border: 3px solid rgba(167,139,250,0.45);
+  background: linear-gradient(145deg, #4c1d95, #312e81);
+  color: #fff; cursor: pointer; font-family: inherit;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 1.5rem;
+}
+.flip-card .side {
+  font-size: clamp(1.5rem, 5vw, 2.2rem); font-weight: 900;
+  text-align: center; word-break: break-word;
+}
+.flip-card .hint { font-size: 0.85rem; opacity: 0.7; }
+.flip-card.is-back { background: linear-gradient(145deg, #7c3aed, #5b21b6); }
+.prac-nav { display: flex; gap: 0.6rem; }
+
+.print-area {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem;
+}
+.print-card {
+  border: 1px solid #ccc; border-radius: 10px; padding: 0.75rem;
+  background: #fff; color: #111; min-height: 100px;
+}
+.print-card strong { display: block; margin-bottom: 0.35rem; }
+
+@media print {
+  .tm-app-chrome, .panel, .practice { display: none !important; }
+  .print-area { display: grid !important; }
+  body { background: #fff; }
+}

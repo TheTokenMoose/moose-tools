@@ -583,6 +583,45 @@ const PROJECTS = [
     playUrl: "games/time-traveller/",
     installable: true,
     featured: true
+  },
+  {
+    id: "word-wall-maker",
+    title: "Word Wall Maker",
+    type: "tool",
+    description: "Paste classroom words, choose columns, optional A–Z sort, build a word wall, present full-screen, or print. Saved on this device.",
+    category: "Classroom",
+    subject: "Literacy / Classroom",
+    skills: ["Word wall", "Vocabulary", "Print", "Display", "Classroom"],
+    screenshot: "assets/screenshots/word-wall-maker.jpg",
+    playUrl: "tools/word-wall-maker/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "flashcard-maker",
+    title: "Flashcard Maker",
+    type: "tool",
+    description: "Create front|back flashcards (one pair per line). Practice with tap-to-flip, shuffle, and print a simple sheet. Deck saved locally.",
+    category: "Classroom",
+    subject: "Literacy / Study",
+    skills: ["Flashcards", "Vocabulary", "Review", "Print", "ESL"],
+    screenshot: "assets/screenshots/flashcard-maker.jpg",
+    playUrl: "tools/flashcard-maker/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "sound-safari",
+    title: "Sound Safari",
+    type: "game",
+    description: "Beginning-sound safari: hear a phoneme, then match the picture or the letter. Press Hear — no auto-read. Stars and progressive rounds for kindergarten phonics.",
+    category: "Literacy",
+    subject: "Phonics",
+    skills: ["phonics", "beginning sounds", "letter-sound", "listening", "ESL"],
+    screenshot: "assets/screenshots/sound-safari.jpg",
+    playUrl: "games/sound-safari/",
+    installable: true,
+    featured: true
   }
 ];
 

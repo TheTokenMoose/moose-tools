@@ -1,0 +1,14 @@
+{
+  "name": "Sound Safari",
+  "short_name": "Sound Safari",
+  "description": "Hear a beginning sound and match picture or letter.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#052e16",
+  "theme_color": "#166534",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
