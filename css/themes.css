@@ -266,15 +266,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.25rem;
-  padding: 0.35rem 0.85rem;
+  min-height: 2rem;
+  padding: 0.28rem 0.7rem;
   border-radius: 999px;
   border: 2px solid var(--border-subtle);
   background: var(--bg-card);
   color: var(--text-primary);
   font: inherit;
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   letter-spacing: 0.02em;
   line-height: 1;
   cursor: pointer;
@@ -441,8 +441,8 @@ html[data-theme="playful"] .calendar-widget {
 
 /* ── Projector Mode (modifier on top of any theme) ─────────────────── */
 html[data-projector="on"] {
-  --projector-scale: 1.12;
-  font-size: 112.5%;
+  --projector-scale: 1.08;
+  font-size: 108%;
 }
 html[data-projector="on"] body {
   line-height: 1.45;

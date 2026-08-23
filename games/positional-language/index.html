@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0e7490">
+  <meta name="description" content="Positional Language Adventure — under, on, between, next to for ESL kindergarten.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Positional Language — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="positional-language" data-app-title="Positional Language">
+  <div id="app">
+    <section id="home">
+      <div class="hero"><div class="emoji">🗺️</div>
+        <h1>Positional Language</h1>
+        <p class="tag">Under · on · between · next to · in</p>
+        <p class="stars" id="stars">⭐ 0</p>
+      </div>
+      <button type="button" class="btn primary start" id="btn-start">Start adventure</button>
+    </section>
+    <section id="play" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score">⭐ 0</span>
+        <button type="button" class="btn ghost" id="btn-hear">🔊</button>
+      </div>
+      <p class="prompt" id="prompt"></p>
+      <div class="scene" id="scene" aria-label="Scene"></div>
+      <div class="choices" id="choices"></div>
+    </section>
+    <section id="fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Yes!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

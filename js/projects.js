@@ -544,6 +544,45 @@ const PROJECTS = [
     playUrl: "games/number-bonds-bakery/",
     installable: true,
     featured: true
+  },
+  {
+    id: "measurement-monster",
+    title: "Measurement Monster",
+    type: "game",
+    description: "Compare length, height, and weight: longer/shorter, taller, heavier/lighter. Visual bars and friendly items, stars, press-to-hear. Kindergarten measurement language.",
+    category: "Math",
+    subject: "Math",
+    skills: ["measurement", "compare", "length", "height", "weight", "ESL"],
+    screenshot: "assets/screenshots/measurement-monster.jpg",
+    playUrl: "games/measurement-monster/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "positional-language",
+    title: "Positional Language",
+    type: "game",
+    description: "Where is the cat? under, on, in, next to, between. Simple scene + multiple choice for ESL kindergarten positional language.",
+    category: "Literacy",
+    subject: "ESL / Literacy",
+    skills: ["positional language", "prepositions", "listening", "vocabulary", "ESL"],
+    screenshot: "assets/screenshots/positional-language.jpg",
+    playUrl: "games/positional-language/",
+    installable: true,
+    featured: true
+  },
+  {
+    id: "time-traveller",
+    title: "Time Traveller",
+    type: "game",
+    description: "Read analogue clocks: o'clock only, or o'clock and half past. Clear clock face, three choices, stars, press-to-hear.",
+    category: "Math",
+    subject: "Math",
+    skills: ["time", "analogue clock", "o'clock", "half past", "ESL"],
+    screenshot: "assets/screenshots/time-traveller.jpg",
+    playUrl: "games/time-traveller/",
+    installable: true,
+    featured: true
   }
 ];
 
