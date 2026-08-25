@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#db2777">
+  <meta name="description" content="Feelings Detective — match faces, situations, and feeling words for SEL and ESL.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Feelings Detective — The Token Moose</title>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="feelings-detective" data-app-title="Feelings Detective">
+  <div id="app">
+    <section id="home">
+      <div class="hero">
+        <div class="emoji">🕵️</div>
+        <h1>Feelings Detective</h1>
+        <p class="tag">Name the feeling · notice the clues</p>
+        <p class="stars" id="stars">⭐ 0</p>
+      </div>
+      <div class="modes">
+        <button type="button" class="mode" data-mode="face">Face → word</button>
+        <button type="button" class="mode" data-mode="scene">Story → feeling</button>
+        <button type="button" class="mode" data-mode="mix">Mix</button>
+      </div>
+    </section>
+    <section id="play" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-home">← Home</button>
+        <span id="score">⭐ 0</span>
+        <button type="button" class="btn ghost" id="btn-hear">🔊</button>
+      </div>
+      <p class="prompt" id="prompt"></p>
+      <div class="clue" id="clue" aria-live="polite"></div>
+      <div class="choices" id="choices"></div>
+    </section>
+    <section id="fb" hidden>
+      <div class="panel">
+        <div class="fb-icon" id="fb-icon">⭐</div>
+        <h2 id="fb-title">Yes!</h2>
+        <p id="fb-msg"></p>
+        <div class="btn-row">
+          <button type="button" class="btn primary" id="btn-next">Next</button>
+          <button type="button" class="btn ghost" id="btn-again">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

@@ -1,10 +1,5 @@
-const CACHE = "sort-it-v2";
-const ASSETS = [
-  "./", "./index.html", "./css/game.css", "./js/app.js", "./js/packs.js",
-  "./manifest.webmanifest", "./pwa-install.js", "./pwa-install.css",
-  "./icons/icon-192.png", "./icons/icon-512.png",
-  "../../js/app-chrome.js", "../../js/voice.js"
-];
+const CACHE = "feelings-detective-v1";
+const ASSETS = ["./","./index.html","./css/game.css","./js/game.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js","../../js/voice.js"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS).catch(() => {})).then(() => self.skipWaiting()));
 });

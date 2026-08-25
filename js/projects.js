@@ -622,6 +622,19 @@ const PROJECTS = [
     playUrl: "games/sound-safari/",
     installable: true,
     featured: true
+  },
+  {
+    id: "feelings-detective",
+    title: "Feelings Detective",
+    type: "game",
+    description: "SEL game for early years: match faces or short situations to feeling words (happy, sad, angry, scared, and more). Press Hear, gentle feedback, stars. Supports ESL emotion vocabulary.",
+    category: "SEL",
+    subject: "SEL / ESL",
+    skills: ["feelings", "emotions", "empathy", "vocabulary", "ESL", "SEL"],
+    screenshot: "assets/screenshots/feelings-detective.jpg",
+    playUrl: "games/feelings-detective/",
+    installable: true,
+    featured: true
   }
 ];
 

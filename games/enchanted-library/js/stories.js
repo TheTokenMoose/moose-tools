@@ -97,563 +97,563 @@ window.ENCHANTED_STORIES = {
     }
   },
   "nodes": {
-    "easy_forest_root": {
-      "text": "You open a book and step into a green forest. Soft light falls through the leaves. A path goes left. A bridge goes right.",
-      "choices": [
-        {
-          "text": "Take the path",
-          "next": "easy_forest_path"
-        },
-        {
-          "text": "Cross the bridge",
-          "next": "easy_forest_bridge"
-        }
-      ]
-    },
-    "easy_forest_path": {
-      "text": "The path leads to a friendly fox. The fox holds a small golden key.",
-      "choices": [
-        {
-          "text": "Talk to the fox",
-          "next": "easy_forest_fox"
-        },
-        {
-          "text": "Look for the keyhole",
-          "next": "easy_forest_keyhole"
-        }
-      ]
-    },
-    "easy_forest_bridge": {
-      "text": "The bridge creaks. Below you see a sparkling stream and a shiny pebble.",
-      "choices": [
-        {
-          "text": "Pick up the pebble",
-          "next": "easy_forest_pebble"
-        },
-        {
-          "text": "Finish crossing",
-          "next": "easy_forest_other_side"
-        }
-      ]
-    },
-    "easy_forest_fox": {
-      "text": "The fox says, “This key opens the story tree. Will you help me find it?”",
-      "choices": [
-        {
-          "text": "Help the fox",
-          "next": "easy_forest_e_help"
-        },
-        {
-          "text": "Keep the key yourself",
-          "next": "easy_forest_e_key"
-        }
-      ]
-    },
-    "easy_forest_keyhole": {
-      "text": "You find a tiny door in an old oak. The keyhole is just the right size.",
-      "choices": [
-        {
-          "text": "Open the door",
-          "next": "easy_forest_e_door"
-        },
-        {
-          "text": "Knock first",
-          "next": "easy_forest_e_knock"
-        }
-      ]
-    },
-    "easy_forest_pebble": {
-      "text": "The pebble glows warm in your hand. A fish pops up and smiles.",
-      "choices": [
-        {
-          "text": "Show the pebble to the fish",
-          "next": "easy_forest_e_fish"
-        },
-        {
-          "text": "Put the pebble in your pocket",
-          "next": "easy_forest_e_pocket"
-        }
-      ]
-    },
-    "easy_forest_other_side": {
-      "text": "On the other side you meet a baby owl who has lost its way home.",
-      "choices": [
-        {
-          "text": "Help the owl",
-          "next": "easy_forest_e_owl"
-        },
-        {
-          "text": "Wave and walk on",
-          "next": "easy_forest_e_wave"
-        }
-      ]
-    },
-    "easy_forest_e_help": {
-      "ending": true,
-      "title": "Forest Friends",
-      "scene": "forest_home",
-      "text": "You and the fox find the story tree together. The forest fills with soft light. You have made a true friend."
-    },
-    "easy_forest_e_key": {
-      "ending": true,
-      "title": "Keeper of the Key",
-      "scene": "treasure",
-      "text": "You keep the golden key. One day it will open a door only you can find. The forest whispers your name."
-    },
-    "easy_forest_e_door": {
-      "ending": true,
-      "title": "Inside the Oak",
-      "scene": "cave_light",
-      "text": "Inside the oak is a room full of picture books. You read until the stars come out. The forest keeps you safe."
-    },
-    "easy_forest_e_knock": {
-      "ending": true,
-      "title": "The Tree’s Welcome",
-      "scene": "forest_home",
-      "text": "A kind voice invites you in. The tree gives you a leaf that never fades. You feel brave and calm."
-    },
-    "easy_forest_e_fish": {
-      "ending": true,
-      "title": "Stream Secret",
-      "scene": "ocean_boat",
-      "text": "The fish leads you to a hidden pool of starlight. You make a wish. The forest remembers it."
-    },
-    "easy_forest_e_pocket": {
-      "ending": true,
-      "title": "Lucky Pebble",
-      "scene": "treasure",
-      "text": "Your glowing pebble lights the way home. You leave the forest with a pocket full of luck."
-    },
-    "easy_forest_e_owl": {
-      "ending": true,
-      "title": "Owl Guide",
-      "scene": "moon",
-      "text": "You help the baby owl find its nest. The mother owl gives you a feather. It shines in the dark."
-    },
-    "easy_forest_e_wave": {
-      "ending": true,
-      "title": "Quiet Path",
-      "scene": "forest_home",
-      "text": "You walk on through the quiet trees. The forest is peaceful. You close the book feeling rested."
-    },
-    "easy_castle_root": {
-      "text": "You push open a heavy castle door. Torches glow along the hall. Stairs go up. A garden door is open to the side.",
-      "choices": [
-        {
-          "text": "Climb the stairs",
-          "next": "easy_castle_stairs"
-        },
-        {
-          "text": "Go to the garden",
-          "next": "easy_castle_garden"
-        }
-      ]
-    },
-    "easy_castle_stairs": {
-      "text": "At the top you find a crown on a cushion and a friendly dragon the size of a cat.",
-      "choices": [
-        {
-          "text": "Say hello to the dragon",
-          "next": "easy_castle_dragon"
-        },
-        {
-          "text": "Look at the crown",
-          "next": "easy_castle_crown"
-        }
-      ]
-    },
-    "easy_castle_garden": {
-      "text": "Roses climb the walls. A small knight is watering the flowers.",
-      "choices": [
-        {
-          "text": "Help water the roses",
-          "next": "easy_castle_roses"
-        },
-        {
-          "text": "Ask about the castle",
-          "next": "easy_castle_ask"
-        }
-      ]
-    },
-    "easy_castle_dragon": {
-      "text": "The dragon purrs. “I guard kindness, not gold,” it says.",
-      "choices": [
-        {
-          "text": "Offer a snack from your bag",
-          "next": "easy_castle_e_snack"
-        },
-        {
-          "text": "Ask to be friends",
-          "next": "easy_castle_e_friend"
-        }
-      ]
-    },
-    "easy_castle_crown": {
-      "text": "The crown is made of paper stars. A note says: For the bravest helper.",
-      "choices": [
-        {
-          "text": "Try on the crown",
-          "next": "easy_castle_e_crown"
-        },
-        {
-          "text": "Leave it for someone else",
-          "next": "easy_castle_e_leave"
-        }
-      ]
-    },
-    "easy_castle_roses": {
-      "text": "You water the roses. They bloom in every colour. The knight cheers.",
-      "choices": [
-        {
-          "text": "Pick one rose to keep",
-          "next": "easy_castle_e_rose"
-        },
-        {
-          "text": "Plant a new seed",
-          "next": "easy_castle_e_seed"
-        }
-      ]
-    },
-    "easy_castle_ask": {
-      "text": "The knight says the castle belongs to anyone who is kind.",
-      "choices": [
-        {
-          "text": "Promise to be kind",
-          "next": "easy_castle_e_kind"
-        },
-        {
-          "text": "Explore one more room",
-          "next": "easy_castle_e_room"
-        }
-      ]
-    },
-    "easy_castle_e_snack": {
-      "ending": true,
-      "title": "Dragon Guest",
-      "scene": "dragon_friend",
-      "text": "The little dragon shares a biscuit with you. You are welcome in the castle whenever you return."
-    },
-    "easy_castle_e_friend": {
-      "ending": true,
-      "title": "Dragon Friend",
-      "scene": "dragon_friend",
-      "text": "You and the dragon become friends. It flies you once around the tower before you say goodbye."
-    },
-    "easy_castle_e_crown": {
-      "ending": true,
-      "title": "Star Crown",
-      "scene": "crown",
-      "text": "The paper crown fits perfectly. You feel proud—not of gold, but of trying your best."
-    },
-    "easy_castle_e_leave": {
-      "ending": true,
-      "title": "Thoughtful Heart",
-      "scene": "castle",
-      "text": "You leave the crown for another child. The castle glows a little warmer. Kindness is its own reward."
-    },
-    "easy_castle_e_rose": {
-      "ending": true,
-      "title": "Garden Gift",
-      "scene": "garden",
-      "text": "Your rose smells like summer. You press it in the book so you can keep the memory."
-    },
-    "easy_castle_e_seed": {
-      "ending": true,
-      "title": "New Bloom",
-      "scene": "garden",
-      "text": "Your seed grows into a tiny tree. The knight names it after you. The garden will remember."
-    },
-    "easy_castle_e_kind": {
-      "ending": true,
-      "title": "Castle Promise",
-      "scene": "castle",
-      "text": "Your promise echoes in the hall. The castle doors will always open for a kind heart."
-    },
-    "easy_castle_e_room": {
-      "ending": true,
-      "title": "Secret Window",
-      "scene": "castle",
-      "text": "You find a window that shows your own classroom. You smile, close the book, and feel ready for the day."
-    },
-    "easy_sea_root": {
-      "text": "You hear waves. You stand on warm sand. A boat rocks nearby. Shells shine at the water’s edge.",
-      "choices": [
-        {
-          "text": "Climb into the boat",
-          "next": "easy_sea_boat"
-        },
-        {
-          "text": "Collect shells",
-          "next": "easy_sea_shells"
-        }
-      ]
-    },
-    "easy_sea_boat": {
-      "text": "The boat drifts to a small island. A lighthouse blinks a friendly light.",
-      "choices": [
-        {
-          "text": "Visit the lighthouse",
-          "next": "easy_sea_light"
-        },
-        {
-          "text": "Search the beach",
-          "next": "easy_sea_beach"
-        }
-      ]
-    },
-    "easy_sea_shells": {
-      "text": "You find a shell that whispers when you hold it to your ear.",
-      "choices": [
-        {
-          "text": "Listen carefully",
-          "next": "easy_sea_listen"
-        },
-        {
-          "text": "Give the shell to the waves",
-          "next": "easy_sea_give"
-        }
-      ]
-    },
-    "easy_sea_light": {
-      "text": "The lighthouse keeper is a cheerful seal with a yellow scarf.",
-      "choices": [
-        {
-          "text": "Help polish the lamp",
-          "next": "easy_sea_e_lamp"
-        },
-        {
-          "text": "Share a story",
-          "next": "easy_sea_e_story"
-        }
-      ]
-    },
-    "easy_sea_beach": {
-      "text": "You find a bottle with a map drawn in crayon.",
-      "choices": [
-        {
-          "text": "Follow the map",
-          "next": "easy_sea_e_map"
-        },
-        {
-          "text": "Draw your own map",
-          "next": "easy_sea_e_draw"
-        }
-      ]
-    },
-    "easy_sea_listen": {
-      "text": "The shell says, “Be brave. The sea loves curious children.”",
-      "choices": [
-        {
-          "text": "Thank the shell",
-          "next": "easy_sea_e_thank"
-        },
-        {
-          "text": "Ask one more question",
-          "next": "easy_sea_e_ask"
-        }
-      ]
-    },
-    "easy_sea_give": {
-      "text": "You return the shell. The water sparkles as if saying thank you.",
-      "choices": [
-        {
-          "text": "Paddle at the shore",
-          "next": "easy_sea_e_paddle"
-        },
-        {
-          "text": "Watch the sunset",
-          "next": "easy_sea_e_sunset"
-        }
-      ]
-    },
-    "easy_sea_e_lamp": {
-      "ending": true,
-      "title": "Bright Keeper",
-      "scene": "ocean_boat",
-      "text": "The lamp shines farther than ever. Ships far away see your light. You helped the whole sea."
-    },
-    "easy_sea_e_story": {
-      "ending": true,
-      "title": "Seal’s Tale",
-      "scene": "ocean_boat",
-      "text": "The seal tells a silly story about dancing crabs. You laugh until your sides hurt."
-    },
-    "easy_sea_e_map": {
-      "ending": true,
-      "title": "Island Treasure",
-      "scene": "treasure",
-      "text": "The map leads to a chest of smooth sea glass. You take one piece and leave the rest for others."
-    },
-    "easy_sea_e_draw": {
-      "ending": true,
-      "title": "Cartographer",
-      "scene": "map",
-      "text": "Your crayon map becomes part of the book. Future readers will follow your lines."
-    },
-    "easy_sea_e_thank": {
-      "ending": true,
-      "title": "Shell Blessing",
-      "scene": "ocean_boat",
-      "text": "The shell grows quiet and warm. You keep it as a reminder to be brave."
-    },
-    "easy_sea_e_ask": {
-      "ending": true,
-      "title": "Sea Answer",
-      "scene": "ocean_boat",
-      "text": "The shell answers, “Home is wherever you are kind.” You understand."
-    },
-    "easy_sea_e_paddle": {
-      "ending": true,
-      "title": "Tide Play",
-      "scene": "ocean_boat",
-      "text": "Cool water tickles your toes. You play until the tide says it is time to go."
-    },
-    "easy_sea_e_sunset": {
-      "ending": true,
-      "title": "Golden Sky",
-      "scene": "sun",
-      "text": "The sky turns gold and pink. You close the book with the sound of waves still in your ears."
-    },
-    "easy_stars_root": {
-      "text": "A ladder of starlight climbs into the night sky. Planets float like lanterns.",
-      "choices": [
-        {
-          "text": "Climb the ladder",
-          "next": "easy_stars_climb"
-        },
-        {
-          "text": "Ride a small comet",
-          "next": "easy_stars_comet"
-        }
-      ]
-    },
-    "easy_stars_climb": {
-      "text": "At the top sits a moon rabbit with a teacup.",
-      "choices": [
-        {
-          "text": "Share tea",
-          "next": "easy_stars_tea"
-        },
-        {
-          "text": "Ask about the stars",
-          "next": "easy_stars_ask"
-        }
-      ]
-    },
-    "easy_stars_comet": {
-      "text": "The comet zooms past colourful clouds. You feel weightless and free.",
-      "choices": [
-        {
-          "text": "Hold on tight",
-          "next": "easy_stars_hold"
-        },
-        {
-          "text": "Wave at a planet",
-          "next": "easy_stars_wave"
-        }
-      ]
-    },
-    "easy_stars_tea": {
-      "text": "The tea tastes like peppermint and night air.",
-      "choices": [
-        {
-          "text": "Stay for a story",
-          "next": "easy_stars_e_story"
-        },
-        {
-          "text": "Thank the rabbit and climb down",
-          "next": "easy_stars_e_down"
-        }
-      ]
-    },
-    "easy_stars_ask": {
-      "text": "The rabbit says each star is a wish someone kept.",
-      "choices": [
-        {
-          "text": "Make a quiet wish",
-          "next": "easy_stars_e_wish"
-        },
-        {
-          "text": "Promise to be a good friend",
-          "next": "easy_stars_e_promise"
-        }
-      ]
-    },
-    "easy_stars_hold": {
-      "text": "The comet slows beside a soft cloud bed.",
-      "choices": [
-        {
-          "text": "Rest on the cloud",
-          "next": "easy_stars_e_rest"
-        },
-        {
-          "text": "Ask the comet to go home",
-          "next": "easy_stars_e_home"
-        }
-      ]
-    },
-    "easy_stars_wave": {
-      "text": "A planet waves back with a swirl of clouds.",
-      "choices": [
-        {
-          "text": "Visit the planet",
-          "next": "easy_stars_e_visit"
-        },
-        {
-          "text": "Keep flying",
-          "next": "easy_stars_e_fly"
-        }
-      ]
-    },
-    "easy_stars_e_story": {
-      "ending": true,
-      "title": "Moon Tale",
-      "scene": "moon",
-      "text": "The rabbit’s story is about a child just like you. You feel seen among the stars."
-    },
-    "easy_stars_e_down": {
-      "ending": true,
-      "title": "Safe Return",
-      "scene": "star_ship",
-      "text": "You climb down carefully. The ladder fades, but the memory of tea stays warm."
-    },
-    "easy_stars_e_wish": {
-      "ending": true,
-      "title": "Star Wish",
-      "scene": "stars",
-      "text": "Your wish glows and settles into the sky. Somewhere, it begins to come true slowly."
-    },
-    "easy_stars_e_promise": {
-      "ending": true,
-      "title": "Promise Light",
-      "scene": "stars",
-      "text": "Your promise shines. The stars seem closer, as if they heard you."
-    },
-    "easy_stars_e_rest": {
-      "ending": true,
-      "title": "Cloud Nap",
-      "scene": "moon",
-      "text": "You rest on the cloud and dream of kindness. You wake ready for a new adventure."
-    },
-    "easy_stars_e_home": {
-      "ending": true,
-      "title": "Comet Ride Home",
-      "scene": "star_ship",
-      "text": "The comet carries you gently back to the library. What a ride!"
-    },
-    "easy_stars_e_visit": {
-      "ending": true,
-      "title": "Planet Hello",
-      "scene": "star_ship",
-      "text": "The planet’s people greet you with music. You dance once, then wave goodbye."
-    },
-    "easy_stars_e_fly": {
-      "ending": true,
-      "title": "Sky Path",
-      "scene": "stars",
-      "text": "You fly until the first morning light. The stars whisper, “Come back soon.”"
-    },
-    "medium_forest_root": {
+"easy_forest_root": {
+    "text": "You open a book and step into a green forest. Soft light falls through the leaves. A path goes left. A wooden bridge goes right.",
+    "choices": [
+      {
+        "text": "Take the path",
+        "next": "easy_forest_path"
+      },
+      {
+        "text": "Cross the bridge",
+        "next": "easy_forest_bridge"
+      }
+    ]
+  },
+  "easy_forest_path": {
+    "text": "The path leads to a friendly fox. The fox holds a small gold key and a shiny red berry.",
+    "choices": [
+      {
+        "text": "Take the key",
+        "next": "easy_forest_key"
+      },
+      {
+        "text": "Take the berry",
+        "next": "easy_forest_berry"
+      }
+    ]
+  },
+  "easy_forest_bridge": {
+    "text": "The bridge crosses a clear stream. Under the water you see a silver fish. On the far bank sits a sleepy owl.",
+    "choices": [
+      {
+        "text": "Follow the fish",
+        "next": "easy_forest_fish"
+      },
+      {
+        "text": "Talk to the owl",
+        "next": "easy_forest_owl"
+      }
+    ]
+  },
+  "easy_forest_key": {
+    "text": "The key fits a tiny door in an old oak. Inside is a warm room with a map of the forest.",
+    "choices": [
+      {
+        "text": "Read the map",
+        "next": "easy_forest_e_map"
+      },
+      {
+        "text": "Rest by the fire",
+        "next": "easy_forest_e_rest"
+      }
+    ]
+  },
+  "easy_forest_berry": {
+    "text": "You share the berry with the fox. The fox shows you a secret garden full of glowing flowers.",
+    "choices": [
+      {
+        "text": "Pick a flower",
+        "next": "easy_forest_e_flower"
+      },
+      {
+        "text": "Dance with the fox",
+        "next": "easy_forest_e_dance"
+      }
+    ]
+  },
+  "easy_forest_fish": {
+    "text": "The silver fish leads you to a smooth stone. When you touch it, the stream sings a soft song.",
+    "choices": [
+      {
+        "text": "Sing along",
+        "next": "easy_forest_e_song"
+      },
+      {
+        "text": "Thank the fish",
+        "next": "easy_forest_e_thanks"
+      }
+    ]
+  },
+  "easy_forest_owl": {
+    "text": "The owl opens one eye. \"Be kind in this forest,\" it says, \"and the trees will help you home.\"",
+    "choices": [
+      {
+        "text": "Promise to be kind",
+        "next": "easy_forest_e_kind"
+      },
+      {
+        "text": "Ask the way home",
+        "next": "easy_forest_e_home"
+      }
+    ]
+  },
+  "easy_forest_e_map": {
+    "ending": true,
+    "title": "The Forest Map",
+    "scene": "forest",
+    "text": "You follow the map and find a sunny clearing. Your adventure ends with a smile and a pocket full of leaves."
+  },
+  "easy_forest_e_rest": {
+    "ending": true,
+    "title": "A Warm Rest",
+    "scene": "forest",
+    "text": "You rest by the fire. When you wake, you are back in the library with pine needles on your shoes."
+  },
+  "easy_forest_e_flower": {
+    "ending": true,
+    "title": "The Glowing Flower",
+    "scene": "forest",
+    "text": "The flower glows in your hand. You return to the library holding a soft light that smells like spring."
+  },
+  "easy_forest_e_dance": {
+    "ending": true,
+    "title": "Dance with the Fox",
+    "scene": "forest",
+    "text": "You dance until the stars come out. The fox waves goodbye as the book closes gently."
+  },
+  "easy_forest_e_song": {
+    "ending": true,
+    "title": "Song of the Stream",
+    "scene": "forest",
+    "text": "Your song joins the stream. Birds answer from the trees. You close the book feeling calm and brave."
+  },
+  "easy_forest_e_thanks": {
+    "ending": true,
+    "title": "A Silver Scale",
+    "scene": "forest",
+    "text": "The fish flicks its tail and gives you a shiny scale. You keep it as a memory of the forest."
+  },
+  "easy_forest_e_kind": {
+    "ending": true,
+    "title": "Kindness Path",
+    "scene": "forest",
+    "text": "The trees lean in and make a soft path home. Kindness was the real key all along."
+  },
+  "easy_forest_e_home": {
+    "ending": true,
+    "title": "Home Again",
+    "scene": "forest",
+    "text": "The owl points with a wing. You walk the path and step back into the library, safe and happy."
+  },
+  "easy_castle_root": {
+    "text": "A tall castle door stands open. Inside, soft music plays. Stairs go up. A garden path goes left.",
+    "choices": [
+      {
+        "text": "Climb the stairs",
+        "next": "easy_castle_stairs"
+      },
+      {
+        "text": "Visit the garden",
+        "next": "easy_castle_garden"
+      }
+    ]
+  },
+  "easy_castle_stairs": {
+    "text": "At the top of the stairs you meet a small dragon with kind eyes. It guards a shiny crown and a plate of cookies.",
+    "choices": [
+      {
+        "text": "Ask about the crown",
+        "next": "easy_castle_crown"
+      },
+      {
+        "text": "Share the cookies",
+        "next": "easy_castle_cookies"
+      }
+    ]
+  },
+  "easy_castle_garden": {
+    "text": "The garden is full of roses. A friendly knight is watering them. A little mouse peeks from under a leaf.",
+    "choices": [
+      {
+        "text": "Help the knight",
+        "next": "easy_castle_help"
+      },
+      {
+        "text": "Follow the mouse",
+        "next": "easy_castle_mouse"
+      }
+    ]
+  },
+  "easy_castle_crown": {
+    "text": "The dragon says the crown is for someone kind. \"Will you try it on, or give it to a friend?\"",
+    "choices": [
+      {
+        "text": "Try it on",
+        "next": "easy_castle_e_try"
+      },
+      {
+        "text": "Give it to a friend",
+        "next": "easy_castle_e_give"
+      }
+    ]
+  },
+  "easy_castle_cookies": {
+    "text": "You and the dragon crunch cookies together. Crumbs make you both laugh.",
+    "choices": [
+      {
+        "text": "Tell a joke",
+        "next": "easy_castle_e_joke"
+      },
+      {
+        "text": "Ask for a tour",
+        "next": "easy_castle_e_tour"
+      }
+    ]
+  },
+  "easy_castle_help": {
+    "text": "You water the roses. The knight smiles and hands you a single red rose.",
+    "choices": [
+      {
+        "text": "Keep the rose",
+        "next": "easy_castle_e_rose"
+      },
+      {
+        "text": "Put it on a statue",
+        "next": "easy_castle_e_statue"
+      }
+    ]
+  },
+  "easy_castle_mouse": {
+    "text": "The mouse leads you to a tiny door. Behind it is a room full of storybooks just your size.",
+    "choices": [
+      {
+        "text": "Read a story",
+        "next": "easy_castle_e_read"
+      },
+      {
+        "text": "Wave goodbye",
+        "next": "easy_castle_e_wave"
+      }
+    ]
+  },
+  "easy_castle_e_try": {
+    "ending": true,
+    "title": "A Silly Crown",
+    "scene": "castle",
+    "text": "The crown is too big and slips over your eyes. You and the dragon laugh until the book closes."
+  },
+  "easy_castle_e_give": {
+    "ending": true,
+    "title": "A Gift of Kindness",
+    "scene": "castle",
+    "text": "You give the crown to a shy friend in the hall. They stand taller. You feel proud."
+  },
+  "easy_castle_e_joke": {
+    "ending": true,
+    "title": "Cookie Laughter",
+    "scene": "castle",
+    "text": "Your joke makes the dragon snort little sparks of joy. The castle feels warmer than before."
+  },
+  "easy_castle_e_tour": {
+    "ending": true,
+    "title": "Castle Tour",
+    "scene": "castle",
+    "text": "The dragon shows you every tower. When you leave, you know every secret stair by heart."
+  },
+  "easy_castle_e_rose": {
+    "ending": true,
+    "title": "The Red Rose",
+    "scene": "castle",
+    "text": "You keep the rose. Its scent stays with you when you step back into the library."
+  },
+  "easy_castle_e_statue": {
+    "ending": true,
+    "title": "Statue Smile",
+    "scene": "castle",
+    "text": "The statue seems to smile. A soft wind says thank you as the garden fades into the page."
+  },
+  "easy_castle_e_read": {
+    "ending": true,
+    "title": "Tiny Library",
+    "scene": "castle",
+    "text": "You read until the last page. The mouse curls up happy. You close the big library book softly."
+  },
+  "easy_castle_e_wave": {
+    "ending": true,
+    "title": "A Friendly Wave",
+    "scene": "castle",
+    "text": "You wave to the mouse and walk into the sunlight. The castle door closes with a gentle click."
+  },
+  "easy_sea_root": {
+    "text": "You hold a sea shell to your ear and splash into a bright blue ocean. A boat floats nearby. A coral reef glows below.",
+    "choices": [
+      {
+        "text": "Climb into the boat",
+        "next": "easy_sea_boat"
+      },
+      {
+        "text": "Dive to the reef",
+        "next": "easy_sea_reef"
+      }
+    ]
+  },
+  "easy_sea_boat": {
+    "text": "In the boat sits a cheerful seagull with a map. Waves rock you gently.",
+    "choices": [
+      {
+        "text": "Sail to the island",
+        "next": "easy_sea_island"
+      },
+      {
+        "text": "Follow the map star",
+        "next": "easy_sea_star"
+      }
+    ]
+  },
+  "easy_sea_reef": {
+    "text": "Colourful fish swim around you. A shy octopus offers a shiny pebble and a smooth shell.",
+    "choices": [
+      {
+        "text": "Take the pebble",
+        "next": "easy_sea_pebble"
+      },
+      {
+        "text": "Take the shell",
+        "next": "easy_sea_shell"
+      }
+    ]
+  },
+  "easy_sea_island": {
+    "text": "The island has soft sand and a picnic blanket. Someone left juice and fruit for visitors.",
+    "choices": [
+      {
+        "text": "Have a picnic",
+        "next": "easy_sea_e_picnic"
+      },
+      {
+        "text": "Build a sandcastle",
+        "next": "easy_sea_e_sand"
+      }
+    ]
+  },
+  "easy_sea_star": {
+    "text": "The map star leads to a calm bay where dolphins jump in the sunset.",
+    "choices": [
+      {
+        "text": "Wave to the dolphins",
+        "next": "easy_sea_e_dolphin"
+      },
+      {
+        "text": "Draw the sunset",
+        "next": "easy_sea_e_sunset"
+      }
+    ]
+  },
+  "easy_sea_pebble": {
+    "text": "The pebble glows blue. The octopus claps its arms. \"You found courage,\" it says.",
+    "choices": [
+      {
+        "text": "Say thank you",
+        "next": "easy_sea_e_thanks"
+      },
+      {
+        "text": "Share a smile",
+        "next": "easy_sea_e_smile"
+      }
+    ]
+  },
+  "easy_sea_shell": {
+    "text": "The shell plays a soft ocean song. You feel sleepy and safe in the water.",
+    "choices": [
+      {
+        "text": "Listen longer",
+        "next": "easy_sea_e_listen"
+      },
+      {
+        "text": "Swim up for air",
+        "next": "easy_sea_e_air"
+      }
+    ]
+  },
+  "easy_sea_e_picnic": {
+    "ending": true,
+    "title": "Island Picnic",
+    "scene": "sea",
+    "text": "You share the picnic with the seagull. Salt air and sweet fruit end your sea day happily."
+  },
+  "easy_sea_e_sand": {
+    "ending": true,
+    "title": "Sandcastle Hero",
+    "scene": "sea",
+    "text": "Your sandcastle has a tiny flag. A wave bows to it before the story ends."
+  },
+  "easy_sea_e_dolphin": {
+    "ending": true,
+    "title": "Dolphin Hello",
+    "scene": "sea",
+    "text": "A dolphin clicks hello. You ride a gentle wake back toward the library shore."
+  },
+  "easy_sea_e_sunset": {
+    "ending": true,
+    "title": "Sunset Picture",
+    "scene": "sea",
+    "text": "Your drawing of the sunset stays on the page. Orange light fills the library window."
+  },
+  "easy_sea_e_thanks": {
+    "ending": true,
+    "title": "Ocean Thanks",
+    "scene": "sea",
+    "text": "The octopus blushes purple. Friendship is the treasure you carry home."
+  },
+  "easy_sea_e_smile": {
+    "ending": true,
+    "title": "Reef Smiles",
+    "scene": "sea",
+    "text": "You smile so wide the fish smile back. The reef sparkles one last time."
+  },
+  "easy_sea_e_listen": {
+    "ending": true,
+    "title": "Shell Lullaby",
+    "scene": "sea",
+    "text": "The shell song becomes a lullaby. You wake in the library, calm as a quiet tide."
+  },
+  "easy_sea_e_air": {
+    "ending": true,
+    "title": "Fresh Air",
+    "scene": "sea",
+    "text": "You break the surface and laugh. Fresh air and blue sky close the chapter."
+  },
+  "easy_stars_root": {
+    "text": "A silver ladder reaches into the night sky. Stars blink like friendly eyes. You can climb up or follow a comet trail.",
+    "choices": [
+      {
+        "text": "Climb the ladder",
+        "next": "easy_stars_ladder"
+      },
+      {
+        "text": "Follow the comet",
+        "next": "easy_stars_comet"
+      }
+    ]
+  },
+  "easy_stars_ladder": {
+    "text": "At the top of the ladder is a moon platform. A kind star offers you a telescope and a blanket.",
+    "choices": [
+      {
+        "text": "Use the telescope",
+        "next": "easy_stars_scope"
+      },
+      {
+        "text": "Wrap the blanket",
+        "next": "easy_stars_blanket"
+      }
+    ]
+  },
+  "easy_stars_comet": {
+    "text": "The comet trail sparkles under your feet. You meet a quiet astronaut planting a tiny flag.",
+    "choices": [
+      {
+        "text": "Help plant the flag",
+        "next": "easy_stars_flag"
+      },
+      {
+        "text": "Ask about Earth",
+        "next": "easy_stars_earth"
+      }
+    ]
+  },
+  "easy_stars_scope": {
+    "text": "Through the telescope you see your town, tiny and glowing. Home feels close even among the stars.",
+    "choices": [
+      {
+        "text": "Wave to home",
+        "next": "easy_stars_e_wave"
+      },
+      {
+        "text": "Count the lights",
+        "next": "easy_stars_e_count"
+      }
+    ]
+  },
+  "easy_stars_blanket": {
+    "text": "The blanket is warm. The star tells stories of brave night travellers.",
+    "choices": [
+      {
+        "text": "Listen to a story",
+        "next": "easy_stars_e_story"
+      },
+      {
+        "text": "Share your own story",
+        "next": "easy_stars_e_share"
+      }
+    ]
+  },
+  "easy_stars_flag": {
+    "text": "Together you push the flag into soft star-dust. It shines with your name.",
+    "choices": [
+      {
+        "text": "Cheer",
+        "next": "easy_stars_e_cheer"
+      },
+      {
+        "text": "Take a photo",
+        "next": "easy_stars_e_photo"
+      }
+    ]
+  },
+  "easy_stars_earth": {
+    "text": "The astronaut points to a blue marble in the dark. \"That is where kindness begins,\" they say.",
+    "choices": [
+      {
+        "text": "Promise to be kind",
+        "next": "easy_stars_e_kind"
+      },
+      {
+        "text": "Head home",
+        "next": "easy_stars_e_home"
+      }
+    ]
+  },
+  "easy_stars_e_wave": {
+    "ending": true,
+    "title": "Wave to Home",
+    "scene": "stars",
+    "text": "You wave at the tiny lights. Somewhere, someone waves back in a dream."
+  },
+  "easy_stars_e_count": {
+    "ending": true,
+    "title": "Counting Lights",
+    "scene": "stars",
+    "text": "You count to twenty lights and stop, happy. Numbers and stars mix in your mind."
+  },
+  "easy_stars_e_story": {
+    "ending": true,
+    "title": "Star Story",
+    "scene": "stars",
+    "text": "The star story ends with a hug of light. You drift back to the library yawning."
+  },
+  "easy_stars_e_share": {
+    "ending": true,
+    "title": "Your Story",
+    "scene": "stars",
+    "text": "You tell a story about your classroom. The star laughs like a tiny bell."
+  },
+  "easy_stars_e_cheer": {
+    "ending": true,
+    "title": "Star Cheer",
+    "scene": "stars",
+    "text": "Your cheer echoes across the quiet dark. Bravery sounds like joy up here."
+  },
+  "easy_stars_e_photo": {
+    "ending": true,
+    "title": "Space Photo",
+    "scene": "stars",
+    "text": "The photo shows you and the astronaut grinning. A perfect end to a sky walk."
+  },
+  "easy_stars_e_kind": {
+    "ending": true,
+    "title": "Kindness Promise",
+    "scene": "stars",
+    "text": "You promise kindness. The ladder appears again, leading gently home."
+  },
+  "easy_stars_e_home": {
+    "ending": true,
+    "title": "Back from the Stars",
+    "scene": "stars",
+    "text": "You step down the ladder into the library. Night still sparkles behind your eyes."
+  },
+"medium_forest_root": {
       "text": "Mist curls between the trunks. You hear distant singing and the creak of something wooden deeper in the woods.",
       "choices": [
         {
