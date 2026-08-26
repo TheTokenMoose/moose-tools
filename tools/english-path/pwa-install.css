@@ -1,0 +1,43 @@
+
+#pwa-install-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 10040;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: min(520px, calc(100vw - 2rem));
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  border: 2px solid var(--border-subtle, rgba(168, 85, 247, 0.35));
+  background: var(--bg-card, rgba(22, 26, 55, 0.95));
+  color: var(--text-primary, #f1f5f9);
+  box-shadow: var(--shadow-card, 0 12px 40px rgba(0,0,0,0.35));
+  backdrop-filter: blur(12px);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+#pwa-install-bar[hidden] { display: none !important; }
+.pwa-install-text { display: flex; flex-direction: column; gap: 0.15rem; flex: 1; min-width: 0; }
+.pwa-install-text strong { font-size: 0.92rem; color: var(--text-primary, #f1f5f9); }
+.pwa-install-text span { font-size: 0.8rem; color: var(--text-muted, #94a3b8); }
+#pwa-install-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--btn-primary-grad, linear-gradient(135deg, #ff4d9e, #a855f7));
+  color: #fff;
+  white-space: nowrap;
+}
+#pwa-install-dismiss {
+  border: none;
+  background: transparent;
+  color: var(--text-muted, #94a3b8);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem 0.35rem;
+}

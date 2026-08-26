@@ -635,6 +635,19 @@ const PROJECTS = [
     playUrl: "games/feelings-detective/",
     installable: true,
     featured: true
+  },
+  {
+    id: "english-path",
+    title: "English Path",
+    type: "tool",
+    description: "20-lesson self-study path for Kindergarten→Grade 1 ESL: speaking prompts with models, original reading texts + checks, discussion notes, guided writing frames. Progress and writing save on this device. Companion for tutoring or independent review.",
+    category: "Literacy",
+    subject: "ESL / Literacy",
+    skills: ["ESL", "sentences", "reading", "writing", "Grade 1", "self-study", "speaking"],
+    screenshot: "assets/screenshots/english-path.jpg",
+    playUrl: "tools/english-path/",
+    installable: true,
+    featured: true
   }
 ];
 

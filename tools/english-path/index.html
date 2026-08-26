@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0369a1">
+  <meta name="description" content="English Path — 20-lesson self-study for Kindergarten to Grade 1 ESL transition.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>English Path — The Token Moose</title>
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="pwa-install.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
+</head>
+<body class="theme-bridged" data-app-id="english-path" data-app-title="English Path">
+  <div id="app">
+    <!-- HOME -->
+    <section id="screen-home" class="screen">
+      <header class="hero">
+        <p class="eyebrow">Self-study · K → Grade 1 ESL</p>
+        <h1>English Path</h1>
+        <p class="lede">20 lessons to build complete sentences, reading, and short paragraphs. Work at your own pace. Your progress stays on this device.</p>
+      </header>
+      <div class="progress-card" id="progress-card">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <p id="progress-label">0 of 20 lessons completed</p>
+      </div>
+      <div class="home-actions">
+        <button type="button" class="btn primary" id="btn-continue">Continue</button>
+        <button type="button" class="btn" id="btn-map">Lesson map</button>
+        <button type="button" class="btn" id="btn-about">How it works</button>
+      </div>
+      <div id="about-panel" class="about-panel" hidden>
+        <h2>How to use English Path</h2>
+        <ul>
+          <li>Each lesson has <strong>Speaking</strong>, <strong>Reading</strong>, <strong>Discussion</strong>, and <strong>Writing</strong>.</li>
+          <li>Press <strong>Hear</strong> to listen to models and texts (optional).</li>
+          <li>Check reading answers. Save your writing on this device.</li>
+          <li>Lessons 1, 5, 10, 15, and 20 are check-in points to see growth.</li>
+          <li>This is a practice companion — not a live tutor. A teacher or parent can review your saved writing.</li>
+        </ul>
+        <button type="button" class="btn" id="btn-about-close">Close</button>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="screen-map" class="screen" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-map-home">← Home</button>
+        <h2>Lesson map</h2>
+        <span></span>
+      </div>
+      <div class="phase-legend">
+        <span class="ph p1">1–5 Sentences</span>
+        <span class="ph p2">6–10 Reading</span>
+        <span class="ph p3">11–15 Writing</span>
+        <span class="ph p4">16–20 Ready</span>
+      </div>
+      <div id="lesson-grid" class="lesson-grid"></div>
+    </section>
+
+    <!-- LESSON HUB -->
+    <section id="screen-lesson" class="screen" hidden>
+      <div class="bar">
+        <button type="button" class="btn ghost" id="btn-lesson-map">← Map</button>
+        <h2 id="lesson-title">Lesson</h2>
+        <button type="button" class="btn ghost" id="btn-hear-obj">🔊</button>
+      </div>
+      <p class="theme-line" id="lesson-theme"></p>
+      <p class="obj-line" id="lesson-obj"></p>
+      <div class="chips" id="lesson-chips"></div>
+      <div class="step-nav" id="step-nav">
+        <button type="button" class="step-btn" data-step="speaking">1 Speaking</button>
+        <button type="button" class="step-btn" data-step="reading">2 Reading</button>
+        <button type="button" class="step-btn" data-step="discussion">3 Talk</button>
+        <button type="button" class="step-btn" data-step="writing">4 Writing</button>
+      </div>
+      <div id="step-panels"></div>
+      <div class="lesson-footer">
+        <button type="button" class="btn primary" id="btn-complete-lesson">Mark lesson complete</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../js/voice.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/lessons-data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+</body>
+</html>

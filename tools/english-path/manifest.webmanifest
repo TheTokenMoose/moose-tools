@@ -1,0 +1,14 @@
+{
+  "name": "English Path",
+  "short_name": "English Path",
+  "description": "20-lesson K to Grade 1 ESL self-study path: speaking, reading, discussion, writing.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c4a6e",
+  "theme_color": "#0369a1",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
