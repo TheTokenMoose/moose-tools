@@ -140,15 +140,48 @@ class PartnerPicker {
           this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));
         });
 
-        // Pointer fallback for touch-ish browsers that struggle with HTML5 DnD
+        // Touch / pointer drag (HTML5 DnD is unreliable on many touch devices)
+        chip.style.touchAction = "none";
         chip.addEventListener("pointerdown", (e) => {
-          if (e.button !== undefined && e.button !== 0) return;
-          // Rely primarily on drag events; pointer used for visual only
+          if (e.pointerType === "mouse" && e.button !== 0) return;
+          // Let pure mouse use HTML5 DnD when available; pointer path for touch/pen
+          if (e.pointerType === "mouse") return;
+          e.preventDefault();
+          this.dragName = name;
+          this.dragFrom = i;
+          chip.classList.add("dragging");
+          chip.setPointerCapture(e.pointerId);
+          const onMove = (ev) => {
+            const el = document.elementFromPoint(ev.clientX, ev.clientY);
+            this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));
+            const over = el && el.closest ? el.closest(".table") : null;
+            if (over) over.classList.add("drag-over");
+          };
+          const onUp = (ev) => {
+            chip.releasePointerCapture(e.pointerId);
+            chip.classList.remove("dragging");
+            const el = document.elementFromPoint(ev.clientX, ev.clientY);
+            const over = el && el.closest ? el.closest(".table") : null;
+            this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));
+            if (over && over.dataset && over.dataset.index != null) {
+              const to = Number(over.dataset.index);
+              if (!Number.isNaN(to)) this.moveStudent(name, i, to);
+            }
+            this.dragName = null;
+            this.dragFrom = null;
+            chip.removeEventListener("pointermove", onMove);
+            chip.removeEventListener("pointerup", onUp);
+            chip.removeEventListener("pointercancel", onUp);
+          };
+          chip.addEventListener("pointermove", onMove);
+          chip.addEventListener("pointerup", onUp);
+          chip.addEventListener("pointercancel", onUp);
         });
 
         chips.appendChild(chip);
       });
       table.appendChild(chips);
+      table.dataset.index = String(i);
 
       table.addEventListener("dragover", (e) => {
         e.preventDefault();

@@ -41,3 +41,17 @@
   line-height: 1;
   padding: 0.2rem 0.35rem;
 }
+
+@media print {
+  body, html { background: #fff !important; }
+  .tm-app-chrome, .panel, .btn, header, nav, #tm-voice-slot, .no-print { display: none !important; }
+  .bingo-board, .board {
+    break-inside: avoid;
+    page-break-after: always;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+  }
+  .bingo-board:last-child { page-break-after: auto; }
+}

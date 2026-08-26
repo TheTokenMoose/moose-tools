@@ -255,3 +255,12 @@ select, input[type="text"] {
   background: #eff6ff;
   border-radius: 12px;
 }
+
+/* Ensure controls are clickable above app chrome edges */
+.controls, .prompt-panel, .btn-spin, select, button {
+  position: relative;
+  z-index: 5;
+}
+.btn-spin, .btn, button, select {
+  pointer-events: auto !important;
+}

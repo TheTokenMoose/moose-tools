@@ -22,7 +22,7 @@
       if (d.title) $("title").value = d.title;
       if (d.words) $("words").value = d.words;
       if (d.cols) $("cols").value = d.cols;
-      if (typeof d.alpha === "boolean") $("alpha").checked = d.alpha;
+      
     } catch (_) {}
   }
 
@@ -34,7 +34,10 @@
           title: $("title").value,
           words: $("words").value,
           cols: $("cols").value,
-          alpha: $("alpha").checked,
+          order: window.__wwOrder || "alpha",
+          colorCard: $("color-card") && $("color-card").value,
+          colorText: $("color-text") && $("color-text").value,
+          colorBg: $("color-bg") && $("color-bg").value,
         })
       );
     } catch (_) {}
@@ -43,8 +46,15 @@
   function buildInto(host, present) {
     save();
     let words = parseWords($("words").value);
-    if ($("alpha").checked) {
+    const order = window.__wwOrder || "alpha";
+    if (order === "alpha") {
       words = words.slice().sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+    } else if (order === "random") {
+      words = words.slice();
+      for (let i = words.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [words[i], words[j]] = [words[j], words[i]];
+      }
     }
     const cols = Math.max(2, Math.min(8, parseInt($("cols").value, 10) || 4));
     host.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
@@ -62,15 +72,34 @@
       host.appendChild(p);
       return;
     }
+    const cardCol = ($("color-card") && $("color-card").value) || "#ffffff";
+    const textCol = ($("color-text") && $("color-text").value) || "#0f172a";
+    const bgCol = ($("color-bg") && $("color-bg").value) || "";
+    if (bgCol && host === $("wall")) {
+      host.style.background = bgCol;
+      host.style.padding = "0.75rem";
+      host.style.borderRadius = "12px";
+    }
     words.forEach((w) => {
       const c = document.createElement("div");
       c.className = "card";
       c.textContent = w;
+      c.style.background = cardCol;
+      c.style.color = textCol;
       host.appendChild(c);
     });
   }
 
+  window.__wwOrder = "alpha";
   $("btn-build").addEventListener("click", () => buildInto($("wall"), false));
+  $("btn-alpha").addEventListener("click", () => {
+    window.__wwOrder = "alpha";
+    buildInto($("wall"), false);
+  });
+  $("btn-random").addEventListener("click", () => {
+    window.__wwOrder = "random";
+    buildInto($("wall"), false);
+  });
   $("btn-print").addEventListener("click", () => {
     buildInto($("wall"), false);
     window.print();

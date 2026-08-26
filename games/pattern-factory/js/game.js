@@ -151,12 +151,12 @@
       els.fbIcon.textContent = "⭐";
       els.fbTitle.textContent = "Yes!";
       els.fbMsg.textContent = "The pattern continues with " + answer;
-      speak("Yes!");
+      /* no auto-speak */
     } else {
       els.fbIcon.textContent = "🔧";
       els.fbTitle.textContent = "Keep trying";
       els.fbMsg.textContent = "Next was " + answer;
-      speak("Next was this one");
+      /* no auto-speak */
     }
     setTimeout(() => show("fb"), 400);
   }

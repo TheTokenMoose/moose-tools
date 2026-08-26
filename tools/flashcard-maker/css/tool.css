@@ -52,24 +52,37 @@ textarea {
   gap: 0.75rem; padding: 1.5rem;
 }
 .flip-card .side {
-  font-size: clamp(1.5rem, 5vw, 2.2rem); font-weight: 900;
+  font-size: clamp(0.9rem, 4.5vw, 2.4rem); font-weight: 900;
   text-align: center; word-break: break-word;
+  line-height: 1.25; max-width: 100%; overflow-wrap: anywhere;
 }
 .flip-card .hint { font-size: 0.85rem; opacity: 0.7; }
 .flip-card.is-back { background: linear-gradient(145deg, #7c3aed, #5b21b6); }
 .prac-nav { display: flex; gap: 0.6rem; }
 
-.print-area {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem;
+.print-area { margin-top: 1rem; }
+.print-page { margin-bottom: 1.5rem; }
+.print-only-title { font-size: 0.95rem; margin: 0 0 0.5rem; }
+.print-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;
 }
 .print-card {
-  border: 1px solid #ccc; border-radius: 10px; padding: 0.75rem;
-  background: #fff; color: #111; min-height: 100px;
+  border: 2px solid #333; border-radius: 10px; padding: 1rem;
+  background: #fff; color: #111; min-height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  page-break-inside: avoid;
 }
-.print-card strong { display: block; margin-bottom: 0.35rem; }
+.print-face { font-size: 1.25rem; font-weight: 800; text-align: center; word-break: break-word; }
 
 @media print {
-  .tm-app-chrome, .panel, .practice { display: none !important; }
-  .print-area { display: grid !important; }
-  body { background: #fff; }
+  .tm-app-chrome, .panel, .practice, .head, .home-actions, #app > header,
+  .btn, .actions, #tm-voice-slot, .pwa-install-banner { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  #app { max-width: none; padding: 0; }
+  .print-area { display: block !important; }
+  .print-page { break-after: page; page-break-after: always; }
+  .print-page-backs { break-after: auto; page-break-after: auto; }
+  .print-only-title { display: none; }
+  .print-grid { gap: 0.5cm; }
+  .print-card { box-shadow: none; min-height: 4.5cm; }
 }

@@ -1,11 +1,11 @@
 (function () {
   const KEY = "token-moose-positional-language-stars";
   const PREPS = [
-    { id: "on", label: "on the table", place: { bottom: "48%", left: "42%" } },
-    { id: "under", label: "under the table", place: { bottom: "8%", left: "42%" } },
-    { id: "next", label: "next to the box", place: { bottom: "42%", left: "68%" } },
-    { id: "in", label: "in the box", place: { bottom: "42%", left: "22%" } },
-    { id: "between", label: "between the box and the edge", place: { bottom: "42%", left: "50%" } },
+    { id: "on", label: "on the table", place: { bottom: "50%", left: "44%" } },
+    { id: "under", label: "under the table", place: { bottom: "6%", left: "44%" } },
+    { id: "next", label: "next to the box", place: { bottom: "42%", left: "62%" } },
+    { id: "in", label: "in the box", place: { bottom: "44%", left: "20%" } },
+    { id: "between", label: "between the box and the edge", place: { bottom: "42%", left: "48%" } },
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -43,8 +43,8 @@
     scene.appendChild(table);
     const box = document.createElement("div");
     box.className = "box";
-    box.style.bottom = "40%";
-    box.style.left = "18%";
+    box.style.bottom = "38%";
+    box.style.left = "16%";
     box.textContent = "📦";
     scene.appendChild(box);
     const cat = document.createElement("div");

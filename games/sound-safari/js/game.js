@@ -52,11 +52,12 @@
     locked = false;
     const correct = ITEMS[Math.floor(Math.random() * ITEMS.length)];
     answer = correct.letter;
-    hearLine = "The sound is " + correct.phoneme + ". " + correct.word;
+    // Speak naturally — never read "/b/" as "slash b slash"
+    hearLine = "The sound is " + correct.sound + ". " + correct.word + " starts with " + correct.letter + ".";
     $("prompt").textContent =
       mode === "picture"
-        ? "Which picture starts with " + correct.phoneme + "?"
-        : "Which letter makes " + correct.phoneme + "?";
+        ? "Which picture starts with the " + correct.letter + " sound?"
+        : "Which letter makes the " + correct.letter + " sound?";
 
     const pool = ITEMS.filter((x) => x.letter !== correct.letter);
     const distractors = [];

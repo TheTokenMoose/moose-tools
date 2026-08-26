@@ -60,17 +60,33 @@
   function go() {
     save();
     if (mode === "names") {
-      let list = parseList($("name-list").value);
-      if (!list.length) return showResult("Add some names");
+      const full = parseList($("name-list").value);
+      if (!full.length) return showResult("Add some names");
+      let list = full;
       if ($("remove-after").checked) {
-        if (!pool.length) pool = list.slice();
+        // Rebuild pool when empty or when list membership changed
+        const key = full.join("\0");
+        if (!pool.length || pool._key !== key) {
+          pool = full.slice();
+          pool._key = key;
+        }
         list = pool;
+        if (!list.length) {
+          pool = full.slice();
+          pool._key = key;
+          list = pool;
+        }
       }
       const i = Math.floor(Math.random() * list.length);
       const pick = list[i];
       if ($("remove-after").checked) {
         pool.splice(i, 1);
-        if (!pool.length) pool = parseList($("name-list").value).slice();
+        if (!pool.length) {
+          pool = full.slice();
+          pool._key = full.join("\0");
+          showResult(pick + " (all done — reshuffling)");
+          return;
+        }
       }
       showResult(pick);
       return;
@@ -115,6 +131,20 @@
     const el = $(id);
     if (el) el.addEventListener("change", save);
   });
+  const nameList = $("name-list");
+  if (nameList) {
+    nameList.addEventListener("input", () => {
+      pool = [];
+      save();
+    });
+  }
+  const rem = $("remove-after");
+  if (rem) {
+    rem.addEventListener("change", () => {
+      pool = [];
+      save();
+    });
+  }
 
   load();
 })();

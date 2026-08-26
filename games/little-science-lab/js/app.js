@@ -133,7 +133,7 @@
         $("explain").textContent = it.sinks
           ? it.name + " sinks — it is denser than water."
           : it.name + " floats — it is less dense than water.";
-        speak($("explain").textContent);
+        /* no auto-speak */
         if (tested.size >= 4) {
           complete("sink", "Heavy things often sink. Light or airy things often float.");
         }
@@ -238,10 +238,10 @@
       if (cell.dataset.mag === "1") {
         cell.classList.add("stuck");
         $("explain").textContent = cell.dataset.name + " is magnetic!";
-        speak($("explain").textContent);
+        /* no auto-speak */
       } else {
         $("explain").textContent = cell.dataset.name + " does not stick.";
-        speak($("explain").textContent);
+        /* no auto-speak */
       }
       if (tested.size >= 5) complete("magnet", "Magnets attract iron and steel.");
     });
@@ -341,13 +341,13 @@
     $("btn-cool").onclick = () => {
       matterState.temp = Math.max(0, matterState.temp - 1);
       paint();
-      speak($("temp-label").textContent);
+      /* no auto-speak */
       if (matterState.temp === 0) complete("matter", "Water can be solid, liquid, or gas when temperature changes.");
     };
     $("btn-heat").onclick = () => {
       matterState.temp = Math.min(2, matterState.temp + 1);
       paint();
-      speak($("temp-label").textContent);
+      /* no auto-speak */
       if (matterState.temp === 2) complete("matter", "Heating and cooling change the state of water.");
     };
   }

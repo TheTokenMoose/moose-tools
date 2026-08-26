@@ -210,3 +210,10 @@ h1 {
 }
 .feedback.ok { color: #16a34a; }
 .feedback.no { color: #dc2626; }
+
+.mode-card, .btn-primary, .btn-ghost, button, .mode-grid {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 5;
+}
+

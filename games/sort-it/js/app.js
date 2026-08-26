@@ -86,13 +86,13 @@
       stars += 1;
       saveStars();
       flashBin(catId, true);
-      speak("Yes! " + item.label);
+      /* voice optional disabled */;
       render();
       if (!pool.length) complete();
     } else {
       flashBin(catId, false);
       const right = pack.cats.find((c) => c.id === item.cat);
-      speak("Not that one. Try " + (right ? right.label : "again"));
+      /* voice optional disabled */;
       // keep item in pool — do not disappear
       selectedId = itemId;
       render();
@@ -115,7 +115,7 @@
     $("done-stars").textContent = "⭐ +" + sessionStars;
     $("done-msg").textContent = "Everything sorted!";
     show("screen-done");
-    speak("Great sorting!");
+    /* voice optional disabled */;
   }
 
   function resetRound() {

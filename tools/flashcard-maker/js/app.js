@@ -46,7 +46,18 @@
   function showCard() {
     if (!cards.length) return;
     const c = cards[idx];
-    $("card-text").textContent = showingBack ? c.back : c.front;
+    const text = showingBack ? c.back : c.front;
+    const el = $("card-text");
+    el.textContent = text;
+    // Dynamic font size: shorter text larger, long text shrinks to fit card
+    const len = String(text || "").length;
+    let size = 2.4;
+    if (len > 12) size = 2.0;
+    if (len > 24) size = 1.55;
+    if (len > 40) size = 1.25;
+    if (len > 70) size = 1.05;
+    if (len > 100) size = 0.9;
+    el.style.fontSize = size + "rem";
     $("flip-card").classList.toggle("is-back", showingBack);
     $("prog").textContent = idx + 1 + " / " + cards.length;
   }
@@ -70,12 +81,34 @@
     const host = $("print-area");
     host.innerHTML = "";
     host.hidden = false;
+    // Page 1: fronts (for double-sided: print, flip stack, print backs)
+    const fronts = document.createElement("div");
+    fronts.className = "print-page";
+    fronts.innerHTML = "<h3 class=\"print-only-title\">Fronts — print this page first</h3>";
+    const fg = document.createElement("div");
+    fg.className = "print-grid";
     list.forEach((c) => {
       const d = document.createElement("div");
-      d.className = "print-card";
-      d.innerHTML = "<strong>" + escapeHtml(c.front) + "</strong><span>" + escapeHtml(c.back) + "</span>";
-      host.appendChild(d);
+      d.className = "print-card front";
+      d.innerHTML = "<div class=\"print-face\">" + escapeHtml(c.front) + "</div>";
+      fg.appendChild(d);
     });
+    fronts.appendChild(fg);
+    host.appendChild(fronts);
+    // Page 2: backs in same order (for duplex, mirror columns if needed — keep same order for simple duplex)
+    const backs = document.createElement("div");
+    backs.className = "print-page print-page-backs";
+    backs.innerHTML = "<h3 class=\"print-only-title\">Backs — print on reverse (same order)</h3>";
+    const bg = document.createElement("div");
+    bg.className = "print-grid";
+    list.forEach((c) => {
+      const d = document.createElement("div");
+      d.className = "print-card back";
+      d.innerHTML = "<div class=\"print-face\">" + escapeHtml(c.back) + "</div>";
+      bg.appendChild(d);
+    });
+    backs.appendChild(bg);
+    host.appendChild(backs);
   }
 
   function escapeHtml(s) {

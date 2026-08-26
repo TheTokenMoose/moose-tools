@@ -479,7 +479,7 @@
     $("fb-title").textContent = "Great job!";
     $("fb-msg").textContent = "You got it!";
     show("screen-feedback");
-    speak("Great job!");
+    /* press Hear — no auto-read */
   }
 
   function fail(msg) {
@@ -487,7 +487,7 @@
     $("fb-title").textContent = "Try again";
     $("fb-msg").textContent = msg;
     show("screen-feedback");
-    speak(msg);
+    /* press Hear — no auto-read */
   }
 
   function openActivity(id) {
@@ -521,11 +521,12 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("number-sense-lab");
-    // Voice picker via app-chrome only
+      const slot = document.getElementById("tm-voice-slot");
+      if (voice && voice.mountPicker && slot) voice.mountPicker(slot);
     }
 
     $("btn-hear").addEventListener("click", () => {
-      if (challenge) /* press Hear to listen */
+      if (challenge && challenge.prompt) speak(challenge.prompt);
     });
     $("btn-back-home").addEventListener("click", () => {
       show("screen-home");

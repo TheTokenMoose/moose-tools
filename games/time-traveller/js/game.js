@@ -30,9 +30,54 @@
   }
 
   function labelTime(h, m) {
+    if (mode === "digital24") {
+      const hh = String(h === 12 ? 12 : h % 12 === 0 ? 0 : h % 12 === 0 ? 0 : h > 12 ? h : h).padStart(2, "0");
+      // use 0-23 style: map 12->12 for noon keep simple 1-12 as 01-12 and add random am/pm via hour 1-12 only
+      const H = h === 12 ? 12 : h;
+      const hh24 = String(H).padStart(2, "0");
+      return hh24 + ":" + String(m).padStart(2, "0");
+    }
+    if (mode === "digital12") {
+      const name = h === 0 ? 12 : h;
+      const ap = "am"; // keep morning for simplicity in K
+      return name + ":" + String(m).padStart(2, "0") + " " + ap;
+    }
     const name = h === 0 ? 12 : h;
     if (m === 0) return name + " o'clock";
-    return "half past " + name;
+    if (m === 30) return "half past " + name;
+    if (m === 15) return "quarter past " + name;
+    if (m === 45) return "quarter to " + ((name % 12) + 1);
+    return name + ":" + String(m).padStart(2, "0");
+  }
+
+  function drawDigital(h, m, is24) {
+    const c = $("clock");
+    const ctx = c.getContext("2d");
+    const w = c.width;
+    ctx.clearRect(0, 0, w, w);
+    ctx.fillStyle = "#0f172a";
+    roundRect(ctx, 20, w * 0.35, w - 40, w * 0.3, 16);
+    ctx.fill();
+    ctx.fillStyle = "#4ade80";
+    ctx.font = "bold 42px ui-monospace, monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    let text;
+    if (is24) {
+      text = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+    } else {
+      text = (h === 0 ? 12 : h) + ":" + String(m).padStart(2, "0");
+    }
+    ctx.fillText(text, w / 2, w / 2);
+  }
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
   }
 
   function drawClock(h, m) {
@@ -102,10 +147,19 @@
   function nextRound() {
     locked = false;
     hour = 1 + Math.floor(Math.random() * 12);
-    minute = mode === "oclock" ? 0 : Math.random() < 0.5 ? 0 : 30;
+    if (mode === "oclock") minute = 0;
+    else if (mode === "half") minute = Math.random() < 0.5 ? 0 : 30;
+    else {
+      // digital: quarter hours
+      minute = [0, 15, 30, 45][Math.floor(Math.random() * 4)];
+    }
     // for half past, hour hand at half
     answerLabel = labelTime(hour, minute);
-    drawClock(hour, minute);
+    if (mode === "digital12" || mode === "digital24") {
+      drawDigital(hour, minute, mode === "digital24");
+    } else {
+      drawClock(hour, minute);
+    }
 
     const opts = new Set([answerLabel]);
     while (opts.size < 3) {

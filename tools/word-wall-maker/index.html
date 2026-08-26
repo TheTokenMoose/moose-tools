@@ -37,10 +37,16 @@
       <div class="row">
         <label for="cols">Columns</label>
         <input type="number" id="cols" min="2" max="8" value="4">
-        <label class="check"><input type="checkbox" id="alpha" checked> Sort A–Z</label>
+      </div>
+      <div class="row colors">
+        <label>Card colour <input type="color" id="color-card" value="#ffffff"></label>
+        <label>Text colour <input type="color" id="color-text" value="#0f172a"></label>
+        <label>Wall background <input type="color" id="color-bg" value="#1e3a5f"></label>
       </div>
       <div class="actions">
         <button type="button" class="btn primary" id="btn-build">Build wall</button>
+        <button type="button" class="btn" id="btn-alpha">Sort A–Z</button>
+        <button type="button" class="btn" id="btn-random">Randomize</button>
         <button type="button" class="btn" id="btn-present">Present</button>
         <button type="button" class="btn" id="btn-print">Print</button>
         <button type="button" class="btn" id="btn-clear">Clear</button>

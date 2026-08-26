@@ -522,6 +522,49 @@ const SECTION_TITLES = {
   concepts: "Key concepts",
   more: "Planning extras",
 };
+const SECTION_TITLES_ZH = {
+  themes: "超学科主题",
+  atl: "学习方法 (ATLs)",
+  profile: "学习者培养目标",
+  concepts: "关键概念",
+  more: "规划补充",
+};
+const TITLE_ZH = {
+  "Who we are": "我们是谁",
+  "Where we are in place and time": "我们身处什么时空",
+  "How we express ourselves": "我们如何表达自己",
+  "How the world works": "世界如何运作",
+  "How we organize ourselves": "我们如何组织自己",
+  "Sharing the planet": "共享地球",
+  "Inquirers": "探究者",
+  "Knowledgeable": "知识渊博的人",
+  "Thinkers": "思考者",
+  "Communicators": "交流者",
+  "Principled": "有原则的人",
+  "Open-minded": "胸襟开阔的人",
+  "Caring": "富有同情心的人",
+  "Risk-takers": "敢于冒风险的人",
+  "Balanced": "全面发展的人",
+  "Reflective": "反思的人",
+  "Form": "形式",
+  "Function": "功能",
+  "Causation": "因果关系",
+  "Change": "变化",
+  "Connection": "联系",
+  "Perspective": "观点",
+  "Responsibility": "责任",
+};
+
+let uiLang = localStorage.getItem("token-moose-ib-lang") || "en";
+
+function tSection(key) {
+  if (uiLang === "zh") return SECTION_TITLES_ZH[key] || SECTION_TITLES[key] || key;
+  return SECTION_TITLES[key] || key;
+}
+function tTitle(en) {
+  if (uiLang === "zh" && TITLE_ZH[en]) return TITLE_ZH[en];
+  return en;
+}
 
 function render() {
   const q = (document.getElementById("search").value || "").trim().toLowerCase();
@@ -537,7 +580,7 @@ function render() {
   });
 
   if (!items.length) {
-    root.innerHTML = `<p class="empty">No matches. Try another keyword.</p>`;
+    root.innerHTML = `<p class="empty">${uiLang === "zh" ? "无匹配结果" : "No matches. Try another keyword."}</p>`;
     return;
   }
 
@@ -547,7 +590,7 @@ function render() {
       lastSection = d.section;
       const lab = document.createElement("div");
       lab.className = "section-label";
-      lab.textContent = SECTION_TITLES[d.section] || d.section;
+      lab.textContent = tSection(d.section);
       root.appendChild(lab);
     }
 
@@ -558,7 +601,7 @@ function render() {
       <button type="button" class="card-head" aria-expanded="false">
         <span class="card-emoji" aria-hidden="true">${d.emoji}</span>
         <span class="card-titles">
-          <h2 class="card-title">${escapeHtml(d.title)}</h2>
+          <h2 class="card-title">${escapeHtml(tTitle(d.title))}</h2>
           <p class="card-sub">${escapeHtml(d.sub)}</p>
         </span>
         <span class="badge ${d.badgeClass}">${escapeHtml(d.badge)}</span>
@@ -592,5 +635,21 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.classList.add("is-active");
     render();
   });
+  const langBtn = document.getElementById("btn-lang");
+  if (langBtn) {
+    const syncLabel = () => {
+      langBtn.textContent = uiLang === "en" ? "中文" : "English";
+      langBtn.setAttribute("data-lang", uiLang);
+    };
+    syncLabel();
+    langBtn.addEventListener("click", () => {
+      uiLang = uiLang === "en" ? "zh" : "en";
+      try {
+        localStorage.setItem("token-moose-ib-lang", uiLang);
+      } catch (_) {}
+      syncLabel();
+      render();
+    });
+  }
   render();
 });

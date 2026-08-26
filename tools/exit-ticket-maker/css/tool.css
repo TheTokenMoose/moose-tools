@@ -374,3 +374,20 @@ html, body {
     margin-bottom: 6px;
   }
 }
+
+
+/* Live display chrome — top center, clear of fav/back */
+.live-bar {
+  position: fixed !important;
+  top: 0.5rem !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 10050 !important;
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 999px !important;
+  background: rgba(15,18,40,0.92) !important;
+}
+.live-actions { display: flex; gap: 0.4rem; }

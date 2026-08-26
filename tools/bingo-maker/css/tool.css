@@ -71,6 +71,10 @@ textarea, input[type="number"] {
 }
 
 @media print {
+  body, html { background: #fff !important; color: #000 !important; }
+  .tm-app-chrome, .btn, header, .no-print { display: none !important; }
+  .bingo-board, .board { page-break-after: always; break-after: page; background:#fff!important; }
+
   .tm-app-chrome, .panel .actions, .head .sub { display: none !important; }
   .boards { grid-template-columns: repeat(2, 1fr); }
   .board { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
