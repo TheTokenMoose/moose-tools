@@ -587,7 +587,8 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("shape-builder");
-      if (slot) voice.mountPicker(slot);
+      const slot = document.getElementById("tm-voice-slot");
+      if (voice && voice.mountPicker && slot) voice.mountPicker(slot);
     }
 
     $("btn-home").onclick = () => {

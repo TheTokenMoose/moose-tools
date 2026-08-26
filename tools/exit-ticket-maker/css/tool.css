@@ -391,3 +391,22 @@ html, body {
   background: rgba(15,18,40,0.92) !important;
 }
 .live-actions { display: flex; gap: 0.4rem; }
+
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: economy;
+    print-color-adjust: economy;
+  }
+  .tm-app-chrome, .tm-back, .tm-fav, #tm-voice-slot, .library-back,
+  .no-print, .live-bar, .btn, .btn-primary, .btn-secondary, .btn-accent,
+  nav, header .actions, .pwa-install-banner {
+    display: none !important;
+  }
+  .ticket, .print-ticket, .live-body, main, #app {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+}

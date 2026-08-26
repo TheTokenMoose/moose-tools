@@ -86,3 +86,22 @@ textarea {
   .print-grid { gap: 0.5cm; }
   .print-card { box-shadow: none; min-height: 4.5cm; }
 }
+
+@media print {
+  html, body, #app, .print-area, .print-page, .print-grid {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+  .tm-app-chrome, .tm-back, .tm-fav, #tm-voice-slot,
+  .head, .panel, .practice, .actions, .btn, .pwa-install-banner,
+  .no-print { display: none !important; }
+  .print-card {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-face { color: #000 !important; font-size: 14pt !important; }
+}

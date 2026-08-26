@@ -84,8 +84,8 @@
       const c = document.createElement("div");
       c.className = "card";
       c.textContent = w;
-      c.style.background = cardCol;
-      c.style.color = textCol;
+      c.style.setProperty("background", cardCol, "important");
+      c.style.setProperty("color", textCol, "important");
       host.appendChild(c);
     });
   }
@@ -99,6 +99,14 @@
   $("btn-random").addEventListener("click", () => {
     window.__wwOrder = "random";
     buildInto($("wall"), false);
+  });
+  // Live colour updates
+  ["color-card", "color-text", "color-bg"].forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener("input", () => {
+      if ($("wall") && $("wall").children.length) buildInto($("wall"), false);
+    });
   });
   $("btn-print").addEventListener("click", () => {
     buildInto($("wall"), false);

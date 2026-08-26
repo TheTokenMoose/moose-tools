@@ -205,7 +205,8 @@
 
     if (window.TokenMooseVoice) {
       voice = TokenMooseVoice.create("speaking-spinner");
-      if (slot) voice.mountPicker(slot);
+      const slot = document.getElementById("tm-voice-slot");
+      if (voice && voice.mountPicker && slot) voice.mountPicker(slot);
     }
 
     $("sel-cat").addEventListener("change", (e) => {

@@ -1,18 +1,19 @@
 (function () {
   const KEY = "token-moose-sound-safari-stars";
+  // spoken: pure letter SOUNDS for TTS (never letter names like "bee" or "tee")
   const ITEMS = [
-    { letter: "S", sound: "sss", word: "sun", emoji: "☀️", phoneme: "/s/" },
-    { letter: "M", sound: "mmm", word: "moon", emoji: "🌙", phoneme: "/m/" },
-    { letter: "T", sound: "t", word: "tiger", emoji: "🐯", phoneme: "/t/" },
-    { letter: "B", sound: "b", word: "ball", emoji: "⚽", phoneme: "/b/" },
-    { letter: "P", sound: "p", word: "pig", emoji: "🐷", phoneme: "/p/" },
-    { letter: "D", sound: "d", word: "dog", emoji: "🐶", phoneme: "/d/" },
-    { letter: "F", sound: "fff", word: "fish", emoji: "🐟", phoneme: "/f/" },
-    { letter: "L", sound: "lll", word: "leaf", emoji: "🍃", phoneme: "/l/" },
-    { letter: "N", sound: "nnn", word: "nest", emoji: "🪺", phoneme: "/n/" },
-    { letter: "R", sound: "rrr", word: "robot", emoji: "🤖", phoneme: "/r/" },
-    { letter: "A", sound: "a", word: "apple", emoji: "🍎", phoneme: "/a/" },
-    { letter: "I", sound: "i", word: "igloo", emoji: "🏠", phoneme: "/i/" },
+    { letter: "S", sound: "ssss", spoken: "ssss", word: "sun", emoji: "☀️", phoneme: "/s/" },
+    { letter: "M", sound: "mmmm", spoken: "mmmm", word: "moon", emoji: "🌙", phoneme: "/m/" },
+    { letter: "T", sound: "t", spoken: "tuh", word: "tiger", emoji: "🐯", phoneme: "/t/" },
+    { letter: "B", sound: "b", spoken: "buh", word: "ball", emoji: "⚽", phoneme: "/b/" },
+    { letter: "P", sound: "p", spoken: "puh", word: "pig", emoji: "🐷", phoneme: "/p/" },
+    { letter: "D", sound: "d", spoken: "duh", word: "dog", emoji: "🐶", phoneme: "/d/" },
+    { letter: "F", sound: "fff", spoken: "ffff", word: "fish", emoji: "🐟", phoneme: "/f/" },
+    { letter: "L", sound: "lll", spoken: "llll", word: "leaf", emoji: "🍃", phoneme: "/l/" },
+    { letter: "N", sound: "nnn", spoken: "nnnn", word: "nest", emoji: "🪺", phoneme: "/n/" },
+    { letter: "R", sound: "rrr", spoken: "rrrr", word: "robot", emoji: "🤖", phoneme: "/r/" },
+    { letter: "A", sound: "a", spoken: "aaa as in apple", word: "apple", emoji: "🍎", phoneme: "/a/" },
+    { letter: "I", sound: "i", spoken: "ih as in igloo", word: "igloo", emoji: "🏠", phoneme: "/i/" },
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -52,12 +53,13 @@
     locked = false;
     const correct = ITEMS[Math.floor(Math.random() * ITEMS.length)];
     answer = correct.letter;
-    // Speak naturally — never read "/b/" as "slash b slash"
-    hearLine = "The sound is " + correct.sound + ". " + correct.word + " starts with " + correct.letter + ".";
+    // Speak letter SOUND only (buh/ssss) — never letter NAME (B/bee)
+    const spoken = correct.spoken || correct.sound;
+    hearLine = "Listen. " + spoken + ". " + correct.word + ".";
     $("prompt").textContent =
       mode === "picture"
-        ? "Which picture starts with the " + correct.letter + " sound?"
-        : "Which letter makes the " + correct.letter + " sound?";
+        ? "Which picture starts with this sound?"
+        : "Which letter makes this sound?";
 
     const pool = ITEMS.filter((x) => x.letter !== correct.letter);
     const distractors = [];
@@ -90,12 +92,12 @@
       saveStars();
       $("fb-icon").textContent = "⭐";
       $("fb-title").textContent = "Yes!";
-      $("fb-msg").textContent = item.word + " starts with " + item.phoneme;
+      $("fb-msg").textContent = item.word + " starts with the " + (item.spoken || item.sound) + " sound.";
     } else {
       const right = ITEMS.find((x) => x.letter === answer);
       $("fb-icon").textContent = "🎧";
       $("fb-title").textContent = "Almost";
-      $("fb-msg").textContent = "Listen again — " + (right ? right.word + " · " + right.phoneme : "");
+      $("fb-msg").textContent = "Listen again — " + (right ? right.word + " · " + (right.spoken || right.sound) : "");
     }
     show("fb");
   }

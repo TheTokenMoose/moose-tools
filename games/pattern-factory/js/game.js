@@ -1,4 +1,6 @@
 (function () {
+  "use strict";
+
   const SETS = [
     ["🔴", "🔵"],
     ["🟨", "🟩"],
@@ -10,14 +12,17 @@
     ["🟥", "🟦", "🟩"],
     ["⭐", "🌙", "☀️"],
     ["🎵", "🎹", "🥁"],
+    ["🟥", "🟦", "🟩", "🟨"],
   ];
+
+  // Difficulty = how many gaps + which pattern kinds
   const LEVELS = {
-    ab: ["AB"],
-    aab: ["AAB"],
-    abb: ["ABB"],
-    abc: ["ABC"],
-    mix: ["AB", "AAB", "ABB", "ABC"],
+    easy: { gaps: 1, kinds: ["AB"] },
+    medium: { gaps: 2, kinds: ["AB", "AAB", "ABB"] },
+    hard: { gaps: 3, kinds: ["AB", "AAB", "ABB", "ABC"] },
+    expert: { gaps: 3, kinds: ["AABB", "ABAB", "AABC", "ABCD", "ABC"] },
   };
+
   const STARS_KEY = "token-moose-pattern-factory-stars";
 
   const els = {
@@ -38,8 +43,9 @@
     btnAgain: document.getElementById("btn-again"),
   };
 
-  let level = "ab";
-  let answer = "";
+  let level = "easy";
+  let answers = []; // symbols for each gap in order
+  let gapIndex = 0; // which gap the child is filling
   let stars = 0;
   let locked = false;
   let voice = null;
@@ -50,13 +56,13 @@
     } catch (_) {
       stars = 0;
     }
-    els.homeStars.textContent = "⭐ " + stars;
+    if (els.homeStars) els.homeStars.textContent = "⭐ " + stars;
   }
   function saveStars() {
     try {
       localStorage.setItem(STARS_KEY, String(stars));
     } catch (_) {}
-    els.homeStars.textContent = "⭐ " + stars;
+    if (els.homeStars) els.homeStars.textContent = "⭐ " + stars;
   }
 
   function speak(t) {
@@ -78,87 +84,152 @@
     if (kind === "AB") return [symbols[0], symbols[1]];
     if (kind === "AAB") return [symbols[0], symbols[0], symbols[1]];
     if (kind === "ABB") return [symbols[0], symbols[1], symbols[1]];
-    return [symbols[0], symbols[1], symbols[2]];
+    if (kind === "ABC") return [symbols[0], symbols[1], symbols[2]];
+    if (kind === "AABB") return [symbols[0], symbols[0], symbols[1], symbols[1]];
+    if (kind === "ABAB") return [symbols[0], symbols[1], symbols[0], symbols[1]];
+    if (kind === "AABC") return [symbols[0], symbols[0], symbols[1], symbols[2]];
+    if (kind === "ABCD") return [symbols[0], symbols[1], symbols[2], symbols[3] || symbols[0]];
+    return [symbols[0], symbols[1]];
   }
 
   function buildRound() {
     locked = false;
-    const kinds = LEVELS[level];
-    const kind = kinds[Math.floor(Math.random() * kinds.length)];
-    let pool = SETS.filter((s) => (kind === "ABC" ? s.length >= 3 : s.length >= 2));
-    const symbols = pool[Math.floor(Math.random() * pool.length)].slice();
+    gapIndex = 0;
+    const cfg = LEVELS[level] || LEVELS.easy;
+    const kind = cfg.kinds[Math.floor(Math.random() * cfg.kinds.length)];
+    const need3 = /C|ABCD|AABC/.test(kind);
+    const need4 = kind === "ABCD";
+    let pool = SETS.filter((s) => {
+      if (need4) return s.length >= 3;
+      if (need3) return s.length >= 3;
+      return s.length >= 2;
+    });
+    let symbols = pool[Math.floor(Math.random() * pool.length)].slice();
+    if (need4 && symbols.length < 4) {
+      // pad a fourth distinct-ish symbol
+      const extra = SETS.flat().find((x) => !symbols.includes(x)) || "⭐";
+      symbols = symbols.concat([extra]);
+    }
     const unit = patternUnits(kind, symbols);
-    const repeats = kind === "ABC" ? 2 : 3;
-    const seq = [];
-    for (let r = 0; r < repeats; r++) seq.push(...unit);
-    answer = unit[0]; // next after full repeats ends on last of unit, next is first
-    // Actually after full cycles, next is unit[0]. Show seq without last item so gap is last of unit? 
-    // Better: show n complete units + partial, gap is next in unit.
-    const showLen = unit.length * 2 + Math.floor(Math.random() * unit.length);
+    // Build a long enough sequence
     const full = [];
-    while (full.length < showLen + 1) full.push(...unit);
-    const visible = full.slice(0, showLen);
-    answer = full[showLen];
+    while (full.length < unit.length * 3 + cfg.gaps) full.push(...unit);
+
+    // Choose gap positions near the end so pattern is visible first
+    const minShow = Math.max(unit.length + 1, 4);
+    const start = Math.min(minShow, full.length - cfg.gaps - 1);
+    const gapPositions = [];
+    for (let g = 0; g < cfg.gaps; g++) {
+      gapPositions.push(start + g + Math.floor((full.length - start - cfg.gaps) * (g / Math.max(cfg.gaps, 1))));
+    }
+    // Simpler: last cfg.gaps cells are gaps, with maybe one gap mid-stream for hard
+    gapPositions.length = 0;
+    if (cfg.gaps === 1) {
+      gapPositions.push(full.length - 1);
+    } else if (cfg.gaps === 2) {
+      gapPositions.push(Math.floor(full.length * 0.55));
+      gapPositions.push(full.length - 1);
+    } else {
+      gapPositions.push(Math.floor(full.length * 0.4));
+      gapPositions.push(Math.floor(full.length * 0.7));
+      gapPositions.push(full.length - 1);
+    }
+    // unique sorted
+    const gaps = [...new Set(gapPositions)].sort((a, b) => a - b).slice(0, cfg.gaps);
+    answers = gaps.map((i) => full[i]);
 
     els.belt.innerHTML = "";
-    visible.forEach((sym) => {
+    full.forEach((sym, i) => {
       const c = document.createElement("div");
       c.className = "cell";
-      c.textContent = sym;
+      if (gaps.includes(i)) {
+        c.classList.add("gap");
+        c.dataset.gap = String(gaps.indexOf(i));
+        c.textContent = "?";
+        c.setAttribute("aria-label", "missing");
+      } else {
+        c.textContent = sym;
+      }
       els.belt.appendChild(c);
     });
-    const gap = document.createElement("div");
-    gap.className = "cell gap";
-    gap.textContent = "?";
-    gap.setAttribute("aria-label", "missing");
-    els.belt.appendChild(gap);
 
-    const distractors = new Set([answer]);
+    renderChoices(symbols, kind);
+    els.prompt.textContent =
+      cfg.gaps === 1 ? "What comes next?" : "Fill the missing parts in order (" + cfg.gaps + " gaps)";
+    els.score.textContent = "⭐ " + stars + " · " + kind + " · " + cfg.gaps + " gap" + (cfg.gaps > 1 ? "s" : "");
+  }
+
+  function renderChoices(symbols, kind) {
+    const need = answers[gapIndex];
+    const distractors = new Set([need]);
     symbols.forEach((s) => distractors.add(s));
-    while (distractors.size < 3) {
+    while (distractors.size < 4) {
       const extra = SETS.flat()[Math.floor(Math.random() * SETS.flat().length)];
       distractors.add(extra);
     }
-    const opts = [...distractors].sort(() => Math.random() - 0.5).slice(0, 3);
-    if (!opts.includes(answer)) opts[0] = answer;
+    const opts = [...distractors];
+    if (!opts.includes(need)) opts[0] = need;
 
     els.choices.innerHTML = "";
-    opts.sort(() => Math.random() - 0.5).forEach((sym) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "choice";
-      b.textContent = sym;
-      b.addEventListener("click", () => pick(sym, b));
-      els.choices.appendChild(b);
-    });
-
-    els.prompt.textContent = "What comes next?";
-    els.score.textContent = "⭐ " + stars + " · " + kind;
+    opts
+      .sort(() => Math.random() - 0.5)
+      .forEach((sym) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "choice";
+        b.textContent = sym;
+        b.addEventListener("click", () => pick(sym, b));
+        els.choices.appendChild(b);
+      });
   }
 
   function pick(sym, btn) {
     if (locked) return;
-    locked = true;
-    const ok = sym === answer;
-    document.querySelectorAll(".choice").forEach((c) => {
-      if (c.textContent === answer) c.classList.add("correct");
-      if (c === btn && !ok) c.classList.add("wrong");
-      c.disabled = true;
-    });
-    if (ok) {
-      stars += 1;
-      saveStars();
-      els.fbIcon.textContent = "⭐";
-      els.fbTitle.textContent = "Yes!";
-      els.fbMsg.textContent = "The pattern continues with " + answer;
-      /* no auto-speak */
-    } else {
+    const need = answers[gapIndex];
+    const ok = sym === need;
+    if (!ok) {
+      locked = true;
+      btn.classList.add("wrong");
+      document.querySelectorAll(".choice").forEach((c) => {
+        if (c.textContent === need) c.classList.add("correct");
+        c.disabled = true;
+      });
       els.fbIcon.textContent = "🔧";
       els.fbTitle.textContent = "Keep trying";
-      els.fbMsg.textContent = "Next was " + answer;
-      /* no auto-speak */
+      els.fbMsg.textContent = "That space needed " + need;
+      setTimeout(() => show("fb"), 450);
+      return;
     }
-    setTimeout(() => show("fb"), 400);
+
+    // Fill this gap
+    const gapEl = els.belt.querySelector('.gap[data-gap="' + gapIndex + '"]');
+    if (gapEl) {
+      gapEl.textContent = sym;
+      gapEl.classList.remove("gap");
+      gapEl.classList.add("filled");
+    }
+    gapIndex += 1;
+    if (gapIndex >= answers.length) {
+      locked = true;
+      stars += 1;
+      saveStars();
+      document.querySelectorAll(".choice").forEach((c) => {
+        c.disabled = true;
+        if (c.textContent === sym) c.classList.add("correct");
+      });
+      els.fbIcon.textContent = "⭐";
+      els.fbTitle.textContent = "Yes!";
+      els.fbMsg.textContent = "You completed the pattern!";
+      setTimeout(() => show("fb"), 400);
+    } else {
+      // Next gap — refresh choices for next answer
+      locked = false;
+      const cfg = LEVELS[level] || LEVELS.easy;
+      els.prompt.textContent = "Next missing part (" + (gapIndex + 1) + " of " + answers.length + ")";
+      // Re-use symbols from belt visible cells
+      const seen = [...new Set([...els.belt.querySelectorAll(".cell:not(.gap)")].map((c) => c.textContent))];
+      renderChoices(seen.length ? seen : answers, "");
+    }
   }
 
   function initVoice() {
@@ -173,18 +244,19 @@
 
   document.querySelectorAll(".mode-card").forEach((b) => {
     b.addEventListener("click", () => {
-      level = b.getAttribute("data-level");
+      level = b.getAttribute("data-level") || "easy";
       show("play");
       buildRound();
     });
   });
-  els.btnHome.addEventListener("click", () => show("home"));
-  els.btnAgain.addEventListener("click", () => show("home"));
-  els.btnNext.addEventListener("click", () => {
-    show("play");
-    buildRound();
-  });
-  els.btnHear.addEventListener("click", () => speak("What comes next?"));
+  if (els.btnHome) els.btnHome.addEventListener("click", () => show("home"));
+  if (els.btnAgain) els.btnAgain.addEventListener("click", () => show("home"));
+  if (els.btnNext)
+    els.btnNext.addEventListener("click", () => {
+      show("play");
+      buildRound();
+    });
+  if (els.btnHear) els.btnHear.addEventListener("click", () => speak("What comes next?"));
 
   loadStars();
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initVoice);

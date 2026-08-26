@@ -3,18 +3,33 @@
   const $ = (id) => document.getElementById(id);
 
   function parseDeck(raw) {
-    return String(raw || "")
+    // Prefer comma: "front, back" per line. Still accept | and tab.
+    const lines = String(raw || "")
       .split(/\n+/)
       .map((line) => line.trim())
-      .filter(Boolean)
-      .map((line) => {
+      .filter(Boolean);
+    const cards = [];
+    lines.forEach((line) => {
+      if (line.includes("|")) {
         const parts = line.split("|").map((s) => s.trim());
-        if (parts.length >= 2) return { front: parts[0], back: parts.slice(1).join(" | ") };
-        const tabs = line.split("\t").map((s) => s.trim());
-        if (tabs.length >= 2) return { front: tabs[0], back: tabs.slice(1).join(" ") };
-        return { front: line, back: line };
-      })
-      .filter((c) => c.front);
+        if (parts[0]) cards.push({ front: parts[0], back: parts.slice(1).join(" | ") || parts[0] });
+        return;
+      }
+      if (line.includes("\t")) {
+        const parts = line.split("\t").map((s) => s.trim());
+        if (parts[0]) cards.push({ front: parts[0], back: parts.slice(1).join(" ") || parts[0] });
+        return;
+      }
+      const comma = line.indexOf(",");
+      if (comma >= 0) {
+        const front = line.slice(0, comma).trim();
+        const back = line.slice(comma + 1).trim();
+        if (front) cards.push({ front, back: back || front });
+        return;
+      }
+      cards.push({ front: line, back: line });
+    });
+    return cards.filter((c) => c.front);
   }
 
   let cards = [];
@@ -43,21 +58,34 @@
     return a;
   }
 
+  function fitTextToCard(el, text) {
+    el.textContent = text;
+    el.style.fontSize = "";
+    // Binary-ish shrink until text fits inside the card face
+    const card = $("flip-card");
+    if (!card) {
+      el.style.fontSize = "1.5rem";
+      return;
+    }
+    let size = 2.8;
+    el.style.fontSize = size + "rem";
+    el.style.lineHeight = "1.2";
+    // Allow layout
+    for (let i = 0; i < 24; i++) {
+      const fits =
+        el.scrollHeight <= card.clientHeight - 48 && el.scrollWidth <= card.clientWidth - 24;
+      if (fits || size <= 0.75) break;
+      size -= 0.12;
+      el.style.fontSize = size + "rem";
+    }
+  }
+
   function showCard() {
     if (!cards.length) return;
     const c = cards[idx];
     const text = showingBack ? c.back : c.front;
     const el = $("card-text");
-    el.textContent = text;
-    // Dynamic font size: shorter text larger, long text shrinks to fit card
-    const len = String(text || "").length;
-    let size = 2.4;
-    if (len > 12) size = 2.0;
-    if (len > 24) size = 1.55;
-    if (len > 40) size = 1.25;
-    if (len > 70) size = 1.05;
-    if (len > 100) size = 0.9;
-    el.style.fontSize = size + "rem";
+    fitTextToCard(el, text);
     $("flip-card").classList.toggle("is-back", showingBack);
     $("prog").textContent = idx + 1 + " / " + cards.length;
   }
@@ -66,7 +94,7 @@
     save();
     cards = parseDeck($("deck").value);
     if (!cards.length) {
-      alert("Add cards first (front | back per line).");
+      alert("Add cards first (front, back per line).");
       return;
     }
     idx = 0;
