@@ -120,6 +120,46 @@
   $("btn-exit").addEventListener("click", () => {
     $("present").hidden = true;
   });
+
+  let bankList = [];
+  let bankIdx = 0;
+  function showBankWord() {
+    if (!bankList.length) {
+      $("bank-word").textContent = "Add words first";
+      $("bank-count").textContent = "";
+      return;
+    }
+    $("bank-word").textContent = bankList[bankIdx];
+    $("bank-count").textContent = bankIdx + 1 + " / " + bankList.length;
+  }
+  $("btn-bank").addEventListener("click", () => {
+    bankList = parseWords($("words").value);
+    if (window.__wwOrder === "alpha") {
+      bankList = bankList.slice().sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+    } else if (window.__wwOrder === "random") {
+      bankList = bankList.slice();
+      for (let i = bankList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [bankList[i], bankList[j]] = [bankList[j], bankList[i]];
+      }
+    }
+    bankIdx = 0;
+    $("word-bank").hidden = false;
+    showBankWord();
+  });
+  $("btn-bank-next").addEventListener("click", () => {
+    if (!bankList.length) return;
+    bankIdx = (bankIdx + 1) % bankList.length;
+    showBankWord();
+  });
+  $("btn-bank-prev").addEventListener("click", () => {
+    if (!bankList.length) return;
+    bankIdx = (bankIdx - 1 + bankList.length) % bankList.length;
+    showBankWord();
+  });
+  $("btn-bank-exit").addEventListener("click", () => {
+    $("word-bank").hidden = true;
+  });
   $("btn-clear").addEventListener("click", () => {
     $("words").value = "";
     $("wall").innerHTML = "";

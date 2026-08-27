@@ -8,9 +8,9 @@ window.SHAPES_2D = [
   { id: "hexagon", name: "hexagon", sides: 6, corners: 6, dim: "2D", color: "#8b5cf6", emoji: "⬡" },
 ];
 window.SHAPES_3D = [
-  { id: "cube", name: "cube", faces: 6, edges: 12, corners: 8, dim: "3D", color: "#ef4444", emoji: "🟥", flatFaces: true },
+  { id: "cube", name: "cube", faces: 6, edges: 12, corners: 8, dim: "3D", color: "#ef4444", emoji: "🧊", flatFaces: true },
   { id: "sphere", name: "sphere", faces: 0, edges: 0, corners: 0, dim: "3D", color: "#a855f7", emoji: "🟣", flatFaces: false },
-  { id: "cone", name: "cone", faces: 2, edges: 1, corners: 1, dim: "3D", color: "#f97316", emoji: "🔺", flatFaces: true },
+  { id: "cone", name: "cone", faces: 2, edges: 1, corners: 1, dim: "3D", color: "#f97316", emoji: "🍦", flatFaces: true },
   { id: "cylinder", name: "cylinder", faces: 3, edges: 2, corners: 0, dim: "3D", color: "#0ea5e9", emoji: "🥫", flatFaces: true },
   { id: "cuboid", name: "cuboid", faces: 6, edges: 12, corners: 8, dim: "3D", color: "#22c55e", emoji: "📦", flatFaces: true },
 ];

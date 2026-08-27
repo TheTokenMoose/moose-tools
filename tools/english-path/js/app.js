@@ -75,7 +75,10 @@
       btn.className = "lesson-card";
       if (state.completed[l.id]) btn.classList.add("done");
       if (l.milestone) btn.classList.add("milestone");
-      btn.innerHTML = '<span class="num">' + l.id + '</span><span class="ttl">' + escapeHtml(l.title) + "</span>";
+      const icons = { 1: "💬", 2: "📖", 3: "✍️", 4: "🎓" };
+      const ico = icons[l.phase] || "📘";
+      btn.setAttribute("data-phase", String(l.phase || 1));
+      btn.innerHTML = '<span class="phase-icon">' + ico + '</span><span class="num">' + l.id + '</span><span class="ttl">' + escapeHtml(l.title) + "</span>";
       btn.addEventListener("click", () => openLesson(l.id));
       grid.appendChild(btn);
     });

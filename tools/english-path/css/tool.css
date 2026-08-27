@@ -130,3 +130,16 @@ textarea, input[type="text"] {
 @media (max-width: 520px) {
   .lesson-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Phase visuals on lesson cards */
+.lesson-card[data-phase="1"] { border-color: #38bdf8; }
+.lesson-card[data-phase="2"] { border-color: #a78bfa; }
+.lesson-card[data-phase="3"] { border-color: #fb923c; }
+.lesson-card[data-phase="4"] { border-color: #4ade80; }
+.lesson-card .phase-icon { font-size: 1.35rem; display: block; margin-bottom: 0.15rem; }
+.hero-art {
+  font-size: 3rem; text-align: center; margin: 0.5rem 0;
+  filter: drop-shadow(0 4px 12px rgba(56,189,248,0.35));
+}
+.step-btn { position: relative; }
+.step-btn .step-ico { margin-right: 0.25rem; }

@@ -588,7 +588,7 @@ const PROJECTS = [
     id: "word-wall-maker",
     title: "Word Wall Maker",
     type: "tool",
-    description: "Paste classroom words, choose columns, optional A–Z sort, build a word wall, present full-screen, or print. Saved on this device.",
+    description: "Build a classroom word wall with colour themes, A–Z or random order, full-screen present, print, and Word Bank mode (one large word at a time for teaching).",
     category: "Classroom",
     subject: "Literacy / Classroom",
     skills: ["Word wall", "Vocabulary", "Print", "Display", "Classroom"],

@@ -555,6 +555,16 @@ const TITLE_ZH = {
   "Responsibility": "责任",
 };
 
+
+const BODY_ZH = {
+  "Who we are": "探究自我的本质；信念与价值观；个人身心健康；人际关系（家庭、朋友、社区与文化）；权利与责任；作为人意味着什么。",
+  "Where we are in place and time": "探究方位与时间；个人历史；家园与旅程；人类的发现、探索与迁徙；个人与文明之间的相互联系。",
+  "How we express ourselves": "探究我们发现与表达想法、情感、自然、文化、信仰与价值观的方式；我们的反思与创意。",
+  "How the world works": "探究自然世界与规律；自然与人类社会的互动；人类如何利用对科学原理的理解。",
+  "How we organize ourselves": "探究人类创造的制度与系统；组织结构；社会决策；经济活动及其对人类与环境的影响。",
+  "Sharing the planet": "探究资源共享与社区内及社区之间的关系；机会平等；和平与解决冲突。",
+};
+
 let uiLang = localStorage.getItem("token-moose-ib-lang") || "en";
 
 function tSection(key) {
@@ -607,7 +617,11 @@ function render() {
         <span class="badge ${d.badgeClass}">${escapeHtml(d.badge)}</span>
         <span class="chevron" aria-hidden="true">▼</span>
       </button>
-      <div class="card-body">${d.body}</div>
+      <div class="card-body">${
+        uiLang === "zh" && BODY_ZH[d.title]
+          ? "<p><strong>中文概要：</strong>" + BODY_ZH[d.title] + "</p>" + d.body
+          : d.body
+      }</div>
     `;
     const head = card.querySelector(".card-head");
     head.addEventListener("click", () => {

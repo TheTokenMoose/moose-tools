@@ -48,12 +48,26 @@
         <button type="button" class="btn" id="btn-alpha">Sort A–Z</button>
         <button type="button" class="btn" id="btn-random">Randomize</button>
         <button type="button" class="btn" id="btn-present">Present</button>
+        <button type="button" class="btn" id="btn-bank">Word Bank</button>
         <button type="button" class="btn" id="btn-print">Print</button>
         <button type="button" class="btn" id="btn-clear">Clear</button>
       </div>
     </section>
 
     <div id="wall" class="wall" aria-live="polite"></div>
+  </div>
+
+  <div id="word-bank" class="present" hidden>
+    <div class="present-bar">
+      <strong>Word Bank</strong>
+      <div class="actions">
+        <button type="button" class="btn" id="btn-bank-prev">← Prev</button>
+        <button type="button" class="btn primary" id="btn-bank-next">Next →</button>
+        <button type="button" class="btn" id="btn-bank-exit">Exit</button>
+      </div>
+    </div>
+    <div class="bank-stage"><div id="bank-word" class="bank-word">—</div>
+    <p id="bank-count" class="bank-count"></p></div>
   </div>
 
   <div id="present" class="present" hidden>

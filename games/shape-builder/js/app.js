@@ -72,8 +72,7 @@
     const el = $("feedback");
     el.textContent = msg;
     el.className = "feedback " + (ok ? "ok" : "no");
-    if (ok) speak(msg);
-    else speak(msg);
+    /* press Hear — no auto-read */
   }
 
   function pick(arr) {
@@ -139,7 +138,7 @@
         "</svg></div>"
       );
     }
-    if (s.id === "rectangle" || s.id === "cuboid") {
+    if (s.id === "rectangle") {
       return (
         wrap +
         '<svg viewBox="0 0 100 100"><rect x="10" y="28" width="80" height="44" rx="4" fill="' +
@@ -147,12 +146,34 @@
         '" stroke="#fff" stroke-width="4"/></svg></div>'
       );
     }
-    if (s.id === "triangle" || s.id === "cone") {
+    if (s.id === "cuboid") {
+      // Isometric rectangular box — longer than cube
+      return (
+        wrap +
+        '<svg viewBox="0 0 100 100">' +
+        '<polygon points="18,42 58,22 88,34 48,54" fill="' + c + '" stroke="#fff" stroke-width="3"/>' +
+        '<polygon points="18,42 48,54 48,82 18,70" fill="' + c + '" opacity="0.85" stroke="#fff" stroke-width="3"/>' +
+        '<polygon points="48,54 88,34 88,62 48,82" fill="' + c + '" opacity="0.6" stroke="#fff" stroke-width="3"/>' +
+        "</svg></div>"
+      );
+    }
+    if (s.id === "triangle") {
       return (
         wrap +
         '<svg viewBox="0 0 100 100"><polygon points="50,12 90,88 10,88" fill="' +
         c +
         '" stroke="#fff" stroke-width="4"/></svg></div>'
+      );
+    }
+    if (s.id === "cone") {
+      // 3D cone: triangle + elliptical base
+      return (
+        wrap +
+        '<svg viewBox="0 0 100 100">' +
+        '<ellipse cx="50" cy="78" rx="36" ry="12" fill="' + c + '" opacity="0.75" stroke="#fff" stroke-width="3"/>' +
+        '<polygon points="50,12 86,78 14,78" fill="' + c + '" stroke="#fff" stroke-width="3"/>' +
+        '<ellipse cx="50" cy="78" rx="36" ry="12" fill="none" stroke="#fff" stroke-width="3"/>' +
+        "</svg></div>"
       );
     }
     if (s.id === "hexagon") {
