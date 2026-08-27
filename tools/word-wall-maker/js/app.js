@@ -35,6 +35,7 @@
           words: $("words").value,
           cols: $("cols").value,
           order: window.__wwOrder || "alpha",
+          colorTitle: $("color-title") && $("color-title").value,
           colorCard: $("color-card") && $("color-card").value,
           colorText: $("color-text") && $("color-text").value,
           colorBg: $("color-bg") && $("color-bg").value,
@@ -63,6 +64,8 @@
       const t = document.createElement("div");
       t.className = "wall-title";
       t.textContent = ($("title").value || "Our Word Wall").trim();
+      const titleCol = ($("color-title") && $("color-title").value) || "#f8fafc";
+      t.style.setProperty("color", titleCol, "important");
       host.appendChild(t);
     }
     if (!words.length) {
@@ -101,7 +104,7 @@
     buildInto($("wall"), false);
   });
   // Live colour updates
-  ["color-card", "color-text", "color-bg"].forEach((id) => {
+  ["color-title", "color-card", "color-text", "color-bg"].forEach((id) => {
     const el = $(id);
     if (!el) return;
     el.addEventListener("input", () => {
@@ -114,6 +117,8 @@
   });
   $("btn-present").addEventListener("click", () => {
     $("present-title").textContent = ($("title").value || "Our Word Wall").trim();
+    const titleCol = ($("color-title") && $("color-title").value) || "#f8fafc";
+    $("present-title").style.setProperty("color", titleCol, "important");
     buildInto($("present-wall"), true);
     $("present").hidden = false;
   });
