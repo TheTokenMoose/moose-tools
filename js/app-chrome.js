@@ -224,8 +224,31 @@
 
     injectStyles();
 
+    // Ensure themes.css + theme-app.css so theme ball styles exist on every app
+    (function ensureThemeCss() {
+      let cssBase = "../../css/";
+      document.querySelectorAll("script[src]").forEach((sc) => {
+        const src = sc.getAttribute("src") || "";
+        if (src.indexOf("app-chrome.js") !== -1) {
+          cssBase = src.replace("js/app-chrome.js", "css/");
+        }
+      });
+      function needLink(hrefPart, fullHref) {
+        const has = Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(
+          (l) => (l.getAttribute("href") || "").indexOf(hrefPart) !== -1
+        );
+        if (has) return;
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = fullHref;
+        document.head.appendChild(link);
+      }
+      needLink("themes.css", cssBase + "themes.css");
+      needLink("theme-app.css", cssBase + "theme-app.css");
+    })();
+
     // Theme ball (bottom-left) — load shared theme.js once
-    if (!document.querySelector('script[data-tm-theme]')) {
+    if (!document.querySelector('script[data-tm-theme]') && !window.__tmThemeLoaded) {
       let themeSrc = "../../js/theme.js";
       document.querySelectorAll("script[src]").forEach((sc) => {
         const src = sc.getAttribute("src") || "";
@@ -236,6 +259,7 @@
       const s = document.createElement("script");
       s.src = themeSrc;
       s.dataset.tmTheme = "1";
+      window.__tmThemeLoaded = true;
       document.head.appendChild(s);
     }
 

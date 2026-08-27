@@ -153,6 +153,15 @@
   }
 
   function init() {
+    // Avoid double-binding if script loads twice
+    if (window.__tmThemeInited) {
+      ensureMarkup();
+      applyTheme(getTheme());
+      applyProjector(getProjector());
+      return;
+    }
+    window.__tmThemeInited = true;
+
     const root = ensureMarkup();
     if (!root) return;
 
