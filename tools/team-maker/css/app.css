@@ -210,3 +210,12 @@ textarea, input[type="text"] {
 .lead-card .lead-pts { font-size: 1.6rem; font-weight: 900; color: var(--tc, #1d4ed8); }
 .lead-card.tied { outline: 2px dashed #f59e0b; }
 .lead-rank { font-size: 0.8rem; font-weight: 800; color: #64748b; }
+
+
+@media print {
+  html, body, #app { background:#fff!important; color:#000!important; }
+  .no-print, .head .tag, .actions, .btn, .tm-app-chrome, #pwa-install-bar, .theme-switcher, .score-screen { display:none!important; }
+  #team-board { display:grid!important; grid-template-columns:repeat(2,1fr)!important; gap:0.5rem!important; }
+  .team-card { background:#fff!important; color:#000!important; border:2px solid #333!important; box-shadow:none!important; break-inside:avoid; }
+  .team-name-input { border:none!important; color:#000!important; background:transparent!important; }
+}

@@ -66,6 +66,8 @@
       t.textContent = ($("title").value || "Our Word Wall").trim();
       const titleCol = ($("color-title") && $("color-title").value) || "#f8fafc";
       t.style.setProperty("color", titleCol, "important");
+      host.style.setProperty("--ww-title-color", titleCol);
+      document.documentElement.style.setProperty("--ww-title-color", titleCol);
       host.appendChild(t);
     }
     if (!words.length) {

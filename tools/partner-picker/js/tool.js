@@ -140,26 +140,52 @@ class PartnerPicker {
           this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));
         });
 
-        // Touch / pointer drag (HTML5 DnD is unreliable on many touch devices)
+        // Touch / pointer drag with lift–float–drop ghost (HTML5 DnD is weak on touch)
         chip.style.touchAction = "none";
         chip.addEventListener("pointerdown", (e) => {
           if (e.pointerType === "mouse" && e.button !== 0) return;
-          // Let pure mouse use HTML5 DnD when available; pointer path for touch/pen
+          // Let pure mouse use HTML5 DnD; pointer path for touch/pen
           if (e.pointerType === "mouse") return;
           e.preventDefault();
           this.dragName = name;
           this.dragFrom = i;
           chip.classList.add("dragging");
+          chip.classList.add("lifted");
           chip.setPointerCapture(e.pointerId);
+
+          // Floating ghost that follows the finger
+          const ghost = chip.cloneNode(true);
+          ghost.className = "chip chip-ghost";
+          ghost.style.position = "fixed";
+          ghost.style.left = e.clientX - 40 + "px";
+          ghost.style.top = e.clientY - 20 + "px";
+          ghost.style.width = Math.max(chip.offsetWidth, 72) + "px";
+          ghost.style.zIndex = "30000";
+          ghost.style.pointerEvents = "none";
+          ghost.style.margin = "0";
+          document.body.appendChild(ghost);
+          this._dragGhost = ghost;
+
           const onMove = (ev) => {
+            if (this._dragGhost) {
+              this._dragGhost.style.left = ev.clientX - 40 + "px";
+              this._dragGhost.style.top = ev.clientY - 20 + "px";
+            }
             const el = document.elementFromPoint(ev.clientX, ev.clientY);
             this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));
             const over = el && el.closest ? el.closest(".table") : null;
             if (over) over.classList.add("drag-over");
           };
           const onUp = (ev) => {
-            chip.releasePointerCapture(e.pointerId);
+            try {
+              chip.releasePointerCapture(e.pointerId);
+            } catch (_) {}
             chip.classList.remove("dragging");
+            chip.classList.remove("lifted");
+            if (this._dragGhost) {
+              this._dragGhost.remove();
+              this._dragGhost = null;
+            }
             const el = document.elementFromPoint(ev.clientX, ev.clientY);
             const over = el && el.closest ? el.closest(".table") : null;
             this.board.querySelectorAll(".table").forEach((t) => t.classList.remove("drag-over"));

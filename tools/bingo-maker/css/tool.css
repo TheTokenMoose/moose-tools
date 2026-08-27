@@ -37,7 +37,7 @@ textarea, input[type="number"] {
   background: #fff; color: #1c1917; border-radius: 12px; padding: 0.55rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
-.board h3 { margin: 0 0 0.35rem; text-align: center; font-size: 0.95rem; }
+.board h3 { margin: 0 0 0.35rem; text-align: center; font-size: 0.95rem; color: #1c1917; }
 .grid {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px;
 }
@@ -46,6 +46,7 @@ textarea, input[type="number"] {
   display: grid; place-items: center; text-align: center;
   font-size: clamp(0.55rem, 1.6vw, 0.72rem); font-weight: 700;
   padding: 2px; line-height: 1.15; word-break: break-word;
+  color: #1c1917; background: #fff;
 }
 .cell.free { background: #fdba74; font-size: 0.7rem; }
 
@@ -70,51 +71,120 @@ textarea, input[type="number"] {
   font-weight: 700; font-size: 0.9rem;
 }
 
+/* ========== PRINT: 2×2 boards per A4, no site chrome, solid white ========== */
 @media print {
-  body, html { background: #fff !important; color: #000 !important; }
-  .tm-app-chrome, .btn, header, .no-print { display: none !important; }
-  .bingo-board, .board { page-break-after: always; break-after: page; background:#fff!important; }
+  @page {
+    size: A4 portrait;
+    margin: 0.6cm;
+  }
 
-  .tm-app-chrome, .panel .actions, .head .sub { display: none !important; }
-  .boards { grid-template-columns: repeat(2, 1fr); }
-  .board { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-  body { background: #fff; color: #000; }
-}
-
-@media print {
   html, body {
     background: #fff !important;
     color: #000 !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  .tm-app-chrome, .tm-back, .tm-fav, #tm-voice-slot, .panel, .head,
-  .btn, .actions, .no-print, header, nav, .pwa-install-banner {
+
+  /* Hide everything except the boards */
+  .tm-app-chrome,
+  .tm-back,
+  .tm-fav,
+  #tm-voice-slot,
+  .theme-switcher,
+  #tm-app-theme-switcher,
+  .head,
+  .panel,
+  .btn,
+  .actions,
+  .caller,
+  #pwa-install-bar,
+  .pwa-install-banner,
+  nav,
+  .library-back,
+  .no-print {
     display: none !important;
   }
-  #boards, .boards, .print-boards {
+
+  #app {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  #boards.boards,
+  .boards {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    grid-template-rows: 1fr 1fr !important;
-    gap: 0.4cm !important;
+    grid-template-rows: auto auto !important;
+    gap: 0.5cm !important;
     width: 100% !important;
-    height: auto !important;
-    page-break-inside: avoid;
+    background: #fff !important;
   }
-  .bingo-board, .board {
-    page-break-after: auto !important;
-    break-after: auto !important;
-    page-break-inside: avoid !important;
+
+  .board {
+    display: flex !important;
+    flex-direction: column !important;
     width: 100% !important;
-    max-height: 13cm !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0.25cm !important;
     background: #fff !important;
     color: #000 !important;
     border: 2px solid #000 !important;
+    border-radius: 0 !important;
     box-shadow: none !important;
-    transform: scale(1) !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    overflow: hidden !important;
   }
-  /* every 4 boards = new page */
-  .bingo-board:nth-child(4n) {
+
+  /* New page after every 4 boards */
+  .board:nth-child(4n) {
     page-break-after: always !important;
+  }
+  .board:last-child {
+    page-break-after: auto !important;
+  }
+
+  .board h3 {
+    margin: 0 0 0.15cm !important;
+    font-size: 11pt !important;
+    color: #000 !important;
+    text-align: center !important;
+  }
+
+  .grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-rows: repeat(5, 1fr) !important;
+    gap: 1px !important;
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    aspect-ratio: 1 / 1 !important;
+    max-height: 9.2cm !important;
+  }
+
+  .cell {
+    aspect-ratio: auto !important;
+    border: 1px solid #333 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    padding: 1px !important;
+    line-height: 1.1 !important;
+    overflow: hidden !important;
+  }
+
+  .cell.free {
+    background: #fde68a !important;
   }
 }

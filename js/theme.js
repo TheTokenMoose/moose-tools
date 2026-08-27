@@ -1,7 +1,8 @@
 /**
- * Theme switcher — self-contained control (ball + "Themes" label + menu).
- * Builds consistent markup so appearance matches across browsers.
- * Includes Projector Mode toggle (modifier on top of the active theme).
+ * Theme switcher — self-contained control (ball + optional "Themes" label + menu).
+ * Shell pages: ball + Themes label in header.
+ * App/game pages (body[data-app-id]): ball only, fixed bottom-left.
+ * Includes Projector Mode toggle.
  */
 (function () {
   const KEY = "token-moose-theme";
@@ -12,6 +13,10 @@
     playful: { label: "Preschool Playful", blurb: "Warm · candy · energetic", meta: "#ffedd5" },
     forest: { label: "Forest Grove", blurb: "Moss · canopy · calm green", meta: "#0c1f14" },
   };
+
+  function isAppPage() {
+    return !!(document.body && document.body.getAttribute("data-app-id"));
+  }
 
   function getTheme() {
     try {
@@ -50,62 +55,75 @@
       localStorage.setItem(KEY, id);
     } catch (_) {}
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", THEMES[id].meta);
-
+    if (meta && THEMES[id]) meta.setAttribute("content", THEMES[id].meta);
     document.querySelectorAll(".theme-option[data-theme]").forEach((btn) => {
-      const active = btn.getAttribute("data-theme") === id;
-      btn.classList.toggle("is-active", active);
-      btn.setAttribute("aria-checked", active ? "true" : "false");
-    });
-
-    const label = THEMES[id].label;
-    document.querySelectorAll("#theme-ball, #theme-label-btn").forEach((el) => {
-      el.setAttribute("aria-label", "Theme: " + label + ". Change theme");
+      const on = btn.getAttribute("data-theme") === id;
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+      btn.classList.toggle("is-active", on);
     });
   }
 
-  function setOpen(open) {
+  function closeMenu() {
     const menu = document.getElementById("theme-menu");
-    if (menu) menu.hidden = !open;
+    if (menu) menu.hidden = true;
     document.querySelectorAll("#theme-ball, #theme-label-btn").forEach((el) => {
-      el.setAttribute("aria-expanded", open ? "true" : "false");
+      if (el) el.setAttribute("aria-expanded", "false");
     });
   }
 
   function toggleMenu(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    if (e) e.stopPropagation();
     const menu = document.getElementById("theme-menu");
     if (!menu) return;
-    setOpen(menu.hidden);
-  }
-
-  function closeMenu() {
-    setOpen(false);
+    const open = menu.hidden;
+    menu.hidden = !open;
+    document.querySelectorAll("#theme-ball, #theme-label-btn").forEach((el) => {
+      if (el) el.setAttribute("aria-expanded", open ? "true" : "false");
+    });
   }
 
   function ensureMarkup() {
-    let root = document.querySelector(".theme-switcher");
-    if (!root) {
-      const host =
-        document.querySelector(".site-header .header-inner") ||
-        document.querySelector(".site-header") ||
-        document.querySelector("header");
-      if (!host) return null;
-      root = document.createElement("div");
-      root.className = "theme-switcher";
-      host.appendChild(root);
+    // Remove stale switchers so we don't double-mount
+    document.querySelectorAll(".theme-switcher").forEach((n) => {
+      if (n.id !== "tm-app-theme-switcher" && !n.closest(".site-header")) {
+        /* keep shell ones if re-init */
+      }
+    });
+
+    const app = isAppPage();
+    let root = document.getElementById("tm-app-theme-switcher");
+    if (app) {
+      if (!root) {
+        root = document.createElement("div");
+        root.id = "tm-app-theme-switcher";
+        root.className = "theme-switcher theme-switcher--app";
+        document.body.appendChild(root);
+      }
+    } else {
+      root = document.querySelector(".site-header .theme-switcher") || document.querySelector(".theme-switcher");
+      if (!root) {
+        const host =
+          document.querySelector(".site-header .header-inner") ||
+          document.querySelector(".site-header") ||
+          document.querySelector("header");
+        if (!host) return null;
+        root = document.createElement("div");
+        root.className = "theme-switcher";
+        host.appendChild(root);
+      }
     }
+
+    const labelBtn = app
+      ? ""
+      : `<button type="button" class="theme-label-btn" id="theme-label-btn"
+          aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu">Themes</button>`;
 
     root.innerHTML = `
       <div class="theme-trigger" role="group" aria-label="Theme">
         <button type="button" class="theme-ball" id="theme-ball"
           aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu"
           title="Change theme"></button>
-        <button type="button" class="theme-label-btn" id="theme-label-btn"
-          aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu">Themes</button>
+        ${labelBtn}
       </div>
       <div class="theme-menu" id="theme-menu" role="listbox" aria-label="Site theme" hidden>
         <button type="button" class="theme-option" role="option" data-theme="night" aria-checked="false">
@@ -163,7 +181,6 @@
       proj.addEventListener("click", (e) => {
         e.stopPropagation();
         applyProjector(!getProjector());
-        // keep menu open so teacher can see the toggle state
       });
     }
 

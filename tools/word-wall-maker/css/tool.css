@@ -46,8 +46,8 @@ input[type="text"], input[type="number"], textarea {
   word-break: break-word;
 }
 .wall-title {
-  grid-column: 1 / -1; text-align: center; font-size: 1.35rem;
-  font-weight: 900; margin-bottom: 0.25rem; color: var(--text-primary, #f1f5f9);
+  font-weight: 900; margin-bottom: 0.25rem;
+  color: var(--ww-title-color, var(--text-primary, #f1f5f9)) !important;
 }
 
 .present {
@@ -83,3 +83,12 @@ input[type="text"], input[type="number"], textarea {
   text-shadow: 0 4px 20px rgba(0,0,0,0.35);
 }
 .bank-count { opacity: 0.8; font-weight: 700; margin-top: 1rem; }
+
+
+@media print {
+  html, body, #app, .panel, #wall, .wall { background:#fff!important; color:#000!important; }
+  .panel, .actions, .btn, .head, .tm-app-chrome, #pwa-install-bar, .theme-switcher, .present { display:none!important; }
+  #wall, .wall { display:grid!important; }
+  .wall-title { color:#000!important; }
+  .card { background:#fff!important; color:#000!important; border:1px solid #333!important; box-shadow:none!important; }
+}

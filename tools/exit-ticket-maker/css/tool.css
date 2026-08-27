@@ -410,3 +410,10 @@ html, body {
     box-shadow: none !important;
   }
 }
+
+
+@media print {
+  html, body, #app, .ticket, .live-body { background:#fff!important; color:#000!important; }
+  .controls, .btn, .tm-app-chrome, #pwa-install-bar, .theme-switcher, .live-bar, .no-print { display:none!important; }
+  .ticket { border:1px solid #000!important; box-shadow:none!important; }
+}

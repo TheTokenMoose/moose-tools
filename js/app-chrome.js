@@ -223,6 +223,22 @@
     } catch (_) {}
 
     injectStyles();
+
+    // Theme ball (bottom-left) — load shared theme.js once
+    if (!document.querySelector('script[data-tm-theme]')) {
+      let themeSrc = "../../js/theme.js";
+      document.querySelectorAll("script[src]").forEach((sc) => {
+        const src = sc.getAttribute("src") || "";
+        if (src.indexOf("app-chrome.js") !== -1) {
+          themeSrc = src.replace("app-chrome.js", "theme.js");
+        }
+      });
+      const s = document.createElement("script");
+      s.src = themeSrc;
+      s.dataset.tmTheme = "1";
+      document.head.appendChild(s);
+    }
+
     body.classList.add("tm-has-app-chrome");
     document.querySelectorAll(".tm-app-chrome").forEach((n) => n.remove());
 

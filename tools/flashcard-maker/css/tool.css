@@ -105,3 +105,14 @@ textarea {
   }
   .print-face { color: #000 !important; font-size: 14pt !important; }
 }
+
+
+@media print {
+  html, body, #app, .print-area, .print-page, .print-grid, .print-card {
+    background:#fff!important; color:#000!important;
+  }
+  .head, .panel, .practice, .actions, .btn, .tm-app-chrome, #pwa-install-bar, .theme-switcher { display:none!important; }
+  .print-area { display:block!important; }
+  .print-card { border:2px solid #000!important; background:#fff!important; color:#000!important; }
+  .print-face { color:#000!important; }
+}

@@ -173,3 +173,10 @@ select, input[type="text"] {
   .no-print { display: none !important; }
   .card { box-shadow: none; border-color: #ccc; }
 }
+
+
+@media print {
+  html, body, #app, .panel, .result, .prompt-card { background:#fff!important; color:#000!important; }
+  .controls, .actions, .head .sub, .tm-app-chrome, #pwa-install-bar, .theme-switcher { display:none!important; }
+  .result, .prompt-out { border:1px solid #000!important; }
+}
