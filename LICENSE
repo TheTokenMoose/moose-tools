@@ -24,12 +24,12 @@ SOFTWARE.
 Notes on third-party and game content
 ---------------------------------------------------------------------------
 
-- Website source (HTML, CSS, JS for the library shell) is covered by the
-  license above unless otherwise noted.
-- Individual games and tools added later may include their own LICENSE or
-  NOTICE files inside their folders. Respect those terms separately.
-- Placeholder graphics and icons in this repository are original simple
-  assets created for the project shell.
+- Website source (HTML, CSS, JS for the library shell and apps in this
+  repository) is covered by the license above unless otherwise noted.
+- Individual games and tools may include their own LICENSE or NOTICE files
+  inside their folders. Respect those terms separately.
+- Graphics, icons, and cover art created for this project are original
+  project assets unless a file or page credits another source.
 - Do not assume that third-party fonts, images, audio, or code you add later
   are covered by this MIT license; keep clear attribution and licenses for
   those assets.
@@ -40,3 +40,14 @@ Notes on third-party and game content
 - Bundled fallback holiday lists and original game/tool code in this repo
   remain under the MIT terms above unless a subfolder states otherwise.
 
+- Optional client-side TTS under assets/tts/:
+  - Piper voice models from rhasspy/piper-voices (MIT) — see each voice
+    folder and assets/tts/VOICES.md.
+  - ONNX Runtime Web, piper-phonemize, and related browser helpers are
+    third-party MIT-licensed components; see assets/tts/VOICES.md.
+  - Browser speechSynthesis voices are provided by the user’s operating
+    system / browser and are not redistributed as part of this license.
+
+- This project is not affiliated with or endorsed by the International
+  Baccalaureate Organization. IB PYP reference material in tools is an
+  unofficial classroom aid for teachers.

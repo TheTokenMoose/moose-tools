@@ -1,26 +1,30 @@
-# The Token Moose (`moose-tools`)
+# Moose Tools
 
-A static website for an open collection of **browser games**, **educational games**, and **small teacher tools**.
-
-**Public identity:** The Token Moose  
+**Public site name:** Moose Tools  
+**Brand mark in the header:** The Token Moose (with profile image)  
 **Creator name:** only on the About page (by design)
+
+A static, open collection of **browser games**, **educational experiments**, and **small teacher tools** for kindergarten / early primary and ESL classrooms.
 
 **Live site:** https://thetokenmoose.github.io/moose-tools/  
 **Repository:** https://github.com/TheTokenMoose/moose-tools
 
-Fully static · suitable for **GitHub Pages** · no accounts · no backend · no database.
+Fully static · GitHub Pages · **no accounts · no backend · no database · no ads · no tracking**
 
 ---
 
 ## Features
 
-- Responsive library of games and teacher tools (`js/projects.js` data-driven cards)
-- Search and type filters (games / tools / favorites)
+- Responsive library of games and teacher tools (data-driven cards in `js/projects.js`)
+- Search, type filters (All / Games / Tools / Favorites), optional **skill tags**
 - Favorites stored in the browser via `localStorage`
-- Home **planner rail**: teacher to-do list + month calendar (China public holidays when online, school-break windows, global teaching dates)
-- Per-app **PWA** install (each game/tool can install with its own scope)
-- **Network-first** service worker so deploys update without clearing site storage
-- Offline fallback for previously visited shell and app assets
+- Home **planner rail**: teacher to-do + month calendar (China public holidays when online, school-break windows)
+- **Themes:** Night City, Daylight, Preschool Playful, Forest Grove, Ocean Breeze + **Projector Mode**
+- Theme ball on the shell (header) and on every app (bottom-left)
+- Shared app chrome: **Back to Moose Tools**, optional Voice slot, Favorite
+- Per-app **PWA** install (each game/tool has its own scope)
+- **Network-first** service workers so deploys update without clearing site storage
+- Optional classroom speech via system voices and/or bundled Piper UK English models (see `assets/tts/VOICES.md`)
 
 ---
 
@@ -36,7 +40,7 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080`.
 
-> Prefer a local server over `file://` (service workers and some paths need `http(s)`).
+> Prefer a local server over `file://` (service workers and relative paths need `http(s)`).
 
 ---
 
@@ -56,17 +60,25 @@ After pushing, visit the site once so the new service worker can activate. Updat
 
 ```text
 .
-├── index.html, games.html, tools.html, favorites.html, about.html
-├── css/                    # site shell styles
+├── index.html, games.html, tools.html, favorites.html, about.html, 404.html
+├── css/
+│   ├── themes.css          # Night / Day / Playful / Forest / Ocean + projector
+│   ├── theme-app.css       # App form controls bridged to theme tokens
+│   └── …                   # shell layout styles
 ├── js/
 │   ├── projects.js         # ← register games & tools here
 │   ├── app.js, favorites.js, install.js
+│   ├── theme.js, app-chrome.js
 │   ├── calendar.js, todo.js
+│   ├── voice.js, tts/      # speech helpers
 │   └── sw-register.js
-├── assets/icons/           # favicons / PWA icons
-├── assets/screenshots/     # card images
-├── games/<name>/           # each game: index.html, css/, js/, sw.js, manifest
-├── tools/<name>/           # each tool: same pattern
+├── assets/
+│   ├── icons/              # favicons / brand
+│   ├── screenshots/        # library card art
+│   └── tts/                # optional Piper runtime + UK voices
+├── games/<name>/           # index.html, css/, js/, sw.js, manifest, pwa-install*
+├── tools/<name>/           # same pattern
+├── favicon.ico
 ├── manifest.webmanifest
 ├── sw.js
 ├── README.md
@@ -78,7 +90,7 @@ After pushing, visit the site once so the new service worker can activate. Updat
 ## Adding a game or tool
 
 1. Create `games/my-game/` or `tools/my-tool/` with at least `index.html`.
-2. Add a screenshot under `assets/screenshots/`.
+2. Add cover art under `assets/screenshots/` (games especially).
 3. Register it in `js/projects.js`:
 
 ```javascript
@@ -86,17 +98,21 @@ After pushing, visit the site once so the new service worker can activate. Updat
   id: "my-game",
   title: "My Game",
   type: "game",              // or "tool"
-  description: "Short card text.",
+  description: "Teacher-facing description of what it does and why.",
+  subject: "Literacy",       // e.g. Math, Classroom, Science
+  skills: ["phonics", "CVC"], // searchable tags
   category: "Education",
   screenshot: "assets/screenshots/my-game.png",
   playUrl: "games/my-game/",
   installable: true,
-  featured: true
+  featured: false
 }
 ```
 
-4. For installable PWAs, include `manifest.webmanifest`, `sw.js`, and the shared `pwa-install.js` pattern used by existing apps (network-first SW recommended).
-5. Commit and push. GitHub Pages updates automatically.
+4. Include `manifest.webmanifest`, `sw.js`, and the shared `pwa-install.js` / `pwa-install.css` pattern used by existing apps (network-first SW recommended).
+5. Load `../../js/app-chrome.js` so Back / Favorite / theme ball work consistently.
+6. For speech: load `../../js/voice.js` (and TTS modules if needed), create with a stable app id, mount the picker on `#tm-voice-slot` or a toolbar slot — prefer **press to hear**, not auto-read.
+7. Commit and push. GitHub Pages updates automatically.
 
 ---
 
@@ -108,16 +124,36 @@ After pushing, visit the site once so the new service worker can activate. Updat
 | `token-moose-todos` | Home to-do items |
 | `token-moose-todo-hidden` | To-do panel visibility |
 | `token-moose-calendar-hidden` | Calendar panel visibility |
+| `token-moose-theme` | Active theme id |
+| `token-moose-projector` | Projector Mode on/off |
+| `token-moose-voice-choice:<appId>` | Per-app voice preference |
+| `token-moose-ib-lang` | IB PYP Guide language (en/zh) |
 
 Data stays on that browser/device only.
 
 ---
 
+## Themes
+
+| Id | Name | Feel |
+|----|------|------|
+| `night` | Night City | Soft neon · default |
+| `day` | Daylight | Bright · airy · calm |
+| `playful` | Preschool Playful | Warm · candy · energetic |
+| `forest` | Forest Grove | Moss · canopy · calm green |
+| `ocean` | Ocean Breeze | Deep sea · soft cyan · calm |
+
+**Projector Mode** is a toggle (not a separate theme): larger type and higher contrast for classroom display.
+
+---
+
 ## PWA & caching
 
-- **Site shell:** root `sw.js` + `js/sw-register.js` (checks for updates, activates new workers, one reload).
+- **Site shell:** root `sw.js` + `js/sw-register.js` (checks for updates, activates new workers).
 - **Each game/tool:** its own `sw.js` scoped to that folder so “Install” is per app, not only the whole site.
 - Strategy: **network-first** for HTML/JS/CSS when online; cache used offline.
+
+Bump the shell cache name in `sw.js` (`token-moose-vN`) when shared shell assets change.
 
 ---
 
@@ -128,13 +164,14 @@ See [LICENSE](LICENSE) (MIT for the project source unless a folder notes otherwi
 Third-party notes:
 
 - China public holiday **live** data (when available) comes from the public [Nager.Date](https://date.nager.at/) API; offline fallback lists are bundled in `js/calendar.js`.
-- Some games may credit open emoji/art sources in-page (e.g. Twemoji). Keep attributions when you copy those folders.
+- Optional **Piper / ONNX** TTS assets under `assets/tts/` — see [assets/tts/VOICES.md](assets/tts/VOICES.md) for model and runtime licenses (generally MIT). Browser `speechSynthesis` voices remain under the user’s OS/browser terms.
+- Some games may credit open emoji/art sources in-page. Keep attributions when you copy those folders.
 
 ---
 
 ## Design
 
-Neon night aesthetic — deep navy, violet/pink/electric accents, glass cards. Original project direction, not tied to any single commercial brand.
+Multi-theme shell (neon night default, plus daylight, playful, forest, and ocean). Individual games may keep their own art direction; the theme switcher drives the **shell and shared chrome**.
 
 ---
 
