@@ -110,3 +110,15 @@ html[data-theme="forest"] #pwa-install-btn {
     display: none !important;
   }
 }
+
+html[data-theme="ocean"] #pwa-install-bar {
+  background: rgba(8, 24, 48, 0.96);
+  color: #e0f2fe;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+html[data-theme="ocean"] .pwa-install-text strong { color: #e0f2fe; }
+html[data-theme="ocean"] .pwa-install-text span,
+html[data-theme="ocean"] #pwa-install-dismiss { color: #7dd3fc; }
+html[data-theme="ocean"] #pwa-install-btn {
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+}

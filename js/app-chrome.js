@@ -36,6 +36,24 @@
       favOnBorder: "rgba(244, 63, 94, 0.55)",
       glow: "0 0 14px rgba(249, 115, 22, 0.25)",
     },
+    forest: {
+      barBg: "rgba(12, 31, 20, 0.9)",
+      border: "rgba(74, 222, 128, 0.45)",
+      text: "#ecfdf5",
+      accent: "#4ade80",
+      favOnBg: "rgba(22, 101, 52, 0.85)",
+      favOnBorder: "rgba(134, 239, 172, 0.7)",
+      glow: "0 0 16px rgba(74, 222, 128, 0.28)",
+    },
+    ocean: {
+      barBg: "rgba(8, 24, 48, 0.92)",
+      border: "rgba(56, 189, 248, 0.45)",
+      text: "#e0f2fe",
+      accent: "#38bdf8",
+      favOnBg: "rgba(12, 74, 110, 0.9)",
+      favOnBorder: "rgba(125, 211, 252, 0.7)",
+      glow: "0 0 16px rgba(56, 189, 248, 0.28)",
+    },
   };
 
   function getThemeId() {
@@ -276,7 +294,7 @@
     const back = document.createElement("button");
     back.type = "button";
     back.className = "tm-back";
-    back.textContent = "← Back to The Token Moose";
+    back.textContent = "← Back to Moose Tools";
     back.addEventListener("click", goHome);
     left.appendChild(back);
 

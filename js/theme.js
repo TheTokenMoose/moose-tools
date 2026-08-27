@@ -12,6 +12,7 @@
     day: { label: "Daylight", blurb: "Bright · airy · calm", meta: "#e8eef8" },
     playful: { label: "Preschool Playful", blurb: "Warm · candy · energetic", meta: "#ffedd5" },
     forest: { label: "Forest Grove", blurb: "Moss · canopy · calm green", meta: "#0c1f14" },
+    ocean: { label: "Ocean Breeze", blurb: "Deep sea · soft cyan · calm", meta: "#071526" },
   };
 
   function isAppPage() {
@@ -141,6 +142,10 @@
         <button type="button" class="theme-option" role="option" data-theme="forest" aria-checked="false">
           <span class="theme-swatch forest" aria-hidden="true"></span>
           <span class="theme-option-text">Forest Grove<small>Moss · canopy · calm green</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="ocean" aria-checked="false">
+          <span class="theme-swatch ocean" aria-hidden="true"></span>
+          <span class="theme-option-text">Ocean Breeze<small>Deep sea · soft cyan · calm</small></span>
         </button>
         <button type="button" class="theme-option projector-toggle" id="projector-toggle"
           role="option" aria-checked="false">
