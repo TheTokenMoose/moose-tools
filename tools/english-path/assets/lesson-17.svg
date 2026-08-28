@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Kinds of Heroes</title>
+  <rect width="320" height="200" fill="#EDE7F6"/>
+  <circle cx="100" cy="90" r="28" fill="#FFCC80"/>
+  <rect x="78" y="118" width="44" height="50" fill="#5C6BC0"/>
+  <path d="M78 130 L55 145" stroke="#5C6BC0" stroke-width="8"/>
+  <circle cx="220" cy="95" r="28" fill="#FFCC80"/>
+  <rect x="198" y="123" width="44" height="48" fill="#EF5350"/>
+  <path d="M242 135 L270 120" stroke="#EF5350" stroke-width="8"/>
+  <rect y="170" width="320" height="30" fill="#B39DDB"/>
+  </svg>

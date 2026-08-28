@@ -1,0 +1,3 @@
+Background music: stock track from Mixkit (https://mixkit.co/free-stock-music/)
+License: Mixkit License — free for commercial and non-commercial use; no attribution required by Mixkit, credit retained here for transparency.
+File: background.mp3 (bundled for offline classroom use)

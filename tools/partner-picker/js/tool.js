@@ -102,7 +102,7 @@ class PartnerPicker {
   render() {
     this.board.innerHTML = "";
     if (!this.groups.length) {
-      this.board.innerHTML = `<p style="color:#a8b4d0;grid-column:1/-1;text-align:center;padding:3rem;">Auto-assign to see fruit tables</p>`;
+      this.board.innerHTML = `<p class="board-empty">Auto-assign to see fruit tables</p>`;
       return;
     }
 

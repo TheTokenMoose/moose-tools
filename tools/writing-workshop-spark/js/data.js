@@ -1,5 +1,6 @@
 /**
  * Writing Workshop Spark — K2 / K3 idea-card banks (with emoji/clipart keys)
+ * Expanded prompt banks for fuller classroom use.
  */
 window.WWS_DATA = {
   "k3": {
@@ -185,6 +186,182 @@ window.WWS_DATA = {
             ],
             "cheer": "Choices reveal character.",
             "emoji": "🪞"
+          },
+          {
+            "title": "Moon Market",
+            "draw": "At a market that only opens under a full moon, a child must trade a secret for a map.",
+            "next": [
+              "What do they trade?",
+              "Who watches them?",
+              "What does the map demand next?"
+            ],
+            "cheer": "Secrets make fantasy plots tight.",
+            "emoji": "🌙"
+          },
+          {
+            "title": "Borrowed Wings",
+            "draw": "Someone borrows a pair of wings for one day — and almost cannot give them back.",
+            "next": [
+              "Why do they need the wings?",
+              "What goes wrong in the air?",
+              "How do they choose to return them?"
+            ],
+            "cheer": "Desire vs duty builds tension.",
+            "emoji": "🪽"
+          },
+          {
+            "title": "Clockwork Fox",
+            "draw": "A clockwork fox ticks louder whenever a lie is told nearby.",
+            "next": [
+              "Who notices first?",
+              "What lie makes it race?",
+              "How is trust repaired?"
+            ],
+            "cheer": "Magical rules should stay consistent.",
+            "emoji": "⚙️"
+          },
+          {
+            "title": "Soup of Stories",
+            "draw": "A cook’s soup makes drinkers speak only in stories for an hour.",
+            "next": [
+              "Who tastes it by accident?",
+              "What story spills out?",
+              "How do they use the hour wisely?"
+            ],
+            "cheer": "Funny magic still needs stakes.",
+            "emoji": "🍲"
+          },
+          {
+            "title": "Bridge of Whispers",
+            "draw": "A bridge repeats every whispered wish — including the ones people regret.",
+            "next": [
+              "What wish is overheard?",
+              "Who is hurt by it?",
+              "How is the wish rewritten?"
+            ],
+            "cheer": "Consequences teach theme.",
+            "emoji": "🌉"
+          },
+          {
+            "title": "Paint That Moves",
+            "draw": "Brushstrokes climb off the page and hide in the classroom.",
+            "next": [
+              "What was painted?",
+              "Where does it hide?",
+              "How is art returned to the page?"
+            ],
+            "cheer": "School settings can still feel wondrous.",
+            "emoji": "🖌️"
+          },
+          {
+            "title": "Name Thief",
+            "draw": "A mischievous sprite steals people’s names so they cannot be called to dinner.",
+            "next": [
+              "Whose name is taken first?",
+              "How do you trap a sprite kindly?",
+              "What is traded to get names back?"
+            ],
+            "cheer": "Clear problems invite clever solutions.",
+            "emoji": "🧚"
+          },
+          {
+            "title": "Lantern Path",
+            "draw": "Paper lanterns light a path only the lost can see.",
+            "next": [
+              "Who is lost?",
+              "What do the lanterns show?",
+              "Who waits at the end?"
+            ],
+            "cheer": "Atmosphere carries emotion.",
+            "emoji": "🏮"
+          },
+          {
+            "title": "Giant’s Button",
+            "draw": "A giant’s lost button rolls into a village and becomes a problem and a gift.",
+            "next": [
+              "What does the village use it for?",
+              "When does the giant return?",
+              "How do both sides compromise?"
+            ],
+            "cheer": "Scale changes conflict.",
+            "emoji": "🧵"
+          },
+          {
+            "title": "Weather Keeper",
+            "draw": "A child is put in charge of the weather for one afternoon.",
+            "next": [
+              "What do they try first?",
+              "Who complains?",
+              "What weather finally helps everyone?"
+            ],
+            "cheer": "Power needs responsibility.",
+            "emoji": "⛅"
+          },
+          {
+            "title": "Pocket Portal",
+            "draw": "A coat pocket opens into a second, quieter school.",
+            "next": [
+              "What is different there?",
+              "Who follows them through?",
+              "Why must the portal close?"
+            ],
+            "cheer": "Two worlds invite comparison.",
+            "emoji": "🧥"
+          },
+          {
+            "title": "Song Without Words",
+            "draw": "A melody makes plants grow but freezes anyone who tries to hum it wrong.",
+            "next": [
+              "Who needs the plants?",
+              "What goes wrong with the song?",
+              "How is the tune learned properly?"
+            ],
+            "cheer": "Process can be magical too.",
+            "emoji": "🎵"
+          },
+          {
+            "title": "Shadow Swap",
+            "draw": "Two children’s shadows switch places for a day.",
+            "next": [
+              "What can each shadow do?",
+              "What trouble appears at recess?",
+              "How do they swap back?"
+            ],
+            "cheer": "Identity stories love a twist.",
+            "emoji": "👥"
+          },
+          {
+            "title": "Library Lion",
+            "draw": "A stone lion outside the library comes alive only for readers who are stuck.",
+            "next": [
+              "What advice does it give?",
+              "What rule must the child keep?",
+              "How does the story get unstuck?"
+            ],
+            "cheer": "Mentors can be magical.",
+            "emoji": "🦁"
+          },
+          {
+            "title": "Candle That Listens",
+            "draw": "A birthday candle listens to wishes and grants the kindest one — not the loudest.",
+            "next": [
+              "What wishes compete?",
+              "Whose wish is kind?",
+              "What changes after?"
+            ],
+            "cheer": "Theme can hide inside objects.",
+            "emoji": "🕯️"
+          },
+          {
+            "title": "Train to Yesterday",
+            "draw": "A train stops at stations named for memories.",
+            "next": [
+              "Which station is tempting?",
+              "What memory is risky to revisit?",
+              "Why do they choose today instead?"
+            ],
+            "cheer": "Time travel needs an emotional reason.",
+            "emoji": "🚂"
           }
         ]
       },
@@ -367,6 +544,182 @@ window.WWS_DATA = {
             ],
             "cheer": "If a friend can do it from your words, you succeeded.",
             "emoji": "✈️"
+          },
+          {
+            "title": "Tie Shoelaces",
+            "draw": "Teach a younger student how to tie shoelaces without rushing.",
+            "next": [
+              "Start with the rabbit-ear or loop method you use.",
+              "Warn about tight vs too loose.",
+              "Done when both shoes are secure."
+            ],
+            "cheer": "Patient steps help real readers.",
+            "emoji": "👟"
+          },
+          {
+            "title": "Sharpen a Pencil",
+            "draw": "How to sharpen a pencil safely at the classroom sharpener.",
+            "next": [
+              "Check the pencil length.",
+              "How many turns is enough?",
+              "What to do if it jams."
+            ],
+            "cheer": "Safety belongs in procedures.",
+            "emoji": "✏️"
+          },
+          {
+            "title": "Feed the Class Fish",
+            "draw": "How to feed the classroom fish without overfeeding.",
+            "next": [
+              "How much food.",
+              "When to feed.",
+              "What to notice about the water."
+            ],
+            "cheer": "Care routines make strong how-tos.",
+            "emoji": "🐠"
+          },
+          {
+            "title": "Make a Paper Airplane",
+            "draw": "How to fold a paper airplane that actually flies.",
+            "next": [
+              "Materials: one sheet.",
+              "Fold order with sharp creases.",
+              "Test flight and one fix tip."
+            ],
+            "cheer": "Try–test–revise is real engineering writing.",
+            "emoji": "✈️"
+          },
+          {
+            "title": "Line Up Quietly",
+            "draw": "How your class lines up to leave the room calmly.",
+            "next": [
+              "Where to stand.",
+              "Voice level.",
+              "Done when the line is ready and silent enough."
+            ],
+            "cheer": "Community procedures matter.",
+            "emoji": "🚪"
+          },
+          {
+            "title": "Water a Plant",
+            "draw": "How to water a classroom plant the right amount.",
+            "next": [
+              "Check the soil first.",
+              "How much water.",
+              "Where not to pour."
+            ],
+            "cheer": "Observation comes before action.",
+            "emoji": "🪴"
+          },
+          {
+            "title": "Build a Block Tower",
+            "draw": "How to build a stable tower from blocks.",
+            "next": [
+              "Wide base first.",
+              "What to do when it wobbles.",
+              "Done when it stands while you count to ten."
+            ],
+            "cheer": "Stability is a design idea.",
+            "emoji": "🧱"
+          },
+          {
+            "title": "Open a Juice Box",
+            "draw": "How to open a juice box without spilling.",
+            "next": [
+              "Hold steady.",
+              "Straw steps.",
+              "What to do if it squirts."
+            ],
+            "cheer": "Everyday expertise is worth teaching.",
+            "emoji": "🧃"
+          },
+          {
+            "title": "Find a Library Book",
+            "draw": "How to find a book by topic in the classroom library.",
+            "next": [
+              "Bins or shelves to check.",
+              "How to reshelve.",
+              "Ask for help after two tries."
+            ],
+            "cheer": "Information skills are how-tos too.",
+            "emoji": "📚"
+          },
+          {
+            "title": "Calm-Down Corner",
+            "draw": "How to use the calm-down corner so it helps.",
+            "next": [
+              "When to go.",
+              "What tools to use.",
+              "When you are ready to return."
+            ],
+            "cheer": "Self-management can be taught step by step.",
+            "emoji": "🧘"
+          },
+          {
+            "title": "Glue Without Mess",
+            "draw": "How to use glue sticks so pages stay neat.",
+            "next": [
+              "Cap off / cap on.",
+              "Edges vs globs.",
+              "Drying time tip."
+            ],
+            "cheer": "Craft how-tos need warnings.",
+            "emoji": "📎"
+          },
+          {
+            "title": "Share a Marker Set",
+            "draw": "How to share a set of markers fairly in a group.",
+            "next": [
+              "How to take turns.",
+              "What if two people need red?",
+              "Put-away steps."
+            ],
+            "cheer": "Social problem-solving fits procedural writing.",
+            "emoji": "🖍️"
+          },
+          {
+            "title": "Zip a Coat",
+            "draw": "How to zip a coat when the zipper sticks.",
+            "next": [
+              "Align the base.",
+              "Gentle tug tips.",
+              "When to ask an adult."
+            ],
+            "cheer": "Troubleshooting belongs in how-tos.",
+            "emoji": "🧥"
+          },
+          {
+            "title": "Carry Scissors",
+            "draw": "How to carry scissors safely in the classroom.",
+            "next": [
+              "Point direction.",
+              "Walking feet.",
+              "Pass, do not toss."
+            ],
+            "cheer": "Safety procedures protect friends.",
+            "emoji": "✂️"
+          },
+          {
+            "title": "Reset the Meeting Spot",
+            "draw": "How to sit in the meeting spot so everyone can see.",
+            "next": [
+              "Rows or circle rule.",
+              "Hands and materials.",
+              "Done when eyes can see the board."
+            ],
+            "cheer": "Classroom culture is teachable.",
+            "emoji": "🪑"
+          },
+          {
+            "title": "Pack the Backpack",
+            "draw": "How to pack a backpack the night before school.",
+            "next": [
+              "Checklist: homework, lunch, water, notes.",
+              "Heavy items placement.",
+              "Done when the bag closes easily."
+            ],
+            "cheer": "Planning is a life how-to.",
+            "emoji": "🎒"
           }
         ]
       },
@@ -549,6 +902,182 @@ window.WWS_DATA = {
             ],
             "cheer": "Respect is a persuasive purpose.",
             "emoji": "🌍"
+          },
+          {
+            "title": "Later Recess?",
+            "draw": "Argue for or against a slightly longer recess on Fridays.",
+            "next": [
+              "One reason with an example.",
+              "Answer one worry from the other side.",
+              "End with a fair ask."
+            ],
+            "cheer": "Persuasion needs both reasons and respect.",
+            "emoji": "⏱️"
+          },
+          {
+            "title": "Class Pet Pitch",
+            "draw": "Persuade the class to choose one pet idea (fish, plant classroom, etc.).",
+            "next": [
+              "Why this pet fits school.",
+              "Who will help care for it?",
+              "One compromise if people disagree."
+            ],
+            "cheer": "Audience + responsibility strengthen arguments.",
+            "emoji": "🐹"
+          },
+          {
+            "title": "Quiet Lunch Table",
+            "draw": "Should one table be a quiet zone at lunch? Take a side.",
+            "next": [
+              "Who benefits?",
+              "What rule would be clear?",
+              "How to be kind to both loud and quiet kids."
+            ],
+            "cheer": "Community debates need empathy.",
+            "emoji": "🤫"
+          },
+          {
+            "title": "More Outdoor Learning",
+            "draw": "Persuade a teacher to try one outdoor lesson this month.",
+            "next": [
+              "What subject fits outside?",
+              "Safety plan in one sentence.",
+              "What success would look like."
+            ],
+            "cheer": "Practical plans persuade adults.",
+            "emoji": "🌳"
+          },
+          {
+            "title": "Book of the Month",
+            "draw": "Convince classmates to vote for your book as book of the month.",
+            "next": [
+              "Hook without spoilers.",
+              "Who would love it?",
+              "Where to find it in the library."
+            ],
+            "cheer": "Recommendations are persuasive writing.",
+            "emoji": "📖"
+          },
+          {
+            "title": "Helper Jobs Fair",
+            "draw": "Argue that helper jobs should rotate every week.",
+            "next": [
+              "Why rotation is fair.",
+              "What skill kids practice?",
+              "Answer: but I like my job."
+            ],
+            "cheer": "Fairness claims need reasons.",
+            "emoji": "🔄"
+          },
+          {
+            "title": "Less Plastic at Snack",
+            "draw": "Persuade families to try one less-packaging snack idea.",
+            "next": [
+              "One easy swap.",
+              "Why it helps.",
+              "A kind, not bossy, tone."
+            ],
+            "cheer": "Tone changes how messages land.",
+            "emoji": "♻️"
+          },
+          {
+            "title": "Buddy Reading Time",
+            "draw": "Should older and younger grades buddy-read once a week?",
+            "next": [
+              "Benefit for both sides.",
+              "One scheduling worry.",
+              "A small trial plan."
+            ],
+            "cheer": "Trials make big ideas safer.",
+            "emoji": "👯"
+          },
+          {
+            "title": "Show Your Work",
+            "draw": "Persuade a friend that showing math thinking helps — not just answers.",
+            "next": [
+              "When it saved you.",
+              "What “show” can look like.",
+              "Encourage, do not shame."
+            ],
+            "cheer": "Peer persuasion builds classroom culture.",
+            "emoji": "🔢"
+          },
+          {
+            "title": "Thank-You Friday",
+            "draw": "Argue for a short weekly thank-you circle.",
+            "next": [
+              "How long it takes.",
+              "Why gratitude helps learning.",
+              "How shy students can join safely."
+            ],
+            "cheer": "Inclusive design strengthens proposals.",
+            "emoji": "🙏"
+          },
+          {
+            "title": "Indoor Shoes",
+            "draw": "Should the class use indoor shoes on rainy days? Pick a side.",
+            "next": [
+              "Cleanliness or hassle?",
+              "One strong reason.",
+              "One fair rule if yes."
+            ],
+            "cheer": "School-life topics are authentic audiences.",
+            "emoji": "👢"
+          },
+          {
+            "title": "Choice Time Menu",
+            "draw": "Persuade teachers to add one new choice-time option.",
+            "next": [
+              "What materials are needed?",
+              "How many kids at a time?",
+              "How you will help reset."
+            ],
+            "cheer": "Offering help makes asks stronger.",
+            "emoji": "🎲"
+          },
+          {
+            "title": "Walk-and-Talk Lines",
+            "draw": "Should lines allow quiet walk-and-talk on the way to specialists?",
+            "next": [
+              "Voice-level definition.",
+              "When silence is still needed.",
+              "A compromise path."
+            ],
+            "cheer": "Nuance beats all-or-nothing.",
+            "emoji": "🚶"
+          },
+          {
+            "title": "Save the Last Piece",
+            "draw": "Write to persuade sharing the last playground ball fairly.",
+            "next": [
+              "A fair system (timer, turns).",
+              "Why grabbing hurts the game.",
+              "Invite agreement."
+            ],
+            "cheer": "Micro-arguments teach big skills.",
+            "emoji": "⚽"
+          },
+          {
+            "title": "Family Story Night",
+            "draw": "Persuade families to join one evening story event.",
+            "next": [
+              "What happens there?",
+              "Why kids benefit?",
+              "A warm closing line."
+            ],
+            "cheer": "Invitations can be persuasive too.",
+            "emoji": "👪"
+          },
+          {
+            "title": "Two-Minute Stretch",
+            "draw": "Argue for a two-minute stretch between long lessons.",
+            "next": [
+              "Body + brain reasons.",
+              "How to keep it calm.",
+              "How to measure if it helps."
+            ],
+            "cheer": "Evidence can be simple and local.",
+            "emoji": "🧘"
           }
         ]
       }
@@ -745,6 +1274,193 @@ window.WWS_DATA = {
               "Add a little tongue line."
             ],
             "emoji": "🐍"
+          },
+          {
+            "title": "Happy Moon",
+            "draw": "Let's draw a friendly moon!",
+            "next": [
+              "Label moon with any letters you know."
+            ],
+            "cheer": "Night pictures count as writing!",
+            "emoji": "🌙",
+            "steps": [
+              "Draw a big circle.",
+              "Color or shade a little curve for the moon shape.",
+              "Add two dots for eyes.",
+              "Draw a small smile.",
+              "Optional: tiny stars around it."
+            ]
+          },
+          {
+            "title": "Easy Car",
+            "draw": "A little car from shapes!",
+            "next": [
+              "Label car or vroom."
+            ],
+            "cheer": "You built a moving machine!",
+            "emoji": "🚗",
+            "steps": [
+              "Draw a long rectangle for the body.",
+              "Add two circles for wheels.",
+              "Put a square window.",
+              "Add a circle headlight.",
+              "Draw a road line under it."
+            ]
+          },
+          {
+            "title": "Rainbow Arc",
+            "draw": "A bright rainbow with simple curves!",
+            "next": [
+              "Label rainbow and one color word."
+            ],
+            "cheer": "Colorful marks tell stories!",
+            "emoji": "🌈",
+            "steps": [
+              "Draw one big curved line.",
+              "Add 2–3 more curves under it.",
+              "Color each band if you like.",
+              "Optional: a small cloud at each end."
+            ]
+          },
+          {
+            "title": "Cupcake Treat",
+            "draw": "A cupcake from a rectangle and frosting swirl!",
+            "next": [
+              "Label yum or cupcake."
+            ],
+            "cheer": "Delicious drawing — well done!",
+            "emoji": "🧁",
+            "steps": [
+              "Draw a rectangle or trapezoid cup.",
+              "Add a bumpy frosting shape on top.",
+              "Put a circle cherry.",
+              "Add sprinkles as tiny lines or dots."
+            ]
+          },
+          {
+            "title": "Simple Butterfly",
+            "draw": "A butterfly with wing shapes!",
+            "next": [
+              "Label butterfly."
+            ],
+            "cheer": "Symmetry is clever noticing!",
+            "emoji": "🦋",
+            "steps": [
+              "Draw a small oval body.",
+              "Add a wing shape on the left.",
+              "Match a wing on the right.",
+              "Put two antenna lines.",
+              "Add dots on the wings."
+            ]
+          },
+          {
+            "title": "Tall Giraffe",
+            "draw": "A giraffe with a long neck stick!",
+            "next": [
+              "Label giraffe."
+            ],
+            "cheer": "Long shapes are brave lines!",
+            "emoji": "🦒",
+            "steps": [
+              "Draw a small oval body.",
+              "Add a very long neck stick up.",
+              "Put a circle head.",
+              "Add two ear bumps and dots for spots."
+            ]
+          },
+          {
+            "title": "Umbrella Day",
+            "draw": "An umbrella for rainy weather!",
+            "next": [
+              "Label rain or umbrella."
+            ],
+            "cheer": "You drew a helper object!",
+            "emoji": "☂️",
+            "steps": [
+              "Draw a big curved half-circle top.",
+              "Add a stick handle down.",
+              "Put a little J curve at the bottom of the handle.",
+              "Optional: rain lines around it."
+            ]
+          },
+          {
+            "title": "Birthday Cake",
+            "draw": "A cake with candles!",
+            "next": [
+              "Label cake or happy birthday."
+            ],
+            "cheer": "Celebration pictures are stories!",
+            "emoji": "🎂",
+            "steps": [
+              "Draw a big rectangle cake.",
+              "Add a thinner rectangle on top (layer).",
+              "Put 2–3 candle sticks.",
+              "Add tiny flame triangles.",
+              "Optional: dots for sprinkles."
+            ]
+          },
+          {
+            "title": "Robot Friend",
+            "draw": "A robot from squares!",
+            "next": [
+              "Give your robot a name."
+            ],
+            "cheer": "Builders are illustrators too!",
+            "emoji": "🤖",
+            "steps": [
+              "Draw a square head.",
+              "Add a bigger square body.",
+              "Put rectangle arms and legs.",
+              "Add button circles on the body.",
+              "Dot eyes and a line mouth."
+            ]
+          },
+          {
+            "title": "Apple Smile",
+            "draw": "A shiny apple!",
+            "next": [
+              "Label apple or red/green."
+            ],
+            "cheer": "Still-life can be joyful!",
+            "emoji": "🍎",
+            "steps": [
+              "Draw a circle.",
+              "Add a small dent at the top.",
+              "Put a short stick stem.",
+              "Add a leaf shape.",
+              "Optional: a shiny curve line."
+            ]
+          },
+          {
+            "title": "Mountain Peak",
+            "draw": "Mountains with triangle tops!",
+            "next": [
+              "Label mountain."
+            ],
+            "cheer": "Big landscapes start with simple shapes!",
+            "emoji": "⛰️",
+            "steps": [
+              "Draw one big triangle.",
+              "Add a smaller triangle beside it.",
+              "Put a ground line.",
+              "Optional: a circle sun above."
+            ]
+          },
+          {
+            "title": "Sleepy Owl",
+            "draw": "An owl in a tree hole!",
+            "next": [
+              "Label owl."
+            ],
+            "cheer": "Night animals love careful eyes!",
+            "emoji": "🦉",
+            "steps": [
+              "Draw a round body.",
+              "Add a rounder head.",
+              "Put two big circle eyes.",
+              "Add a small triangle beak.",
+              "Optional: branch line under the feet."
+            ]
           }
         ]
       },
@@ -871,6 +1587,126 @@ window.WWS_DATA = {
             ],
             "cheer": "Sounds help stories come alive!",
             "emoji": "🔔"
+          },
+          {
+            "title": "Trophy Moment",
+            "draw": "Draw a medal, sticker, or trophy you earned — or want to earn.",
+            "next": [
+              "Label it.",
+              "Tell what you did to get it (or will do)."
+            ],
+            "cheer": "Goals make proud pages!",
+            "emoji": "🏆"
+          },
+          {
+            "title": "Sibling or Friend",
+            "draw": "Draw a person who matters to you.",
+            "next": [
+              "Label hair, smile, or a favorite shirt.",
+              "Say one kind thing about them."
+            ],
+            "cheer": "People stories start with noticing!",
+            "emoji": "🧡"
+          },
+          {
+            "title": "My Bed Room Corner",
+            "draw": "Draw a corner of your room that feels yours.",
+            "next": [
+              "Label bed, shelf, or lamp.",
+              "Tell what you do there."
+            ],
+            "cheer": "Places hold feelings!",
+            "emoji": "🛏️"
+          },
+          {
+            "title": "Snack I Love",
+            "draw": "Draw a snack you love (school-safe idea).",
+            "next": [
+              "Label parts.",
+              "Tell when you eat it."
+            ],
+            "cheer": "Sensory details wake writing up!",
+            "emoji": "🍪"
+          },
+          {
+            "title": "Holiday Object",
+            "draw": "Draw one object from a holiday or celebration you know.",
+            "next": [
+              "Label it.",
+              "Tell who you share it with."
+            ],
+            "cheer": "Traditions are story treasures!",
+            "emoji": "🎉"
+          },
+          {
+            "title": "Wheel Toy",
+            "draw": "Draw a toy with wheels.",
+            "next": [
+              "Label wheels and what moves.",
+              "Tell how you play with it."
+            ],
+            "cheer": "Action toys make action sentences!",
+            "emoji": "🚚"
+          },
+          {
+            "title": "Music Maker",
+            "draw": "Draw something that makes music at home or school.",
+            "next": [
+              "Label it.",
+              "Show how your hands use it."
+            ],
+            "cheer": "Sound + picture = lively pages!",
+            "emoji": "🎶"
+          },
+          {
+            "title": "Garden Bit",
+            "draw": "Draw one thing from a garden or park.",
+            "next": [
+              "Label color and size words.",
+              "Tell if it is living."
+            ],
+            "cheer": "Science eyes help writers!",
+            "emoji": "🌼"
+          },
+          {
+            "title": "Rainy Day Gear",
+            "draw": "Draw boots, a coat, or an umbrella you use.",
+            "next": [
+              "Label it.",
+              "Tell why it helps."
+            ],
+            "cheer": "Helpers deserve show-and-tell!",
+            "emoji": "🥾"
+          },
+          {
+            "title": "Art Tool",
+            "draw": "Draw a crayon, brush, or pencil you love.",
+            "next": [
+              "Label it.",
+              "Tell what you like to make with it."
+            ],
+            "cheer": "Tools of makers are worth celebrating!",
+            "emoji": "🖌️"
+          },
+          {
+            "title": "Bus or Car Ride",
+            "draw": "Draw the vehicle that brings you to school.",
+            "next": [
+              "Label windows or wheels.",
+              "Tell one thing you see on the way."
+            ],
+            "cheer": "Everyday journeys are stories!",
+            "emoji": "🚌"
+          },
+          {
+            "title": "Lucky Charm",
+            "draw": "Draw a small lucky or special charm (stone, bead, button).",
+            "next": [
+              "Label it.",
+              "Tell why it feels special."
+            ],
+            "cheer": "Tiny things can hold big meaning!",
+            "emoji": "✨"
           }
         ]
       },
@@ -997,6 +1833,126 @@ window.WWS_DATA = {
             ],
             "cheer": "You are a real story illustrator!",
             "emoji": "🐉"
+          },
+          {
+            "title": "Cloud Castle",
+            "draw": "Draw a castle sitting on a cloud.",
+            "next": [
+              "Who lives there?",
+              "Draw one bridge of rainbow or rope."
+            ],
+            "cheer": "High-up worlds start with one bold shape!",
+            "emoji": "☁️"
+          },
+          {
+            "title": "Magic Paintbrush",
+            "draw": "Draw a paintbrush that paints real things into life.",
+            "next": [
+              "What did it paint first?",
+              "Label the brush with a magic word."
+            ],
+            "cheer": "Tools can be characters!",
+            "emoji": "🖌️"
+          },
+          {
+            "title": "Giant Cookie",
+            "draw": "Draw a cookie as big as a house.",
+            "next": [
+              "Who takes a bite?",
+              "What problem does that cause?"
+            ],
+            "cheer": "Silly size makes instant plot!",
+            "emoji": "🍪"
+          },
+          {
+            "title": "Star Pet",
+            "draw": "Draw a pet made of stars.",
+            "next": [
+              "How do you care for it?",
+              "Label its name."
+            ],
+            "cheer": "Care + magic = heart stories!",
+            "emoji": "🌟"
+          },
+          {
+            "title": "Under-Bed World",
+            "draw": "Draw a tiny door under a bed leading somewhere new.",
+            "next": [
+              "What is through the door?",
+              "Who goes first?"
+            ],
+            "cheer": "Familiar places hide portals!",
+            "emoji": "🛏️"
+          },
+          {
+            "title": "Singing Tree",
+            "draw": "Draw a tree with faces in the leaves that can sing.",
+            "next": [
+              "What song does it know?",
+              "Who listens?"
+            ],
+            "cheer": "Setting can have a voice!",
+            "emoji": "🌲"
+          },
+          {
+            "title": "Bubble Bus",
+            "draw": "Draw a bus made of bubbles.",
+            "next": [
+              "Where does it go?",
+              "What happens if a bubble pops?"
+            ],
+            "cheer": "Problems keep fantasy moving!",
+            "emoji": "🫧"
+          },
+          {
+            "title": "Crown of Questions",
+            "draw": "Draw a crown that asks the wearer a question each morning.",
+            "next": [
+              "What question appears?",
+              "How does the child answer?"
+            ],
+            "cheer": "Wonder questions grow stories!",
+            "emoji": "👑"
+          },
+          {
+            "title": "Paper Bird",
+            "draw": "Draw a paper bird that folds itself and flies a message.",
+            "next": [
+              "Who is the message for?",
+              "Label one word of the message."
+            ],
+            "cheer": "Helpers on wings are classic!",
+            "emoji": "🕊️"
+          },
+          {
+            "title": "Sock Monster Kind",
+            "draw": "Draw a sock that becomes a kind monster at night.",
+            "next": [
+              "What kind job does it do?",
+              "Draw morning when it is only a sock again."
+            ],
+            "cheer": "Day/night patterns feel like chapters!",
+            "emoji": "🧦"
+          },
+          {
+            "title": "Ladder to Moon",
+            "draw": "Draw a ladder reaching toward the moon.",
+            "next": [
+              "Who climbs?",
+              "What do they bring back?"
+            ],
+            "cheer": "Journeys need a goal!",
+            "emoji": "🌙"
+          },
+          {
+            "title": "Invisible Ice Cream",
+            "draw": "Draw a child holding ice cream only some people can see.",
+            "next": [
+              "Who believes them?",
+              "What proves it is real?"
+            ],
+            "cheer": "Belief is a powerful theme!",
+            "emoji": "🍦"
           }
         ]
       }

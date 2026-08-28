@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Helping Others</title>
+  <rect width="320" height="200" fill="#E8F5E9"/>
+  <circle cx="120" cy="90" r="24" fill="#FFCC80"/>
+  <rect x="100" y="114" width="40" height="45" fill="#26A69A"/>
+  <circle cx="200" cy="100" r="24" fill="#FFCC80"/>
+  <rect x="180" y="124" width="40" height="40" fill="#5C6BC0"/>
+  <path d="M140 130 L180 135" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <rect y="165" width="320" height="35" fill="#A5D6A7"/>
+  </svg>

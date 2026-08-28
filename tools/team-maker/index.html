@@ -45,10 +45,23 @@
         <input type="range" id="group-size" min="2" max="10" value="3" />
       </div>
 
-      <label class="full muted-label">
-        Optional custom team names (comma-separated)
-        <input type="text" id="custom-names" placeholder="Red Team, Blue Team…" />
-      </label>
+      <fieldset class="pack-field">
+        <legend>Team name style</legend>
+        <div class="pack-row">
+          <label class="radio"><input type="radio" name="pack" value="animals" checked /> Animals</label>
+          <label class="radio"><input type="radio" name="pack" value="produce" /> Fruit &amp; veg</label>
+          <label class="radio"><input type="radio" name="pack" value="colours" /> Colours</label>
+          <label class="radio"><input type="radio" name="pack" value="shapes" /> Shapes</label>
+        </div>
+        <label class="check-custom">
+          <input type="checkbox" id="use-custom" />
+          Use custom team names
+        </label>
+        <label class="full muted-label" id="custom-wrap" hidden>
+          Custom team names <span class="muted">(comma-separated, one per team)</span>
+          <input type="text" id="custom-names" placeholder="Red Team, Blue Team…" />
+        </label>
+      </fieldset>
 
       <div class="btn-row">
         <button type="button" class="btn btn-primary" id="btn-make">Make teams</button>

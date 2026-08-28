@@ -1,118 +1,410 @@
-* { box-sizing: border-box; }
-body {
-  margin: 0; min-height: 100vh;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg-deep, #1e1b4b);
-  color: var(--text-primary, #eef2ff);
-}
-#app { max-width: 720px; margin: 0 auto; padding: 0.75rem 1rem 2rem; }
-.head { text-align: center; }
-.head h1 { margin: 0; font-size: clamp(1.35rem, 3.5vw, 1.75rem); }
-.sub { color: var(--text-muted, #c4b5fd); margin: 0.25rem 0 0.85rem; }
-.panel {
-  background: var(--bg-card, rgba(49,46,129,0.9));
-  border: 1px solid var(--border-subtle, rgba(167,139,250,0.3));
-  border-radius: 16px; padding: 1rem;
-}
-label { font-weight: 700; display: block; margin-bottom: 0.3rem; }
-textarea {
-  width: 100%; border-radius: 10px; border: 1px solid var(--border-subtle, rgba(167,139,250,0.35));
-  padding: 0.55rem 0.7rem; font: inherit; min-height: 10rem;
-  background: var(--bg-navy, #312e81); color: var(--text-primary, #eef2ff);
-}
-.actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem; }
-.btn {
-  min-height: 2.5rem; padding: 0.4rem 0.95rem; border-radius: 999px;
-  border: 2px solid var(--border-subtle, rgba(167,139,250,0.4));
-  background: transparent; color: var(--text-primary, #eef2ff);
-  font-weight: 800; cursor: pointer; font-family: inherit;
-}
-.btn.primary {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-  border-color: transparent; color: #fff;
+/* Flashcard Maker — theme-bridged */
+:root {
+  --fc-bg: var(--bg-deep, #0f0a1a);
+  --fc-panel: var(--bg-card, rgba(30, 20, 50, 0.94));
+  --fc-solid: var(--bg-card-hover, var(--bg-navy, #2e1065));
+  --fc-stroke: var(--border-subtle, rgba(167, 139, 250, 0.35));
+  --fc-text: var(--text-primary, #f5f3ff);
+  --fc-muted: var(--text-muted, #c4b5fd);
+  --fc-grad: var(--btn-primary-grad, linear-gradient(135deg, #a78bfa, #7c3aed));
+  --print-font: #111111;
+  --print-bg: #ffffff;
+  --print-border-c: #222222;
+  --print-border-w: 2px;
+  --print-text-size: 18px;
 }
 
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--fc-bg);
+  color: var(--fc-text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+#app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem 2rem;
+}
+.head h1 { margin: 0; font-size: 1.45rem; color: var(--fc-text); }
+.sub { margin: 0.25rem 0 0.85rem; color: var(--fc-muted); font-size: 0.92rem; }
+
+.panel {
+  background: var(--fc-panel);
+  border: 1px solid var(--fc-stroke);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.panel[hidden] { display: none !important; }
+.panel-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: var(--fc-text);
+}
+.panel label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin: 0 0 0.35rem;
+  color: var(--fc-muted);
+}
+.panel textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--fc-stroke);
+  background: var(--fc-solid);
+  color: var(--fc-text);
+  font: inherit;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+.btn {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: 2px solid var(--fc-stroke);
+  background: var(--fc-solid);
+  color: var(--fc-text) !important;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.btn:hover { filter: brightness(1.06); }
+.btn.primary {
+  background: var(--fc-grad);
+  border-color: transparent;
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.btn.solid {
+  background: var(--fc-solid);
+  color: var(--fc-text) !important;
+}
+
+/* Print setup controls */
+.print-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+.ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--fc-muted);
+  margin: 0;
+}
+.ctrl select,
+.ctrl input[type="range"] {
+  min-width: 8rem;
+}
+.ctrl select {
+  padding: 0.4rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--fc-stroke);
+  background: var(--fc-solid);
+  color: var(--fc-text);
+  font: inherit;
+  font-weight: 700;
+}
+.ctrl input[type="color"] {
+  width: 2.6rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 1px solid var(--fc-stroke);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.ctrl input[type="range"] { width: 9rem; }
+.ctrl span { font-size: 0.78rem; color: var(--fc-muted); }
+.rotate-ctrl .ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.2rem;
+  font-weight: 800;
+  color: var(--fc-text);
+  font-size: 0.88rem;
+}
+.rotate-ctrl input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--accent-electric, #a78bfa);
+}
+
+.preview-block { margin: 0.5rem 0 0.25rem; }
+.preview-label {
+  margin: 0 0 0.4rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--fc-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+/* Preview matches printable cell size for selected layout (A4, 10mm page pad, 4mm gaps) */
+.print-preview-wrap {
+  overflow: auto;
+  max-width: 100%;
+  padding-bottom: 0.35rem;
+}
+.print-preview-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: var(--print-border-w) solid var(--print-border-c);
+  background: var(--print-bg);
+  color: var(--print-font);
+  padding: 4mm;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  /* default = 2x3 cell */
+  width: 93mm;
+  height: 89mm;
+}
+.print-preview-card.layout-2x2 {
+  width: 93mm;
+  height: 136.5mm;
+}
+.print-preview-card.layout-2x3 {
+  width: 93mm;
+  height: 89mm;
+}
+.print-preview-card.layout-2x5 {
+  width: 93mm;
+  height: 52.2mm;
+}
+.print-preview-card .print-face {
+  font-size: var(--print-text-size);
+  font-weight: 800;
+  text-align: center;
+  word-break: break-word;
+  color: var(--print-font);
+  line-height: 1.2;
+  max-width: 100%;
+  max-height: 100%;
+}
+.print-preview-card.is-rotated .print-face {
+  transform: rotate(90deg);
+  /* when rotated, text travels along the short edge visually */
+  max-width: none;
+  writing-mode: horizontal-tb;
+}
+.print-card.is-rotated .print-face {
+  transform: rotate(90deg);
+}
+
+/* Practice — theme aware */
 .practice {
-  position: fixed; inset: 0; z-index: 20000;
-  background: var(--bg-deep, #1e1b4b); color: var(--text-primary, #eef2ff);
-  display: flex; flex-direction: column; align-items: center;
-  padding: 1rem; gap: 1rem;
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  background: var(--fc-bg);
+  color: var(--fc-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 .practice[hidden] { display: none !important; }
 .prac-bar {
-  width: 100%; max-width: 480px;
-  display: flex; justify-content: space-between; align-items: center;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.prac-bar #prog {
+  font-weight: 800;
+  color: var(--fc-muted);
 }
 .flip-card {
-  width: min(100%, 420px); min-height: 240px;
-  border-radius: 20px; border: 3px solid rgba(167,139,250,0.45);
-  background: linear-gradient(145deg, #4c1d95, #312e81);
-  color: #fff; cursor: pointer; font-family: inherit;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 0.75rem; padding: 1.5rem;
+  width: min(420px, 92vw);
+  min-height: 240px;
+  border: 2px solid var(--fc-stroke);
+  border-radius: 20px;
+  background: var(--fc-panel);
+  color: var(--fc-text);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 1.5rem;
+}
+.flip-card.is-back {
+  background: var(--fc-grad);
+  color: #fff;
+  border-color: transparent;
 }
 .flip-card .side {
-  font-size: clamp(0.9rem, 4.5vw, 2.4rem); font-weight: 900;
-  text-align: center; word-break: break-word;
-  line-height: 1.25; max-width: 100%; overflow-wrap: anywhere;
+  font-size: clamp(0.9rem, 4.5vw, 2.4rem);
+  font-weight: 900;
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.25;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: inherit;
 }
-.flip-card .hint { font-size: 0.85rem; opacity: 0.7; }
-.flip-card.is-back { background: linear-gradient(145deg, #7c3aed, #5b21b6); }
+.flip-card .hint {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  color: inherit;
+}
 .prac-nav { display: flex; gap: 0.6rem; }
 
-.print-area { margin-top: 1rem; }
-.print-page { margin-bottom: 1.5rem; }
-.print-only-title { font-size: 0.95rem; margin: 0 0 0.5rem; }
+/* On-screen print area (hidden until print) */
+.print-area {
+  display: none;
+}
+.print-area.is-building {
+  display: block;
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 210mm;
+}
+
+.print-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 10mm;
+  box-sizing: border-box;
+  page-break-after: always;
+  break-after: page;
+}
+.print-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+.print-only-title {
+  font-size: 0.9rem;
+  margin: 0 0 6mm;
+  color: #333;
+}
 .print-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;
+  display: grid;
+  gap: 4mm;
+  width: 100%;
+  height: calc(297mm - 30mm);
+  align-content: stretch;
+}
+.print-grid.layout-2x2 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.print-grid.layout-2x3 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.print-grid.layout-2x5 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
 }
 .print-card {
-  border: 2px solid #333; border-radius: 10px; padding: 1rem;
-  background: #fff; color: #111; min-height: 120px;
-  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4mm;
   page-break-inside: avoid;
+  overflow: hidden;
 }
-.print-face { font-size: 1.25rem; font-weight: 800; text-align: center; word-break: break-word; }
-
-@media print {
-  .tm-app-chrome, .panel, .practice, .head, .home-actions, #app > header,
-  .btn, .actions, #tm-voice-slot, .pwa-install-banner { display: none !important; }
-  body { background: #fff !important; color: #000 !important; }
-  #app { max-width: none; padding: 0; }
-  .print-area { display: block !important; }
-  .print-page { break-after: page; page-break-after: always; }
-  .print-page-backs { break-after: auto; page-break-after: auto; }
-  .print-only-title { display: none; }
-  .print-grid { gap: 0.5cm; }
-  .print-card { box-shadow: none; min-height: 4.5cm; }
+.print-card .print-face {
+  font-weight: 800;
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.2;
+  width: 100%;
+}
+.print-card.is-empty {
+  border-style: dashed !important;
+  opacity: 0.25;
 }
 
 @media print {
-  html, body, #app, .print-area, .print-page, .print-grid {
-    background: #fff !important;
+  /* Cards keep their own colours; page chrome stays white (no site theme bg) */
+  .print-card,
+  .print-card * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  html, body, body.theme-bridged, #app {
+    background: #ffffff !important;
+    background-image: none !important;
+    background-color: #ffffff !important;
     color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     box-shadow: none !important;
   }
-  .tm-app-chrome, .tm-back, .tm-fav, #tm-voice-slot,
-  .head, .panel, .practice, .actions, .btn, .pwa-install-banner,
-  .no-print { display: none !important; }
-  .print-card {
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #000 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  /* Hide everything that is not the print sheet */
+  .tm-app-chrome, .theme-switcher, #pwa-install-bar, .theme-ball,
+  .head, .panel, .practice, .actions, .btn,
+  #main-panel, #print-setup, .library-back,
+  .print-setup, .print-preview-wrap, .print-preview-card {
+    display: none !important;
   }
-  .print-face { color: #000 !important; font-size: 14pt !important; }
-}
-
-
-@media print {
-  html, body, #app, .print-area, .print-page, .print-grid, .print-card {
-    background:#fff!important; color:#000!important;
+  #app {
+    max-width: none !important;
+    width: 100% !important;
   }
-  .head, .panel, .practice, .actions, .btn, .tm-app-chrome, #pwa-install-bar, .theme-switcher { display:none!important; }
-  .print-area { display:block!important; }
-  .print-card { border:2px solid #000!important; background:#fff!important; color:#000!important; }
-  .print-face { color:#000!important; }
+  .print-area,
+  .print-area.is-building {
+    display: block !important;
+    position: static !important;
+    left: auto !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    background-image: none !important;
+  }
+  .print-only-title { display: none !important; }
+  .print-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 10mm;
+    margin: 0 auto;
+    background: #ffffff !important;
+    background-image: none !important;
+    box-sizing: border-box;
+  }
+  .print-grid {
+    background: transparent !important;
+  }
+  /* Empty filler slots: no ink */
+  .print-card.is-empty {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: transparent !important;
+    opacity: 0 !important;
+  }
 }

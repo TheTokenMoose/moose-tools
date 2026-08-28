@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>A Busy Day school</title>
+  <rect width="320" height="200" fill="#FFF3E0"/>
+  <rect x="60" y="60" width="200" height="110" fill="#90CAF9"/>
+  <polygon points="60,60 160,20 260,60" fill="#EF5350"/>
+  <rect x="140" y="120" width="40" height="50" fill="#5D4037"/>
+  <rect x="90" y="90" width="30" height="25" fill="#FFF"/>
+  <rect x="200" y="90" width="30" height="25" fill="#FFF"/>
+  <circle cx="280" cy="40" r="18" fill="#FFEB3B"/>
+  </svg>

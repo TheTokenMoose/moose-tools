@@ -538,20 +538,24 @@ class ClassroomTimer {
 
     const g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, this.goal.theme.sky[0]);
+    g.addColorStop(0.55, this.goal.theme.sky[1]);
     g.addColorStop(1, this.goal.theme.sky[1]);
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
-    ctx.globalAlpha = 0.35;
-    for (let i = 0; i < 40; i++) {
-      const x = (Math.sin(i * 12.3 + this.phase * 0.05) * 0.5 + 0.5) * W;
-      const y = (Math.cos(i * 7.1) * 0.5 + 0.5) * H * 0.55;
-      ctx.fillStyle = "#fff";
+    // Soft floating orbs (not hard pixel dots)
+    for (let i = 0; i < 18; i++) {
+      const x = ((Math.sin(i * 1.7 + this.phase * 0.15) * 0.5 + 0.5) * W);
+      const y = ((Math.cos(i * 0.9 + this.phase * 0.08) * 0.5 + 0.5) * H * 0.5);
+      const r = 3 + (i % 4);
+      const orb = ctx.createRadialGradient(x, y, 0, x, y, r * 2.5);
+      orb.addColorStop(0, "rgba(255,255,255,0.22)");
+      orb.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = orb;
       ctx.beginPath();
-      ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+      ctx.arc(x, y, r * 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.globalAlpha = 1;
 
     if (this.goal.bomb) {
       this.drawBombScene(ctx, W, H, progress);
@@ -560,241 +564,384 @@ class ClassroomTimer {
     }
 
     if (this.paused) {
-      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.fillStyle = "rgba(0,0,0,0.4)";
       ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = "#fef3c7";
       ctx.font = "bold 42px Segoe UI, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+      ctx.shadowColor = "rgba(0,0,0,0.5)";
+      ctx.shadowBlur = 12;
       ctx.fillText("PAUSED", W / 2, H / 2);
+      ctx.shadowBlur = 0;
     }
   }
 
   drawPathScene(ctx, W, H, progress) {
     const padX = W * 0.08;
-    const pathY = H * 0.62;
+    const pathY = H * 0.64;
     const pathW = W - padX * 2;
 
-    ctx.fillStyle = "rgba(0,0,0,0.25)";
-    ctx.fillRect(0, pathY + 20, W, H - pathY);
+    // Ground band
+    const ground = ctx.createLinearGradient(0, pathY - 20, 0, H);
+    ground.addColorStop(0, "rgba(0,0,0,0)");
+    ground.addColorStop(0.15, "rgba(0,0,0,0.18)");
+    ground.addColorStop(1, "rgba(0,0,0,0.35)");
+    ctx.fillStyle = ground;
+    ctx.fillRect(0, pathY - 20, W, H - pathY + 20);
 
-    ctx.strokeStyle = this.goal.theme.path;
-    ctx.lineWidth = 14;
+    // Soft path shadow
+    ctx.strokeStyle = "rgba(0,0,0,0.35)";
+    ctx.lineWidth = 28;
     ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(padX, pathY + 4);
+    ctx.lineTo(padX + pathW, pathY + 4);
+    ctx.stroke();
+
+    // Path track
+    ctx.strokeStyle = this.goal.theme.path;
+    ctx.lineWidth = 22;
     ctx.beginPath();
     ctx.moveTo(padX, pathY);
     ctx.lineTo(padX + pathW, pathY);
     ctx.stroke();
 
-    ctx.strokeStyle = this.goal.theme.accent;
-    ctx.lineWidth = 10;
+    // Inner highlight rail
+    ctx.strokeStyle = "rgba(255,255,255,0.12)";
+    ctx.lineWidth = 6;
     ctx.beginPath();
-    ctx.moveTo(padX, pathY);
-    ctx.lineTo(padX + pathW * progress, pathY);
+    ctx.moveTo(padX, pathY - 4);
+    ctx.lineTo(padX + pathW, pathY - 4);
     ctx.stroke();
 
-    ctx.fillStyle = "rgba(255,255,255,0.25)";
-    for (let i = 0; i <= 10; i++) {
-      const x = padX + (pathW * i) / 10;
-      ctx.fillRect(x - 1, pathY + 16, 2, 10);
+    // Progress fill
+    if (progress > 0.001) {
+      const pg = ctx.createLinearGradient(padX, 0, padX + pathW, 0);
+      pg.addColorStop(0, this.goal.theme.accent);
+      pg.addColorStop(1, this.goal.theme.accent);
+      ctx.strokeStyle = this.goal.theme.accent;
+      ctx.lineWidth = 14;
+      ctx.shadowColor = this.goal.theme.accent;
+      ctx.shadowBlur = 16;
+      ctx.beginPath();
+      ctx.moveTo(padX, pathY);
+      ctx.lineTo(padX + pathW * progress, pathY);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
 
-    this.drawFlag(ctx, padX, pathY - 8, "#94a3b8", "Start");
-    this.drawFlag(ctx, padX + pathW, pathY - 8, this.goal.theme.accent, "Done");
+    // Mile markers
+    ctx.fillStyle = "rgba(255,255,255,0.28)";
+    for (let i = 0; i <= 10; i++) {
+      const x = padX + (pathW * i) / 10;
+      ctx.beginPath();
+      ctx.roundRect
+        ? ctx.roundRect(x - 2, pathY + 14, 4, 12, 2)
+        : ctx.rect(x - 2, pathY + 14, 4, 12);
+      ctx.fill();
+    }
+
+    this.drawFlag(ctx, padX, pathY - 10, "#94a3b8", "Start");
+    this.drawFlag(ctx, padX + pathW, pathY - 10, this.goal.theme.accent, "Done");
 
     const cx = padX + pathW * progress;
-    const bob = Math.sin(this.phase * 6) * 4;
-    this.drawCharacter(ctx, this.goal.id, cx, pathY - 10 + bob, this.phase);
-    this.drawProgressRing(ctx, W - 70, 70, 48, progress, this.goal.theme.accent);
+    const walk = Math.sin(this.phase * 4.2);
+    const bob = Math.abs(walk) * 3;
+    this.drawCharacter(ctx, this.goal.id, cx, pathY - 12 + bob, this.phase);
+    this.drawProgressRing(ctx, W - 72, 72, 50, progress, this.goal.theme.accent);
   }
 
   drawFlag(ctx, x, y, color, label) {
+    ctx.fillStyle = "rgba(0,0,0,0.25)";
+    ctx.fillRect(x - 1, y - 38, 5, 42);
     ctx.fillStyle = color;
-    ctx.fillRect(x - 2, y - 40, 4, 40);
+    ctx.fillRect(x - 2, y - 42, 5, 44);
     ctx.beginPath();
-    ctx.moveTo(x, y - 40);
-    ctx.lineTo(x + 22, y - 30);
-    ctx.lineTo(x, y - 20);
+    ctx.moveTo(x + 3, y - 42);
+    ctx.lineTo(x + 28, y - 32);
+    ctx.lineTo(x + 3, y - 22);
     ctx.closePath();
     ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
-    ctx.font = "11px Segoe UI, sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.font = "bold 12px Segoe UI, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(label, x, y + 28);
+    ctx.fillText(label, x + 4, y + 18);
   }
 
   drawProgressRing(ctx, x, y, r, progress, color) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(255,255,255,0.1)";
+    ctx.strokeStyle = "rgba(255,255,255,0.12)";
     ctx.lineWidth = 8;
     ctx.stroke();
     ctx.beginPath();
-    ctx.arc(x, y, r, -Math.PI / 2, -Math.PI / 2 + progress * Math.PI * 2);
+    ctx.arc(x, y, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
     ctx.strokeStyle = color;
     ctx.lineWidth = 8;
     ctx.lineCap = "round";
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 10;
     ctx.stroke();
-    ctx.fillStyle = "#eef2ff";
-    ctx.font = "bold 14px Segoe UI, sans-serif";
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "rgba(255,255,255,0.92)";
+    ctx.font = "bold 16px Segoe UI, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(`${Math.round(progress * 100)}%`, x, y);
+    ctx.fillText(Math.round(progress * 100) + "%", x, y);
   }
 
   drawCharacter(ctx, id, x, y, phase) {
     ctx.save();
     ctx.translate(x, y);
+    const leg = Math.sin(phase * 4.2) * 5;
 
     if (id === "focus") {
-      this._body(ctx, "#38bdf8");
-      ctx.fillStyle = "#fef3c7";
-      ctx.fillRect(10, -28, 18, 14);
-      ctx.strokeStyle = "#92400e";
-      ctx.strokeRect(10, -28, 18, 14);
-    } else if (id === "pair") {
-      ctx.translate(-14, 0);
-      this._body(ctx, "#c084fc", 0.85);
-      ctx.translate(28, 0);
-      this._body(ctx, "#f9a8d4", 0.85);
-    } else if (id === "cleanup") {
-      this._body(ctx, "#4ade80");
-      const swing = Math.sin(phase * 8) * 0.35;
+      this._figure(ctx, "#38bdf8", "#0ea5e9", leg);
+      // Target / focus badge floating
       ctx.save();
-      ctx.translate(16, -10);
-      ctx.rotate(swing);
-      ctx.strokeStyle = "#a3a3a3";
+      ctx.translate(22, -48 + Math.sin(phase * 2) * 2);
+      ctx.strokeStyle = "#fde68a";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(0, 36);
+      ctx.arc(0, 0, 12, 0, Math.PI * 2);
       ctx.stroke();
-      ctx.fillStyle = "#fbbf24";
-      ctx.fillRect(-10, 32, 20, 8);
+      ctx.beginPath();
+      ctx.arc(0, 0, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#fde68a";
+      ctx.fill();
+      ctx.restore();
+    } else if (id === "pair") {
+      ctx.save();
+      ctx.translate(-16, 0);
+      this._figure(ctx, "#c084fc", "#a855f7", leg, 0.88);
+      ctx.restore();
+      ctx.save();
+      ctx.translate(16, 0);
+      this._figure(ctx, "#f9a8d4", "#ec4899", -leg, 0.88);
+      ctx.restore();
+      // Link
+      ctx.strokeStyle = "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(-4, -30);
+      ctx.quadraticCurveTo(0, -38, 4, -30);
+      ctx.stroke();
+    } else if (id === "cleanup") {
+      this._figure(ctx, "#4ade80", "#22c55e", leg);
+      const swing = Math.sin(phase * 3.5) * 0.4;
+      ctx.save();
+      ctx.translate(18, -14);
+      ctx.rotate(swing);
+      // Broom handle
+      ctx.strokeStyle = "#a8a29e";
+      ctx.lineWidth = 4;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, 40);
+      ctx.stroke();
+      // Bristles
+      const br = ctx.createLinearGradient(-12, 38, 12, 48);
+      br.addColorStop(0, "#fbbf24");
+      br.addColorStop(1, "#d97706");
+      ctx.fillStyle = br;
+      ctx.beginPath();
+      ctx.moveTo(-12, 38);
+      ctx.lineTo(12, 38);
+      ctx.lineTo(10, 50);
+      ctx.lineTo(-10, 50);
+      ctx.closePath();
+      ctx.fill();
       ctx.restore();
     } else if (id === "transition") {
-      ctx.rotate(Math.sin(phase * 8) * 0.08);
-      this._body(ctx, "#fbbf24");
-      ctx.strokeStyle = "rgba(255,255,255,0.3)";
-      ctx.lineWidth = 2;
+      ctx.save();
+      ctx.translate(Math.sin(phase * 3) * 2, 0);
+      this._figure(ctx, "#fbbf24", "#f59e0b", leg);
+      // Motion streaks
+      ctx.strokeStyle = "rgba(255,255,255,0.35)";
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = "round";
       for (let i = 0; i < 3; i++) {
+        const oy = -28 + i * 10;
+        ctx.globalAlpha = 0.45 - i * 0.1;
         ctx.beginPath();
-        ctx.moveTo(-28 - i * 8, -20 + i * 6);
-        ctx.lineTo(-18 - i * 8, -20 + i * 6);
+        ctx.moveTo(-34 - i * 4, oy);
+        ctx.lineTo(-20 - i * 4, oy);
         ctx.stroke();
       }
+      ctx.globalAlpha = 1;
+      ctx.restore();
     } else if (id === "write") {
-      this._body(ctx, "#67e8f9");
-      const bob = Math.sin(phase * 10) * 3;
+      this._figure(ctx, "#67e8f9", "#06b6d4", leg * 0.4);
+      const bob = Math.sin(phase * 5) * 2.5;
       ctx.save();
-      ctx.translate(14, -18 + bob);
-      ctx.rotate(-0.5);
-      ctx.fillStyle = "#fde047";
-      ctx.fillRect(0, 0, 6, 22);
+      ctx.translate(16, -22 + bob);
+      ctx.rotate(-0.55);
+      // Pencil body
+      const pen = ctx.createLinearGradient(0, 0, 0, 28);
+      pen.addColorStop(0, "#fde047");
+      pen.addColorStop(1, "#eab308");
+      ctx.fillStyle = pen;
+      ctx.beginPath();
+      ctx.moveTo(0, 4);
+      ctx.lineTo(8, 4);
+      ctx.lineTo(8, 26);
+      ctx.lineTo(4, 32);
+      ctx.lineTo(0, 26);
+      ctx.closePath();
+      ctx.fill();
       ctx.fillStyle = "#ef4444";
-      ctx.fillRect(0, 0, 6, 5);
+      ctx.fillRect(0, 0, 8, 6);
       ctx.fillStyle = "#78716c";
       ctx.beginPath();
-      ctx.moveTo(0, 22);
-      ctx.lineTo(3, 28);
-      ctx.lineTo(6, 22);
+      ctx.moveTo(0, 26);
+      ctx.lineTo(4, 34);
+      ctx.lineTo(8, 26);
       ctx.fill();
       ctx.restore();
     } else {
-      this._body(ctx, "#a78bfa");
+      this._figure(ctx, "#a78bfa", "#8b5cf6", leg);
     }
 
     ctx.restore();
   }
 
-  _body(ctx, color, scale = 1) {
+  /** Soft shaded character with walk cycle */
+  _figure(ctx, color, colorDark, leg = 0, scale = 1) {
     ctx.save();
     ctx.scale(scale, scale);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 5;
+
+    // Contact shadow
+    ctx.fillStyle = "rgba(0,0,0,0.22)";
+    ctx.beginPath();
+    ctx.ellipse(0, 18, 22, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Legs
+    ctx.strokeStyle = colorDark;
+    ctx.lineWidth = 7;
     ctx.lineCap = "round";
-    const leg = Math.sin(this.phase * 8) * 6;
     ctx.beginPath();
-    ctx.moveTo(-6, 0);
-    ctx.lineTo(-8, 16 + leg);
-    ctx.moveTo(6, 0);
-    ctx.lineTo(8, 16 - leg);
+    ctx.moveTo(-7, 0);
+    ctx.lineTo(-9, 16 + leg);
+    ctx.moveTo(7, 0);
+    ctx.lineTo(9, 16 - leg);
     ctx.stroke();
-    ctx.fillStyle = color;
+
+    // Body
+    const body = ctx.createRadialGradient(-4, -28, 4, 0, -16, 28);
+    body.addColorStop(0, color);
+    body.addColorStop(1, colorDark);
+    ctx.fillStyle = body;
     ctx.beginPath();
-    ctx.ellipse(0, -18, 14, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(0, -16, 16, 22, 0, 0, Math.PI * 2);
     ctx.fill();
+
+    // Head
+    const head = ctx.createRadialGradient(-3, -48, 2, 0, -44, 14);
+    head.addColorStop(0, color);
+    head.addColorStop(1, colorDark);
+    ctx.fillStyle = head;
     ctx.beginPath();
-    ctx.arc(0, -44, 12, 0, Math.PI * 2);
+    ctx.arc(0, -44, 13, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = "#0f172a";
+
+    // Face
+    ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
     ctx.beginPath();
-    ctx.arc(-4, -46, 2, 0, Math.PI * 2);
-    ctx.arc(4, -46, 2, 0, Math.PI * 2);
+    ctx.arc(-4.5, -45, 2.2, 0, Math.PI * 2);
+    ctx.arc(4.5, -45, 2.2, 0, Math.PI * 2);
     ctx.fill();
+    ctx.strokeStyle = "rgba(15, 23, 42, 0.7)";
+    ctx.lineWidth = 1.5;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.arc(0, -40, 4, 0.15, Math.PI - 0.15);
+    ctx.stroke();
+
+    // Arms
+    ctx.strokeStyle = colorDark;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(-14, -24);
+    ctx.lineTo(-18, -6 + leg * 0.3);
+    ctx.moveTo(14, -24);
+    ctx.lineTo(18, -6 - leg * 0.3);
+    ctx.stroke();
+
     ctx.restore();
   }
 
   /**
    * Fuse burns FROM the free end TOWARD the bomb.
-   * progress 0 = full fuse, tip at free end (left)
-   * progress 1 = gone, tip at bomb
+   * progress 0 = full fuse; progress 1 = tip at bomb
    */
   drawBombScene(ctx, W, H, progress) {
-    ctx.fillStyle = "rgba(0,0,0,0.35)";
-    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+    const y = H * 0.55;
+    const startX = W * 0.12;
+    const endX = W * 0.72;
+    const fuseLen = endX - startX;
+    const tipX = startX + fuseLen * progress;
+    const tipY = y + Math.sin(progress * Math.PI * 3) * 18;
 
-    const startX = W * 0.12; // free end of fuse
-    const endX = W * 0.72; // meets the bomb
-    const y = H * 0.42;
+    // Soft floor
+    const floor = ctx.createLinearGradient(0, y + 40, 0, H);
+    floor.addColorStop(0, "rgba(0,0,0,0)");
+    floor.addColorStop(1, "rgba(0,0,0,0.4)");
+    ctx.fillStyle = floor;
+    ctx.fillRect(0, y + 20, W, H - y);
 
-    const fuseY = (t) => y - Math.sin(t * Math.PI) * H * 0.1;
-
-    // Remaining fuse: from burn tip → bomb (progress → 1)
-    const tipT = Math.min(0.98, Math.max(0, progress));
-    ctx.lineWidth = 8;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "#a3a3a3";
-    ctx.beginPath();
-    const steps = 60;
-    let started = false;
-    for (let i = Math.floor(steps * tipT); i <= steps; i++) {
-      const t = i / steps;
-      const x = startX + (endX - startX) * t;
-      const yy = fuseY(t);
-      if (!started) {
-        ctx.moveTo(x, yy);
-        started = true;
-      } else {
-        ctx.lineTo(x, yy);
-      }
-    }
-    if (started) ctx.stroke();
-
-    // Burn tip + flame (moves toward bomb as progress increases)
-    const tipX = startX + (endX - startX) * tipT;
-    const tipY = fuseY(tipT);
-
-    if (progress < 0.99) {
-      const flicker = 1 + Math.sin(this.phase * 20) * 0.15;
-      const grd = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, 22 * flicker);
-      grd.addColorStop(0, "#fef08a");
-      grd.addColorStop(0.4, "#fb923c");
-      grd.addColorStop(1, "rgba(239,68,68,0)");
-      ctx.fillStyle = grd;
+    // Unburned fuse (tip → bomb)
+    if (progress < 0.995) {
+      ctx.strokeStyle = "#a16207";
+      ctx.lineWidth = 6;
+      ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.arc(tipX, tipY, 22 * flicker, 0, Math.PI * 2);
+      ctx.moveTo(tipX, tipY);
+      const segs = 16;
+      for (let i = 1; i <= segs; i++) {
+        const t = progress + (1 - progress) * (i / segs);
+        const fx = startX + fuseLen * t;
+        const fy = y + Math.sin(t * Math.PI * 3) * 18;
+        ctx.lineTo(fx, fy);
+      }
+      ctx.stroke();
+      // Fuse highlight
+      ctx.strokeStyle = "rgba(253, 224, 71, 0.35)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // Burn tip flame
+    if (progress < 0.99) {
+      const flicker = 0.85 + Math.sin(this.phase * 14) * 0.15;
+      const flame = ctx.createRadialGradient(tipX, tipY - 8, 2, tipX, tipY - 8, 26 * flicker);
+      flame.addColorStop(0, "rgba(255, 250, 200, 0.95)");
+      flame.addColorStop(0.35, "rgba(251, 146, 60, 0.85)");
+      flame.addColorStop(0.7, "rgba(239, 68, 68, 0.45)");
+      flame.addColorStop(1, "rgba(239, 68, 68, 0)");
+      ctx.fillStyle = flame;
+      ctx.beginPath();
+      ctx.arc(tipX, tipY - 8, 26 * flicker, 0, Math.PI * 2);
       ctx.fill();
 
+      // Flame core
+      ctx.fillStyle = "rgba(254, 243, 199, 0.9)";
+      ctx.beginPath();
+      ctx.ellipse(tipX, tipY - 10, 5 * flicker, 10 * flicker, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Sparks
       ctx.fillStyle = "#fde047";
-      for (let i = 0; i < 8; i++) {
-        const a = this.phase * 8 + i * 0.9;
-        const dist = 12 + (i % 3) * 6;
-        ctx.globalAlpha = 0.5 + Math.sin(a) * 0.4;
+      for (let i = 0; i < 6; i++) {
+        const a = this.phase * 6 + i * 1.1;
+        const dist = 10 + (i % 3) * 5;
+        ctx.globalAlpha = 0.4 + Math.sin(a) * 0.35;
         ctx.beginPath();
         ctx.arc(
           tipX + Math.cos(a) * dist,
-          tipY + Math.sin(a * 1.3) * dist * 0.6 - 8,
+          tipY - 12 + Math.sin(a * 1.4) * dist * 0.5,
           2,
           0,
           Math.PI * 2
@@ -804,60 +951,96 @@ class ClassroomTimer {
       ctx.globalAlpha = 1;
     }
 
-    // Bomb
-    const bx = endX + 50;
-    const by = y + 10;
+    // Bomb body
+    const bx = endX + 52;
+    const by = y + 8;
     ctx.save();
     ctx.translate(bx, by);
-    ctx.fillStyle = "#1f2937";
+
+    // Shadow
+    ctx.fillStyle = "rgba(0,0,0,0.3)";
+    ctx.beginPath();
+    ctx.ellipse(0, 48, 40, 10, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Shell
+    const shell = ctx.createRadialGradient(-14, -16, 6, 0, 0, 52);
+    shell.addColorStop(0, "#4b5563");
+    shell.addColorStop(0.55, "#1f2937");
+    shell.addColorStop(1, "#111827");
+    ctx.fillStyle = shell;
     ctx.beginPath();
     ctx.arc(0, 0, 48, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = "#374151";
+
+    // Specular
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
     ctx.beginPath();
-    ctx.arc(-12, -12, 14, 0, Math.PI * 2);
+    ctx.ellipse(-14, -14, 14, 10, -0.4, 0, Math.PI * 2);
     ctx.fill();
+
+    // Cap
     ctx.fillStyle = "#6b7280";
-    ctx.fillRect(-14, -58, 28, 16);
+    ctx.beginPath();
+    ctx.roundRect
+      ? ctx.roundRect(-14, -58, 28, 14, 4)
+      : ctx.rect(-14, -58, 28, 14);
+    ctx.fill();
     ctx.fillStyle = "#9ca3af";
-    ctx.fillRect(-8, -68, 16, 12);
+    ctx.fillRect(-8, -66, 16, 10);
+
+    // Face
     if (progress > 0.7) {
       ctx.strokeStyle = "#f87171";
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 3.5;
+      ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(-16, -8);
+      ctx.moveTo(-16, -10);
       ctx.lineTo(-6, -2);
-      ctx.moveTo(16, -8);
+      ctx.moveTo(-6, -10);
+      ctx.lineTo(-16, -2);
+      ctx.moveTo(16, -10);
       ctx.lineTo(6, -2);
+      ctx.moveTo(6, -10);
+      ctx.lineTo(16, -2);
       ctx.stroke();
       ctx.fillStyle = "#f87171";
       ctx.beginPath();
-      ctx.arc(0, 12, 10, 0.1, Math.PI - 0.1);
+      ctx.ellipse(0, 14, 12, 8, 0, 0.1, Math.PI - 0.1);
       ctx.fill();
     } else {
       ctx.fillStyle = "#fbbf24";
       ctx.beginPath();
-      ctx.arc(-12, -4, 5, 0, Math.PI * 2);
-      ctx.arc(12, -4, 5, 0, Math.PI * 2);
+      ctx.arc(-12, -4, 6, 0, Math.PI * 2);
+      ctx.arc(12, -4, 6, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = "#111";
       ctx.beginPath();
-      ctx.arc(-12, -4, 2.5, 0, Math.PI * 2);
-      ctx.arc(12, -4, 2.5, 0, Math.PI * 2);
+      ctx.arc(-12, -4, 2.8, 0, Math.PI * 2);
+      ctx.arc(12, -4, 2.8, 0, Math.PI * 2);
       ctx.fill();
+      ctx.strokeStyle = "#374151";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(0, 10, 8, 0.2, Math.PI - 0.2);
+      ctx.stroke();
     }
     ctx.restore();
 
-    this.drawProgressRing(ctx, W - 70, 70, 48, progress, "#fb7185");
+    this.drawProgressRing(ctx, W - 72, 72, 50, progress, "#fb7185");
 
     if (progress > 0.85) {
-      ctx.fillStyle = "rgba(251,113,133,0.85)";
+      ctx.fillStyle = "rgba(251,113,133,0.9)";
       ctx.font = "bold 28px Segoe UI, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("HURRY!", W / 2, H * 0.2);
+      ctx.shadowColor = "rgba(0,0,0,0.4)";
+      ctx.shadowBlur = 8;
+      ctx.fillText("HURRY!", W / 2, H * 0.18);
+      ctx.shadowBlur = 0;
     }
   }
 }
+
 
 function syncDurationFromUI(app) {
   const active = app.els.presets.querySelector("button.is-active");

@@ -18,24 +18,21 @@ function parseNames(text) {
     .filter(Boolean);
 }
 
-// ─── Circus music (Web Audio) — stop() clears timer immediately ──────────────
+// ─── Background music (real Mixkit track, soft loop) ─────────────────────────
 
-class CircusMusic {
-  constructor() {
+class BackgroundMusic {
+  constructor(src) {
     this.enabled = true;
-    this.ctx = null;
-    this.timer = null;
-    this.activeNodes = [];
+    this.audio = new Audio(src);
+    this.audio.loop = true;
+    this.audio.preload = "auto";
+    this.audio.volume = 0.32;
+    this._started = false;
   }
 
   ensureCtx() {
-    if (!this.ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return null;
-      this.ctx = new AC();
-    }
-    if (this.ctx.state === "suspended") this.ctx.resume();
-    return this.ctx;
+    /* HTMLAudio; resume after user gesture */
+    return this.audio;
   }
 
   setEnabled(on) {
@@ -45,68 +42,24 @@ class CircusMusic {
   }
 
   start() {
-    if (!this.enabled || this.timer) return;
-    const ctx = this.ensureCtx();
-    if (!ctx) return;
-
-    const melody = [
-      [523.25, 0.2], [659.25, 0.2], [783.99, 0.2], [1046.5, 0.2],
-      [783.99, 0.2], [659.25, 0.2], [523.25, 0.4],
-      [587.33, 0.2], [698.46, 0.2], [880.0, 0.2], [1174.66, 0.2],
-      [880.0, 0.2], [698.46, 0.2], [587.33, 0.4],
-      [523.25, 0.2], [659.25, 0.2], [783.99, 0.2], [659.25, 0.2],
-      [523.25, 0.2], [392.0, 0.2], [523.25, 0.4],
-    ];
-    let i = 0;
-
-    const playNote = () => {
-      if (!this.enabled || !this.ctx) return;
-      const [freq, dur] = melody[i % melody.length];
-      i += 1;
-      const t0 = this.ctx.currentTime;
-
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = "square";
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.0001, t0);
-      gain.gain.exponentialRampToValueAtTime(0.06, t0 + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(t0);
-      osc.stop(t0 + dur + 0.02);
-
-      const bass = this.ctx.createOscillator();
-      const bg = this.ctx.createGain();
-      bass.type = "triangle";
-      bass.frequency.value = i % 4 < 2 ? 130.81 : 174.61;
-      bg.gain.value = 0.03;
-      bass.connect(bg);
-      bg.connect(this.ctx.destination);
-      bass.start(t0);
-      bass.stop(t0 + dur);
-
-      this.activeNodes.push(osc, bass);
-      this.timer = setTimeout(playNote, dur * 1000);
-    };
-    playNote();
+    if (!this.enabled) return;
+    const p = this.audio.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => {
+        this._started = true;
+      }).catch(() => {
+        /* autoplay blocked until gesture */
+      });
+    } else {
+      this._started = true;
+    }
   }
 
   stop() {
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = null;
-    }
-    // Silence any currently sounding oscillators
-    for (const node of this.activeNodes) {
-      try {
-        node.stop();
-      } catch (_) {
-        /* already stopped */
-      }
-    }
-    this.activeNodes = [];
+    try {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    } catch (_) {}
   }
 }
 
@@ -121,7 +74,7 @@ class NameSpinWheel {
     this.spinning = false;
     this.targetAngle = 0;
     this.raf = null;
-    this.music = new CircusMusic();
+    this.music = new BackgroundMusic("audio/background.mp3");
 
     this.resultEl = document.getElementById("result");
     this.countEl = document.getElementById("count");
@@ -135,7 +88,7 @@ class NameSpinWheel {
 
     const unlock = () => {
       this.music.ensureCtx();
-      this.music.start();
+      if (this.music.enabled) this.music.start();
       window.removeEventListener("pointerdown", unlock);
     };
     window.addEventListener("pointerdown", unlock);
@@ -292,7 +245,7 @@ class NameSpinWheel {
       return;
     }
     this.music.ensureCtx();
-    if (this.music.enabled && !this.music.timer) this.music.start();
+    if (this.music.enabled) this.music.start();
 
     if (this.names.length === 1 && this.mode() === "remove") {
       const name = this.names[0];

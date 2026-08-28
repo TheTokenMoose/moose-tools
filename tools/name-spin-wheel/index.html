@@ -16,51 +16,9 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="pwa-install.css">
-  <style id="cover-bg-style">
-.library-back { position: relative; z-index: 20; margin: 12px 16px 0; }
-.library-back .btn-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.55rem 1rem;
-  border-radius: 999px;
-  border: 2px solid rgba(255,255,255,0.25);
-  background: rgba(15, 18, 40, 0.75);
-  color: #fff;
-  font: inherit;
-  font-weight: 800;
-  font-size: 0.9rem;
-  text-decoration: none;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.library-back .btn-back:hover {
-  transform: translateY(-1px);
-  background: rgba(30, 36, 70, 0.9);
-  color: #fff;
-}
-.library-back .btn-back:focus-visible {
-  outline: 2px solid #22d3ee;
-  outline-offset: 2px;
-}
-
-    /* Cover art page background */
-    body {
-      background-color: #0a0b1a;
-      background-image:
-        linear-gradient(180deg, rgba(8, 10, 24, 0.55) 0%, rgba(8, 10, 24, 0.78) 45%, rgba(8, 10, 24, 0.92) 100%),
-        url("../../assets/screenshots/name-spin-wheel.jpg");
-      background-size: cover;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-  </style>
 </head>
 <body data-app-id="name-spin-wheel" data-app-title="Name Spin Wheel">
-  <p class="library-back"><a class="btn-back" href="../../index.html">← Back to The Token Moose</a></p>
+  <p class="library-back"><a class="btn-back" href="../../index.html">← Back to Moose Tools</a></p>
 
   <header class="tool-header">
     <h1>🎡 Name Spin Wheel</h1>
@@ -89,6 +47,8 @@
     </div>
   </div>
 
+  <p class="music-credit">Music: Mixkit free stock track · <a href="https://mixkit.co/free-stock-music/" target="_blank" rel="noopener">mixkit.co</a></p>
+
   <div id="pwa-install-bar" hidden>
     <div class="pwa-install-text">
       <strong>Install Name Spin Wheel</strong>
@@ -98,6 +58,7 @@
     <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
   </div>
 
+  <script src="../../js/theme.js"></script>
   <script src="js/tool.js"></script>
   <script src="pwa-install.js"></script>
   <script src="../../js/app-chrome.js"></script>

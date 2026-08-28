@@ -583,8 +583,13 @@ html[data-projector="on"][data-theme="forest"] {
   bottom: 0.85rem !important;
   top: auto !important;
   right: auto !important;
-  z-index: 10050 !important;
+  z-index: 10100 !important;
   margin: 0 !important;
+  pointer-events: auto !important;
+}
+.theme-switcher--app .theme-ball,
+.theme-switcher--app .theme-menu {
+  pointer-events: auto !important;
 }
 .theme-switcher--app .theme-label-btn { display: none !important; }
 .theme-switcher--app .theme-menu {

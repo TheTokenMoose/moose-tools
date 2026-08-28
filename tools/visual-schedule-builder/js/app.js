@@ -1,5 +1,5 @@
 (function () {
-  const STORAGE_KEY = "token-moose-visual-schedule-v1";
+  const STORAGE_KEY = "token-moose-visual-schedule-v2";
   const PRESETS = [
     { id: "morning", emoji: "🌅", label: "Morning Meeting", color: "#fde68a" },
     { id: "reading", emoji: "📚", label: "Reading", color: "#bfdbfe" },
@@ -26,11 +26,14 @@
     custom: document.getElementById("custom-label"),
     addCustom: document.getElementById("btn-add-custom"),
     clear: document.getElementById("btn-clear"),
+    print: document.getElementById("btn-print"),
     present: document.getElementById("btn-present"),
     overlay: document.getElementById("present-overlay"),
     presentTitle: document.getElementById("present-title"),
     presentList: document.getElementById("present-list"),
     exitPresent: document.getElementById("btn-exit-present"),
+    printTitle: document.getElementById("print-title"),
+    printBody: document.getElementById("print-body"),
   };
 
   let items = [];
@@ -42,10 +45,23 @@
 
   function load() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      let raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        // migrate v1
+        const legacy = localStorage.getItem("token-moose-visual-schedule-v1");
+        if (legacy) raw = legacy;
+      }
       if (!raw) return;
       const data = JSON.parse(raw);
-      if (data && Array.isArray(data.items)) items = data.items;
+      if (data && Array.isArray(data.items)) {
+        items = data.items.map((it) => ({
+          id: it.id || uid(),
+          emoji: it.emoji || "📌",
+          label: it.label || "Block",
+          color: it.color || "#e2e8f0",
+          time: typeof it.time === "string" ? it.time : "",
+        }));
+      }
       if (data && typeof data.title === "string") els.title.value = data.title;
     } catch (_) {}
   }
@@ -54,7 +70,10 @@
     try {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ title: els.title.value || "Today's Schedule", items })
+        JSON.stringify({
+          title: els.title.value || "Today's Schedule",
+          items,
+        })
       );
     } catch (_) {}
   }
@@ -66,14 +85,27 @@
       b.type = "button";
       b.className = "pal-btn";
       b.style.background = p.color;
-      b.innerHTML = `<span aria-hidden="true">${p.emoji}</span><span>${p.label}</span>`;
-      b.addEventListener("click", () => addBlock({ emoji: p.emoji, label: p.label, color: p.color }));
+      b.innerHTML =
+        '<span aria-hidden="true">' +
+        p.emoji +
+        "</span><span>" +
+        p.label +
+        "</span>";
+      b.addEventListener("click", () =>
+        addBlock({ emoji: p.emoji, label: p.label, color: p.color, time: "" })
+      );
       els.palette.appendChild(b);
     });
   }
 
   function addBlock(block) {
-    items.push({ id: uid(), emoji: block.emoji || "📌", label: block.label, color: block.color || "#e2e8f0" });
+    items.push({
+      id: uid(),
+      emoji: block.emoji || "📌",
+      label: block.label,
+      color: block.color || "#e2e8f0",
+      time: block.time || "",
+    });
     save();
     renderList();
   }
@@ -84,25 +116,55 @@
     renderList();
   }
 
+  function updateTime(id, value) {
+    const it = items.find((x) => x.id === id);
+    if (!it) return;
+    it.time = value;
+    save();
+  }
+
   function renderList() {
     els.list.innerHTML = "";
     els.empty.hidden = items.length > 0;
-    items.forEach((it, idx) => {
+    items.forEach((it) => {
       const li = document.createElement("li");
       li.className = "sched-item";
       li.draggable = true;
       li.dataset.id = it.id;
       li.style.background = it.color;
-      li.innerHTML = `
-        <span class="emoji" aria-hidden="true">${it.emoji}</span>
-        <span class="label">${escapeHtml(it.label)}</span>
-        <button type="button" class="remove" aria-label="Remove ${escapeHtml(it.label)}">×</button>
-      `;
+      li.innerHTML =
+        '<span class="emoji" aria-hidden="true">' +
+        it.emoji +
+        "</span>" +
+        '<span class="label">' +
+        escapeHtml(it.label) +
+        "</span>" +
+        '<input type="text" class="time-input" maxlength="24" placeholder="e.g. 9:00–9:30" value="' +
+        escapeAttr(it.time || "") +
+        '" aria-label="Time for ' +
+        escapeAttr(it.label) +
+        '" />' +
+        '<button type="button" class="remove" aria-label="Remove ' +
+        escapeAttr(it.label) +
+        '">×</button>';
+
+      const timeInput = li.querySelector(".time-input");
+      timeInput.addEventListener("click", (e) => e.stopPropagation());
+      timeInput.addEventListener("mousedown", (e) => e.stopPropagation());
+      timeInput.addEventListener("pointerdown", (e) => e.stopPropagation());
+      timeInput.addEventListener("change", () => updateTime(it.id, timeInput.value.trim()));
+      timeInput.addEventListener("blur", () => updateTime(it.id, timeInput.value.trim()));
+
       li.querySelector(".remove").addEventListener("click", (e) => {
         e.stopPropagation();
         removeBlock(it.id);
       });
-      li.addEventListener("dragstart", () => {
+
+      li.addEventListener("dragstart", (e) => {
+        if (e.target && e.target.classList && e.target.classList.contains("time-input")) {
+          e.preventDefault();
+          return;
+        }
         dragId = it.id;
         li.classList.add("dragging");
       });
@@ -122,7 +184,7 @@
         save();
         renderList();
       });
-      // touch-friendly reorder: long-press not required; use move buttons via shift
+
       els.list.appendChild(li);
     });
   }
@@ -135,13 +197,31 @@
       .replace(/"/g, "&quot;");
   }
 
+  function escapeAttr(s) {
+    return escapeHtml(s).replace(/'/g, "&#39;");
+  }
+
   function openPresent() {
     els.presentTitle.textContent = els.title.value.trim() || "Today's Schedule";
     els.presentList.innerHTML = "";
     items.forEach((it, i) => {
       const li = document.createElement("li");
       li.style.background = it.color;
-      li.innerHTML = `<span class="num">${i + 1}</span><span class="emoji">${it.emoji}</span><span>${escapeHtml(it.label)}</span>`;
+      const timeTxt = (it.time || "").trim();
+      li.innerHTML =
+        '<span class="num">' +
+        (i + 1) +
+        "</span>" +
+        '<span class="p-activity"><span class="emoji">' +
+        it.emoji +
+        "</span> " +
+        escapeHtml(it.label) +
+        "</span>" +
+        '<span class="p-time' +
+        (timeTxt ? "" : " is-empty") +
+        '">' +
+        (timeTxt ? escapeHtml(timeTxt) : "—") +
+        "</span>";
       els.presentList.appendChild(li);
     });
     els.overlay.hidden = false;
@@ -151,10 +231,33 @@
     els.overlay.hidden = true;
   }
 
+  function doPrint() {
+    const title = els.title.value.trim() || "Today's Schedule";
+    els.printTitle.textContent = title;
+    els.printBody.innerHTML = "";
+    if (!items.length) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = '<td colspan="2">No blocks yet.</td>';
+      els.printBody.appendChild(tr);
+    } else {
+      items.forEach((it) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" +
+          escapeHtml(it.emoji + " " + it.label) +
+          "</td><td>" +
+          escapeHtml((it.time || "").trim() || "—") +
+          "</td>";
+        els.printBody.appendChild(tr);
+      });
+    }
+    window.print();
+  }
+
   els.addCustom.addEventListener("click", () => {
     const label = (els.custom.value || "").trim();
     if (!label) return;
-    addBlock({ emoji: "📌", label, color: "#e2e8f0" });
+    addBlock({ emoji: "📌", label, color: "#e2e8f0", time: "" });
     els.custom.value = "";
   });
   els.custom.addEventListener("keydown", (e) => {
@@ -166,6 +269,7 @@
     save();
     renderList();
   });
+  els.print.addEventListener("click", doPrint);
   els.present.addEventListener("click", openPresent);
   els.exitPresent.addEventListener("click", closePresent);
   els.title.addEventListener("change", save);

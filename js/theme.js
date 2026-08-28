@@ -84,13 +84,6 @@
   }
 
   function ensureMarkup() {
-    // Remove stale switchers so we don't double-mount
-    document.querySelectorAll(".theme-switcher").forEach((n) => {
-      if (n.id !== "tm-app-theme-switcher" && !n.closest(".site-header")) {
-        /* keep shell ones if re-init */
-      }
-    });
-
     const app = isAppPage();
     let root = document.getElementById("tm-app-theme-switcher");
     if (app) {
@@ -112,6 +105,11 @@
         root.className = "theme-switcher";
         host.appendChild(root);
       }
+    }
+
+    // Keep existing controls so click listeners survive a second theme.js load
+    if (root.querySelector("#theme-ball") && root.querySelector("#theme-menu")) {
+      return root;
     }
 
     const labelBtn = app
@@ -157,32 +155,21 @@
     return root;
   }
 
-  function init() {
-    // Avoid double-binding if script loads twice
-    if (window.__tmThemeInited) {
-      ensureMarkup();
-      applyTheme(getTheme());
-      applyProjector(getProjector());
-      return;
-    }
-    window.__tmThemeInited = true;
-
-    const root = ensureMarkup();
-    if (!root) return;
-
-    applyTheme(getTheme());
-    applyProjector(getProjector());
-
+  function bindControls(root) {
     const ball = document.getElementById("theme-ball");
     const labelBtn = document.getElementById("theme-label-btn");
     const menu = document.getElementById("theme-menu");
+    if (!menu) return;
 
     [ball, labelBtn].forEach((el) => {
-      if (!el) return;
+      if (!el || el.dataset.tmBound === "1") return;
+      el.dataset.tmBound = "1";
       el.addEventListener("click", toggleMenu);
     });
 
     menu.querySelectorAll(".theme-option[data-theme]").forEach((btn) => {
+      if (btn.dataset.tmBound === "1") return;
+      btn.dataset.tmBound = "1";
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         applyTheme(btn.getAttribute("data-theme"));
@@ -191,21 +178,40 @@
     });
 
     const proj = document.getElementById("projector-toggle");
-    if (proj) {
+    if (proj && proj.dataset.tmBound !== "1") {
+      proj.dataset.tmBound = "1";
       proj.addEventListener("click", (e) => {
         e.stopPropagation();
         applyProjector(!getProjector());
       });
     }
 
-    document.addEventListener("click", (e) => {
-      if (!menu || menu.hidden) return;
-      if (root.contains(e.target)) return;
-      closeMenu();
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
+    if (!window.__tmThemeDocBound) {
+      window.__tmThemeDocBound = true;
+      document.addEventListener("click", (e) => {
+        const m = document.getElementById("theme-menu");
+        const r = document.getElementById("tm-app-theme-switcher") ||
+          document.querySelector(".site-header .theme-switcher") ||
+          document.querySelector(".theme-switcher");
+        if (!m || m.hidden) return;
+        if (r && r.contains(e.target)) return;
+        closeMenu();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    }
+  }
+
+  function init() {
+    // Script may load twice (page + app-chrome inject). Never wipe live controls.
+    window.__tmThemeLoaded = true;
+    const root = ensureMarkup();
+    applyTheme(getTheme());
+    applyProjector(getProjector());
+    if (!root) return;
+    bindControls(root);
+    window.__tmThemeInited = true;
   }
 
   try {

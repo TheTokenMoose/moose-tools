@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Quiet Ken</title>
+  <rect width="320" height="200" fill="#E8EAF6"/>
+  <circle cx="160" cy="90" r="36" fill="#FFCC80"/>
+  <rect x="130" y="125" width="60" height="50" fill="#7E57C2"/>
+  <path d="M145 85 Q160 95 175 85" stroke="#5D4037" stroke-width="3" fill="none"/>
+  <circle cx="148" cy="82" r="4" fill="#333"/>
+  <circle cx="172" cy="82" r="4" fill="#333"/>
+  <text x="230" y="70" font-size="28" fill="#5C6BC0">shh</text>
+  </svg>

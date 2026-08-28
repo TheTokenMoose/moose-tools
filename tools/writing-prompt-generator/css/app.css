@@ -48,6 +48,11 @@ html, body {
   font-size: 0.85rem;
   color: #4c1d95;
 }
+/* display:flex above would override the HTML hidden attribute without this */
+.controls label[hidden],
+#custom-wrap[hidden] {
+  display: none !important;
+}
 select, input[type="text"] {
   font: inherit;
   padding: 0.55rem 0.6rem;

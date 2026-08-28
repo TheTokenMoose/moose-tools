@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Two Paths</title>
+  <rect width="320" height="200" fill="#E8F5E9"/>
+  <path d="M160 180 L100 80 L40 180 Z" fill="#66BB6A"/>
+  <path d="M160 180 L220 80 L280 180 Z" fill="#81C784"/>
+  <path d="M160 180 L160 100" stroke="#8D6E63" stroke-width="8"/>
+  <path d="M160 120 L110 90" stroke="#A1887F" stroke-width="6"/>
+  <path d="M160 120 L210 90" stroke="#A1887F" stroke-width="6"/>
+  <circle cx="160" cy="70" r="14" fill="#FFEB3B"/>
+  </svg>

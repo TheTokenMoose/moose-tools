@@ -2,8 +2,27 @@
   "use strict";
 
   const STORE = "token-moose-english-path-v1";
+  const TEXT_SIZE_KEY = "token-moose-english-path-text-size";
   const lessons = window.ENGLISH_PATH_LESSONS || [];
   const $ = (id) => document.getElementById(id);
+
+  function applyTextSize(size) {
+    const s = ["s", "m", "l", "xl"].includes(size) ? size : "m";
+    document.documentElement.setAttribute("data-text-size", s);
+    try { localStorage.setItem(TEXT_SIZE_KEY, s); } catch (_) {}
+    document.querySelectorAll(".size-btn").forEach((b) => {
+      b.classList.toggle("is-active", b.getAttribute("data-size") === s);
+    });
+  }
+
+  function initTextSize() {
+    let s = "m";
+    try { s = localStorage.getItem(TEXT_SIZE_KEY) || "m"; } catch (_) {}
+    applyTextSize(s);
+    document.querySelectorAll(".size-btn").forEach((b) => {
+      b.addEventListener("click", () => applyTextSize(b.getAttribute("data-size")));
+    });
+  }
 
   let state = loadState();
   let currentId = null;
@@ -178,15 +197,20 @@
       const answers = state.reading[currentId] || {};
       const panel = document.createElement("div");
       panel.className = "panel";
+      const imgSrc = "assets/lesson-" + String(currentId).padStart(2, "0") + ".jpg";
       let html =
-        "<h3>Reading: " +
+        "<h3>Reading</h3>" +
+        '<div class="reading-art"><img src="' +
+        imgSrc +
+        '" alt="" width="320" height="200" loading="lazy"></div>' +
+        '<p class="reading-title">' +
         escapeHtml(r.title) +
-        "</h3>" +
+        "</p>" +
         '<button type="button" class="btn small" id="btn-hear-text">🔊 Hear the story</button>' +
         '<div class="reading-text" id="reading-text">' +
         escapeHtml(r.text) +
         "</div>";
-      r.questions.forEach((item, i) => {
+      (r.questions || []).forEach((item, i) => {
         html += '<div class="q-block" data-qi="' + i + '">';
         html += '<div class="q-text">' + (i + 1) + ". " + escapeHtml(item.q) + "</div>";
         html += '<div class="opt-row">';
@@ -340,6 +364,7 @@
     }
   } catch (_) {}
 
+  initTextSize();
   updateProgress();
   show("screen-home");
 })();

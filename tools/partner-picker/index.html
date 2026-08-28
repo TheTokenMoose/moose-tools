@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#12182a">
+  <meta name="theme-color" content="#12182a" id="theme-color-meta">
   <meta name="description" content="Partner Picker — fruit-themed classroom groups with drag-and-drop fixes.">
   <title>Partner Picker — The Token Moose</title>
   <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
@@ -24,9 +24,9 @@
   gap: 0.4rem;
   padding: 0.55rem 1rem;
   border-radius: 999px;
-  border: 2px solid rgba(255,255,255,0.25);
-  background: rgba(15, 18, 40, 0.75);
-  color: #fff;
+  border: 2px solid color-mix(in srgb, var(--text-primary, #fff) 25%, transparent);
+  background: color-mix(in srgb, var(--bg-card, #12182a) 85%, transparent);
+  color: var(--text-primary, #fff);
   font: inherit;
   font-weight: 800;
   font-size: 0.9rem;
@@ -38,19 +38,22 @@
 }
 .library-back .btn-back:hover {
   transform: translateY(-1px);
-  background: rgba(30, 36, 70, 0.9);
-  color: #fff;
+  filter: brightness(1.08);
+  color: var(--text-primary, #fff);
 }
 .library-back .btn-back:focus-visible {
-  outline: 2px solid #22d3ee;
+  outline: 2px solid var(--accent-electric, #22d3ee);
   outline-offset: 2px;
 }
 
-    /* Cover art page background */
+    /* Theme wash + optional cover (no forced night palette) */
     body {
-      background-color: #0a0b1a;
+      background-color: var(--bg-deep, #0a0b1a);
       background-image:
-        linear-gradient(180deg, rgba(8, 10, 24, 0.55) 0%, rgba(8, 10, 24, 0.78) 45%, rgba(8, 10, 24, 0.92) 100%),
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--bg-deep, #080a18) 55%, transparent) 0%,
+          color-mix(in srgb, var(--bg-deep, #080a18) 78%, transparent) 45%,
+          color-mix(in srgb, var(--bg-deep, #080a18) 92%, transparent) 100%),
         url("../../assets/screenshots/partner-picker.jpg");
       background-size: cover;
       background-position: top center;
@@ -60,7 +63,7 @@
   </style>
 </head>
 <body data-app-id="partner-picker" data-app-title="Partner Picker">
-  <p class="library-back"><a class="btn-back" href="../../index.html">← Back to The Token Moose</a></p>
+  <p class="library-back"><a class="btn-back" href="../../index.html">← Back to Moose Tools</a></p>
 
   <header class="tool-header">
     <div>

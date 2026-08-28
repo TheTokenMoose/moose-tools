@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Lilys Discovery</title>
+  <rect width="320" height="200" fill="#E0F7FA"/>
+  <circle cx="160" cy="100" r="35" fill="#FFCC80"/>
+  <rect x="135" y="135" width="50" height="40" fill="#EC407A"/>
+  <circle cx="220" cy="130" r="18" fill="#FFD54F"/>
+  <path d="M210 120 L230 120 L220 105 Z" fill="#66BB6A"/>
+  <rect y="175" width="320" height="25" fill="#8D6E63"/>
+  </svg>

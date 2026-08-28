@@ -32,16 +32,79 @@
       <p class="sub">One pair per line: front, back</p>
     </header>
 
-    <section class="panel">
+    <section class="panel" id="main-panel">
       <label for="deck">Cards</label>
       <textarea id="deck" rows="8" placeholder="cat, a small animal
 sun, star in the day
 … (front, back per line)"></textarea>
       <div class="actions">
-        <button type="button" class="btn primary" id="btn-save">Save deck</button>
+        <button type="button" class="btn primary" id="btn-save">Save deck (.txt)</button>
+        <button type="button" class="btn" id="btn-import">Import deck</button>
+        <input type="file" id="import-file" accept=".txt,text/plain" hidden>
         <button type="button" class="btn" id="btn-practice">Practice</button>
-        <button type="button" class="btn" id="btn-print">Print</button>
         <button type="button" class="btn" id="btn-shuffle">Shuffle</button>
+        <button type="button" class="btn" id="btn-print-setup">Print options</button>
+      </div>
+    </section>
+
+    <!-- Print customisation -->
+    <section class="panel print-setup" id="print-setup" hidden>
+      <h2 class="panel-title">Print options</h2>
+      <div class="print-controls">
+        <label class="ctrl">Layout (A4)
+          <select id="print-layout">
+            <option value="2x5">2 × 5 (10 per page)</option>
+            <option value="2x3" selected>2 × 3 (6 per page)</option>
+            <option value="2x2">2 × 2 (4 per page)</option>
+          </select>
+        </label>
+        <label class="ctrl">Theme
+          <select id="print-theme">
+            <option value="custom">Custom</option>
+            <option value="classic">Classic</option>
+            <option value="ocean">Ocean</option>
+            <option value="sunshine">Sunshine</option>
+            <option value="forest">Forest</option>
+            <option value="candy">Candy</option>
+          </select>
+        </label>
+        <label class="ctrl">Text size
+          <input type="range" id="print-text-size" min="10" max="96" value="18">
+          <span id="print-text-size-label">18px</span>
+        </label>
+        <label class="ctrl">Border weight
+          <input type="range" id="print-border" min="1" max="24" value="2">
+          <span id="print-border-label">2px</span>
+        </label>
+        <label class="ctrl rotate-ctrl">
+          <span class="ctrl-row">
+            <input type="checkbox" id="print-rotate">
+            Rotate text 90°
+          </span>
+        </label>
+        <label class="ctrl">Font colour
+          <input type="color" id="print-font" value="#111111">
+        </label>
+        <label class="ctrl">Background
+          <input type="color" id="print-bg" value="#ffffff">
+        </label>
+        <label class="ctrl">Border colour
+          <input type="color" id="print-border-color" value="#222222">
+        </label>
+      </div>
+
+      <div class="preview-block">
+        <p class="preview-label">Preview</p>
+        <div class="print-preview-wrap">
+          <div class="print-preview-card layout-2x3" id="print-preview">
+            <div class="print-face" id="print-preview-text">Sample word</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn primary" id="btn-print-go">Print</button>
+        <button type="button" class="btn" id="btn-print-cancel">Back</button>
       </div>
     </section>
 
@@ -51,14 +114,14 @@ sun, star in the day
   <div id="practice" class="practice" hidden>
     <div class="prac-bar">
       <span id="prog">1 / 1</span>
-      <button type="button" class="btn" id="btn-exit">Exit</button>
+      <button type="button" class="btn solid" id="btn-exit">Exit</button>
     </div>
     <button type="button" class="flip-card" id="flip-card" aria-label="Flip card">
       <span class="side" id="card-text">—</span>
       <span class="hint">Tap to flip</span>
     </button>
     <div class="prac-nav">
-      <button type="button" class="btn" id="btn-prev">← Prev</button>
+      <button type="button" class="btn solid" id="btn-prev">← Prev</button>
       <button type="button" class="btn primary" id="btn-next">Next →</button>
     </div>
   </div>

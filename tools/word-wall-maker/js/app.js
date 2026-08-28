@@ -1,6 +1,40 @@
 (function () {
-  const KEY = "token-moose-word-wall-maker-v1";
+  const KEY = "token-moose-word-wall-maker-v2";
   const $ = (id) => document.getElementById(id);
+
+  /** Five preset colour themes (title, card, text, wall bg) */
+  const THEMES = {
+    ocean: {
+      title: "#e0f2fe",
+      card: "#ffffff",
+      text: "#0c4a6e",
+      bg: "#0c4a6e",
+    },
+    sunshine: {
+      title: "#9a3412",
+      card: "#fffbeb",
+      text: "#78350f",
+      bg: "#fbbf24",
+    },
+    forest: {
+      title: "#ecfdf5",
+      card: "#f0fdf4",
+      text: "#14532d",
+      bg: "#166534",
+    },
+    candy: {
+      title: "#ffffff",
+      card: "#fdf2f8",
+      text: "#9d174d",
+      bg: "#db2777",
+    },
+    chalkboard: {
+      title: "#f8fafc",
+      card: "#f1f5f9",
+      text: "#1e293b",
+      bg: "#1a3a2a",
+    },
+  };
 
   function parseWords(raw) {
     const seen = new Set();
@@ -18,11 +52,23 @@
 
   function load() {
     try {
-      const d = JSON.parse(localStorage.getItem(KEY) || "{}");
+      let raw = localStorage.getItem(KEY);
+      if (!raw) raw = localStorage.getItem("token-moose-word-wall-maker-v1");
+      const d = JSON.parse(raw || "{}");
       if (d.title) $("title").value = d.title;
       if (d.words) $("words").value = d.words;
       if (d.cols) $("cols").value = d.cols;
-      
+      if (d.titleSize) {
+        $("title-size").value = d.titleSize;
+        $("title-size-label").textContent = d.titleSize + "px";
+      }
+      if (d.colorTitle) $("color-title").value = d.colorTitle;
+      if (d.colorCard) $("color-card").value = d.colorCard;
+      if (d.colorText) $("color-text").value = d.colorText;
+      if (d.colorBg) $("color-bg").value = d.colorBg;
+      if (d.theme && THEMES[d.theme]) $("color-theme").value = d.theme;
+      else $("color-theme").value = "custom";
+      if (d.order) window.__wwOrder = d.order;
     } catch (_) {}
   }
 
@@ -34,22 +80,38 @@
           title: $("title").value,
           words: $("words").value,
           cols: $("cols").value,
+          titleSize: $("title-size").value,
           order: window.__wwOrder || "alpha",
-          colorTitle: $("color-title") && $("color-title").value,
-          colorCard: $("color-card") && $("color-card").value,
-          colorText: $("color-text") && $("color-text").value,
-          colorBg: $("color-bg") && $("color-bg").value,
+          theme: $("color-theme").value,
+          colorTitle: $("color-title").value,
+          colorCard: $("color-card").value,
+          colorText: $("color-text").value,
+          colorBg: $("color-bg").value,
         })
       );
     } catch (_) {}
   }
 
-  function buildInto(host, present) {
-    save();
+  function applyTheme(id) {
+    const t = THEMES[id];
+    if (!t) return;
+    $("color-title").value = t.title;
+    $("color-card").value = t.card;
+    $("color-text").value = t.text;
+    $("color-bg").value = t.bg;
+  }
+
+  function titleSizePx() {
+    return Math.max(18, Math.min(72, parseInt($("title-size").value, 10) || 32));
+  }
+
+  function orderedWords() {
     let words = parseWords($("words").value);
     const order = window.__wwOrder || "alpha";
     if (order === "alpha") {
-      words = words.slice().sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+      words = words.slice().sort((a, b) =>
+        a.localeCompare(b, undefined, { sensitivity: "base" })
+      );
     } else if (order === "random") {
       words = words.slice();
       for (let i = words.length - 1; i > 0; i--) {
@@ -57,71 +119,103 @@
         [words[i], words[j]] = [words[j], words[i]];
       }
     }
+    return words;
+  }
+
+  /**
+   * Build wall: title is a centered header ABOVE the word grid (not a grid cell).
+   * @param {HTMLElement} wallHost  #wall or #present-wall
+   * @param {HTMLElement} titleEl
+   * @param {HTMLElement} gridEl
+   */
+  function buildInto(wallHost, titleEl, gridEl) {
+    save();
+    const words = orderedWords();
     const cols = Math.max(2, Math.min(8, parseInt($("cols").value, 10) || 4));
-    host.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
-    host.innerHTML = "";
-    if (!present) {
-      const t = document.createElement("div");
-      t.className = "wall-title";
-      t.textContent = ($("title").value || "Our Word Wall").trim();
-      const titleCol = ($("color-title") && $("color-title").value) || "#f8fafc";
-      t.style.setProperty("color", titleCol, "important");
-      host.style.setProperty("--ww-title-color", titleCol);
-      document.documentElement.style.setProperty("--ww-title-color", titleCol);
-      host.appendChild(t);
-    }
+    const size = titleSizePx();
+    const titleCol = $("color-title").value || "#f8fafc";
+    const cardCol = $("color-card").value || "#ffffff";
+    const textCol = $("color-text").value || "#0f172a";
+    const bgCol = $("color-bg").value || "#1e3a5f";
+
+    document.documentElement.style.setProperty("--ww-title-color", titleCol);
+    document.documentElement.style.setProperty("--ww-title-size", size + "px");
+
+    wallHost.style.setProperty("background", bgCol, "important");
+    wallHost.style.setProperty("background-color", bgCol, "important");
+    wallHost.style.padding = "0.85rem";
+    wallHost.style.borderRadius = "12px";
+
+    titleEl.textContent = ($("title").value || "Our Word Wall").trim();
+    titleEl.style.setProperty("color", titleCol, "important");
+    titleEl.style.fontSize = size + "px";
+
+    gridEl.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
+    gridEl.innerHTML = "";
+
     if (!words.length) {
       const p = document.createElement("p");
+      p.className = "empty-msg";
       p.textContent = "Add some words above.";
       p.style.gridColumn = "1 / -1";
-      host.appendChild(p);
+      p.style.textAlign = "center";
+      p.style.color = titleCol;
+      p.style.opacity = "0.85";
+      gridEl.appendChild(p);
       return;
     }
-    const cardCol = ($("color-card") && $("color-card").value) || "#ffffff";
-    const textCol = ($("color-text") && $("color-text").value) || "#0f172a";
-    const bgCol = ($("color-bg") && $("color-bg").value) || "";
-    if (bgCol && host === $("wall")) {
-      host.style.background = bgCol;
-      host.style.padding = "0.75rem";
-      host.style.borderRadius = "12px";
-    }
+
     words.forEach((w) => {
       const c = document.createElement("div");
       c.className = "card";
       c.textContent = w;
       c.style.setProperty("background", cardCol, "important");
       c.style.setProperty("color", textCol, "important");
-      host.appendChild(c);
+      gridEl.appendChild(c);
     });
   }
 
+  function rebuild() {
+    buildInto($("wall"), $("wall-title-el"), $("wall-grid"));
+  }
+
   window.__wwOrder = "alpha";
-  $("btn-build").addEventListener("click", () => buildInto($("wall"), false));
+
+  $("btn-build").addEventListener("click", rebuild);
   $("btn-alpha").addEventListener("click", () => {
     window.__wwOrder = "alpha";
-    buildInto($("wall"), false);
+    rebuild();
   });
   $("btn-random").addEventListener("click", () => {
     window.__wwOrder = "random";
-    buildInto($("wall"), false);
+    rebuild();
   });
-  // Live colour updates
+
+  $("color-theme").addEventListener("change", () => {
+    const v = $("color-theme").value;
+    if (v !== "custom") applyTheme(v);
+    rebuild();
+  });
+
   ["color-title", "color-card", "color-text", "color-bg"].forEach((id) => {
-    const el = $(id);
-    if (!el) return;
-    el.addEventListener("input", () => {
-      if ($("wall") && $("wall").children.length) buildInto($("wall"), false);
+    $(id).addEventListener("input", () => {
+      $("color-theme").value = "custom";
+      rebuild();
     });
   });
+
+  $("title-size").addEventListener("input", () => {
+    $("title-size-label").textContent = titleSizePx() + "px";
+    rebuild();
+  });
+
   $("btn-print").addEventListener("click", () => {
-    buildInto($("wall"), false);
+    rebuild();
     window.print();
   });
+
   $("btn-present").addEventListener("click", () => {
-    $("present-title").textContent = ($("title").value || "Our Word Wall").trim();
-    const titleCol = ($("color-title") && $("color-title").value) || "#f8fafc";
-    $("present-title").style.setProperty("color", titleCol, "important");
-    buildInto($("present-wall"), true);
+    buildInto($("present-wall"), $("present-title-el"), $("present-grid"));
     $("present").hidden = false;
   });
   $("btn-exit").addEventListener("click", () => {
@@ -140,16 +234,7 @@
     $("bank-count").textContent = bankIdx + 1 + " / " + bankList.length;
   }
   $("btn-bank").addEventListener("click", () => {
-    bankList = parseWords($("words").value);
-    if (window.__wwOrder === "alpha") {
-      bankList = bankList.slice().sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-    } else if (window.__wwOrder === "random") {
-      bankList = bankList.slice();
-      for (let i = bankList.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [bankList[i], bankList[j]] = [bankList[j], bankList[i]];
-      }
-    }
+    bankList = orderedWords();
     bankIdx = 0;
     $("word-bank").hidden = false;
     showBankWord();
@@ -169,7 +254,8 @@
   });
   $("btn-clear").addEventListener("click", () => {
     $("words").value = "";
-    $("wall").innerHTML = "";
+    $("wall-grid").innerHTML = "";
+    $("wall-title-el").textContent = "";
     save();
   });
   document.addEventListener("keydown", (e) => {
@@ -177,5 +263,5 @@
   });
 
   load();
-  buildInto($("wall"), false);
+  rebuild();
 })();

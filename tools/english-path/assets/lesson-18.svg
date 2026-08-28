@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>A Rainy Walk</title>
+  <rect width="320" height="200" fill="#78909C"/>
+  <path d="M100 80 Q160 40 220 80" fill="#546E7A"/>
+  <line x1="120" y1="90" x2="110" y2="140" stroke="#4FC3F7" stroke-width="3"/>
+  <line x1="160" y1="95" x2="155" y2="150" stroke="#4FC3F7" stroke-width="3"/>
+  <line x1="200" y1="90" x2="210" y2="145" stroke="#4FC3F7" stroke-width="3"/>
+  <circle cx="160" cy="145" r="18" fill="#FFCC80"/>
+  <path d="M130 140 Q160 110 190 140" fill="#FF7043"/>
+  <rect y="170" width="320" height="30" fill="#558B2F"/>
+  </svg>

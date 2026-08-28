@@ -6,28 +6,80 @@
 
   const LIST_KEY = "token-moose-team-maker-list";
   const HISTORY_KEY = "token-moose-team-maker-history";
-  const PRESET_NAMES = [
-    { name: "Foxes", emoji: "🦊", color: "#f97316" },
-    { name: "Wolves", emoji: "🐺", color: "#3b82f6" },
-    { name: "Pandas", emoji: "🐼", color: "#22c55e" },
-    { name: "Lions", emoji: "🦁", color: "#eab308" },
-    { name: "Tigers", emoji: "🐯", color: "#ef4444" },
-    { name: "Dolphins", emoji: "🐬", color: "#06b6d4" },
-    { name: "Eagles", emoji: "🦅", color: "#8b5cf6" },
-    { name: "Bears", emoji: "🐻", color: "#a16207" },
-    { name: "Sharks", emoji: "🦈", color: "#0ea5e9" },
-    { name: "Owls", emoji: "🦉", color: "#64748b" },
-    { name: "Dragons", emoji: "🐉", color: "#dc2626" },
-    { name: "Unicorns", emoji: "🦄", color: "#ec4899" },
-  ];
+
+  /** Preset packs — emoji as picture, colour drives team card / score UI */
+  const PRESET_PACKS = {
+    animals: [
+      { name: "Foxes", emoji: "🦊", color: "#f97316" },
+      { name: "Wolves", emoji: "🐺", color: "#3b82f6" },
+      { name: "Pandas", emoji: "🐼", color: "#22c55e" },
+      { name: "Lions", emoji: "🦁", color: "#eab308" },
+      { name: "Tigers", emoji: "🐯", color: "#ef4444" },
+      { name: "Dolphins", emoji: "🐬", color: "#06b6d4" },
+      { name: "Eagles", emoji: "🦅", color: "#8b5cf6" },
+      { name: "Bears", emoji: "🐻", color: "#a16207" },
+      { name: "Sharks", emoji: "🦈", color: "#0ea5e9" },
+      { name: "Owls", emoji: "🦉", color: "#64748b" },
+      { name: "Dragons", emoji: "🐉", color: "#dc2626" },
+      { name: "Unicorns", emoji: "🦄", color: "#ec4899" },
+    ],
+    produce: [
+      { name: "Apples", emoji: "🍎", color: "#ef4444" },
+      { name: "Bananas", emoji: "🍌", color: "#eab308" },
+      { name: "Oranges", emoji: "🍊", color: "#f97316" },
+      { name: "Grapes", emoji: "🍇", color: "#8b5cf6" },
+      { name: "Strawberries", emoji: "🍓", color: "#e11d48" },
+      { name: "Watermelons", emoji: "🍉", color: "#22c55e" },
+      { name: "Lemons", emoji: "🍋", color: "#facc15" },
+      { name: "Peaches", emoji: "🍑", color: "#fb923c" },
+      { name: "Carrots", emoji: "🥕", color: "#ea580c" },
+      { name: "Broccoli", emoji: "🥦", color: "#16a34a" },
+      { name: "Corn", emoji: "🌽", color: "#ca8a04" },
+      { name: "Kiwi", emoji: "🥝", color: "#65a30d" },
+    ],
+    colours: [
+      { name: "Red", emoji: "🔴", color: "#ef4444" },
+      { name: "Blue", emoji: "🔵", color: "#3b82f6" },
+      { name: "Green", emoji: "🟢", color: "#22c55e" },
+      { name: "Yellow", emoji: "🟡", color: "#eab308" },
+      { name: "Orange", emoji: "🟠", color: "#f97316" },
+      { name: "Purple", emoji: "🟣", color: "#a855f7" },
+      { name: "Pink", emoji: "💗", color: "#ec4899" },
+      { name: "Teal", emoji: "🩵", color: "#14b8a6" },
+      { name: "Brown", emoji: "🟤", color: "#a16207" },
+      { name: "Black", emoji: "⚫", color: "#1e293b" },
+      { name: "White", emoji: "⚪", color: "#94a3b8" },
+      { name: "Indigo", emoji: "🟦", color: "#6366f1" },
+    ],
+    shapes: [
+      { name: "Circles", emoji: "⭕", color: "#3b82f6" },
+      { name: "Squares", emoji: "⬛", color: "#1e293b" },
+      { name: "Triangles", emoji: "🔺", color: "#ef4444" },
+      { name: "Stars", emoji: "⭐", color: "#eab308" },
+      { name: "Hearts", emoji: "❤️", color: "#e11d48" },
+      { name: "Diamonds", emoji: "💎", color: "#06b6d4" },
+      { name: "Hexagons", emoji: "⬡", color: "#8b5cf6" },
+      { name: "Ovals", emoji: "🔵", color: "#0ea5e9" },
+      { name: "Rectangles", emoji: "▬", color: "#64748b" },
+      { name: "Crescents", emoji: "🌙", color: "#6366f1" },
+      { name: "Arrows", emoji: "➤", color: "#f97316" },
+      { name: "Pentagons", emoji: "⬠", color: "#22c55e" },
+    ],
+  };
 
   let students = loadList();
   let teams = [];
   let mode = "teams"; // teams | size
+  let namePack = "animals";
+  let useCustomNames = false;
   let teamCount = 4;
   let groupSize = 3;
   let history = loadHistory(); // array of past pair keys
   let animating = false;
+
+  function activePresets() {
+    return PRESET_PACKS[namePack] || PRESET_PACKS.animals;
+  }
 
   const $ = (id) => document.getElementById(id);
 
@@ -107,8 +159,9 @@
     for (let t = 0; t < tries; t++) {
       const shuffled = shuffle(list);
       const result = [];
+      const presets = activePresets();
       for (let i = 0; i < nTeams; i++) {
-        const preset = PRESET_NAMES[i % PRESET_NAMES.length];
+        const preset = presets[i % presets.length];
         result.push({
           name: preset.name,
           emoji: preset.emoji,
@@ -157,15 +210,33 @@
   }
 
   function applyCustomNames() {
-    const raw = $("custom-names").value.trim();
+    if (!useCustomNames) return;
+    const raw = ($("custom-names") && $("custom-names").value.trim()) || "";
     if (!raw) return;
     const names = raw.split(",").map((s) => s.trim()).filter(Boolean);
     teams.forEach((tm, i) => {
       if (names[i]) {
         tm.name = names[i];
         tm.emoji = "⭐";
+        // keep preset colour unless name is a known colour word
+        const colourHit = (PRESET_PACKS.colours || []).find(
+          (c) => c.name.toLowerCase() === names[i].toLowerCase()
+        );
+        if (colourHit) tm.color = colourHit.color;
       }
     });
+  }
+
+  function syncModeUI() {
+    const teamsEl = $("ctrl-teams");
+    const sizeEl = $("ctrl-size");
+    if (teamsEl) teamsEl.hidden = mode !== "teams";
+    if (sizeEl) sizeEl.hidden = mode !== "size";
+  }
+
+  function syncCustomUI() {
+    const wrap = $("custom-wrap");
+    if (wrap) wrap.hidden = !useCustomNames;
   }
 
   function renderTeams(animate) {
@@ -358,10 +429,26 @@
     document.querySelectorAll('input[name="mode"]').forEach((r) => {
       r.addEventListener("change", () => {
         mode = r.value;
-        $("ctrl-teams").hidden = mode !== "teams";
-        $("ctrl-size").hidden = mode !== "size";
+        syncModeUI();
       });
     });
+    syncModeUI();
+
+    document.querySelectorAll('input[name="pack"]').forEach((r) => {
+      r.addEventListener("change", () => {
+        if (r.checked) namePack = r.value;
+      });
+    });
+
+    const useCustom = $("use-custom");
+    if (useCustom) {
+      useCustom.addEventListener("change", () => {
+        useCustomNames = !!useCustom.checked;
+        syncCustomUI();
+      });
+      syncCustomUI();
+    }
+
     $("team-count").addEventListener("input", (e) => {
       teamCount = Math.max(2, Math.min(12, Number(e.target.value) || 2));
       $("team-count-val").textContent = teamCount;

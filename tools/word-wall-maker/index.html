@@ -38,10 +38,25 @@
       <label for="words">Words (comma-separated)</label>
       <textarea id="words" rows="4" placeholder="the, and, said, because, friend…"></textarea>
       <div class="row">
-        <label for="cols">Columns</label>
-        <input type="number" id="cols" min="2" max="8" value="4">
+        <label for="cols">Columns
+          <input type="number" id="cols" min="2" max="8" value="4">
+        </label>
+        <label for="title-size">Title size
+          <input type="range" id="title-size" min="18" max="72" value="32" aria-valuemin="18" aria-valuemax="72">
+          <span id="title-size-label">32px</span>
+        </label>
       </div>
       <div class="row colors">
+        <label class="theme-pick">Theme
+          <select id="color-theme" aria-label="Colour theme">
+            <option value="custom">Custom</option>
+            <option value="ocean">Ocean</option>
+            <option value="sunshine">Sunshine</option>
+            <option value="forest">Forest</option>
+            <option value="candy">Candy</option>
+            <option value="chalkboard">Chalkboard</option>
+          </select>
+        </label>
         <label>Title colour <input type="color" id="color-title" value="#f8fafc"></label>
         <label>Card colour <input type="color" id="color-card" value="#ffffff"></label>
         <label>Text colour <input type="color" id="color-text" value="#0f172a"></label>
@@ -58,7 +73,10 @@
       </div>
     </section>
 
-    <div id="wall" class="wall" aria-live="polite"></div>
+    <div id="wall" class="wall" aria-live="polite">
+      <div class="wall-title" id="wall-title-el"></div>
+      <div class="wall-grid" id="wall-grid"></div>
+    </div>
   </div>
 
   <div id="word-bank" class="present" hidden>
@@ -76,10 +94,12 @@
 
   <div id="present" class="present" hidden>
     <div class="present-bar">
-      <strong id="present-title">Our Word Wall</strong>
       <button type="button" class="btn" id="btn-exit">Exit</button>
     </div>
-    <div id="present-wall" class="wall present-grid"></div>
+    <div id="present-wall" class="wall present-wall">
+      <div class="wall-title" id="present-title-el"></div>
+      <div class="wall-grid present-grid" id="present-grid"></div>
+    </div>
   </div>
 
   <script src="../../js/app-chrome.js"></script>

@@ -8,8 +8,8 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: #1a1033;
-  color: #f7faff;
+  background: var(--bg-deep, #0a0b1a);
+  color: var(--text-primary, #f1f5f9);
   font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
 }
 
@@ -17,15 +17,38 @@ html, body {
   margin: 12px 20px 0;
 }
 
-.library-back a {
-  color: #c4b5e0;
-  font-weight: 600;
+.library-back a,
+.library-back .btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--border-subtle, rgba(255, 255, 255, 0.2));
+  background: var(--bg-glass, rgba(15, 18, 40, 0.75));
+  color: var(--text-primary, #fff);
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card, 0 4px 14px rgba(0, 0, 0, 0.25));
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.library-back a:hover,
+.library-back .btn-back:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-pink, #ff4d9e);
+  color: var(--text-primary, #fff);
   text-decoration: none;
 }
 
-.library-back a:hover {
-  color: #ff4ecd;
-  text-decoration: underline;
+.library-back a:focus-visible,
+.library-back .btn-back:focus-visible {
+  outline: 2px solid var(--accent-electric, #22d3ee);
+  outline-offset: 2px;
 }
 
 .tool-header {
@@ -39,46 +62,70 @@ html, body {
 .tool-header h1 {
   margin: 0;
   font-size: 1.6rem;
-  color: #ffd166;
+  color: var(--accent-soft-pink, #f9a8d4);
+  background: var(--hero-title-grad, none);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .tool-header h1 {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image: var(--hero-title-grad, linear-gradient(135deg, var(--accent-soft-pink, #f9a8d4), var(--accent-purple, #a855f7)));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
 }
 
 .btn-mute {
-  border: none;
-  border-radius: 8px;
+  border: 2px solid var(--border-subtle, rgba(168, 85, 247, 0.35));
+  border-radius: 999px;
   padding: 8px 14px;
-  background: #3d2a6b;
-  color: #f7faff;
-  font-weight: 600;
+  background: var(--bg-card, #2a1b4d);
+  color: var(--text-primary, #f7faff);
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
 .btn-mute:hover {
-  background: #ff4ecd;
+  border-color: var(--accent-pink, #ff4d9e);
+  background: var(--fill-accent-soft, rgba(255, 77, 158, 0.12));
+  transform: translateY(-1px);
 }
 
 .panel {
   margin: 8px 20px;
   padding: 14px 16px;
-  background: #2a1b4d;
+  background: var(--bg-card, rgba(30, 27, 60, 0.92));
+  border: 1px solid var(--border-subtle, rgba(168, 85, 247, 0.25));
   border-radius: 12px;
+  box-shadow: var(--shadow-card, 0 8px 24px rgba(0, 0, 0, 0.25));
 }
 
 .panel label {
   display: block;
   font-weight: 700;
   margin-bottom: 6px;
+  color: var(--text-primary, #f1f5f9);
 }
 
 .panel textarea {
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #5a3d9a;
-  background: #1a1033;
-  color: #f7faff;
+  border: 1px solid var(--border-subtle, rgba(168, 85, 247, 0.35));
+  background: var(--bg-deep, #1a1033);
+  color: var(--text-primary, #f7faff);
   font-size: 1rem;
   resize: vertical;
   font-family: inherit;
+}
+
+.panel textarea:focus {
+  outline: 2px solid var(--accent-electric, #22d3ee);
+  outline-offset: 1px;
 }
 
 .panel-row {
@@ -90,7 +137,7 @@ html, body {
 }
 
 .mode-label {
-  color: #c4b5e0;
+  color: var(--text-secondary, #c4b5e0);
   font-weight: 600;
 }
 
@@ -100,24 +147,28 @@ html, body {
   gap: 6px;
   font-weight: 500;
   cursor: pointer;
+  color: var(--text-primary, #f1f5f9);
 }
 
 .radio input {
-  accent-color: #ff4ecd;
+  accent-color: var(--accent-pink, #ff4d9e);
 }
 
 .btn-primary {
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
-  background: #ff4ecd;
-  color: white;
+  background: var(--btn-primary-grad, linear-gradient(135deg, #ff4d9e, #a855f7));
+  color: #fff;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: var(--glow-pink, 0 0 12px rgba(255, 77, 158, 0.25));
+  transition: filter 0.15s ease, transform 0.15s ease;
 }
 
 .btn-primary:hover {
-  background: #e03db8;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
 .main {
@@ -133,6 +184,7 @@ html, body {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+  box-shadow: var(--shadow-card, 0 8px 32px rgba(0, 0, 0, 0.35));
 }
 
 .side {
@@ -145,14 +197,14 @@ html, body {
 .result {
   font-size: 1.35rem;
   font-weight: 800;
-  color: #ffd166;
+  color: var(--accent-soft-pink, #ffd166);
   margin: 0 0 8px;
   line-height: 1.35;
   white-space: pre-line;
 }
 
 .count {
-  color: #c4b5e0;
+  color: var(--text-muted, #c4b5e0);
   margin: 0 0 16px;
 }
 
@@ -161,16 +213,19 @@ html, body {
   border: none;
   border-radius: 12px;
   padding: 14px 36px;
-  background: #ffd166;
-  color: #1a1033;
+  background: var(--btn-primary-grad, linear-gradient(135deg, #fbbf24, #f59e0b));
+  color: var(--bg-deep, #0a0b1a);
   font-size: 1.4rem;
   font-weight: 800;
   cursor: pointer;
   margin-bottom: 12px;
+  box-shadow: var(--glow-pink, 0 4px 18px rgba(251, 191, 36, 0.3));
+  transition: filter 0.15s ease, transform 0.15s ease;
 }
 
 .btn-spin:hover:not(:disabled) {
-  background: #e6bc5c;
+  filter: brightness(1.06);
+  transform: translateY(-1px);
 }
 
 .btn-spin:disabled {
@@ -179,24 +234,37 @@ html, body {
 }
 
 .btn-secondary {
-  border: none;
+  border: 2px solid var(--border-subtle, rgba(168, 85, 247, 0.35));
   border-radius: 8px;
   padding: 8px 14px;
-  background: #3d2a6b;
-  color: #f7faff;
+  background: var(--bg-card, #3d2a6b);
+  color: var(--text-primary, #f7faff);
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .btn-secondary:hover {
-  background: #5a3d9a;
+  border-color: var(--accent-purple, #a855f7);
+  background: var(--fill-accent-mid, rgba(168, 85, 247, 0.15));
 }
 
 .tip {
   margin-top: 20px;
-  color: #c4b5e0;
+  color: var(--text-muted, #c4b5e0);
   font-size: 0.9rem;
   line-height: 1.4;
+}
+
+.music-credit {
+  margin: 0 20px 24px;
+  font-size: 0.75rem;
+  color: var(--text-muted, #94a3b8);
+  opacity: 0.85;
+}
+
+.music-credit a {
+  color: var(--accent-electric, #22d3ee);
 }
 
 @media (max-width: 700px) {

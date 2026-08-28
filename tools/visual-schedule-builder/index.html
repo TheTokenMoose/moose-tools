@@ -19,7 +19,8 @@
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
-      if (t === "day" || t === "playful" || t === "night") document.documentElement.setAttribute("data-theme", t);
+      if (t === "day" || t === "playful" || t === "night" || t === "forest" || t === "ocean")
+        document.documentElement.setAttribute("data-theme", t);
       var p = localStorage.getItem("token-moose-projector");
       document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
     } catch (e) {}
@@ -29,7 +30,7 @@
   <div id="app">
     <header class="tool-head">
       <h1>Visual Schedule Builder</h1>
-      <p class="sub">Build today’s plan · show it full screen for the class</p>
+      <p class="sub">Build today’s plan · times + activities · present or print</p>
     </header>
 
     <div class="layout">
@@ -38,8 +39,8 @@
         <p class="hint">Tap to add · drag to reorder</p>
         <div id="palette-list" class="palette-list"></div>
         <div class="custom-row">
-          <input type="text" id="custom-label" maxlength="40" placeholder="Custom block name" />
-          <button type="button" class="btn" id="btn-add-custom">Add</button>
+          <input type="text" id="custom-label" maxlength="40" placeholder="Custom block name" aria-label="Custom block name" />
+          <button type="button" class="btn solid" id="btn-add-custom">Add</button>
         </div>
       </aside>
 
@@ -47,12 +48,17 @@
         <div class="board-toolbar">
           <input type="text" id="day-title" maxlength="60" value="Today's Schedule" aria-label="Schedule title" />
           <div class="toolbar-actions">
-            <button type="button" class="btn" id="btn-clear">Clear</button>
+            <button type="button" class="btn solid" id="btn-clear">Clear</button>
+            <button type="button" class="btn solid" id="btn-print">Print</button>
             <button type="button" class="btn primary" id="btn-present">Present ▶</button>
           </div>
         </div>
+        <div class="list-head" aria-hidden="true">
+          <span class="col-activity">Activity</span>
+          <span class="col-time">Time</span>
+        </div>
         <ol id="schedule-list" class="schedule-list" aria-label="Schedule blocks"></ol>
-        <p class="empty-hint" id="empty-hint">Add blocks from the left to build the day.</p>
+        <p class="empty-hint" id="empty-hint">Add blocks from the left. Type a time on each row (e.g. 9:00–9:30).</p>
       </main>
     </div>
   </div>
@@ -60,9 +66,24 @@
   <div id="present-overlay" hidden>
     <div class="present-bar">
       <span id="present-title">Today's Schedule</span>
-      <button type="button" class="btn" id="btn-exit-present">Exit</button>
+      <button type="button" class="btn exit-present" id="btn-exit-present">Exit</button>
+    </div>
+    <div class="present-head">
+      <span>Activity</span>
+      <span>Time</span>
     </div>
     <ol id="present-list" class="present-list"></ol>
+  </div>
+
+  <!-- Print-only sheet (ink-friendly) -->
+  <div id="print-sheet" class="print-sheet" aria-hidden="true">
+    <h1 id="print-title">Today's Schedule</h1>
+    <table class="print-table">
+      <thead>
+        <tr><th>Activity</th><th>Time</th></tr>
+      </thead>
+      <tbody id="print-body"></tbody>
+    </table>
   </div>
 
   <script src="../../js/app-chrome.js"></script>

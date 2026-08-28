@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Mia Helps Sam</title>
+  <rect width="320" height="200" fill="#E3F2FD"/>
+  <circle cx="110" cy="90" r="22" fill="#FFCC80"/>
+  <rect x="95" y="112" width="30" height="40" fill="#42A5F5"/>
+  <circle cx="200" cy="100" r="22" fill="#FFCC80"/>
+  <rect x="185" y="122" width="30" height="35" fill="#EF5350"/>
+  <path d="M140 100 Q160 80 180 100" stroke="#FFD54F" stroke-width="4" fill="none"/>
+  <rect y="160" width="320" height="40" fill="#AED581"/>
+  </svg>

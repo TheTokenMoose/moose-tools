@@ -43,7 +43,18 @@ html, body {
   backdrop-filter: blur(8px);
 }
 
-.hero-emoji { font-size: 3.2rem; margin-bottom: 8px; }
+.hero-emoji {
+  font-size: 3.2rem;
+  line-height: 1;
+  filter: saturate(0.92);
+  letter-spacing: 0.15em;
+  opacity: 0.95;
+  animation: soft-float 4.5s ease-in-out infinite;
+}
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
 
 h1 {
   margin: 0 0 8px;
@@ -195,9 +206,10 @@ settings select,
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
-  background: #87ceeb;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  border-radius: 18px;
+  background: #9ec9e8;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .status-line {

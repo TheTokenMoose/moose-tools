@@ -2,8 +2,23 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="name-spin-wheel-v4";
-const ASSETS=["./index.html","./css/tool.css","./js/tool.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png","../../js/app-chrome.js"];
+const CACHE="name-spin-wheel-v5";
+const ASSETS=[
+  "./index.html",
+  "./css/tool.css",
+  "./js/tool.js",
+  "./audio/background.mp3",
+  "./manifest.webmanifest",
+  "./pwa-install.js",
+  "./pwa-install.css",
+  "./sw.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "../../js/app-chrome.js",
+  "../../js/theme.js",
+  "../../css/themes.css",
+  "../../css/theme-app.css"
+];
 
 self.addEventListener("install", e => {
   e.waitUntil(

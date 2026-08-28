@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>The Market Orange</title>
+  <rect width="320" height="200" fill="#FFF3E0"/>
+  <ellipse cx="160" cy="120" rx="40" ry="42" fill="#FF9800"/>
+  <path d="M160 80 Q150 60 170 55" stroke="#2E7D32" stroke-width="4" fill="none"/>
+  <ellipse cx="80" cy="140" rx="20" ry="22" fill="#FFA726"/>
+  <ellipse cx="240" cy="140" rx="18" ry="20" fill="#FB8C00"/>
+  <rect x="40" y="160" width="240" height="20" rx="4" fill="#8D6E63"/>
+  </svg>

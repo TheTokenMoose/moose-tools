@@ -39,6 +39,13 @@
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
         <p id="progress-label">0 of 20 lessons completed</p>
       </div>
+      <div class="size-toggle" role="group" aria-label="Text size">
+        <span class="size-label">Text size</span>
+        <button type="button" class="size-btn" data-size="s" title="Small">A</button>
+        <button type="button" class="size-btn is-active" data-size="m" title="Medium">A</button>
+        <button type="button" class="size-btn" data-size="l" title="Large">A</button>
+        <button type="button" class="size-btn" data-size="xl" title="Extra large">A</button>
+      </div>
       <div class="home-actions">
         <button type="button" class="btn primary" id="btn-continue">Continue</button>
         <button type="button" class="btn" id="btn-map">Lesson map</button>
@@ -78,7 +85,15 @@
       <div class="bar">
         <button type="button" class="btn ghost" id="btn-lesson-map">← Map</button>
         <h2 id="lesson-title">Lesson</h2>
-        <button type="button" class="btn ghost" id="btn-hear-obj">🔊</button>
+        <div class="bar-right">
+          <div class="size-toggle compact" role="group" aria-label="Text size">
+            <button type="button" class="size-btn" data-size="s" title="Small">A</button>
+            <button type="button" class="size-btn is-active" data-size="m" title="Medium">A</button>
+            <button type="button" class="size-btn" data-size="l" title="Large">A</button>
+            <button type="button" class="size-btn" data-size="xl" title="Extra large">A</button>
+          </div>
+          <button type="button" class="btn ghost" id="btn-hear-obj">🔊</button>
+        </div>
       </div>
       <p class="theme-line" id="lesson-theme"></p>
       <p class="obj-line" id="lesson-obj"></p>

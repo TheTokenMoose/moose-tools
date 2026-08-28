@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>The Lost Ball</title>
+  <rect width="320" height="200" fill="#87CEEB"/>
+  <rect y="140" width="320" height="60" fill="#7CB342"/>
+  <circle cx="250" cy="70" r="28" fill="#FFEB3B"/>
+  <ellipse cx="100" cy="155" rx="22" ry="22" fill="#E53935"/>
+  <path d="M90 150 Q70 120 95 110" stroke="#5D4037" stroke-width="3" fill="none"/>
+  <circle cx="60" cy="160" r="8" fill="#FFF" opacity="0.5"/>
+  </svg>

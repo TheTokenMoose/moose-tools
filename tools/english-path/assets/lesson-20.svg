@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img"><title>Omar and the Kitten</title>
+  <rect width="320" height="200" fill="#FFF3E0"/>
+  <circle cx="130" cy="90" r="26" fill="#FFCC80"/>
+  <rect x="108" y="116" width="44" height="48" fill="#29B6F6"/>
+  <ellipse cx="210" cy="140" rx="28" ry="20" fill="#FFB74D"/>
+  <circle cx="225" cy="125" r="14" fill="#FFB74D"/>
+  <circle cx="230" cy="122" r="2.5" fill="#333"/>
+  <path d="M218 128 Q225 132 232 128" stroke="#333" stroke-width="1.5" fill="none"/>
+  <rect y="168" width="320" height="32" fill="#A5D6A7"/>
+  </svg>
