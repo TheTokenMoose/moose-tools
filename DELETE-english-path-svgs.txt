@@ -1,0 +1,21 @@
+After unzipping v26, delete these leftover English Path SVG doodles if present:
+tools/english-path/assets/lesson-01.svg
+tools/english-path/assets/lesson-02.svg
+tools/english-path/assets/lesson-03.svg
+tools/english-path/assets/lesson-04.svg
+tools/english-path/assets/lesson-05.svg
+tools/english-path/assets/lesson-06.svg
+tools/english-path/assets/lesson-07.svg
+tools/english-path/assets/lesson-08.svg
+tools/english-path/assets/lesson-09.svg
+tools/english-path/assets/lesson-10.svg
+tools/english-path/assets/lesson-11.svg
+tools/english-path/assets/lesson-12.svg
+tools/english-path/assets/lesson-13.svg
+tools/english-path/assets/lesson-14.svg
+tools/english-path/assets/lesson-15.svg
+tools/english-path/assets/lesson-16.svg
+tools/english-path/assets/lesson-17.svg
+tools/english-path/assets/lesson-18.svg
+tools/english-path/assets/lesson-19.svg
+tools/english-path/assets/lesson-20.svg

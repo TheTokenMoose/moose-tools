@@ -107,8 +107,47 @@
       }
     }
 
-    // Keep existing controls so click listeners survive a second theme.js load
-    if (root.querySelector("#theme-ball") && root.querySelector("#theme-menu")) {
+    // If markup already exists, refresh menu when it is missing newer options
+    // (avoids stuck 3-theme HTML after deploys). Re-bind happens in bindControls.
+    const existingMenu = root.querySelector("#theme-menu");
+    if (root.querySelector("#theme-ball") && existingMenu) {
+      const needsExpand =
+        !existingMenu.querySelector('[data-theme="forest"]') ||
+        !existingMenu.querySelector('[data-theme="ocean"]') ||
+        !existingMenu.querySelector("#projector-toggle");
+      if (needsExpand) {
+        existingMenu.innerHTML = `
+        <button type="button" class="theme-option" role="option" data-theme="night" aria-checked="false">
+          <span class="theme-swatch night" aria-hidden="true"></span>
+          <span class="theme-option-text">Night City<small>Soft neon · default</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="day" aria-checked="false">
+          <span class="theme-swatch day" aria-hidden="true"></span>
+          <span class="theme-option-text">Daylight<small>Bright · airy · calm</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="playful" aria-checked="false">
+          <span class="theme-swatch playful" aria-hidden="true"></span>
+          <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="forest" aria-checked="false">
+          <span class="theme-swatch forest" aria-hidden="true"></span>
+          <span class="theme-option-text">Forest Grove<small>Moss · canopy · calm green</small></span>
+        </button>
+        <button type="button" class="theme-option" role="option" data-theme="ocean" aria-checked="false">
+          <span class="theme-swatch ocean" aria-hidden="true"></span>
+          <span class="theme-option-text">Ocean Breeze<small>Deep sea · soft cyan · calm</small></span>
+        </button>
+        <button type="button" class="theme-option projector-toggle" id="projector-toggle"
+          role="option" aria-checked="false">
+          <span class="theme-swatch projector" aria-hidden="true"></span>
+          <span class="theme-option-text">Projector Mode<small>Off · normal classroom view</small></span>
+        </button>`;
+        // allow rebinding after DOM replace
+        existingMenu.querySelectorAll("[data-tm-bound]").forEach((el) => el.removeAttribute("data-tm-bound"));
+        root.querySelectorAll("#theme-ball, #theme-label-btn, #projector-toggle").forEach((el) => {
+          if (el) el.removeAttribute("data-tm-bound");
+        });
+      }
       return root;
     }
 

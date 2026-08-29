@@ -19,7 +19,7 @@
   <script>
     try {
       var t = localStorage.getItem("token-moose-theme");
-      if (t === "day" || t === "playful" || t === "night" || t === "forest") {
+      if (t === "day" || t === "playful" || t === "night" || t === "forest" || t === "ocean") {
         document.documentElement.setAttribute("data-theme", t);
       }
       var p = localStorage.getItem("token-moose-projector");
@@ -48,7 +48,7 @@
           <div class="theme-switcher">
         <button type="button" class="theme-ball" id="theme-ball" aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu" title="Change theme" aria-label="Themes"></button>
         <button type="button" class="theme-label-btn" id="theme-label-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="theme-menu">Themes</button>
-        <div class="theme-menu" id="theme-menu" role="listbox" aria-label="Site theme" hidden>
+                <div class="theme-menu" id="theme-menu" role="listbox" aria-label="Site theme" hidden>
           <button type="button" class="theme-option" role="option" data-theme="night" aria-checked="false">
             <span class="theme-swatch night" aria-hidden="true"></span>
             <span class="theme-option-text">Night City<small>Soft neon · default</small></span>
@@ -60,6 +60,19 @@
           <button type="button" class="theme-option" role="option" data-theme="playful" aria-checked="false">
             <span class="theme-swatch playful" aria-hidden="true"></span>
             <span class="theme-option-text">Preschool Playful<small>Warm · candy · energetic</small></span>
+          </button>
+          <button type="button" class="theme-option" role="option" data-theme="forest" aria-checked="false">
+            <span class="theme-swatch forest" aria-hidden="true"></span>
+            <span class="theme-option-text">Forest Grove<small>Moss · canopy · calm green</small></span>
+          </button>
+          <button type="button" class="theme-option" role="option" data-theme="ocean" aria-checked="false">
+            <span class="theme-swatch ocean" aria-hidden="true"></span>
+            <span class="theme-option-text">Ocean Breeze<small>Deep sea · soft cyan · calm</small></span>
+          </button>
+          <button type="button" class="theme-option projector-toggle" id="projector-toggle"
+            role="option" aria-checked="false">
+            <span class="theme-swatch projector" aria-hidden="true"></span>
+            <span class="theme-option-text">Projector Mode<small>Off · normal classroom view</small></span>
           </button>
         </div>
       </div>
