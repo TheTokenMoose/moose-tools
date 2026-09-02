@@ -637,6 +637,20 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "bubble-brainstorm",
+    title: "Bubble Brainstorm",
+    type: "tool",
+    description:
+      "Interactive classroom mind map: click empty space to add idea bubbles, click to rename in place, drag to move, drop onto another bubble to link (then snap back), click a link to remove it. Scale grows nodes; text auto-fits. Print/PDF for handouts. Saves on this device.",
+    category: "Classroom",
+    subject: "Planning / Writing / Inquiry",
+    skills: ["Brainstorming", "Mind map", "Ideas", "Collaboration", "Writing pre-work", "Projector"],
+    screenshot: "assets/screenshots/bubble-brainstorm.jpg",
+    playUrl: "tools/bubble-brainstorm/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "english-path",
     title: "English Path",
     type: "tool",

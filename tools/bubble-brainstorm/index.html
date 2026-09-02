@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#6d4aff">
+  <meta name="description" content="Bubble Brainstorm — interactive mind map and idea bubbles for classroom brainstorming.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Bubble Brainstorm — Moose Tools</title>
+  <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night" || t === "forest" || t === "ocean")
+        document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
+</head>
+<body class="theme-bridged" data-app-id="bubble-brainstorm" data-app-title="Bubble Brainstorm">
+  <div id="app" class="bb-app">
+    <header class="bb-head">
+      <div class="bb-titles">
+        <h1><span class="bb-title-icon" aria-hidden="true">🫧</span> Bubble Brainstorm</h1>
+      </div>
+      <div class="bb-head-actions">
+        <button type="button" class="bb-btn bb-btn-primary" id="printBtn">Print / PDF</button>
+        <button type="button" class="bb-btn" id="clearConnectionsBtn">Clear links</button>
+        <button type="button" class="bb-btn bb-btn-danger" id="clearBubblesBtn">Clear bubbles</button>
+      </div>
+    </header>
+
+    <div class="bb-layout">
+      <aside class="bb-panel no-print">
+        <section class="bb-section">
+          <h3>Add a bubble</h3>
+          <p class="bb-hint">Double-click empty space on the board, or use the button.</p>
+          <input type="text" id="bubbleInput" placeholder="Idea text (optional)…" maxlength="120" autocomplete="off">
+          <label class="bb-label" for="colorPicker">Colour override</label>
+          <select id="colorPicker">
+            <option value="">Theme colours (auto)</option>
+            <option value="#6d4aff">Purple</option>
+            <option value="#00d4aa">Teal</option>
+            <option value="#ff6b6b">Coral</option>
+            <option value="#ffd93d">Yellow</option>
+            <option value="#4ecdc4">Cyan</option>
+            <option value="#95e1d3">Mint</option>
+            <option value="#f38181">Pink</option>
+            <option value="#aa96da">Lavender</option>
+            <option value="#38bdf8">Sky</option>
+            <option value="#4ade80">Green</option>
+          </select>
+          <button type="button" class="bb-btn bb-btn-primary bb-btn-block" id="addBubbleBtn">Add bubble</button>
+        </section>
+
+        <section class="bb-section">
+          <h3>Bubble scale <span id="scaleValue">100%</span></h3>
+          <p class="bb-hint">Grows bubbles and text together.</p>
+          <input type="range" id="scaleSlider" min="70" max="180" value="100" aria-valuemin="70" aria-valuemax="180">
+        </section>
+
+        <section class="bb-section">
+          <h3>How it works</h3>
+          <ul class="bb-tips">
+            <li><strong>Double-click empty</strong> — new bubble</li>
+            <li><strong>Tap bubble</strong> — edit name</li>
+            <li><strong>Drag bubble</strong> — move it</li>
+            <li><strong>Drop on another</strong> — link (arrow to target), snap back</li>
+            <li><strong>Tap a link</strong> — remove it</li>
+            <li><strong>Drag to bin</strong> — delete bubble</li>
+          </ul>
+        </section>
+      </aside>
+
+      <div class="bb-canvas-wrap" id="canvasWrap">
+        <svg id="canvas" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Brainstorm canvas">
+          <defs>
+            <radialGradient id="boardGlow" cx="50%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="rgba(125, 90, 255, 0.12)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </radialGradient>
+            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="4" stdDeviation="5" flood-opacity="0.35"/>
+            </filter>
+            <marker id="arrowHead" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 1 L 11 6 L 0 11 z" fill="context-stroke"/>
+            </marker>
+          </defs>
+          <rect class="bb-canvas-bg" id="canvasBg" x="0" y="0" width="1600" height="1000" rx="16"/>
+          <rect x="0" y="0" width="1600" height="1000" fill="url(#boardGlow)" rx="16" pointer-events="none"/>
+          <g id="deleteBin" class="delete-bin" transform="translate(24, 24)">
+            <rect class="bin-plate" x="0" y="0" width="96" height="96" rx="20"/>
+            <text class="bin-emoji" x="48" y="46" text-anchor="middle" dominant-baseline="middle" font-size="34">🗑️</text>
+            <text class="bin-label" x="48" y="78" text-anchor="middle" font-size="12" font-weight="800">DELETE</text>
+          </g>
+          <g id="connectionsLayer"></g>
+          <g id="bubblesLayer"></g>
+        </svg>
+        <textarea id="inlineEdit" class="bb-inline-edit" maxlength="200" hidden rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/app-chrome.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

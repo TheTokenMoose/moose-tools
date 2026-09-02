@@ -1,0 +1,24 @@
+{
+  "name": "Bubble Brainstorm",
+  "short_name": "Brainstorm",
+  "description": "Interactive mind mapping and brainstorming for classrooms",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0b1a",
+  "theme_color": "#6d4aff",
+  "icons": [
+    {
+      "src": "../../assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../../assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

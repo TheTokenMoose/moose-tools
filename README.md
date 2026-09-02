@@ -176,3 +176,22 @@ Multi-theme shell (neon night default, plus daylight, playful, forest, and ocean
 ---
 
 Have fun. Break things. Make things. Keep learning.
+
+## Library index & discoverability
+
+Tools and games live under:
+
+- [`/tools`](tools/) — teacher productivity tools  
+- [`/games`](games/) — educational games  
+
+**Structured manifest (preferred for scripts/agents):** [`data/library.json`](data/library.json)  
+**Human-readable list:** [`INDEX.md`](INDEX.md)  
+**Source of truth in the app:** [`js/projects.js`](js/projects.js)
+
+GitHub’s folder pages (`/tree/main/tools`) are filled in with JavaScript, so plain HTML crawlers will not see file lists. Use `library.json`, `INDEX.md`, or the [GitHub Contents API](https://docs.github.com/en/rest/repos/contents) instead of scraping directory HTML.
+
+When adding a new game or tool: register it in `js/projects.js` **and** regenerate `data/library.json` / `INDEX.md` (or include both in the same patch zip).
+
+### Service worker cache
+
+Shell cache name is `token-moose-vN` in `sw.js`. Bump `N` when shared shell assets change so clients pick up updates without a manual storage clear.
