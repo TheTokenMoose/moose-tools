@@ -5,16 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1020">
   <meta name="description" content="Classroom Timer — goal-based visual timers with animated timeline characters.">
-  <title>Classroom Timer — The Token Moose</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Classroom Timer — Moose Tools</title>
+  <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
   <link rel="stylesheet" href="css/tool.css">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="pwa-install.css">
+  <script>
+    try {
+      var t = localStorage.getItem("token-moose-theme");
+      if (t === "day" || t === "playful" || t === "night" || t === "forest" || t === "ocean")
+        document.documentElement.setAttribute("data-theme", t);
+      var p = localStorage.getItem("token-moose-projector");
+      document.documentElement.setAttribute("data-projector", p === "on" ? "on" : "off");
+    } catch (e) {}
+  </script>
 </head>
-<body>
-  <p class="library-back"><a href="../../index.html">← Back to The Token Moose</a></p>
-
+<body class="theme-bridged" data-app-id="classroom-timer" data-app-title="Classroom Timer">
   <div id="app">
     <!-- MENU -->
     <section id="screen-menu" class="screen">
@@ -92,6 +104,8 @@
     <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
   </div>
 
+  <script src="../../js/app-chrome.js"></script>
+  <script src="../../js/theme.js"></script>
   <script src="js/tool.js"></script>
   <script src="pwa-install.js"></script>
 </body>
