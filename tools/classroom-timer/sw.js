@@ -2,8 +2,8 @@
  * Per-app service worker — network-first so updates appear without clearing storage.
  * Offline: falls back to cache.
  */
-const CACHE="classroom-timer-v3";
-const ASSETS=["./index.html","./css/tool.css","./js/tool.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png"];
+const CACHE="classroom-timer-v4";
+const ASSETS=["./index.html","./css/tool.css","./js/tool.js","./manifest.webmanifest","./pwa-install.js","./pwa-install.css","./sw.js","./icons/icon-192.png","./icons/icon-512.png","./audio/explosion.wav"];
 
 self.addEventListener("install", e => {
   e.waitUntil(

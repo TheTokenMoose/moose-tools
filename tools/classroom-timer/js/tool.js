@@ -191,42 +191,56 @@ class TimerAudio {
     this.musicNodes = [];
   }
 
-  /** Mild classroom-friendly boom */
+  /** Boom: prefers audio/explosion.mp3 then .wav, else procedural */
   playBoom() {
     if (!this.enabled) return;
+    const tryPlay = (src) => {
+      try {
+        const a = new Audio(src);
+        a.volume = 0.85;
+        const p = a.play();
+        if (p && p.catch) p.catch(() => this._proceduralBoom());
+        return true;
+      } catch (_) {
+        return false;
+      }
+    };
+    if (tryPlay("audio/explosion.mp3")) return;
+    if (tryPlay("audio/explosion.wav")) return;
+    this._proceduralBoom();
+  }
+
+  _proceduralBoom() {
     const ctx = this.ensure();
     if (!ctx) return;
     const t0 = ctx.currentTime;
-
-    // Low thump
     const osc = ctx.createOscillator();
     const og = ctx.createGain();
     osc.type = "sine";
-    osc.frequency.setValueAtTime(120, t0);
-    osc.frequency.exponentialRampToValueAtTime(40, t0 + 0.35);
+    osc.frequency.setValueAtTime(140, t0);
+    osc.frequency.exponentialRampToValueAtTime(35, t0 + 0.45);
     og.gain.setValueAtTime(0.0001, t0);
-    og.gain.exponentialRampToValueAtTime(0.5, t0 + 0.02);
-    og.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.5);
+    og.gain.exponentialRampToValueAtTime(0.65, t0 + 0.02);
+    og.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.7);
     osc.connect(og);
     og.connect(this.master);
     osc.start(t0);
-    osc.stop(t0 + 0.55);
+    osc.stop(t0 + 0.75);
 
-    // Soft noise burst
-    const len = Math.floor(ctx.sampleRate * 0.35);
+    const len = Math.floor(ctx.sampleRate * 0.55);
     const buffer = ctx.createBuffer(1, len, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < len; i++) {
-      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.08));
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.1));
     }
     const noise = ctx.createBufferSource();
     noise.buffer = buffer;
     const ng = ctx.createGain();
-    ng.gain.setValueAtTime(0.35, t0);
-    ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.35);
+    ng.gain.setValueAtTime(0.5, t0);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.55);
     const filt = ctx.createBiquadFilter();
     filt.type = "lowpass";
-    filt.frequency.value = 800;
+    filt.frequency.value = 1200;
     noise.connect(filt);
     filt.connect(ng);
     ng.connect(this.master);
@@ -268,6 +282,8 @@ class ClassroomTimer {
     this.state = "menu";
     this.running = false;
     this.paused = false;
+    this.exploding = false;
+    this.explosionT = 0;
     this.lastTs = 0;
     this.raf = null;
     this.phase = 0;
@@ -442,6 +458,8 @@ class ClassroomTimer {
     this.stopLoop();
     this.running = false;
     this.paused = false;
+    this.exploding = false;
+    this.explosionT = 0;
     this.audio.stopMusic();
     this.show("menu");
     if (document.fullscreenElement) {
@@ -509,16 +527,26 @@ class ClassroomTimer {
   }
 
   finish() {
+    this.audio.stopMusic();
+    if (this.goal.bomb && !this.exploding) {
+      this.exploding = true;
+      this.explosionT = 0;
+      this.running = true; // keep draw loop for FX
+      this.paused = false;
+      this.audio.playBoom();
+      this.lastTs = performance.now();
+      this.loop(this.lastTs);
+      return;
+    }
     this.stopLoop();
     this.running = false;
     this.paused = false;
-    this.audio.stopMusic();
+    this.exploding = false;
     this.show("done");
     if (this.goal.bomb) {
-      this.audio.playBoom();
       this.els.doneEmoji.textContent = "💥";
-      this.els.doneTitle.textContent = "BOOM!";
-      this.els.doneMsg.textContent = "Time’s up — pencils down / answers ready!";
+      this.els.doneTitle.textContent = "Time’s up!";
+      this.els.doneMsg.textContent = "Pencils down / answers ready!";
     } else {
       this.audio.playChime();
       this.els.doneEmoji.textContent = "✅";
@@ -528,13 +556,26 @@ class ClassroomTimer {
   }
 
   loop(ts) {
-    if (!this.running || this.paused) return;
+    if (!this.running) return;
     const dt = Math.min(0.05, (ts - this.lastTs) / 1000);
     this.lastTs = ts;
-    this.remaining -= dt;
     this.phase += dt;
-    this._syncClockDisplay();
 
+    if (this.exploding) {
+      this.explosionT += dt;
+      this.draw(ts);
+      if (this.explosionT >= 2.0) {
+        this.exploding = false;
+        this.finish();
+        return;
+      }
+      this.raf = requestAnimationFrame((t) => this.loop(t));
+      return;
+    }
+
+    if (this.paused) return;
+    this.remaining -= dt;
+    this._syncClockDisplay();
     this.draw(ts);
 
     if (this.remaining <= 0) {
@@ -570,16 +611,18 @@ class ClassroomTimer {
     }
     ctx.globalAlpha = 1;
 
-    if (this.goal.bomb) {
+    if (this.exploding) {
+      this.drawBombScene(ctx, W, H, 1);
+      this.drawExplosion(ctx, W, H, this.explosionT);
+    } else if (this.goal.bomb) {
       this.drawBombScene(ctx, W, H, progress);
+      this.drawStageClock(ctx, W, H);
     } else {
       this.drawPathScene(ctx, W, H, progress);
+      this.drawStageClock(ctx, W, H);
     }
 
-    // Large readable time on the stage (visible even if chrome is scrolled away)
-    this.drawStageClock(ctx, W, H);
-
-    if (this.paused) {
+    if (this.paused && !this.exploding) {
       ctx.fillStyle = "rgba(0,0,0,0.35)";
       ctx.fillRect(0, 0, W, H);
       ctx.fillStyle = "#fef3c7";
@@ -588,6 +631,60 @@ class ClassroomTimer {
       ctx.textBaseline = "middle";
       ctx.fillText("PAUSED", W / 2, H / 2);
     }
+  }
+
+  drawExplosion(ctx, W, H, t) {
+    // t: 0 → 2 seconds
+    const bx = W * 0.78;
+    const by = H * 0.48;
+    const flash = Math.max(0, 1 - t * 2.2);
+    if (flash > 0) {
+      ctx.fillStyle = `rgba(255, 250, 200, ${0.75 * flash})`;
+      ctx.fillRect(0, 0, W, H);
+    }
+    const shake = t < 0.45 ? (Math.random() - 0.5) * 18 * (1 - t / 0.45) : 0;
+    ctx.save();
+    ctx.translate(shake, shake * 0.6);
+    const rings = 5;
+    for (let i = 0; i < rings; i++) {
+      const age = t - i * 0.08;
+      if (age < 0) continue;
+      const r = 20 + age * 180;
+      const a = Math.max(0, 0.7 - age * 0.45);
+      ctx.strokeStyle = `rgba(251, 146, 60, ${a})`;
+      ctx.lineWidth = 10 - i;
+      ctx.beginPath();
+      ctx.arc(bx, by, r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    // particles
+    for (let i = 0; i < 28; i++) {
+      const ang = (i / 28) * Math.PI * 2 + t * 0.5;
+      const dist = 30 + t * (90 + (i % 5) * 25);
+      const px = bx + Math.cos(ang) * dist;
+      const py = by + Math.sin(ang) * dist - t * 40;
+      const a = Math.max(0, 1 - t * 0.55);
+      ctx.fillStyle = i % 3 === 0 ? `rgba(254, 240, 138, ${a})` : `rgba(249, 115, 22, ${a})`;
+      ctx.beginPath();
+      ctx.arc(px, py, 4 + (i % 4), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // smoke
+    for (let i = 0; i < 10; i++) {
+      const a = Math.max(0, 0.35 - t * 0.12);
+      ctx.fillStyle = `rgba(80, 80, 90, ${a})`;
+      ctx.beginPath();
+      ctx.arc(bx + (i - 5) * 18, by - 20 - t * 50 - i * 4, 20 + t * 25, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (t > 0.15 && t < 1.4) {
+      ctx.fillStyle = `rgba(254, 243, 199, ${Math.max(0, 1 - t * 0.7)})`;
+      ctx.font = "900 " + Math.min(72, W * 0.1) + "px Segoe UI, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("BOOM!", W / 2, H * 0.28);
+    }
+    ctx.restore();
   }
 
   drawStageClock(ctx, W, H) {
@@ -776,66 +873,70 @@ class ClassroomTimer {
   }
 
   /**
-   * Fuse burns FROM the free end TOWARD the bomb.
-   * progress 0 = full fuse, tip at free end (left)
-   * progress 1 = gone, tip at bomb
+   * Fuse burns FROM free end TOWARD bomb fuse-post on top of the bomb.
+   * progress 0 = full fuse; progress 1 = burned to the bomb.
    */
   drawBombScene(ctx, W, H, progress) {
     ctx.fillStyle = "rgba(0,0,0,0.35)";
     ctx.fillRect(0, H * 0.7, W, H * 0.3);
 
-    const startX = W * 0.12; // free end of fuse
-    const endX = W * 0.72; // meets the bomb
-    const y = H * 0.42;
+    // Bomb body position (shared with explosion)
+    const bx = W * 0.78;
+    const by = H * 0.48;
+    // Fuse attaches to the top of the metal fuse post
+    const fuseEndX = bx;
+    const fuseEndY = by - 62;
+    const startX = W * 0.1;
+    const startY = H * 0.5;
 
-    const fuseY = (t) => y - Math.sin(t * Math.PI) * H * 0.1;
+    // Arc fuse path: quadratic from free end to bomb top
+    const fusePoint = (t) => {
+      // control point for a gentle arch
+      const cpx = (startX + fuseEndX) / 2;
+      const cpy = Math.min(startY, fuseEndY) - H * 0.14;
+      const u = 1 - t;
+      const x = u * u * startX + 2 * u * t * cpx + t * t * fuseEndX;
+      const y = u * u * startY + 2 * u * t * cpy + t * t * fuseEndY;
+      return { x, y };
+    };
 
-    // Remaining fuse: from burn tip → bomb (progress → 1)
-    const tipT = Math.min(0.98, Math.max(0, progress));
-    ctx.lineWidth = 8;
+    const tipT = Math.min(1, Math.max(0, progress));
+    const steps = 72;
+    ctx.lineWidth = 9;
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#a3a3a3";
+    ctx.strokeStyle = "#a8a29e";
     ctx.beginPath();
-    const steps = 60;
     let started = false;
     for (let i = Math.floor(steps * tipT); i <= steps; i++) {
-      const t = i / steps;
-      const x = startX + (endX - startX) * t;
-      const yy = fuseY(t);
+      const p = fusePoint(i / steps);
       if (!started) {
-        ctx.moveTo(x, yy);
+        ctx.moveTo(p.x, p.y);
         started = true;
-      } else {
-        ctx.lineTo(x, yy);
-      }
+      } else ctx.lineTo(p.x, p.y);
     }
     if (started) ctx.stroke();
 
-    // Burn tip + flame (moves toward bomb as progress increases)
-    const tipX = startX + (endX - startX) * tipT;
-    const tipY = fuseY(tipT);
-
-    if (progress < 0.99) {
-      const flicker = 1 + Math.sin(this.phase * 20) * 0.15;
-      const grd = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, 22 * flicker);
+    // Burn tip
+    const tip = fusePoint(tipT);
+    if (progress < 0.995 && !this.exploding) {
+      const flicker = 1 + Math.sin(this.phase * 22) * 0.18;
+      const grd = ctx.createRadialGradient(tip.x, tip.y, 0, tip.x, tip.y, 24 * flicker);
       grd.addColorStop(0, "#fef08a");
       grd.addColorStop(0.4, "#fb923c");
       grd.addColorStop(1, "rgba(239,68,68,0)");
       ctx.fillStyle = grd;
       ctx.beginPath();
-      ctx.arc(tipX, tipY, 22 * flicker, 0, Math.PI * 2);
+      ctx.arc(tip.x, tip.y, 22 * flicker, 0, Math.PI * 2);
       ctx.fill();
-
       ctx.fillStyle = "#fde047";
       for (let i = 0; i < 8; i++) {
-        const a = this.phase * 8 + i * 0.9;
-        const dist = 12 + (i % 3) * 6;
-        ctx.globalAlpha = 0.5 + Math.sin(a) * 0.4;
+        const a = this.phase * 9 + i;
+        ctx.globalAlpha = 0.45 + Math.sin(a) * 0.4;
         ctx.beginPath();
         ctx.arc(
-          tipX + Math.cos(a) * dist,
-          tipY + Math.sin(a * 1.3) * dist * 0.6 - 8,
-          2,
+          tip.x + Math.cos(a) * (10 + (i % 3) * 5),
+          tip.y + Math.sin(a * 1.2) * 8 - 6,
+          2.2,
           0,
           Math.PI * 2
         );
@@ -844,57 +945,66 @@ class ClassroomTimer {
       ctx.globalAlpha = 1;
     }
 
-    // Bomb
-    const bx = endX + 50;
-    const by = y + 10;
-    ctx.save();
-    ctx.translate(bx, by);
-    ctx.fillStyle = "#1f2937";
-    ctx.beginPath();
-    ctx.arc(0, 0, 48, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#374151";
-    ctx.beginPath();
-    ctx.arc(-12, -12, 14, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#6b7280";
-    ctx.fillRect(-14, -58, 28, 16);
-    ctx.fillStyle = "#9ca3af";
-    ctx.fillRect(-8, -68, 16, 12);
-    if (progress > 0.7) {
-      ctx.strokeStyle = "#f87171";
-      ctx.lineWidth = 3;
+    // Bomb (hidden mid-explosion flash)
+    if (!this.exploding || this.explosionT < 0.12) {
+      ctx.save();
+      ctx.translate(bx, by);
+      ctx.fillStyle = "#1f2937";
       ctx.beginPath();
-      ctx.moveTo(-16, -8);
-      ctx.lineTo(-6, -2);
-      ctx.moveTo(16, -8);
-      ctx.lineTo(6, -2);
+      ctx.arc(0, 0, 48, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#374151";
+      ctx.beginPath();
+      ctx.arc(-12, -12, 14, 0, Math.PI * 2);
+      ctx.fill();
+      // Fuse post — top aligns with fuseEndY (by - 62)
+      ctx.fillStyle = "#6b7280";
+      ctx.fillRect(-12, -58, 24, 14);
+      ctx.fillStyle = "#9ca3af";
+      ctx.fillRect(-7, -66, 14, 10);
+      // stub of fuse into post
+      ctx.strokeStyle = "#a8a29e";
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(0, -66);
+      ctx.lineTo(0, -72);
       ctx.stroke();
-      ctx.fillStyle = "#f87171";
-      ctx.beginPath();
-      ctx.arc(0, 12, 10, 0.1, Math.PI - 0.1);
-      ctx.fill();
-    } else {
-      ctx.fillStyle = "#fbbf24";
-      ctx.beginPath();
-      ctx.arc(-12, -4, 5, 0, Math.PI * 2);
-      ctx.arc(12, -4, 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#111";
-      ctx.beginPath();
-      ctx.arc(-12, -4, 2.5, 0, Math.PI * 2);
-      ctx.arc(12, -4, 2.5, 0, Math.PI * 2);
-      ctx.fill();
+
+      if (progress > 0.7) {
+        ctx.strokeStyle = "#f87171";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(-16, -8);
+        ctx.lineTo(-6, -2);
+        ctx.moveTo(16, -8);
+        ctx.lineTo(6, -2);
+        ctx.stroke();
+        ctx.fillStyle = "#f87171";
+        ctx.beginPath();
+        ctx.arc(0, 12, 10, 0.1, Math.PI - 0.1);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = "#fbbf24";
+        ctx.beginPath();
+        ctx.arc(-12, -4, 5, 0, Math.PI * 2);
+        ctx.arc(12, -4, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#111";
+        ctx.beginPath();
+        ctx.arc(-12, -4, 2.5, 0, Math.PI * 2);
+        ctx.arc(12, -4, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
     }
-    ctx.restore();
 
     this.drawProgressRing(ctx, W - 70, 70, 48, progress, "#fb7185");
 
-    if (progress > 0.85) {
+    if (progress > 0.85 && !this.exploding) {
       ctx.fillStyle = "rgba(251,113,133,0.85)";
       ctx.font = "bold 28px Segoe UI, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("HURRY!", W / 2, H * 0.2);
+      ctx.fillText("HURRY!", W / 2, H * 0.14);
     }
   }
 }

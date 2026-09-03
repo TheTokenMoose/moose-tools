@@ -349,3 +349,15 @@ html[data-theme="day"] .done-card p,
 html[data-theme="playful"] .done-card p { color: #475569; }
 html[data-theme="forest"] body { background: var(--bg-deep, #0c1f14); }
 html[data-theme="ocean"] body { background: var(--bg-deep, #071526); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
