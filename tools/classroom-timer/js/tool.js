@@ -197,7 +197,8 @@ class TimerAudio {
     const tryPlay = (src) => {
       try {
         const a = new Audio(src);
-        a.volume = 0.85;
+        a.loop = false;
+        a.volume = 0.9;
         const p = a.play();
         if (p && p.catch) p.catch(() => this._proceduralBoom());
         return true;
@@ -284,6 +285,7 @@ class ClassroomTimer {
     this.paused = false;
     this.exploding = false;
     this.explosionT = 0;
+    this.explosionDone = false;
     this.lastTs = 0;
     this.raf = null;
     this.phase = 0;
@@ -460,6 +462,7 @@ class ClassroomTimer {
     this.paused = false;
     this.exploding = false;
     this.explosionT = 0;
+    this.explosionDone = false;
     this.audio.stopMusic();
     this.show("menu");
     if (document.fullscreenElement) {
@@ -474,6 +477,9 @@ class ClassroomTimer {
       return;
     }
     this.remaining = this.duration;
+    this.explosionDone = false;
+    this.exploding = false;
+    this.explosionT = 0;
     this.running = true;
     this.paused = false;
     this.phase = 0;
@@ -492,6 +498,9 @@ class ClassroomTimer {
   restart() {
     this.stopLoop();
     this.remaining = this.duration;
+    this.explosionDone = false;
+    this.exploding = false;
+    this.explosionT = 0;
     this.running = true;
     this.paused = false;
     this.phase = 0;
@@ -528,15 +537,19 @@ class ClassroomTimer {
 
   finish() {
     this.audio.stopMusic();
-    if (this.goal.bomb && !this.exploding) {
-      this.exploding = true;
-      this.explosionT = 0;
-      this.running = true; // keep draw loop for FX
-      this.paused = false;
-      this.audio.playBoom();
-      this.lastTs = performance.now();
-      this.loop(this.lastTs);
-      return;
+    if (this.goal.bomb && !this.explosionDone) {
+      if (!this.exploding) {
+        this.exploding = true;
+        this.explosionT = 0;
+        this.running = true;
+        this.paused = false;
+        this.audio.playBoom();
+        this.lastTs = performance.now();
+        this.loop(this.lastTs);
+        return;
+      }
+      this.explosionDone = true;
+      this.exploding = false;
     }
     this.stopLoop();
     this.running = false;
@@ -564,8 +577,7 @@ class ClassroomTimer {
     if (this.exploding) {
       this.explosionT += dt;
       this.draw(ts);
-      if (this.explosionT >= 2.0) {
-        this.exploding = false;
+      if (this.explosionT >= 2.8) {
         this.finish();
         return;
       }
@@ -634,76 +646,153 @@ class ClassroomTimer {
   }
 
   drawExplosion(ctx, W, H, t) {
-    // t: 0 → 2 seconds
     const bx = W * 0.78;
     const by = H * 0.48;
-    const flash = Math.max(0, 1 - t * 2.2);
+    const pieces = [
+      { ang: 0.2, spd: 140, spin: 3.2, w: 28, h: 22, col: "#1f2937", shape: "chunk" },
+      { ang: 1.1, spd: 160, spin: -2.5, w: 22, h: 18, col: "#374151", shape: "chunk" },
+      { ang: 2.0, spd: 130, spin: 4.1, w: 18, h: 16, col: "#1f2937", shape: "chunk" },
+      { ang: 2.8, spd: 175, spin: -3.0, w: 20, h: 14, col: "#4b5563", shape: "chunk" },
+      { ang: 3.6, spd: 150, spin: 2.2, w: 24, h: 20, col: "#1f2937", shape: "chunk" },
+      { ang: 4.4, spd: 120, spin: -4.0, w: 16, h: 16, col: "#6b7280", shape: "post" },
+      { ang: 5.2, spd: 145, spin: 2.8, w: 14, h: 12, col: "#9ca3af", shape: "post" },
+      { ang: 5.9, spd: 110, spin: -1.5, w: 12, h: 10, col: "#fbbf24", shape: "eye" },
+      { ang: 0.7, spd: 100, spin: 1.8, w: 12, h: 10, col: "#fbbf24", shape: "eye" },
+      { ang: 4.0, spd: 190, spin: 5.0, w: 10, h: 8, col: "#f87171", shape: "spark" },
+      { ang: 1.6, spd: 200, spin: -4.5, w: 9, h: 9, col: "#fb923c", shape: "spark" },
+      { ang: 3.2, spd: 185, spin: 3.5, w: 8, h: 8, col: "#fde047", shape: "spark" }
+    ];
+
+    const flash = Math.max(0, 1 - t * 1.8);
     if (flash > 0) {
-      ctx.fillStyle = `rgba(255, 250, 200, ${0.75 * flash})`;
+      ctx.fillStyle = "rgba(255, 248, 200, " + (0.7 * flash) + ")";
       ctx.fillRect(0, 0, W, H);
     }
-    const shake = t < 0.45 ? (Math.random() - 0.5) * 18 * (1 - t / 0.45) : 0;
+
+    const shake = t < 0.5 ? (Math.random() - 0.5) * 16 * (1 - t / 0.5) : 0;
     ctx.save();
-    ctx.translate(shake, shake * 0.6);
-    const rings = 5;
-    for (let i = 0; i < rings; i++) {
-      const age = t - i * 0.08;
+    ctx.translate(shake, shake * 0.5);
+
+    for (let i = 0; i < 4; i++) {
+      const age = t - i * 0.07;
       if (age < 0) continue;
-      const r = 20 + age * 180;
-      const a = Math.max(0, 0.7 - age * 0.45);
-      ctx.strokeStyle = `rgba(251, 146, 60, ${a})`;
-      ctx.lineWidth = 10 - i;
+      const r = 18 + age * 160;
+      const a = Math.max(0, 0.65 - age * 0.5);
+      ctx.strokeStyle = "rgba(251, 146, 60, " + a + ")";
+      ctx.lineWidth = 8 - i;
       ctx.beginPath();
       ctx.arc(bx, by, r, 0, Math.PI * 2);
       ctx.stroke();
     }
-    // particles
-    for (let i = 0; i < 28; i++) {
-      const ang = (i / 28) * Math.PI * 2 + t * 0.5;
-      const dist = 30 + t * (90 + (i % 5) * 25);
+
+    if (t < 0.08) {
+      ctx.save();
+      ctx.translate(bx, by);
+      ctx.fillStyle = "#1f2937";
+      ctx.beginPath();
+      ctx.arc(0, 0, 48, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#6b7280";
+      ctx.fillRect(-12, -58, 24, 14);
+      ctx.restore();
+    } else {
+      const grav = 220;
+      for (let i = 0; i < pieces.length; i++) {
+        const pc = pieces[i];
+        const life = Math.min(1, t / 2.2);
+        const dist = pc.spd * t;
+        const px = bx + Math.cos(pc.ang) * dist;
+        const py = by + Math.sin(pc.ang) * dist + 0.5 * grav * t * t;
+        const rot = pc.spin * t;
+        const alpha = Math.max(0, 1 - life * 0.85);
+        if (alpha <= 0.02) continue;
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(rot);
+        ctx.globalAlpha = alpha;
+        if (pc.shape === "chunk") {
+          ctx.fillStyle = pc.col;
+          ctx.beginPath();
+          ctx.moveTo(-pc.w / 2, -pc.h / 2);
+          ctx.lineTo(pc.w / 2, -pc.h / 3);
+          ctx.lineTo(pc.w / 3, pc.h / 2);
+          ctx.lineTo(-pc.w / 3, pc.h / 2);
+          ctx.closePath();
+          ctx.fill();
+        } else if (pc.shape === "post") {
+          ctx.fillStyle = pc.col;
+          ctx.fillRect(-pc.w / 2, -pc.h / 2, pc.w, pc.h);
+        } else if (pc.shape === "eye") {
+          ctx.fillStyle = pc.col;
+          ctx.beginPath();
+          ctx.arc(0, 0, pc.w / 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#111";
+          ctx.beginPath();
+          ctx.arc(0, 0, pc.w / 4, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillStyle = pc.col;
+          ctx.beginPath();
+          ctx.arc(0, 0, pc.w / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 20; i++) {
+      const ang = (i / 20) * Math.PI * 2 + t * 0.8;
+      const dist = 40 + t * (100 + (i % 4) * 30);
       const px = bx + Math.cos(ang) * dist;
-      const py = by + Math.sin(ang) * dist - t * 40;
-      const a = Math.max(0, 1 - t * 0.55);
-      ctx.fillStyle = i % 3 === 0 ? `rgba(254, 240, 138, ${a})` : `rgba(249, 115, 22, ${a})`;
+      const py = by + Math.sin(ang) * dist - t * 50;
+      const a = Math.max(0, 1 - t * 0.5);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = i % 2 ? "#fde047" : "#fb923c";
       ctx.beginPath();
-      ctx.arc(px, py, 4 + (i % 4), 0, Math.PI * 2);
+      ctx.arc(px, py, 3 + (i % 3), 0, Math.PI * 2);
       ctx.fill();
     }
-    // smoke
-    for (let i = 0; i < 10; i++) {
-      const a = Math.max(0, 0.35 - t * 0.12);
-      ctx.fillStyle = `rgba(80, 80, 90, ${a})`;
+    ctx.globalAlpha = 1;
+
+    for (let i = 0; i < 12; i++) {
+      const a = Math.max(0, 0.4 - t * 0.12);
+      ctx.fillStyle = "rgba(70, 70, 80, " + a + ")";
       ctx.beginPath();
-      ctx.arc(bx + (i - 5) * 18, by - 20 - t * 50 - i * 4, 20 + t * 25, 0, Math.PI * 2);
+      ctx.arc(bx + (i - 6) * 16 + Math.sin(t + i) * 8, by - 10 - t * 55 - i * 3, 16 + t * 28, 0, Math.PI * 2);
       ctx.fill();
     }
-    if (t > 0.15 && t < 1.4) {
-      ctx.fillStyle = `rgba(254, 243, 199, ${Math.max(0, 1 - t * 0.7)})`;
-      ctx.font = "900 " + Math.min(72, W * 0.1) + "px Segoe UI, sans-serif";
+
+    if (t > 0.12 && t < 1.5) {
+      ctx.globalAlpha = Math.max(0, 1 - (t - 0.12) * 0.8);
+      ctx.fillStyle = "#fef3c7";
+      ctx.font = "900 " + Math.min(64, W * 0.09) + "px Segoe UI, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("BOOM!", W / 2, H * 0.28);
+      ctx.fillText("BOOM!", W / 2, H * 0.22);
+      ctx.globalAlpha = 1;
     }
+
     ctx.restore();
   }
 
   drawStageClock(ctx, W, H) {
     const label = formatTime(this.remaining);
-    const fontSize = Math.max(48, Math.min(W * 0.14, H * 0.22));
+    const fontSize = Math.max(40, Math.min(W * 0.12, H * 0.16));
+    const cy = H * 0.88;
     ctx.save();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.font = "900 " + fontSize + "px Segoe UI, system-ui, sans-serif";
-    // shadow
     ctx.fillStyle = "rgba(0,0,0,0.45)";
-    ctx.fillText(label, W / 2 + 3, H * 0.18 + 3);
+    ctx.fillText(label, W / 2 + 3, cy + 3);
     if (this.remaining <= 10) ctx.fillStyle = "#fb7185";
     else if (this.remaining <= 30) ctx.fillStyle = "#fbbf24";
     else ctx.fillStyle = "#fef9c3";
-    ctx.fillText(label, W / 2, H * 0.18);
-    ctx.font = "700 " + Math.max(12, fontSize * 0.18) + "px Segoe UI, system-ui, sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.7)";
-    ctx.fillText("REMAINING", W / 2, H * 0.18 + fontSize * 0.55);
+    ctx.fillText(label, W / 2, cy);
+    ctx.font = "700 " + Math.max(11, fontSize * 0.2) + "px Segoe UI, system-ui, sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.75)";
+    ctx.fillText("REMAINING", W / 2, cy - fontSize * 0.55);
     ctx.restore();
   }
 
@@ -1001,10 +1090,10 @@ class ClassroomTimer {
     this.drawProgressRing(ctx, W - 70, 70, 48, progress, "#fb7185");
 
     if (progress > 0.85 && !this.exploding) {
-      ctx.fillStyle = "rgba(251,113,133,0.85)";
-      ctx.font = "bold 28px Segoe UI, sans-serif";
+      ctx.fillStyle = "rgba(251,113,133,0.9)";
+      ctx.font = "bold 26px Segoe UI, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("HURRY!", W / 2, H * 0.14);
+      ctx.fillText("HURRY!", W / 2, H * 0.74);
     }
   }
 }
