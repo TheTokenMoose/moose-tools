@@ -191,24 +191,20 @@ class TimerAudio {
     this.musicNodes = [];
   }
 
-  /** Boom: prefers audio/explosion.mp3 then .wav, else procedural */
+  /** Boom: use packaged .wav only (no missing .mp3 404); fallback procedural */
   playBoom() {
     if (!this.enabled) return;
-    const tryPlay = (src) => {
-      try {
-        const a = new Audio(src);
-        a.loop = false;
-        a.volume = 0.9;
-        const p = a.play();
-        if (p && p.catch) p.catch(() => this._proceduralBoom());
-        return true;
-      } catch (_) {
-        return false;
+    try {
+      const a = new Audio("audio/explosion.wav");
+      a.loop = false;
+      a.volume = 0.9;
+      const playPromise = a.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => this._proceduralBoom());
       }
-    };
-    if (tryPlay("audio/explosion.mp3")) return;
-    if (tryPlay("audio/explosion.wav")) return;
-    this._proceduralBoom();
+    } catch (_) {
+      this._proceduralBoom();
+    }
   }
 
   _proceduralBoom() {
@@ -327,9 +323,19 @@ class ClassroomTimer {
       btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
       btn.dataset.id = g.id;
       btn.innerHTML = `
-        <div class="goal-emoji">${g.emoji}</div>
-        <div class="goal-name">${g.name}</div>
-        <div class="goal-desc">${g.desc}</div>
+        <div class="goal-card-inner">
+          <div class="goal-face goal-face-front">
+            <div class="goal-emoji">${g.emoji}</div>
+            <div class="goal-name">${g.name}</div>
+            <div class="goal-desc">${g.desc}</div>
+          </div>
+          <div class="goal-face goal-face-back">
+            <div class="goal-selected-badge" aria-hidden="true">✓</div>
+            <div class="goal-emoji">${g.emoji}</div>
+            <div class="goal-name">${g.name}</div>
+            <div class="goal-selected-label">Selected</div>
+          </div>
+        </div>
       `;
       btn.addEventListener("click", () => this.selectGoal(g.id));
       this.els.goalGrid.appendChild(btn);

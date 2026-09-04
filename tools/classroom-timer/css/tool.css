@@ -57,31 +57,98 @@ html, body {
 }
 
 .goal-card {
-  border: 2px solid var(--border-subtle, rgba(255,255,255,0.08));
-  background: var(--bg-card, linear-gradient(160deg, rgba(30,36,70,0.9), rgba(15,18,40,0.95)));
-  border-radius: 16px;
-  padding: 16px 12px;
+  perspective: 900px;
+  border: none;
+  background: transparent;
+  padding: 0;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   color: var(--text-primary, inherit);
   font: inherit;
+  min-height: 148px;
 }
-.goal-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(167, 139, 250, 0.45);
+.goal-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 148px;
+  transition: transform 0.45s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
 }
-.goal-card.is-selected {
+.goal-card.is-selected .goal-card-inner {
+  transform: rotateY(180deg);
+}
+.goal-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 12px;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 2px solid var(--border-subtle, rgba(255,255,255,0.12));
+  box-sizing: border-box;
+}
+.goal-face-front {
+  background: var(--bg-card, linear-gradient(160deg, rgba(30,36,70,0.95), rgba(15,18,40,0.98)));
+  color: var(--text-primary, #eef2ff);
+}
+.goal-face-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #a78bfa 0%, #7c3aed 45%, #db2777 100%);
   border-color: #f9a8d4;
-  box-shadow: 0 0 0 2px rgba(249, 168, 212, 0.25), 0 12px 32px rgba(0,0,0,0.35);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.45), 0 14px 28px rgba(124, 58, 237, 0.35);
 }
-.goal-card.bomb.is-selected {
-  border-color: #fb7185;
-  box-shadow: 0 0 0 2px rgba(251, 113, 133, 0.35), 0 12px 32px rgba(251, 113, 133, 0.15);
+.goal-card.bomb .goal-face-back {
+  background: linear-gradient(145deg, #fb7185 0%, #e11d48 50%, #9f1239 100%);
+  border-color: #fecdd3;
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.5), 0 14px 28px rgba(225, 29, 72, 0.35);
+}
+.goal-card:hover:not(.is-selected) .goal-face-front {
+  border-color: rgba(167, 139, 250, 0.55);
+  transform: translateY(-2px);
+}
+.goal-selected-badge {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  color: #7c3aed;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 28px;
+  text-align: center;
+}
+.goal-card.bomb .goal-selected-badge { color: #e11d48; }
+.goal-selected-label {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.95;
 }
 .goal-emoji { font-size: 2rem; line-height: 1.2; margin-bottom: 6px; }
 .goal-name { font-weight: 800; font-size: 0.95rem; }
 .goal-desc { font-size: 0.78rem; color: #9aa6c8; margin-top: 4px; }
+.goal-face-back .goal-desc { display: none; }
+.goal-face-back .goal-name { font-size: 1.05rem; }
+
+/* Unselected cards stay clearly dimmer than selected */
+.goal-card:not(.is-selected) .goal-face-front {
+  opacity: 0.88;
+  filter: saturate(0.85);
+}
+.goal-card.is-selected {
+  z-index: 2;
+}
 
 .time-panel {
   background: rgba(18, 22, 48, 0.85);
@@ -321,12 +388,50 @@ html[data-theme="day"] .run-clock.is-warn,
 html[data-theme="playful"] .run-clock.is-warn { color: #b45309; }
 html[data-theme="day"] .run-clock.is-critical,
 html[data-theme="playful"] .run-clock.is-critical { color: #be123c; }
-html[data-theme="day"] .goal-card,
-html[data-theme="playful"] .goal-card {
+html[data-theme="day"] .goal-face-front,
+html[data-theme="playful"] .goal-face-front {
   background: #ffffff;
   border-color: #cbd5e1;
   color: #0f172a;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+html[data-theme="day"] .goal-desc,
+html[data-theme="playful"] .goal-desc { color: #64748b; }
+html[data-theme="day"] .goal-face-back,
+html[data-theme="playful"] .goal-face-back {
+  /* keep vivid selected face so it is obvious on light themes */
+  color: #fff;
+}
+html[data-theme="forest"] .goal-face-back {
+  background: linear-gradient(145deg, #4ade80 0%, #16a34a 50%, #166534 100%);
+  border-color: #bbf7d0;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.4), 0 14px 28px rgba(22, 163, 74, 0.3);
+}
+html[data-theme="forest"] .goal-selected-badge { color: #166534; }
+html[data-theme="ocean"] .goal-face-back {
+  background: linear-gradient(145deg, #38bdf8 0%, #0284c7 50%, #075985 100%);
+  border-color: #bae6fd;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.4), 0 14px 28px rgba(2, 132, 199, 0.3);
+}
+html[data-theme="ocean"] .goal-selected-badge { color: #0369a1; }
+
+/* Duration chips: obvious active state on light themes */
+html[data-theme="day"] .presets button.is-active,
+html[data-theme="playful"] .presets button.is-active {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  border-color: #6d28d9;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+}
+html[data-theme="forest"] .presets button.is-active {
+  background: linear-gradient(135deg, #4ade80, #16a34a);
+  border-color: #15803d;
+  color: #052e16;
+}
+html[data-theme="ocean"] .presets button.is-active {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  border-color: #0369a1;
+  color: #fff;
 }
 html[data-theme="day"] .time-panel,
 html[data-theme="playful"] .time-panel {
