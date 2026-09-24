@@ -109,6 +109,30 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "vowel-quest",
+    title: "Vowel Quest",
+    type: "game",
+    description:
+      "Touch-friendly vowel phonics practice for kindergarten and early primary (and ESL). Students choose a vowel (A E I O U), then a specific sound (short, long, R-controlled, etc.) or Play All / Advanced Mix. Activities: find the letter in a grid, fill the blank with an emoji cue, and pick the word that contains the target letter. Large targets for interactive whiteboards and tablets; optional speech prompts; high score stays on this device.",
+    subject: "Phonics / Literacy",
+    skills: [
+      "Vowels",
+      "Short vowels",
+      "Long vowels",
+      "R-controlled vowels",
+      "Letter–sound correspondence",
+      "Phonemic awareness",
+      "ESL",
+      "Interactive whiteboard",
+      "Listening (TTS)"
+    ],
+    category: "Education",
+    screenshot: "assets/screenshots/vowel-quest.jpg",
+    playUrl: "games/vowel-quest/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "ib-little-explorers",
     title: "IB Little Explorers",
     type: "game",
