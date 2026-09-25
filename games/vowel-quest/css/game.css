@@ -1366,3 +1366,28 @@ html[data-projector="on"] body[data-app-id="vowel-quest"] .sound-card {
 html[data-projector="on"] body[data-app-id="vowel-quest"] .app-title {
   font-size: clamp(2.4rem, 6vw, 3.6rem);
 }
+
+/* ===== Shared app chrome clearance (do not overlap Back / Voice / Favorite) ===== */
+body.tm-has-app-chrome .screen {
+  /* chrome ~3.4rem normal, ~3.9rem projector + a little breathing room */
+  padding-top: calc(3.6rem + env(safe-area-inset-top, 0px));
+}
+html[data-projector="on"] body.tm-has-app-chrome .screen {
+  padding-top: calc(4.2rem + env(safe-area-inset-top, 0px));
+}
+body.tm-has-app-chrome .game-header {
+  top: calc(3.5rem + env(safe-area-inset-top, 0px));
+}
+html[data-projector="on"] body.tm-has-app-chrome .game-header {
+  top: calc(4.1rem + env(safe-area-inset-top, 0px));
+}
+/* Select screen back button sits below chrome */
+body.tm-has-app-chrome #select .back-btn,
+body.tm-has-app-chrome #select .select-content {
+  margin-top: 0.25rem;
+}
+body.tm-has-app-chrome .home-content,
+body.tm-has-app-chrome .select-content,
+body.tm-has-app-chrome .final-content {
+  padding-top: 0.5rem;
+}

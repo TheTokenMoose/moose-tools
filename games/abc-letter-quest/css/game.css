@@ -184,3 +184,32 @@ html[data-projector="on"] .choice-btn { width: 88px; height: 88px; font-size: 2.
 html[data-projector="on"] .btn { min-height: 58px; font-size: 1.2rem; }
 html[data-projector="on"] .alpha-pick-grid button { font-size: 1.5rem; }
 @media (min-width: 900px) { .mode-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ===== Shared app chrome clearance (do not overlap Back / Voice / Favorite) ===== */
+body.tm-has-app-chrome .screen {
+  padding-top: calc(3.6rem + env(safe-area-inset-top, 0px));
+}
+html[data-projector="on"] body.tm-has-app-chrome .screen {
+  padding-top: calc(4.2rem + env(safe-area-inset-top, 0px));
+}
+body.tm-has-app-chrome .prac-header {
+  top: calc(3.5rem + env(safe-area-inset-top, 0px));
+}
+html[data-projector="on"] body.tm-has-app-chrome .prac-header {
+  top: calc(4.1rem + env(safe-area-inset-top, 0px));
+}
+/* Content under fixed prac-header needs extra offset when header is pushed down */
+body.tm-has-app-chrome #practice .card-stage,
+body.tm-has-app-chrome #song .song-stage {
+  padding-top: calc(60px + 3.5rem);
+}
+html[data-projector="on"] body.tm-has-app-chrome #practice .card-stage,
+html[data-projector="on"] body.tm-has-app-chrome #song .song-stage {
+  padding-top: calc(60px + 4.1rem);
+}
+body.tm-has-app-chrome #startPick {
+  padding-top: calc(70px + 3.5rem);
+}
+html[data-projector="on"] body.tm-has-app-chrome #startPick {
+  padding-top: calc(70px + 4.1rem);
+}
