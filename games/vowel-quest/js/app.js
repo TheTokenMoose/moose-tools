@@ -568,7 +568,7 @@
   const celebPoints = document.getElementById("celeb-points");
   const highScoreEl = document.getElementById("highScore");
   const soundBadge = document.getElementById("soundBadge");
-  const soundCardsEl = document.getElementById("soundCards");
+  const soundCardsEl = document.getElementById("soundGrid");
   const vowelGrid = document.getElementById("vowelGrid");
   const selectVowelBadge = document.getElementById("selectVowelBadge");
 
@@ -954,6 +954,8 @@
   // ============================================================
   document.getElementById("backHomeBtn").addEventListener("click", () => showScreen("home"));
   document.getElementById("playAllBtn").addEventListener("click", startPlayAll);
+  const advBtn = document.getElementById("advancedBtn");
+  if (advBtn) advBtn.addEventListener("click", startAdvanced);
   document.getElementById("homeBtn").addEventListener("click", () => {
     window.speechSynthesis?.cancel(); showScreen("home");
   });
