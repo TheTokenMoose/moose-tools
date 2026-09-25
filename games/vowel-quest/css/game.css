@@ -1367,27 +1367,47 @@ html[data-projector="on"] body[data-app-id="vowel-quest"] .app-title {
   font-size: clamp(2.4rem, 6vw, 3.6rem);
 }
 
-/* ===== Shared app chrome clearance (do not overlap Back / Voice / Favorite) ===== */
+
+/* ===== Shared app chrome clearance (Back / Voice / Favorite stay put) ===== */
 body.tm-has-app-chrome .screen {
-  /* chrome ~3.4rem normal, ~3.9rem projector + a little breathing room */
   padding-top: calc(3.6rem + env(safe-area-inset-top, 0px));
 }
 html[data-projector="on"] body.tm-has-app-chrome .screen {
   padding-top: calc(4.2rem + env(safe-area-inset-top, 0px));
 }
-body.tm-has-app-chrome .game-header {
-  top: calc(3.5rem + env(safe-area-inset-top, 0px));
+
+/* Select (middle) menu: absolute back-btn was stuck under chrome */
+body.tm-has-app-chrome #select {
+  padding-top: calc(3.8rem + env(safe-area-inset-top, 0px)) !important;
+  justify-content: flex-start !important;
+  overflow-y: auto !important;
 }
-html[data-projector="on"] body.tm-has-app-chrome .game-header {
-  top: calc(4.1rem + env(safe-area-inset-top, 0px));
+html[data-projector="on"] body.tm-has-app-chrome #select {
+  padding-top: calc(4.4rem + env(safe-area-inset-top, 0px)) !important;
 }
-/* Select screen back button sits below chrome */
-body.tm-has-app-chrome #select .back-btn,
+body.tm-has-app-chrome #select .back-btn {
+  position: absolute;
+  top: calc(3.7rem + env(safe-area-inset-top, 0px)) !important;
+  left: 16px;
+  z-index: 6;
+}
+html[data-projector="on"] body.tm-has-app-chrome #select .back-btn {
+  top: calc(4.3rem + env(safe-area-inset-top, 0px)) !important;
+}
 body.tm-has-app-chrome #select .select-content {
-  margin-top: 0.25rem;
+  justify-content: flex-start !important;
+  padding-top: 3.2rem !important; /* room under absolute back + badge */
+  height: auto !important;
+  max-height: none;
 }
-body.tm-has-app-chrome .home-content,
-body.tm-has-app-chrome .select-content,
-body.tm-has-app-chrome .final-content {
-  padding-top: 0.5rem;
+body.tm-has-app-chrome #select .select-title {
+  margin-top: 0.25rem !important;
+}
+body.tm-has-app-chrome #select .select-vowel-badge {
+  margin-top: 0.15rem;
+}
+
+body.tm-has-app-chrome .game-header {
+  /* in-flow header; screen padding already clears chrome */
+  margin-top: 0;
 }

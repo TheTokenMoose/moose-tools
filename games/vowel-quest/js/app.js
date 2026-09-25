@@ -730,19 +730,7 @@
       btn.addEventListener("click", () => startSingleSound(s.id));
       soundCardsEl.appendChild(btn);
     });
-    // Advanced
-    const adv = document.createElement("button");
-    adv.className = "sound-card advanced-card";
-    adv.innerHTML = `
-      <span class="card-emoji">🌈</span>
-      <div class="card-info">
-        <span class="card-label">Advanced Mix</span>
-        <div class="card-example">All ${currentVowel} sounds mixed</div>
-        <div class="card-hint">Full challenge</div>
-      </div>
-    `;
-    adv.addEventListener("click", startAdvanced);
-    soundCardsEl.appendChild(adv);
+
   }
 
   // ============================================================
