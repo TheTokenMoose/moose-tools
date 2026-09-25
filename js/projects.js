@@ -81,6 +81,29 @@ const PROJECTS = [
     featured: true
   },
   {
+    id: "abc-letter-quest",
+    title: "ABC Letter Quest",
+    type: "game",
+    description:
+      "Big, bold, colourful ABC letter recognition and sound trainer for kindergarten and early ESL. Practice A–Z in order, random mix, or backwards. Each letter has a full illustrated card (not emoji), the letter name, sound, and a classic word (Apple, Ball, Cat…). Quick tap-the-letter checks keep it interactive. Includes an ABC Song mode that highlights each letter. Built for large touch displays and tablets; optional speech; stars saved on this device.",
+    subject: "Phonics / Literacy",
+    skills: [
+      "Letter recognition",
+      "Letter–sound correspondence",
+      "Alphabet order",
+      "Phonemic awareness",
+      "Listening (TTS)",
+      "Kindergarten",
+      "ESL",
+      "Interactive whiteboard"
+    ],
+    category: "Education",
+    screenshot: "assets/screenshots/abc-letter-quest.jpg",
+    playUrl: "games/abc-letter-quest/",
+    installable: true,
+    featured: true
+  },
+  {
     id: "one-button-hero",
     title: "One Button Hero",
     type: "game",

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FF6B35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ABC Letter Quest">
+  <meta name="description" content="Big, bold, colourful ABC letter recognition and sound trainer for kindergarten. Learn letters in order, random, or backwards with illustrated cards and speech.">
+  <title>ABC Letter Quest — The Token Moose</title>
+  <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/themes.css">
+  <link rel="stylesheet" href="../../css/theme-app.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="pwa-install.css">
+</head>
+<body data-app-id="abc-letter-quest" data-app-title="ABC Letter Quest">
+  <!-- HOME -->
+  <div id="home" class="screen active">
+    <div class="bg-shapes" aria-hidden="true"></div>
+    <div class="home-inner">
+      <h1 class="app-title">ABC Letter Quest</h1>
+      <p class="tagline">Learn letters &amp; sounds — big, bold &amp; colourful</p>
+      <div class="mode-grid">
+        <button type="button" class="mode-card" data-mode="order">
+          <span class="mode-emoji">🔤</span>
+          <span class="mode-name">In Order</span>
+          <span class="mode-desc">A → Z</span>
+        </button>
+        <button type="button" class="mode-card" data-mode="random">
+          <span class="mode-emoji">🎲</span>
+          <span class="mode-name">Random</span>
+          <span class="mode-desc">Mixed up</span>
+        </button>
+        <button type="button" class="mode-card" data-mode="backwards">
+          <span class="mode-emoji">🔄</span>
+          <span class="mode-name">Backwards</span>
+          <span class="mode-desc">Z → A</span>
+        </button>
+        <button type="button" class="mode-card" data-mode="song">
+          <span class="mode-emoji">🎵</span>
+          <span class="mode-name">ABC Song</span>
+          <span class="mode-desc">Sing along</span>
+        </button>
+      </div>
+      <div class="home-stats">
+        <div class="stat"><span class="stat-num" id="starsTotal">0</span><span class="stat-label">Stars</span></div>
+        <div class="stat"><span class="stat-num" id="bestRun">0</span><span class="stat-label">Best run</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div id="practice" class="screen">
+    <header class="prac-header">
+      <button type="button" id="homeBtn" class="icon-btn" title="Home">🏠</button>
+      <div class="progress-wrap">
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+        <span id="progressText" class="progress-text">1 / 26</span>
+      </div>
+      <button type="button" id="soundBtn" class="icon-btn" title="Sound">🔊</button>
+    </header>
+
+    <div id="cardStage" class="card-stage">
+      <div class="letter-card" id="letterCard">
+        <div class="letter-big" id="letterBig">A</div>
+        <div class="letter-art" id="letterArt"></div>
+        <div class="letter-word" id="letterWord">Apple</div>
+      </div>
+    </div>
+
+    <div id="quizRow" class="quiz-row hidden">
+      <p class="quiz-prompt" id="quizPrompt">Tap the letter</p>
+      <div class="choice-row" id="choiceRow"></div>
+    </div>
+
+    <div id="actionRow" class="action-row">
+      <button type="button" id="hearBtn" class="btn secondary">🔊 Hear again</button>
+      <button type="button" id="nextBtn" class="btn primary">Next →</button>
+    </div>
+  </div>
+
+  <!-- SONG -->
+  <div id="song" class="screen">
+    <header class="prac-header">
+      <button type="button" id="songHomeBtn" class="icon-btn" title="Home">🏠</button>
+      <h2 class="song-title">ABC Song</h2>
+      <button type="button" id="songSoundBtn" class="icon-btn" title="Sound">🔊</button>
+    </header>
+    <div class="song-stage">
+      <div class="song-letter" id="songLetter">A</div>
+      <div class="song-art" id="songArt"></div>
+      <p class="song-word" id="songWord">Apple</p>
+      <div class="song-strip" id="songStrip"></div>
+    </div>
+    <div class="action-row">
+      <button type="button" id="songPlayBtn" class="btn primary">▶ Play song</button>
+      <button type="button" id="songStopBtn" class="btn secondary hidden">■ Stop</button>
+    </div>
+  </div>
+
+  <!-- CELEBRATION / FINAL -->
+  <div id="final" class="screen">
+    <div class="final-inner">
+      <div class="trophy">⭐</div>
+      <h2 id="finalTitle">You did it!</h2>
+      <p class="final-score">Stars this run: <span id="finalStars">0</span></p>
+      <p class="final-msg" id="finalMsg">Great letter work!</p>
+      <button type="button" id="againBtn" class="btn primary">Play again</button>
+      <button type="button" id="finalHomeBtn" class="btn secondary">Home</button>
+    </div>
+  </div>
+
+  <div id="pwa-install-bar" hidden>
+    <div class="pwa-install-text">
+      <strong>Install ABC Letter Quest</strong>
+      <span>Add to home screen for offline play.</span>
+    </div>
+    <button type="button" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-install-dismiss" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="../../js/tts/voice-catalog.js"></script>
+  <script src="../../js/tts/moose-tts.js"></script>
+  <script src="../../js/voice.js"></script>
+  <script src="js/letters.js"></script>
+  <script src="js/app.js"></script>
+  <script src="pwa-install.js"></script>
+  <script src="../../js/theme.js"></script>
+  <script src="../../js/app-chrome.js"></script>
+</body>
+</html>
